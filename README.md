@@ -1,5 +1,7 @@
 # PHPCheckstyle
 
+[![Build Status](https://travis-ci.org/PHPCheckstyle/phpcheckstyle.svg?branch=ast-parser)](https://travis-ci.org/PHPCheckstyle/phpcheckstyle)
+
 This is a work in progress to make PHPCheckstyle use an AST parser. It'll most likely end up being a complete rewrite, supporting good standards out of the box (as a default).
 
 The goal is to make PHPCheckstyle the PHP version of [Rubocop](https://github.com/bbatsov/rubocop).
