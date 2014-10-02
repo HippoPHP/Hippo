@@ -1,73 +1,16 @@
 # PHPCheckstyle
 
-## 1. Overview
+This is a work in progress to make PHPCheckstyle use an AST parser. It'll most likely end up being a complete rewrite, supporting good standards out of the box (as a default).
 
-PHPCheckstyle is an open-source tool that helps PHP programmers 
-adhere to certain coding conventions. The tools checks the input PHP 
-source code and reports any deviations from the coding convention.
+The goal is to make PHPCheckstyle the PHP version of [Rubocop](https://github.com/bbatsov/rubocop).
 
-The tool uses the PEAR Coding Standards as the default coding convention. 
-But it allows you to configure it to suit your coding standards.
+## TODO
 
-Please visit http://code.google.com/p/phpcheckstyle/ for
-more information and documentation
-
-
-## 2. Requirements
-
-- PHP 5.0 or newer. 
-- Web browser to view the checkstyle report (only for html view)
-- That's all. 
-
-
-## 3. Installation
-
-### Installation with Composer
-
-Add `phpcheckstyle/phpcheckstyle` as a requirement to `composer.json`:
-
-```json
-{
-    "require": {
-        "phpcheckstyle/phpcheckstyle": "dev-master"
-    }
-}
-```
-
-Update your packages with `composer update` or if installing from fresh, with `composer install`.
-
-### Manual Installation
-
-Just unzip the distribution.
-
-```bash
-$> unzip PhpCheckstyle.zip
-```
-
-This will create a directory called `phpcheckstyle` and expand all 
-files in it.
-
-
-## 4. Usage
-
-- Change directory to the PHPCheckstyle installation directory.
-
-  ```bash
-  $> cd phpcheckstyle
-  ```
-
-- Execute the `run.php` script providing the `--src` option.
-
-  ```bash
-  $> php run.php --src <php source directory/file>
-  ```
-
-- Use the `--help` option to see more options
-
-  ```bash
-  $> php run.php --help
-  ```
-
+- [ ] Integrate PHP-Parser.
+- [ ] Set default standards to [PSR 2](http://www.php-fig.org/psr/psr-2/).
+- [ ] Run as a binary with console output and as a library. #46
+- [ ] Switch to [semver](http://semver.org) versioning. #42
+- [ ] Create a proper test suite. #18
 
 # License
 See [LICENSE](/LICENSE.txt)
