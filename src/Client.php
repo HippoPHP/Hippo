@@ -1,8 +1,7 @@
 <?php 
 
 	namespace PHPCheckstyle;
-
-	use Closure;
+    
 	use PhpParser;
 	use RuntimeException;
 
