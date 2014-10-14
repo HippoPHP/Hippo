@@ -5,3 +5,4 @@ vendor/
 checkstyle_resultncss.xml
 .project
 .models
+.idea/
