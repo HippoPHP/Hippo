@@ -1,5 +1,7 @@
 <?php 
 
+	namespace PHPCheckstyle;
+
 	/**
 	 * Represents a PHPCheckstyle check for checking coding standards.
 	 *
