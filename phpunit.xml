@@ -15,14 +15,6 @@
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist>
-            <directory suffix=".php">./src</directory>
-            <exclude>
-                <directory suffix=".php">./src/config</directory>
-            </exclude>
-        </whitelist>
-    </filter>
     <logging>
         <log type="coverage-html"
              target="build/coverage"
