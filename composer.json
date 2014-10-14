@@ -32,7 +32,10 @@
         "psr-4": {
             "PHPCheckstyle\\PHPCheckstyle\\": "src",
             "PHPCheckstyle\\PHPCheckstyle\\Tests\\": "tests"
-        }
+        },
+        "classmap": [
+            "src/PHPCheckstyle/Tokens.php"
+        ]
     }
 
 }
