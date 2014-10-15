@@ -8,7 +8,7 @@
 		/**
 		 * Please don't hurt me. I'll change this soon.
 		 */
-		public function passTests() {
+		public function testPassAll() {
 			$this->assertTrue(TRUE);
 		}
 	}
