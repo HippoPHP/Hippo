@@ -1,6 +1,6 @@
 <?php 
 
-	namespace PHPCheckstyle\Exception;
+	namespace PHPCheckstyle\PHPCheckstyle\Exception;
 
 	interface ExceptionInterface {
 		

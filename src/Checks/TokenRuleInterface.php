@@ -1,6 +1,6 @@
 <?php 
 
-	namespace PHPCheckstyle\Check;
+	namespace PHPCheckstyle\PHPCheckstyle\Check;
 
 	use PHPCheckstyle\File;
 

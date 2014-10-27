@@ -1,8 +1,8 @@
 <?php 
 
-	namespace PHPCheckstyle\Reporter;
+	namespace PHPCheckstyle\PHPCheckstyle\Reporter;
 
-	use PHPCheckstyle\File;
+	use PHPCheckstyle\PHPCheckstyle\File;
 
 	/**
 	 * Reporters should inherit from this.

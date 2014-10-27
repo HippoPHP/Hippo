@@ -1,8 +1,8 @@
 <?php 
 
-	namespace PHPCheckstyle\Checks;
+	namespace PHPCheckstyle\PHPCheckstyle\Checks;
 
-	use PHPCheckstyle\File;
+	use PHPCheckstyle\PHPCheckstyle\File;
 
 	interface FileRuleInterface {
 		public function checkFile(File $file);

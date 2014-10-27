@@ -1,9 +1,9 @@
 <?php 
 
-	namespace PHPCheckstyle\Check;
+	namespace PHPCheckstyle\PHPCheckstyle\Check;
 
-	use PHPCheckstyle\File;
-	use PHPCheckstyle\Violation;
+	use PHPCheckstyle\PHPCheckstyle\File;
+	use PHPCheckstyle\PHPCheckstyle\Violation;
 
 	abstract class AbstractCheck {
 		protected $severity = Violation::SEVERITY_ERROR;

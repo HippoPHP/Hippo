@@ -1,6 +1,6 @@
 <?php 
 
-	namespace PHPCheckstyle;
+	namespace PHPCheckstyle\PHPCheckstyle;
 
 	use PHPCheckstyle\Exception;
 	use SeekableIterator;

@@ -1,6 +1,6 @@
 <?php 
 
-	namespace PHPCheckstyle;
+	namespace PHPCheckstyle\PHPCheckstyle;
 
 	class Violation {
 		const SEVERITY_IGNORE  = 0;

@@ -1,6 +1,6 @@
 <?php 
 
-	namespace PHPCheckstyle;
+	namespace PHPCheckstyle\PHPCheckstyle;
 
 	class Token {
 		protected $type;

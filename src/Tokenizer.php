@@ -1,6 +1,6 @@
 <?php 
 
-	namespace PHPCheckstyle;
+	namespace PHPCheckstyle\PHPCheckstyle;
 
 	class Tokenizer {
 		public function tokenize($filename, $source) {
