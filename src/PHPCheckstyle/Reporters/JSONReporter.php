@@ -2,6 +2,8 @@
 
 	namespace PHPCheckstyle\Reporter;
 
-	class JSONReporter extends Reporter {
+	use PHPCheckstyle\File;
+
+	class JSONReporter extends ReportInterface {
 
 	}

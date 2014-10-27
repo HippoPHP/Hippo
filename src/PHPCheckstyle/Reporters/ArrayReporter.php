@@ -2,6 +2,8 @@
 
 	namespace PHPCheckstyle\Reporter;
 
-	class ArrayReporter extends Reporter {
+	use PHPCheckstyle\File;
+
+	class ArrayReporter extends ReportInterface {
 
 	}
