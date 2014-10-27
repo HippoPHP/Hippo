@@ -8,7 +8,7 @@ The goal is to make PHPCheckstyle the PHP version of [Rubocop](https://github.co
 
 ## TODO
 
-- [ ] Create a proper test suite. [#18](https://github.com/PHPCheckstyle/phpcheckstyle/issues/18)
+- [x] Create a proper test suite. [#18](https://github.com/PHPCheckstyle/phpcheckstyle/issues/18)
 - [ ] Integrate PHP-Parser for AST. Each check should have access to the current token list and the AST.
 - [ ] Set default standards to [PSR 2](http://www.php-fig.org/psr/psr-2/). [#43](https://github.com/PHPCheckstyle/phpcheckstyle/issues/43)
 - [ ] Run as a binary with console output and as a library. [#46](https://github.com/PHPCheckstyle/phpcheckstyle/issues/46)
