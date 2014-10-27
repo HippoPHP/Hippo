@@ -5,9 +5,23 @@
 	use PHPCheckstyle\PHPCheckstyle\File;
 	use PHPCheckstyle\PHPCheckstyle\Violation;
 
+	/**
+	 * All checks will extend from this Abstract class.
+	 * @package PHPCheckstyle
+	 * @author James Brooks <jbrooksuk@me.com>
+	 */
 	abstract class AbstractCheck {
+		/**
+		 * Severity that the check will produce.
+		 * @var int
+		 */
 		protected $severity = Violation::SEVERITY_ERROR;
 
+		/**
+		 * Set the severity level of the check.
+		 * @param int $severity
+		 * @return AbstractCheck
+		 */
 		public function setSeverity($severity) {
 			if (NULL !== ($severity = Violation::getSeverityFromString($severity))) {
 				$this->severity = $severity;
@@ -16,6 +30,14 @@
 			return $this;
 		}
 
+		/**
+		 * Add a violation to the current file.
+		 * @param File   $file
+		 * @param int $line
+		 * @param int $column
+		 * @param string $message
+		 * @param int $severity
+		 */
 		protected function addViolation(File $file, $line, $column, $message, $severity = NULL) {
 			$source = get_class($this);
 
