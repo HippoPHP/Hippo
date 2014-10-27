@@ -5,5 +5,7 @@
 	use PHPCheckstyle\File;
 
 	class JSONReporter extends ReportInterface {
-
+		public function addFile(File $file) {
+			
+		}
 	}
