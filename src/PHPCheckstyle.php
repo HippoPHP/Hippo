@@ -19,7 +19,7 @@
 			}
 
 			while ($file->valid()) {
-				$position = $file->Fkey();
+				$position = $file->key();
 				$tokenType = $file->current()->getType();
 
 				if (isset($this->listenerTokens[$tokenType])) {
