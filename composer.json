@@ -39,12 +39,12 @@
     },
     "autoload": {
         "psr-4": {
-            "PHPCheckstyle\\PHPCheckstyle\\": "src/"
+            "PHPCheckstyle\\PHPCheckstyle\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "PHPCheckstyle\\PHPCheckstyle\\Tests\\": "tests/"
+            "PHPCheckstyle\\PHPCheckstyle\\Tests\\": "tests"
         }
     },
     "minimum-stability": "dev",
