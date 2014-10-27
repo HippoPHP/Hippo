@@ -8,10 +8,10 @@
 
 	/**
 	 * Abstract Tree Interface.
-	 * Rules implementing this interface will recieve a full AST of the file.
+	 * Checks implementing this interface will recieve a full AST of the file.
 	 * @package PHPCheckstyle
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
-	interface ASTRuleInterface {
+	interface ASTCheckInterface {
 		public function parseFile(File $file);
 	}

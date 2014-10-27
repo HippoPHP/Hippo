@@ -5,11 +5,11 @@
 	use PHPCheckstyle\PHPCheckstyle\File;
 
 	/**
-	 * File rule interface.
+	 * File Check Interface.
 	 * Rules implementing this interface will be visited for every file.
 	 * @package PHPCheckstyle
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
-	interface FileRuleInterface {
+	interface FileCheckInterface {
 		public function checkFile(File $file);
 	}

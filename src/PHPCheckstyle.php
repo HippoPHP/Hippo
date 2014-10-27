@@ -11,15 +11,15 @@
 
 		public function check(File $file) {
 			foreach ($this->checks as $check) {
-				if ($check instanceof FileRuleInterface) {
-					$rule->visitFile($file);
-				} elseif ($check instanceof ASTRuleInterface) {
-					$rule->parseFile($file);
+				if ($check instanceof FileCheckInterface) {
+					$check->visitFile($file);
+				} elseif ($check instanceof ASTCheckInterface) {
+					$check->parseFile($file);
 				}
 			}
 
 			while ($file->valid()) {
-				$position = $file->key();
+				$position = $file->Fkey();
 				$tokenType = $file->current()->getType();
 
 				if (isset($this->listenerTokens[$tokenType])) {
