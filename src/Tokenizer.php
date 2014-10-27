@@ -2,16 +2,27 @@
 
 	namespace PHPCheckstyle\PHPCheckstyle;
 
+	/**
+	 * Tokenizes a file.
+	 * @package PHPCheckstyle
+	 * @author James Brooks <jbrooksuk@me.com>
+	 */
 	class Tokenizer {
+		/**
+		 * Performs tokenization on the file
+		 * @param  string $filename
+		 * @param  string $source
+		 * @return File
+		 */
 		public function tokenize($filename, $source) {
 			$file   = new File($filename, $source);
 			$line   = 1;
 			$column = 1;
 			$level  = 0;
 
-			$namespaceFound = false;
-			$namespace      = null;
-			$namespaceLevel = null;
+			$namespaceFound = FALSE;
+			$namespace      = NULL;
+			$namespaceLevel = NULL;
 
 			foreach (token_get_all($source) as $token) {
 				if (is_array($token)) {
@@ -33,20 +44,20 @@
 
 				// Namespace handling.
 				if ($type === T_NAMESPACE) {
-					$namespaceFound = true;
+					$namespaceFound = TRUE;
 				} elseif ($namespaceFound) {
 					if (in_array($type, array(T_STRING, T_NS_SEPARATOR))) {
 						$namespace .= $lexeme;
 					} elseif ($type === ';') {
-						$namespaceFound = false;
+						$namespaceFound = FALSE;
 					} elseif ($type === '{') {
-						$namespaceFound = false;
+						$namespaceFound = FALSE;
 						$namespaceLevel = $level;
 					}
 				} elseif ($type === '}' && ($level - 1) === $namespaceLevel) {
-					$namespace      = null;
-					$namespaceLevel = null;
-				} elseif (!$namespaceFound && $namespace !== null) {
+					$namespace      = NULL;
+					$namespaceLevel = NULL;
+				} elseif (!$namespaceFound && $namespace !== NULL) {
 					$token->setNamespace($namespace);
 				}
 
