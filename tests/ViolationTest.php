@@ -26,4 +26,24 @@
 		public function testGetSeverityFromStringError() {
 			$this->assertEquals($this->violation->getSeverityFromString('error'), 3);
 		}
+
+		public function testGetLine() {
+			$this->assertEquals($this->violation->getLine(), 1);
+		}
+
+		public function testGetColumn() {
+			$this->assertEquals($this->violation->getColumn(), 0);
+		}
+
+		public function testGetSeverityName() {
+			$this->assertEquals($this->violation->getSeverityName(), 'ignore');
+		}
+
+		public function testGetMessage() {
+			$this->assertEquals($this->violation->getMessage(), 'Test');
+		}
+
+		public function testGetSource() {
+			$this->assertEquals($this->violation->getSource(), 'Test');
+		}
 	}
