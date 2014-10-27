@@ -13,6 +13,8 @@
 			foreach ($this->checks as $check) {
 				if ($check instanceof FileRuleInterface) {
 					$rule->visitFile($file);
+				} elseif ($check instanceof ASTRuleInterface) {
+					$rule->parseFile($file);
 				}
 			}
 
