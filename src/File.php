@@ -49,17 +49,10 @@
 		 */
 		public function __construct($filename = NULL, $source = NULL, $encoding = 'UTF-8') {
 			$this->filename = $filename;
-			$this->source = NULL;
+			$this->source = $source;
 			$this->encoding = $encoding;
 
-			preg_match_all('((?<content>.*?)(?<ending>\n|\r\n?|$))', $source, $matches, PREG_SET_ORDER);
-
-			foreach ($matches as $index => $line) {
-				$this->lines[$index + 1] = array(
-					'content' => $line['content'],
-					'ending' => $line['ending']
-				);
-			}
+			$this->lines = $this->_buildLinesFromSource($source);
 
 			return $this;
 		}
@@ -176,5 +169,32 @@
 				$this->next();
 				$current++;
 			}
+		}
+
+		/**
+		 * @param string $source
+		 */
+		private function _buildLinesFromSource($source) {
+			$eols = array("\r\n", "\n", "\r");
+			usort($eols, function($eol1, $eol2) { return strlen($eol2) - strlen($eol1); });
+
+			$lines = array();
+			while (!empty($source)) {
+				$eolFound = false;
+				foreach ($eols as $eol) {
+					$index = strpos($source, $eol);
+					if ($index !== false) {
+						$lines[] = substr($source, 0, $index + strlen($eol));
+						$source = substr($source, $index + strlen($eol));
+						$eolFound = true;
+						break;
+					}
+				}
+				if (!$eolFound || $source === false) {
+					$lines[] = $source;
+					break;
+				}
+			}
+			return $lines;
 		}
 	}
