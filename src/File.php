@@ -35,12 +35,6 @@
 		protected $lines = array();
 
 		/**
-		 * Violations held against the file.
-		 * @var array
-		 */
-		protected $violations = array();
-
-		/**
 		 * End of line character.
 		 * @var string
 		 */
@@ -100,35 +94,6 @@
 		 */
 		public function getEncoding() {
 			return $this->encoding;
-		}
-
-		/**
-		 * Adds a new Violation to the file.
-		 * @param Violation $violation
-		 */
-		public function addViolation(Violation $violation) {
-			$this->violations[] = $violation;
-		}
-
-		/**
-		 * Return all of the violations on the file.
-		 * Violations are sorted on a line/column basis.
-		 * @return array
-		 */
-		public function getViolations() {
-			usort($this->violations, function(Violation $a, Violation $b) {
-				if ($a->getLine() === $b->getLine()) {
-					if ($a->getColumn() === $b->getColumn()) {
-						return 0;
-					}
-
-					return ($a->getColumn() < $b->getColumn() ? -1 : 1);
-				}
-
-				return ($a->getLine() < $b->getLine() ? -1 : 1);
-			});
-
-			return $this->violations;
 		}
 
 		/**

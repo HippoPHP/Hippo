@@ -11,5 +11,8 @@
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
 	interface CheckInterface {
+		/**
+		 * @return CheckResult
+		 */
 		public function checkFile(File $file);
 	}

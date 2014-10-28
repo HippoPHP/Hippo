@@ -2,14 +2,17 @@
 
 	namespace PHPCheckstyle\Tests;
 
+	use PHPCheckstyle\PHPCheckstyle\File;
 	use PHPCheckstyle\PHPCheckstyle\Violation;
 	use PHPCheckstyle\PHPCheckstyle\Exception\OutOfBoundsException;
 
 	class ViolationTest extends \PHPUnit_Framework_TestCase {
 		protected $violation;
+		protected $file;
 
 		public function setUp() {
-			$this->violation = new Violation(1, 0, 0, "Test", "Test");
+			$this->file = new File();
+			$this->violation = new Violation($this->file, 1, 0, 0, "Test", "Test");
 		}
 
 		public function testGetSeverityFromStringIgnore() {
@@ -32,6 +35,10 @@
 			$this->assertNull($this->violation->getSeverityFromString('foobar'));
 		}
 
+		public function testGetFile() {
+			$this->assertEquals($this->violation->getFile(), $this->file);
+		}
+
 		public function testGetLine() {
 			$this->assertEquals($this->violation->getLine(), 1);
 		}
@@ -45,22 +52,22 @@
 		}
 
 		public function testGetSeverityNameIgnore() {
-			$mock = new Violation(1, 0, 0, "Test", "Ignore");
+			$mock = new Violation($this->file, 1, 0, 0, "Test", "Ignore");
 			$this->assertEquals($mock->getSeverityName(), 'ignore');
 		}
 
 		public function testGetSeverityNameInfo() {
-			$mock = new Violation(1, 0, 1, "Test", "Info");
+			$mock = new Violation($this->file, 1, 0, 1, "Test", "Info");
 			$this->assertEquals($mock->getSeverityName(), 'info');
 		}
 
 		public function testGetSeverityNameWarning() {
-			$mock = new Violation(1, 0, 2, "Test", "Warning");
+			$mock = new Violation($this->file, 1, 0, 2, "Test", "Warning");
 			$this->assertEquals($mock->getSeverityName(), 'warning');
 		}
 
 		public function testGetSeverityNameError() {
-			$mock = new Violation(1, 0, 3, "Test", "Error");
+			$mock = new Violation($this->file, 1, 0, 3, "Test", "Error");
 			$this->assertEquals($mock->getSeverityName(), 'error');
 		}
 
@@ -68,7 +75,7 @@
 		 * getSeverityName should return error by default.
 		 */
 		public function testGetSeverityNameException() {
-			$mock = new Violation(1, 0, 100, "Test", "Exception");
+			$mock = new Violation($this->file, 1, 0, 100, "Test", "Exception");
 			$this->assertEquals($mock->getSeverityName(), 'error');
 		}
 

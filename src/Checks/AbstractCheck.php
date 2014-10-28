@@ -18,6 +18,16 @@
 		protected $severity = Violation::SEVERITY_ERROR;
 
 		/**
+		 * Result of the check.
+		 * @var CheckResult
+		 */
+		protected $checkResult;
+
+		public function __construct() {
+			$this->checkResult = new CheckResult();
+		}
+
+		/**
 		 * Set the severity level of the check.
 		 * @param int $severity
 		 * @return AbstractCheck
@@ -32,7 +42,7 @@
 
 		/**
 		 * Add a violation to the current file.
-		 * @param File   $file
+		 * @param File $file
 		 * @param int $line
 		 * @param int $column
 		 * @param string $message
@@ -49,6 +59,6 @@
 				$severity = $this->severity;
 			}
 
-			$file->addViolation(new Violation($line, $column, $severity, $message, $source));
+			$this->checkResult->addViolation(new Violation($file, $line, $column, $severity, $message, $source));
 		}
 	}

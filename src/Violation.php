@@ -17,6 +17,12 @@
 		const SEVERITY_ERROR   = 3;
 
 		/**
+		 * The file that the violation was made on.
+		 * @var File
+		 */
+		protected $file;
+
+		/**
 		 * The line number that the violation was made on.
 		 * @var int
 		 */
@@ -55,12 +61,21 @@
 		 * @param string $source
 		 * @return void
 		 */
-		public function __construct($line, $column, $severity, $message, $source) {
+		public function __construct(File $file, $line, $column, $severity, $message, $source) {
+			$this->file = $file;
 			$this->line = (int) $line;
 			$this->column = (int) $column;
 			$this->severity = min(self::SEVERITY_ERROR, max(self::SEVERITY_IGNORE, (int) $severity));
 			$this->message = $message;
 			$this->source = $source;
+		}
+
+		/**
+		 * Returns the file of the violation.
+		 * @return File
+		 */
+		public function getFile() {
+			return $this->file;
 		}
 
 		/**

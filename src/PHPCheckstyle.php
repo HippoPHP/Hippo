@@ -10,22 +10,32 @@
 		protected $listenerTokens = array();
 
 		public function check(File $file) {
+			$this->_runChecks($file);
+		}
+
+		private function _runChecks(File $file) {
+			$results = [];
 			foreach ($this->checks as $check) {
-				$check->visitFile($file);
+				$results[] = $check->visitFile($file);
 			}
+			return $results;
+		}
 
-			while ($file->valid()) {
-				$position = $file->key();
-				$tokenType = $file->current()->getType();
+		private function _verifyResults(File $file, array $checkResults) {
+			foreach ($results as $result) {
+				$this->reportViolationsIfNeeded($result->getViolations());
+			}
+		}
 
-				if (isset($this->listenerTokens[$tokenType])) {
-					foreach ($this->listenerTokens[$tokenType] as $checkName) {
-						$this->checks[$checkName]->check($file);
-						$file->seek($position);
-					}
-				}
+		private function _reportViolationsIfNeeded(CheckResult $checkResult) {
+			if (!$result->hasSucceeded()) {
+				$this->_reportViolations($checkResult);
+			}
+		}
 
-				$file->next();
+		private function _reportViolations(CheckResult $checkResult) {
+			foreach ($checkResult->getViolations() as $violation) {
+				throw new \BadMethodCallException('Not implemented');
 			}
 		}
 	}
