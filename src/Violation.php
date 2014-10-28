@@ -99,7 +99,7 @@
 					return 'info';
 				case self::SEVERITY_WARNING:
 					return 'warning';
-				case self::SEVERITY_error:
+				case self::SEVERITY_ERROR:
 					return 'error';
 			}
 		}
