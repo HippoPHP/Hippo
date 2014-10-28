@@ -4,7 +4,7 @@
     "type": "library",
     "keywords": ["checkstyle","standard","convention", "coding standards", "validator"],
     "homepage": "https://github.com/phpcheckstyle/phpcheckstyle/",
-    "license": "OSL-2.1",
+    "license": "MIT",
     "authors": [
         {
             "name": "James Brooks",
