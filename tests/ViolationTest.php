@@ -1,6 +1,6 @@
 <?php 
 
-	namespace PHPCheckstyle\PHPCheckstyle\Tests;
+	namespace PHPCheckstyle\Tests;
 
 	use PHPCheckstyle\PHPCheckstyle\Violation;
 	use PHPCheckstyle\PHPCheckstyle\Exception\OutOfBoundsException;
