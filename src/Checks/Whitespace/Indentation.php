@@ -46,4 +46,43 @@
 			$this->indentCount = max(1, (int), $count);
 			return $this;
 		}
+
+		public function check(File $file) {
+			$indentation = $this->_getIndentChar();
+
+			$file->rewind();
+
+			while (TRUE) {
+				$token = $file->current();
+				$level = $token->getLevel();
+
+				$file->next();
+				if ($file->current()->getType() === '}' || $file->current()->getType() === ')') {
+					$level--;
+				}
+				$file->prev();
+
+				$expectedIndentation = str_repeat($indentation, $level);
+				$actualIndentation = $token->getTrailingWhitespace();
+
+				if ($expectedIndentation !== $actualIndentation) {
+					$this->addViolation($file, $token, $column, $message);
+				}
+
+				if (!$file->seekNextLine()) {
+					return;
+				}
+			}
+		}
+
+		private function _getIndentChar() {
+			$char = '';
+			if ($this->indentStyle === 'space') {
+				$char = ' ';
+			} elseif ($this->indentStyle === 'tab') {
+				$char = "\t";
+			}
+
+			return str_repeat($char, $this->indentCount);
+		}
 	}
