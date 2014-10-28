@@ -187,6 +187,7 @@
 						$lines[] = substr($source, 0, $index + strlen($eol));
 						$source = substr($source, $index + strlen($eol));
 						$eolFound = true;
+						$this->eolChar = $eol;
 						break;
 					}
 				}
