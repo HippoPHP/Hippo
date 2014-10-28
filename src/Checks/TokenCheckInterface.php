@@ -11,7 +11,7 @@
 	 * @package PHPCheckstyle
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
-	interface TokenCheckInterface {
+	interface TokenCheckInterface extends CheckInterface {
 		/**
 		 * Get all of the tokens the interface should listen for.
 		 * @return array

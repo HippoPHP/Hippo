@@ -12,6 +12,5 @@
 	 * @package PHPCheckstyle
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
-	interface ASTCheckInterface {
-		public function parseFile(File $file);
+	interface ASTCheckInterface extends CheckInterface {
 	}

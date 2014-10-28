@@ -50,7 +50,7 @@
 			return $this;
 		}
 
-		public function check(File $file) {
+		public function visitFile(File $file) {
 			$indentation = $this->_getIndentChar();
 
 			$file->rewind();

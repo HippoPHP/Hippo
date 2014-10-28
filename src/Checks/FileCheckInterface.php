@@ -10,6 +10,5 @@
 	 * @package PHPCheckstyle
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
-	interface FileCheckInterface {
-		public function checkFile(File $file);
+	interface FileCheckInterface extends CheckInterface {
 	}

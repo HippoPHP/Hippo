@@ -10,7 +10,7 @@
 	 * @package PHPCheckstyle
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
-	abstract class AbstractCheck {
+	abstract class AbstractCheck implements CheckInterface {
 		/**
 		 * Severity that the check will produce.
 		 * @var int

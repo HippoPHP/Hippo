@@ -11,11 +11,7 @@
 
 		public function check(File $file) {
 			foreach ($this->checks as $check) {
-				if ($check instanceof FileCheckInterface) {
-					$check->visitFile($file);
-				} elseif ($check instanceof ASTCheckInterface) {
-					$check->parseFile($file);
-				}
+				$check->visitFile($file);
 			}
 
 			while ($file->valid()) {
