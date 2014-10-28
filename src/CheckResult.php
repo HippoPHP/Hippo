@@ -21,7 +21,11 @@
 		 * @return bool
 		 */
 		public function hasSucceeded() {
-			return count($this->violations) === 0;
+			return empty($this->violations);
+		}
+
+		public function hasFailed() {
+			return empty($this->violations) === FALSE;
 		}
 
 		/**
