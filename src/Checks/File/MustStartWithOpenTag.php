@@ -15,7 +15,7 @@
 		 */
 		public function visitFile(File $file) {
 			if (count($file) > 0 && $file->bottom()->getType() !== T_OPEN_TAG) {
-				$this->addViolateion($file, 1, 1, 'Files must begin with the PHP open tag.');
+				$this->addViolation($file, 1, 1, 'Files must begin with the PHP open tag.');
 			}
 		}
 	}
