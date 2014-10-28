@@ -21,7 +21,7 @@
 		 * @return bool
 		 */
 		public function hasSucceeded() {
-			return count($this->violations) > 0;
+			return count($this->violations) === 0;
 		}
 
 		/**
