@@ -69,7 +69,13 @@
 				$actualIndentation = $token->getTrailingWhitespace();
 
 				if ($expectedIndentation !== $actualIndentation) {
-					$this->addViolation($file, $token, $column, $message);
+					$this->addViolation(
+						$file, 
+						$token, 
+						$column, 
+						sprintf("Unexpected indentation found at level %d", $level),
+						Violation::SEVERITY_WARNING
+					);
 				}
 
 				if (!$file->seekNextLine()) {
