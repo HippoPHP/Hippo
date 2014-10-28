@@ -6,3 +6,4 @@ checkstyle_resultncss.xml
 .project
 .models
 .idea/
+build/
