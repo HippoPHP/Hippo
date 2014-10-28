@@ -1,7 +1,7 @@
 # PHPCheckstyle
 
 [![Build Status](https://travis-ci.org/PHPCheckstyle/phpcheckstyle.svg?branch=ast-parser)](https://travis-ci.org/PHPCheckstyle/phpcheckstyle)
-[![Coverage Status](https://img.shields.io/coveralls/PHPCheckstyle/phpcheckstyle.svg)](https://coveralls.io/r/PHPCheckstyle/phpcheckstyle)
+[![Coverage Status](https://img.shields.io/coveralls/PHPCheckstyle/phpcheckstyle.svg)](https://coveralls.io/r/PHPCheckstyle/phpcheckstyle?branch=ast-parser)
 
 This is a work in progress to make PHPCheckstyle use an AST parser. It'll most likely end up being a complete rewrite, supporting good standards out of the box (as a default).
 
