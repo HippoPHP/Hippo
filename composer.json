@@ -40,9 +40,8 @@
         "source": "https://github.com/phpcheckstyle/phpcheckstyle"
     },
     "autoload": {
-        "psr-4": {
-            "PHPCheckstyle\\PHPCheckstyle\\": "src",
-            "PHPCheckstyle\\PHPCheckstyle\\Tests\\": "tests"
+        "psr-0": {
+            "PHPCheckstyle\\": "src/"
         }
     },
     "minimum-stability": "dev",
