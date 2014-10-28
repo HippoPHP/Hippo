@@ -58,7 +58,7 @@
 		public function __construct($line, $column, $severity, $message, $source) {
 			$this->line = (int) $line;
 			$this->column = (int) $column;
-			$this->severity = min(3, max(0, (int) $severity));
+			$this->severity = min(self::SEVERITY_ERROR, max(self::SEVERITY_IGNORE, (int) $severity));
 			$this->message = $message;
 			$this->source = $source;
 		}
