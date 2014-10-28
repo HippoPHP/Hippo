@@ -6,12 +6,15 @@
 	use PHPCheckstyle\Check\AbstractCheck;
 
 	class Indentation extends AbstractCheck {
+		const INDENT_STYLE_SPACE = 'space';
+		const INDENT_STYLE_TAB = 'tab';
+
 		/**
 		 * Style of indent.
 		 * Either 'tab' or 'space'.
 		 * @var string
 		 */
-		protected $indentStyle = 'space';
+		protected $indentStyle = self::INDENT_STYLE_SPACE;
 
 		/**
 		 * Number of indentation characters per-level.
@@ -28,8 +31,8 @@
 			$style = strtolower($style);
 
 			switch ($style) {
-				case 'space':
-				case 'tab':
+				case self::INDENT_STYLE_SPACE:
+				case self::INDENT_STYLE_TAB:
 					$this->indentStyle = $style;
 					break;
 			}
@@ -77,9 +80,9 @@
 
 		private function _getIndentChar() {
 			$char = '';
-			if ($this->indentStyle === 'space') {
+			if ($this->indentStyle === self::INDENT_STYLE_SPACE) {
 				$char = ' ';
-			} elseif ($this->indentStyle === 'tab') {
+			} elseif ($this->indentStyle === self::INDENT_STYLE_TAB) {
 				$char = "\t";
 			}
 
