@@ -43,7 +43,7 @@
 		 * @return Indentation
 		 */
 		public function setIndentCount($count) {
-			$this->indentCount = max(1, (int), $count);
+			$this->indentCount = max(1, (int) $count);
 			return $this;
 		}
 
