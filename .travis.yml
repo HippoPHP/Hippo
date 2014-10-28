@@ -19,3 +19,7 @@ before_script:
 
 script:
   - vendor/bin/phpunit --verbose --coverage-text
+  - ./vendor/bin/phpcs --standard=PSR2 -p --report=full --report-checkstyle=build/logs/checkstyle.xml src/ tests/
+
+after_script:
+  - ./vendor/bin/coveralls -v
