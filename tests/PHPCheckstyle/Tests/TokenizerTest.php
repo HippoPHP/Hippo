@@ -36,12 +36,6 @@ $source = <<<ESRC
 			return "bar";
 		}
 	}
-	if (0 > 1) {
-		echo 'What? Zero can never be higher.';
-	} else {
-		echo "Cool.";
-	}
-	echo 'Hello'; 
 ?>
 ESRC;
 			$this->assertInstanceOf('PHPCheckstyle\File', $this->tokenizer->tokenize($this->filename, $source));
