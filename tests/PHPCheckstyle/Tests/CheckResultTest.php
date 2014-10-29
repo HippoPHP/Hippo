@@ -10,7 +10,7 @@
 	class CheckResultTest extends \PHPUnit_Framework_TestCase {
 		protected $instance;
 
-		public function __construct() {
+		public function setUp() {
 			$this->instance = new CheckResult;
 		}
 

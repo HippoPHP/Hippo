@@ -8,7 +8,7 @@
 	class FileTest extends \PHPUnit_Framework_TestCase {
 		protected $file;
 
-		public function __construct() {
+		public function setUp() {
 			$this->file = new File('test.php', '<?php echo 1; ?>');
 		}
 
