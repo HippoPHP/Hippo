@@ -28,7 +28,7 @@ ESRC;
 			$this->assertInstanceOf('PHPCheckstyle\File', $this->tokenizer->tokenize($this->filename, $source));
 		}
 
-				public function testTokenizeWithIdentNamespace() {
+		public function testTokenizeWithIdentNamespace() {
 $source = <<<ESRC
 <?php 
 	namespace PHPCheckstyle {
@@ -44,6 +44,6 @@ $source = <<<ESRC
 	echo 'Hello'; 
 ?>
 ESRC;
-					$this->assertInstanceOf('PHPCheckstyle\File', $this->tokenizer->tokenize($this->filename, $source));
-				}
+			$this->assertInstanceOf('PHPCheckstyle\File', $this->tokenizer->tokenize($this->filename, $source));
+		}
 	}
