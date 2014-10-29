@@ -50,12 +50,15 @@
 		 * @param string $lexeme
 		 * @param int $line
 		 * @param int $column
+		 * @return Token
 		 */
 		public function __construct($type, $lexeme, $line, $column) {
 			$this->type = $type;
 			$this->lexeme = $lexeme;
 			$this->line = $line;
 			$this->column = $column;
+
+			return $this;
 		}
 
 		/**
