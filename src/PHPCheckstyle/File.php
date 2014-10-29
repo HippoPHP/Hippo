@@ -173,6 +173,7 @@
 
 		/**
 		 * @param string $source
+		 * @return array
 		 */
 		private function _buildLinesFromSource($source) {
 			$eols = array("\r\n", "\n", "\r");
