@@ -2,16 +2,16 @@
 
 	namespace PHPCheckstyle\Reporter;
 
-	use PHPCheckstyle\File;
+	use PHPCheckstyle\CheckResult;
 
 	/**
 	 * Reporters should inherit from this.
 	 */
 	interface ReportInterface {
 		/**
-		 * Adds a file to the report.
-		 * @param File $file
+		 * Adds a check result to the report.
+		 * @param CheckResult $checkResult
 		 * @return void
 		 */
-		public function addFile(File $file);
+		public function addCheckResult(CheckResult $checkResult);
 	}

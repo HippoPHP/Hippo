@@ -2,7 +2,7 @@
 
 	namespace PHPCheckstyle\Reporter;
 
-	use PHPCheckstyle\File;
+	use PHPCheckstyle\CheckResult;
 	use XMLWriter;
 
 	/**
@@ -10,19 +10,19 @@
 	 * @package PHPCheckstyle
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
-	class XMLReporter extends ReportInterface {
+	class XMLReporter implements ReportInterface {
 		/**
 		 * XMLWriter
 		 * @var XMLWriter
 		 */
 		protected $writer;
-		
+
 		/**
 		 * Defined by ReportInterface.
-		 * @see ReportInterface::addFile()
-		 * @param File $file
+		 * @see ReportInterface::addCheckResult()
+		 * @param CheckResult $checkResult
 		 */
-		public function addFile(File $file) {
-			
+		public function addCheckResult(CheckResult $checkResult) {
+			throw new \BadMethodCallException('Not implemented');
 		}
 	}

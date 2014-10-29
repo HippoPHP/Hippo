@@ -24,6 +24,28 @@
 		protected $violations = array();
 
 		/**
+		 * Which file is this check result for
+		 * @var File
+		 */
+		protected $file;
+
+		/**
+		 * Sets which file is this check result for.
+		 * @param File $file
+		 */
+		public function setFile(File $file) {
+			$this->file = $file;
+		}
+
+		/**
+		 * Returns which file is this check result for.
+		 * @return File
+		 */
+		public function getFile() {
+			return $this->file;
+		}
+
+		/**
 		 * Returns whether check succeeded.
 		 * @return bool
 		 */

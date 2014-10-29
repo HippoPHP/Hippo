@@ -2,7 +2,7 @@
 
 	namespace PHPCheckstyle\Reporter;
 
-	use PHPCheckstyle\File;
+	use PHPCheckstyle\CheckResult;
 	use XmlWriter;
 
 	/**
@@ -10,7 +10,7 @@
 	 * @package PHPCheckstyle
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
-	class CheckstyleReporter extends ReportInterface {
+	class CheckstyleReporter implements ReportInterface {
 		/**
 		 * XML Writer.
 		 * @var XMLWriter
@@ -34,14 +34,14 @@
 
 		/**
 		 * Defined by ReportInterface.
-		 * @see ReportInterface::addFile()
-		 * @param File $file
+		 * @see ReportInterface::addCheckResult()
+		 * @param CheckResult $checkResult
 		 */
-		public function addFile(File $file) {
+		public function addCheckResult(CheckResult $checkResult) {
 			$this->writer->startElement('file');
-			$this->writer->writeAttribute('name', $file->getFilename());
+			$this->writer->writeAttribute('name', $checkResult->getFile()->getFilename());
 
-			foreach ($file->getViolations() as $violation) {
+			foreach ($checkResult->getViolations() as $violation) {
 				$this->writer->startElement('error');
 
 				$this->writer->writeAttribute('line', $violation->getLine());
