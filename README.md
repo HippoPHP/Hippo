@@ -1,7 +1,7 @@
 # PHPCheckstyle
 
 [![Build Status](https://travis-ci.org/PHPCheckstyle/phpcheckstyle.svg?branch=ast-parser)](https://travis-ci.org/PHPCheckstyle/phpcheckstyle)
-[![Coverage Status](https://img.shields.io/coveralls/PHPCheckstyle/phpcheckstyle.svg)](https://coveralls.io/r/PHPCheckstyle/phpcheckstyle?branch=ast-parser)
+[![Coverage Status](https://coveralls.io/repos/PHPCheckstyle/phpcheckstyle/badge.png?branch=ast-parser)](https://coveralls.io/r/PHPCheckstyle/phpcheckstyle?branch=ast-parser)
 [![Gitter chat](https://badges.gitter.im/phpcheckstyle.png)](https://gitter.im/phpcheckstyle)
 
 **You're looking at the development branch. See the [Goals](#goals) below to see what is different in this branch.**
