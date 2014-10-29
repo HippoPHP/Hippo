@@ -9,6 +9,7 @@
 
 	class CheckResultTest extends \PHPUnit_Framework_TestCase {
 		protected $instance;
+		protected $file;
 
 		public function setUp() {
 			$this->instance = new CheckResult;
@@ -18,12 +19,22 @@
 			$this->assertInstanceOf('PHPCheckstyle\CheckResult', $this->instance);
 		}
 
+		public function testGetFileAtStartup() {
+			$this->assertNull($this->instance->getFile());
+		}
+
 		public function testEmptyByDefault() {
 			$this->assertEmpty($this->instance->getViolations());
 		}
 
 		public function testCount() {
 			$this->assertEquals(0, $this->instance->count());
+		}
+
+		public function testSetFile() {
+			$this->instance->setFile(new File('test.php', '<?php echo 1 ?>'));
+
+			$this->assertInstanceOf('PHPCheckstyle\File', $this->instance->getFile());
 		}
 
 		public function testAddViolation() {
