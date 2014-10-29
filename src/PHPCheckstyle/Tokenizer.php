@@ -2,6 +2,9 @@
 
 	namespace PHPCheckstyle;
 
+	use PHPCheckstyle\File;
+	use PHPCheckstyle\Token;
+
 	/**
 	 * Tokenizes a file.
 	 * @package PHPCheckstyle
