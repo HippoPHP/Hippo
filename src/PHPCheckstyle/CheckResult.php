@@ -9,7 +9,7 @@
 	/**
 	 * Result of running a check.
 	 */
-	class CheckResult {
+	class CheckResult implements Countable {
 		/**
 		 * Violations held against the file.
 		 * @var array
@@ -51,5 +51,14 @@
 
 				return ($a->getLine() < $b->getLine() ? -1 : 1);
 			});
+		}
+
+		/**
+		 * Counts how many violations are in the result.
+		 * @return int
+		 * @see Countable::count()
+		 */
+		public function count() {
+			return count($this->violations);
 		}
 	}
