@@ -35,16 +35,16 @@
 			return empty($this->violations) === FALSE;
 		}
 
-		/**
-		 * Return all of the violations on the file.
-		 * Violations are sorted on a line/column basis.
-		 * @return array
-		 */
 		public function addViolation(Violation $violation) {
 			$this->violations[] = $violation;
 			$this->violationsDirty = true;
 		}
 
+		/**
+		 * Return all of the violations on the file.
+		 * Violations are sorted on a line/column basis.
+		 * @return array
+		 */
 		public function getViolations() {
 			$this->_processViolationsIfDirty();
 			return $this->violations;
