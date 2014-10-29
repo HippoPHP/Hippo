@@ -5,6 +5,7 @@
 	use PHPCheckstyle\Exception;
 	use SeekableIterator;
 	use SplDoublyLinkedList;
+	use Countable;
 
 	/**
 	 * Result of running a check.
