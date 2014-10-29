@@ -32,19 +32,19 @@
 		}
 
 		public function testGetSeverityFromStringIgnore() {
-			$this->assertEquals($this->violation->getSeverityFromString('ignore'), 0);
+			$this->assertEquals(Violation::SEVERITY_IGNORE, $this->violation->getSeverityFromString('ignore'));
 		}
 
 		public function testGetSeverityFromStringInfo() {
-			$this->assertEquals($this->violation->getSeverityFromString('info'), 1);
+			$this->assertEquals(Violation::SEVERITY_INFO, $this->violation->getSeverityFromString('info'));
 		}
 
 		public function testGetSeverityFromStringWarning() {
-			$this->assertEquals($this->violation->getSeverityFromString('warning'), 2);
+			$this->assertEquals(Violation::SEVERITY_WARNING, $this->violation->getSeverityFromString('warning'));
 		}
 
 		public function testGetSeverityFromStringError() {
-			$this->assertEquals($this->violation->getSeverityFromString('error'), 3);
+			$this->assertEquals(Violation::SEVERITY_ERROR, $this->violation->getSeverityFromString('error'));
 		}
 
 		public function testGetSeverityFromStringNull() {
@@ -52,39 +52,39 @@
 		}
 
 		public function testGetFile() {
-			$this->assertEquals($this->violation->getFile(), $this->file);
+			$this->assertEquals($this->file, $this->violation->getFile());
 		}
 
 		public function testGetLine() {
-			$this->assertEquals($this->violation->getLine(), 1);
+			$this->assertEquals(1, $this->violation->getLine());
 		}
 
 		public function testGetColumn() {
-			$this->assertEquals($this->violation->getColumn(), 0);
+			$this->assertEquals(0, $this->violation->getColumn());
 		}
 
 		public function testGetSeverity() {
-			$this->assertEquals($this->violation->getSeverity(), 0);
+			$this->assertEquals(0, $this->violation->getSeverity());
 		}
 
 		public function testGetSeverityNameIgnore() {
 			$mock = new Violation($this->file, 1, 0, 0, "Test", "Ignore");
-			$this->assertEquals($mock->getSeverityName(), 'ignore');
+			$this->assertEquals('ignore', $mock->getSeverityName());
 		}
 
 		public function testGetSeverityNameInfo() {
 			$mock = new Violation($this->file, 1, 0, 1, "Test", "Info");
-			$this->assertEquals($mock->getSeverityName(), 'info');
+			$this->assertEquals('info', $mock->getSeverityName());
 		}
 
 		public function testGetSeverityNameWarning() {
 			$mock = new Violation($this->file, 1, 0, 2, "Test", "Warning");
-			$this->assertEquals($mock->getSeverityName(), 'warning');
+			$this->assertEquals('warning', $mock->getSeverityName());
 		}
 
 		public function testGetSeverityNameError() {
 			$mock = new Violation($this->file, 1, 0, 3, "Test", "Error");
-			$this->assertEquals($mock->getSeverityName(), 'error');
+			$this->assertEquals('error', $mock->getSeverityName());
 		}
 
 		/**
@@ -92,14 +92,14 @@
 		 */
 		public function testGetSeverityNameException() {
 			$mock = new Violation($this->file, 1, 0, 100, "Test", "Exception");
-			$this->assertEquals($mock->getSeverityName(), 'error');
+			$this->assertEquals('error', $mock->getSeverityName());
 		}
 
 		public function testGetMessage() {
-			$this->assertEquals($this->violation->getMessage(), 'Test');
+			$this->assertEquals('Test', $this->violation->getMessage());
 		}
 
 		public function testGetSource() {
-			$this->assertEquals($this->violation->getSource(), 'Test');
+			$this->assertEquals('Test', $this->violation->getSource());
 		}
 	}
