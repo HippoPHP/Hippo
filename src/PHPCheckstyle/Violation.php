@@ -107,15 +107,14 @@
 		 * @return string
 		 */
 		public function getSeverityName() {
-			switch ($this->severity) {
-				case self::SEVERITY_IGNORE:
-					return 'ignore';
-				case self::SEVERITY_INFO:
-					return 'info';
-				case self::SEVERITY_WARNING:
-					return 'warning';
-				case self::SEVERITY_ERROR:
-					return 'error';
+			if ($this->severity === self::SEVERITY_IGNORE) {
+				return 'ignore';
+			} elseif ($this->severity === self::SEVERITY_INFO) {
+				return 'info';
+			} elseif ($this->severity === self::SEVERITY_WARNING) {
+				return 'warning';
+			} elseif ($this->severity === self::SEVERITY_ERROR) {
+				return 'error';
 			}
 		}
 
