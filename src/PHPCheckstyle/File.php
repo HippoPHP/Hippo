@@ -35,12 +35,6 @@
 		protected $lines = array();
 
 		/**
-		 * End of line character.
-		 * @var string
-		 */
-		protected $eolChar = '';
-
-		/**
 		 * Create a new file representation.
 		 * @param string $filename
 		 * @param string $source
@@ -188,7 +182,6 @@
 						$lines[] = substr($source, 0, $index + strlen($eol));
 						$source = substr($source, $index + strlen($eol));
 						$eolFound = true;
-						$this->eolChar = $eol;
 						break;
 					}
 				}
