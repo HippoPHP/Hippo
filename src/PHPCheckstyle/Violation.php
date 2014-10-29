@@ -107,15 +107,8 @@
 		 * @return string
 		 */
 		public function getSeverityName() {
-			if ($this->severity === self::SEVERITY_IGNORE) {
-				return 'ignore';
-			} elseif ($this->severity === self::SEVERITY_INFO) {
-				return 'info';
-			} elseif ($this->severity === self::SEVERITY_WARNING) {
-				return 'warning';
-			} elseif ($this->severity === self::SEVERITY_ERROR) {
-				return 'error';
-			}
+			$severityNames = $this->_getSeverityNames();
+			return $severityNames[$this->severity];
 		}
 
 		/**
@@ -136,21 +129,22 @@
 
 		/**
 		 * Get a severity level from a severity name.
-		 * @param  string $severity
+		 * @param  string $severityName
 		 * @return int
 		 */
-		public function getSeverityFromString($severity) {
-			switch ($severity) {
-				case 'ignore':
-					return self::SEVERITY_IGNORE;
-				case 'info':
-					return self::SEVERITY_INFO;
-				case 'warning':
-					return self::SEVERITY_WARNING;
-				case 'error':
-					return self::SEVERITY_ERROR;
+		public function getSeverityFromString($severityName) {
+			$severityNames = array_flip($this->_getSeverityNames());
+			if (isset($severityNames[$severityName])) {
+				return $severityNames[$severityName];
 			}
-
 			return NULL;
+		}
+
+		private function _getSeverityNames() {
+			return array(
+				self::SEVERITY_IGNORE => 'ignore',
+				self::SEVERITY_INFO => 'info',
+				self::SEVERITY_WARNING => 'warning',
+				self::SEVERITY_ERROR => 'error');
 		}
 	}
