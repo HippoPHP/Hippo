@@ -34,13 +34,11 @@
 		 * Violations are sorted on a line/column basis.
 		 * @return array
 		 */
-		public function getViolations() {
-			return $this->violations;
-		}
-
 		public function addViolation(Violation $violation) {
 			$this->violations[] = $violation;
+		}
 
+		public function getViolations() {
 			usort($this->violations, function(Violation $a, Violation $b) {
 				if ($a->getLine() === $b->getLine()) {
 					if ($a->getColumn() === $b->getColumn()) {
@@ -52,6 +50,8 @@
 
 				return ($a->getLine() < $b->getLine() ? -1 : 1);
 			});
+
+			return $this->violations;
 		}
 
 		/**
