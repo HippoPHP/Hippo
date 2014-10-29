@@ -35,4 +35,32 @@
 			$this->assertFalse($this->instance->hasSucceeded());
 		}
 
+		/**
+		 * @dataProvider violationOrderProvider
+		 */
+		public function testViolationOrder(array $inputViolations, array $expectedViolations) {
+			foreach ($inputViolations as $violation) {
+				$this->instance->addViolation($violation);
+			}
+
+			$actualViolations = $this->instance->getViolations();
+			$this->assertEquals($expectedViolations, $actualViolations);
+		}
+
+		public function violationOrderProvider() {
+			$file = new File('test.php', '<? echo 1; ?>');
+			$violationLine1Col1 = new Violation($file, 1, 1, Violation::SEVERITY_ERROR, null, null);
+			$violationLine2Col1 = new Violation($file, 2, 1, Violation::SEVERITY_ERROR, null, null);
+			$violationLine3Col1 = new Violation($file, 3, 1, Violation::SEVERITY_ERROR, null, null);
+			$violationLine1Col2 = new Violation($file, 1, 2, Violation::SEVERITY_ERROR, null, null);
+			$violationLine2Col2 = new Violation($file, 2, 2, Violation::SEVERITY_ERROR, null, null);
+			return array(
+				array(array($violationLine1Col1, $violationLine2Col1), array($violationLine1Col1, $violationLine2Col1)),
+				array(array($violationLine2Col1, $violationLine1Col1), array($violationLine1Col1, $violationLine2Col1)),
+				array(array($violationLine2Col1, $violationLine3Col1), array($violationLine2Col1, $violationLine3Col1)),
+				array(
+					array($violationLine2Col1, $violationLine1Col2, $violationLine3Col1, $violationLine2Col2),
+					array($violationLine1Col2, $violationLine2Col1, $violationLine2Col2, $violationLine3Col1)),
+			);
+		}
 	}

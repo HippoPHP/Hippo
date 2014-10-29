@@ -12,6 +12,12 @@
 	 */
 	class CheckResult implements Countable {
 		/**
+		 * Was modified since last violation retrieval?
+		 * @var boolean
+		 */
+		protected $violationsDirty;
+
+		/**
 		 * Violations held against the file.
 		 * @var array
 		 */
@@ -36,9 +42,31 @@
 		 */
 		public function addViolation(Violation $violation) {
 			$this->violations[] = $violation;
+			$this->violationsDirty = true;
 		}
 
 		public function getViolations() {
+			$this->_processViolationsIfDirty();
+			return $this->violations;
+		}
+
+		/**
+		 * Counts how many violations are in the result.
+		 * @return int
+		 * @see Countable::count()
+		 */
+		public function count() {
+			return count($this->violations);
+		}
+
+		private function _processViolationsIfDirty() {
+			if ($this->violationsDirty) {
+				$this->_sortViolations();
+				$this->violationsDirty = false;
+			}
+		}
+
+		private function _sortViolations() {
 			usort($this->violations, function(Violation $a, Violation $b) {
 				if ($a->getLine() === $b->getLine()) {
 					if ($a->getColumn() === $b->getColumn()) {
@@ -50,16 +78,5 @@
 
 				return ($a->getLine() < $b->getLine() ? -1 : 1);
 			});
-
-			return $this->violations;
-		}
-
-		/**
-		 * Counts how many violations are in the result.
-		 * @return int
-		 * @see Countable::count()
-		 */
-		public function count() {
-			return count($this->violations);
 		}
 	}
