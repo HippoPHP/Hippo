@@ -19,8 +19,15 @@ PHPCheckstyle has been around since 2011 and in that time there has been changes
 This branch isn't just new changes, it's a complete, from the ground up rewrite.
 
 - [x] Create a proper test suite. [#18](https://github.com/PHPCheckstyle/phpcheckstyle/issues/18)
+- [ ] Checks should be able to implement different kind of check types, giving more freedom on a per-check basis.
 - [ ] Integrate PHP-Parser for AST. Checks can extend some kind of AST Node Tree class.
-- [ ] Set default standards to [PSR 2](http://www.php-fig.org/psr/psr-2/), config should be able to override. [#43](https://github.com/PHPCheckstyle/phpcheckstyle/issues/43)
+- [ ] Set default standards to [PSR 2](http://www.php-fig.org/psr/psr-2/).
+  - [ ] Standards and configurations should be able to be extended. [#43](https://github.com/PHPCheckstyle/phpcheckstyle/issues/43)
+  - [ ] PSR-1
+  - [ ] PSR-2
+  - [ ] PGS-2
+  - [ ] Zend
+  - [ ] PEAR
 - [ ] Run as a binary with console output and as a library. [#46](https://github.com/PHPCheckstyle/phpcheckstyle/issues/46)
 - [ ] Switch to [semver](http://semver.org) versioning. [#42](https://github.com/PHPCheckstyle/phpcheckstyle/issues/42)
 
