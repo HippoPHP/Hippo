@@ -55,7 +55,7 @@
 
 			$file->rewind();
 
-			while (TRUE) {
+			while (true) {
 				$token = $file->current();
 				$level = $token->getLevel();
 

@@ -54,7 +54,7 @@
 		}
 
 		public function hasFailed() {
-			return empty($this->violations) === FALSE;
+			return empty($this->violations) === false;
 		}
 
 		public function addViolation(Violation $violation) {

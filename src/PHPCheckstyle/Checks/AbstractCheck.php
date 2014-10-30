@@ -33,7 +33,7 @@
 		 * @return AbstractCheck
 		 */
 		public function setSeverity($severity) {
-			if (NULL !== ($severity = Violation::getSeverityFromString($severity))) {
+			if (null !== ($severity = Violation::getSeverityFromString($severity))) {
 				$this->severity = $severity;
 			}
 
@@ -48,14 +48,14 @@
 		 * @param string $message
 		 * @param int $severity
 		 */
-		protected function addViolation(File $file, $line, $column, $message, $severity = NULL) {
+		protected function addViolation(File $file, $line, $column, $message, $severity = null) {
 			$source = get_class($this);
 
 			if (strpos($source, 'PHPCheckstyle\\Check\\') === 0) {
 				$source = 'PHPCheckstyle\\' . substr($source, strlen('PHPCheckstyle\\Check\\'));
 			}
 
-			if ($severity === NULL) {
+			if ($severity === null) {
 				$severity = $this->severity;
 			}
 

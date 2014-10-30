@@ -135,10 +135,10 @@
 		 */
 		public function hasNewline() {
 			if (preg_match('([\r\n])', $this->lexeme)) {
-				return TRUE;
+				return true;
 			}
 
-			return FALSE;
+			return false;
 		}
 
 		/**

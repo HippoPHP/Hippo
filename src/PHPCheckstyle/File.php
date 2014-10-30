@@ -41,7 +41,7 @@
 		 * @param string $encoding
 		 * @return File
 		 */
-		public function __construct($filename = NULL, $source = NULL, $encoding = 'UTF-8') {
+		public function __construct($filename = null, $source = null, $encoding = 'UTF-8') {
 			$this->filename = $filename;
 			$this->source = $source;
 			$this->encoding = $encoding;

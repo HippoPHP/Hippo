@@ -137,7 +137,7 @@
 			if (isset($severityNames[$severityName])) {
 				return $severityNames[$severityName];
 			}
-			return NULL;
+			return null;
 		}
 
 		private function _getSeverityNames() {

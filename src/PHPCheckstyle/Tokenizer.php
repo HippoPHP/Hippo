@@ -23,9 +23,9 @@
 			$column = 1;
 			$level  = 0;
 
-			$namespaceFound = FALSE;
-			$namespace      = NULL;
-			$namespaceLevel = NULL;
+			$namespaceFound = false;
+			$namespace      = null;
+			$namespaceLevel = null;
 
 			foreach (token_get_all($source) as $token) {
 				if (is_array($token)) {
@@ -47,20 +47,20 @@
 
 				// Namespace handling.
 				if ($type === T_NAMESPACE) {
-					$namespaceFound = TRUE;
+					$namespaceFound = true;
 				} elseif ($namespaceFound) {
 					if (in_array($type, array(T_STRING, T_NS_SEPARATOR))) {
 						$namespace .= $lexeme;
 					} elseif ($type === ';') {
-						$namespaceFound = FALSE;
+						$namespaceFound = false;
 					} elseif ($type === '{') {
-						$namespaceFound = FALSE;
+						$namespaceFound = false;
 						$namespaceLevel = $level;
 					}
 				} elseif ($type === '}' && ($level - 1) === $namespaceLevel) {
-					$namespace      = NULL;
-					$namespaceLevel = NULL;
-				} elseif (!$namespaceFound && $namespace !== NULL) {
+					$namespace      = null;
+					$namespaceLevel = null;
+				} elseif (!$namespaceFound && $namespace !== null) {
 					$token->setNamespace($namespace);
 				}
 

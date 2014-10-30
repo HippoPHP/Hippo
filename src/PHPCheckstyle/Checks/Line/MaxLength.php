@@ -18,13 +18,13 @@
 		 * Limit for emitting warnings.
 		 * @var integer
 		 */
-		protected $warningLimit = NULL;
+		protected $warningLimit = null;
 
 		/**
 		 * Limit for emitting infos.
 		 * @var integer
 		 */
-		protected $infoLimit = NULL;
+		protected $infoLimit = null;
 
 		/**
 		 * Defines how many spaces a tab takes up.
@@ -38,7 +38,7 @@
 		 * @return MaxLength
 		 */
 		public function setErrorLimit($length) {
-			$this->errorLimit = ((int) $length) ?: NULL;
+			$this->errorLimit = ((int) $length) ?: null;
 			return $this;
 		}
 
@@ -48,7 +48,7 @@
 		 * @return MaxLength
 		 */
 		public function setWarningLimit($length) {
-			$this->warningLimit = ((int) $length) ?: NULL;
+			$this->warningLimit = ((int) $length) ?: null;
 			return $this;
 		}
 
@@ -58,7 +58,7 @@
 		 * @return MaxLength
 		 */
 		public function setInfoLimit($length) {
-			$this->infoLimit = ((int) $length) ?: NULL;
+			$this->infoLimit = ((int) $length) ?: null;
 			return $this;
 		}
 
@@ -85,8 +85,8 @@
 					$file->getEncoding()
 				);
 
-				$violationLimit = NULL;
-				$severity = NULL;
+				$violationLimit = null;
+				$severity = null;
 
 				if ($this->errorLimit !== null && $lineLength > $this->errorLimit) {
 					$violationLimit = $this->errorLimit;
@@ -99,7 +99,7 @@
 					$severity       = Violation::SEVERITY_INFO;
 				}
 
-				if ($violationLimit !== NULL) {
+				if ($violationLimit !== null) {
 					$this->addViolation(
 						$file, 
 						$line, 

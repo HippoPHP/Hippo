@@ -10,7 +10,7 @@
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
 	class CLIReporter implements ReportInterface {
-		protected $firstFile = TRUE;
+		protected $firstFile = true;
 		
 		/**
 		 * Defined by ReportInterface.
@@ -25,7 +25,7 @@
 			}
 
 			if ($this->firstFile) {
-				$this->firstFile = FALSE;
+				$this->firstFile = false;
 			} else {
 				echo PHP_EOL;
 			}
