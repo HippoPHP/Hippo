@@ -3,8 +3,6 @@
 	namespace PHPCheckstyle\Checks;
 
 	use PHPCheckstyle\File;
-	use PhpParser\Lexer;
-	use PhpParser\Parser;
 
 	/**
 	 * Abstract Tree Interface.
@@ -13,4 +11,10 @@
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
 	interface ASTCheckInterface extends CheckInterface {
+		/**
+		 * Returns the node tree for a given File instance.
+		 * @param  File   $file
+		 * @return PhpParser
+		 */
+		public function getNodeTree(File $file);	
 	}
