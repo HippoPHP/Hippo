@@ -22,12 +22,16 @@ This branch isn't just new changes, it's a complete, from the ground up rewrite.
 - [ ] Checks should be able to implement different kind of check types, giving more freedom on a per-check basis.
 - [ ] Integrate PHP-Parser for AST. Checks can extend some kind of AST Node Tree class.
 - [ ] Set default standards to [PSR 2](http://www.php-fig.org/psr/psr-2/).
-  - [ ] Standards and configurations should be able to be extended. [#43](https://github.com/PHPCheckstyle/phpcheckstyle/issues/43)
-  - [ ] PSR-1
-  - [ ] PSR-2
-  - [ ] PGS-2
-  - [ ] Zend
-  - [ ] PEAR
+    - [ ] Standards and configurations should be able to be extended. [#43](https://github.com/PHPCheckstyle/phpcheckstyle/issues/43)
+    - [ ] PSR-1
+    - [ ] PSR-2
+    - [ ] PGS-2
+    - [ ] Zend
+    - [ ] PEAR
+- [ ] Configuration keys should allow flexibility in the naming pattern, it shouldn't matter so long as it is a valid name.
+    - [ ] camelCase
+    - [ ] snake_case
+    - [ ] PascalCase
 - [ ] Run as a binary with console output and as a library. [#46](https://github.com/PHPCheckstyle/phpcheckstyle/issues/46)
 - [ ] Switch to [semver](http://semver.org) versioning. [#42](https://github.com/PHPCheckstyle/phpcheckstyle/issues/42)
 
