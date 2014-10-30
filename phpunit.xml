@@ -11,28 +11,28 @@
          syntaxCheck="false"
 >
     <testsuites>
-        <testsuite name="PHPCheckstyle Test Suite">
-            <directory>./tests/PHPCheckstyle/Tests</directory>
+        <testsuite name="Hippo Test Suite">
+            <directory>./tests/Hippo/Tests</directory>
         </testsuite>
     </testsuites>
     
     <filter>
         <whitelist>
-            <directory suffix=".php">./src/PHPCheckstyle/</directory>
+            <directory suffix=".php">./src/Hippo/</directory>
         </whitelist>
     </filter>
 
     <logging>
        <log type="coverage-html"
             target="build/coverage"
-            title="PHPCheckstyle"
+            title="Hippo"
             charset="UTF-8"
             yui="true"
             highlight="true" />
 
        <log type="coverage-text"
             target="php://stdout"
-            title="PHPCheckstyle"
+            title="Hippo"
             charset="UTF-8"
             lowUpperBound="50"
             highLowerBound="90" />

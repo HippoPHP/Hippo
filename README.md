@@ -1,28 +1,24 @@
-# PHPCheckstyle
+# Hippo
 
-[![Build Status](https://travis-ci.org/PHPCheckstyle/phpcheckstyle.svg?branch=ast-parser)](https://travis-ci.org/PHPCheckstyle/phpcheckstyle)
-[![Coverage Status](https://coveralls.io/repos/PHPCheckstyle/phpcheckstyle/badge.png?branch=ast-parser)](https://coveralls.io/r/PHPCheckstyle/phpcheckstyle?branch=ast-parser)
-[![Gitter chat](https://badges.gitter.im/phpcheckstyle.png)](https://gitter.im/phpcheckstyle)
+[![Build Status](https://travis-ci.org/HippoPHP/Hippo.svg)](https://travis-ci.org/HippoPHP/Hippo)
+[![Coverage Status](https://coveralls.io/repos/HippoPHP/Hippo/badge.png)](https://coveralls.io/r/HippoPHP/Hippo)
+[![Gitter chat](https://badges.gitter.im/hippophp.png)](https://gitter.im/hippophp)
 
 **You're looking at the development branch. See the [Goals](#goals) below to see what is different in this branch.**
 
 ## About
 
-PHPCheckstyle is an open-source tool that helps PHP programmers adhere to certain coding conventions. The tools checks the input PHP source code and reports any violations against the given standards.
+Hippo originally started life as a fork of [PHPCheckstyle](https://github.com/phpcheckstyle/phpcheckstyle), however due to the complete rewrite, we decided to start a new project.
 
-This project was originally written by Hari Kodungallur and Nimish Pachapurkar and is now maintained by Benoit Pesty, James Brooks and Marcin Kurczewski.
+Hippo is an open-source tool that helps PHP programmers adhere to certain coding conventions. The tools checks the input PHP source code and reports any violations against the given standards.
 
 ## Goals
 
-PHPCheckstyle has been around since 2011 and in that time there has been changes in PHP and new packages developed that allow us to rewrite PHPCheckstyle with a lot of cool new features.
-
-This branch isn't just new changes, it's a complete, from the ground up rewrite.
-
-- [x] Create a proper test suite. [#18](https://github.com/PHPCheckstyle/phpcheckstyle/issues/18)
+- [x] Create a proper test suite.
 - [ ] Checks should be able to implement different kind of check types, giving more freedom on a per-check basis.
 - [ ] Integrate PHP-Parser for AST. Checks can extend some kind of AST Node Tree class.
 - [ ] Set default standards to [PSR 2](http://www.php-fig.org/psr/psr-2/).
-    - [ ] Standards and configurations should be able to be extended. [#43](https://github.com/PHPCheckstyle/phpcheckstyle/issues/43)
+    - [ ] Standards and configurations should be able to be extended.
     - [ ] PSR-1
     - [ ] PSR-2
     - [ ] PGS-2
@@ -32,8 +28,8 @@ This branch isn't just new changes, it's a complete, from the ground up rewrite.
     - [ ] camelCase
     - [ ] snake_case
     - [ ] PascalCase
-- [ ] Run as a binary with console output and as a library. [#46](https://github.com/PHPCheckstyle/phpcheckstyle/issues/46)
-- [ ] Switch to [semver](http://semver.org) versioning. [#42](https://github.com/PHPCheckstyle/phpcheckstyle/issues/42)
+- [ ] Run as a binary with console output and as a library.
+- [ ] Switch to [semver](http://semver.org) versioning.
 
 # License
 See [LICENSE](/LICENSE.txt)

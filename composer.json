@@ -1,9 +1,9 @@
 {
-    "name": "phpcheckstyle/phpcheckstyle",
-    "description": "PHPCheckstyle is an open-source tool that helps PHP programmers adhere to certain coding conventions",
+    "name": "hippophp/hippo",
+    "description": "Hippo is an open-source tool that helps PHP programmers adhere to certain coding conventions",
     "type": "library",
     "keywords": ["checkstyle","standard","convention", "coding standards", "validator"],
-    "homepage": "https://github.com/phpcheckstyle/phpcheckstyle/",
+    "homepage": "https://github.com/hippophp/hippo",
     "license": "MIT",
     "authors": [
         {
@@ -13,13 +13,13 @@
             "role": "Developer"
         },
         {
-            "name": "Benoit Pesty",
-            "homepage": "https://github.com/tchule",
+            "name": "Marcin Kurczewski",
+            "homepage": "http://sakuya.pl",
             "role": "Developer"
         },
         {
-            "name": "Marcin Kurczewski",
-            "homepage": "http://sakuya.pl",
+            "name": "Benoit Pesty",
+            "homepage": "https://github.com/tchule",
             "role": "Developer"
         }
     ],
@@ -36,12 +36,12 @@
         "satooshi/php-coveralls": "~0.6"
     },
     "support": {
-        "wiki": "https://github.com/phpcheckstyle/phpcheckstyle/wiki",
-        "source": "https://github.com/phpcheckstyle/phpcheckstyle"
+        "wiki": "https://github.com/hippophp/hippo/wiki",
+        "source": "https://github.com/hippophp/hippo"
     },
     "autoload": {
         "psr-0": {
-            "PHPCheckstyle\\": "src/"
+            "Hippo\\": "src/"
         }
     },
     "minimum-stability": "dev",
