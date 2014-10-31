@@ -57,11 +57,14 @@
 		}
 
 		public function testGetLinesVaryingEol() {
-			$file = new File('test.php', "<?php echo 1;\r\necho 2\recho 3\n");
+			$file = new File('test.php', "<?php echo 1;\r\necho 2;\recho 3;\necho 4;\recho 5;\r\necho 6;\n");
 			$this->assertEquals(array(
 				"<?php echo 1;\r\n",
-				"echo 2\r",
-				"echo 3\n",
+				"echo 2;\r",
+				"echo 3;\n",
+				"echo 4;\r",
+				"echo 5;\r\n",
+				"echo 6;\n",
 				''),
 				$file->getLines());
 		}

@@ -87,7 +87,7 @@
 		 * @return array
 		 */
 		private function _buildLinesFromSource($source) {
-			$eols = array("\r\n", "\n", "\r");
+			$eols = array("\r", "\n", "\r\n");
 
 			$lines = array();
 			while ($source !== '') {
@@ -116,7 +116,8 @@
 				if ($index === false) {
 					continue;
 				}
-				if ($minIndex === false || $index < $minIndex || strlen($eol) > strlen($eolUsed)) {
+				$isLonger = strlen($eol) > strlen($eolUsed);
+				if ($minIndex === false || $index < $minIndex || ($index === $minIndex && $isLonger)) {
 					$eolUsed = $eol;
 					$minIndex = $index;
 				}
