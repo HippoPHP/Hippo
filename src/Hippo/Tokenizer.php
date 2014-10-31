@@ -33,13 +33,8 @@
 			$tokens = token_get_all($file->getSource());
 
 			foreach ($tokens as $token) {
-				if (is_array($token)) {
-					$type   = $token[0];
-					$lexeme = $token[1];
-				} else {
-					$type   = $token;
-					$lexeme = $token;
-				}
+				$type = is_array($token) ? $token[0] : $token;
+				$lexeme = is_array($token) ? $token[1] : $token;
 
 				$token = new Token($type, $lexeme, $line, $column);
 
