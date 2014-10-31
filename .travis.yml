@@ -21,3 +21,4 @@ script:
 
 after_script:
   - ./vendor/bin/coveralls -v
+  - CODECLIMATE_REPO_TOKEN=3893dec64ea1b8a939039133f6f4943c7d41f1b8d51cd7b1417e68568b20a740 ./vendor/bin/test-reporter
