@@ -24,6 +24,13 @@
 			$this->assertEquals('<?php echo 1; ?>', $this->file->getSource());
 		}
 
+		public function testGetOneLine() {
+			$file = new File('test.php', "<?php echo 1;");
+			$this->assertEquals(array(
+				"<?php echo 1;"),
+				$file->getLines());
+		}
+
 		public function testGetLines() {
 			$file = new File('test.php', "<?php echo 1;\necho 2 ?>");
 			$this->assertEquals(array(

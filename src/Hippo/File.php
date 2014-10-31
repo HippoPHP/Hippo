@@ -88,25 +88,42 @@
 		 */
 		private function _buildLinesFromSource($source) {
 			$eols = array("\r\n", "\n", "\r");
-			usort($eols, function($eol1, $eol2) { return strlen($eol2) - strlen($eol1); });
 
 			$lines = array();
-			while (!empty($source)) {
-				$eolFound = false;
-				foreach ($eols as $eol) {
-					$index = strpos($source, $eol);
-					if ($index !== false) {
-						$lines[] = substr($source, 0, $index + strlen($eol));
-						$source = substr($source, $index + strlen($eol));
-						$eolFound = true;
-						break;
-					}
-				}
-				if (!$eolFound || $source === false) {
-					$lines[] = $source;
+			while ($source !== '') {
+				$line = $this->_extractNextLine($source, $eols, $eolUsed);
+				$lines[] = $line;
+				$source = strval(substr($source, strlen($line)));
+				if ($eolUsed !== null && $source === '') {
+					$lines[] = '';
 					break;
 				}
 			}
 			return $lines;
+		}
+
+		/**
+		 * @param string $source
+		 * @param string[] $eols
+		 * @param string $eolUsed
+		 * @return string
+		 */
+		private function _extractNextLine($source, array $eols, &$eolUsed) {
+			$minIndex = false;
+			$eolUsed = null;
+			foreach ($eols as $eol) {
+				$index = strpos($source, $eol);
+				if ($index === false) {
+					continue;
+				}
+				if ($minIndex === false || $index < $minIndex || strlen($eol) > strlen($eolUsed)) {
+					$eolUsed = $eol;
+					$minIndex = $index;
+				}
+			}
+
+			return $eolUsed !== null
+				? strval(substr($source, 0, $minIndex + strlen($eolUsed)))
+				: $source;
 		}
 	}
