@@ -40,8 +40,8 @@
 				$token = new Token($type, $lexeme, $line, $column);
 
 				if ($token->hasNewline()) {
-					$line   += $token->getNewLineCount();
-					$column  = 1 + $token->getTrailingLineLength();
+					$line += $token->getNewLineCount();
+					$column = 1 + $token->getTrailingLineLength();
 				} else {
 					$column += $token->getLength();
 				}
