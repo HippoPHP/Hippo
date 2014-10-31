@@ -66,6 +66,7 @@
 			$violationLine1Col2 = new Violation($file, 1, 2, Violation::SEVERITY_ERROR, null, null);
 			$violationLine2Col2 = new Violation($file, 2, 2, Violation::SEVERITY_ERROR, null, null);
 			return array(
+				array(array($violationLine1Col1, $violationLine1Col1), array($violationLine1Col1, $violationLine1Col1)),
 				array(array($violationLine1Col1, $violationLine2Col1), array($violationLine1Col1, $violationLine2Col1)),
 				array(array($violationLine2Col1, $violationLine1Col1), array($violationLine1Col1, $violationLine2Col1)),
 				array(array($violationLine2Col1, $violationLine3Col1), array($violationLine2Col1, $violationLine3Col1)),
