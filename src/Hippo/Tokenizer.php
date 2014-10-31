@@ -12,6 +12,9 @@
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
 	class Tokenizer {
+		private $_blockIndent = array('(', '{', T_CURLY_OPEN, T_DOLLAR_OPEN_CURLY_BRACES);
+		private $_blockOutdent = array(')', '}');
+
 		/**
 		 * Performs tokenization on the file
 		 * @param  File $file
@@ -27,8 +30,9 @@
 			$namespaceLevel = null;
 
 			$tokenList = new TokenList;
+			$tokens = token_get_all($file->getSource());
 
-			foreach (token_get_all($file->getSource()) as $token) {
+			foreach ($tokens as $token) {
 				if (is_array($token)) {
 					$type   = $token[0];
 					$lexeme = $token[1];
@@ -65,18 +69,20 @@
 					$token->setNamespace($namespace);
 				}
 
-				// Block level increment.
-				if (in_array($type, array('(', '{', T_CURLY_OPEN, T_DOLLAR_OPEN_CURLY_BRACES))) {
-					$level++;
-				} elseif (in_array($type, array(')', '}'))) {
-					$level--;
-				}
-
-				$token->setLevel($level);
+				$token->setLevel($this->_blockDent($type, $level));
 
 				$tokenList[] = $token;
 			}
 
 			return $tokenList;
+		}
+
+		private function _blockDent($type, &$level) {
+			if (in_array($type, $this->_blockIndent)) {
+				$level++;
+			} elseif (in_array($type, $this->_blockOutdent)) {
+				$level--;
+			}
+			return $level;
 		}
 	}
