@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/HippoPHP/Hippo.svg)](https://travis-ci.org/HippoPHP/Hippo)
 [![Code Climate](https://codeclimate.com/github/HippoPHP/Hippo/badges/gpa.svg)](https://codeclimate.com/github/HippoPHP/Hippo)
-[![Coverage Status](https://coveralls.io/repos/HippoPHP/Hippo/badge.png)](https://coveralls.io/r/HippoPHP/Hippo)
+[![Test Coverage](https://codeclimate.com/github/HippoPHP/Hippo/badges/coverage.svg)](https://codeclimate.com/github/HippoPHP/Hippo)
 [![Gitter chat](https://badges.gitter.im/hippophp.png)](https://gitter.im/hippophp)
 
 ## About
