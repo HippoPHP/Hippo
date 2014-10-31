@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	namespace Hippo\Check;
 
@@ -6,7 +6,7 @@
 
 	/**
 	 * Token Check Interface.
-	 * Rules implementing this interface will be able to register 
+	 * Rules implementing this interface will be able to register
 	 * for certain tokens and be notified for each occurence.
 	 * @package Hippo
 	 * @author James Brooks <jbrooksuk@me.com>

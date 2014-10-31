@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	namespace Hippo\Check\Whitespace;
 
@@ -70,9 +70,9 @@
 
 				if ($expectedIndentation !== $actualIndentation) {
 					$this->addViolation(
-						$file, 
-						$token, 
-						$column, 
+						$file,
+						$token,
+						$column,
 						sprintf("Unexpected indentation found at level %d", $level),
 						Violation::SEVERITY_WARNING
 					);

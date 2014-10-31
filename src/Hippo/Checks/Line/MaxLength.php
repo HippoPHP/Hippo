@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	namespace Hippo\Check\Line;
 
@@ -101,10 +101,10 @@
 
 				if ($violationLimit !== null) {
 					$this->addViolation(
-						$file, 
-						$line, 
-						0, 
-						sprintf('Line is longer than %d characters.', $violationLimit), 
+						$file,
+						$line,
+						0,
+						sprintf('Line is longer than %d characters.', $violationLimit),
 						$severity
 					);
 				}

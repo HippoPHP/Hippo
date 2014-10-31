@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	namespace Hippo\Exception;
 
@@ -8,5 +8,4 @@
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
 	class BadConfigKeyException extends \Exception implements ExceptionInterface {
-		
 	}

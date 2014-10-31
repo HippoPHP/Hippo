@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	namespace Hippo\Reporter;
 
@@ -11,7 +11,7 @@
 	 */
 	class CLIReporter implements ReportInterface {
 		protected $firstFile = true;
-		
+
 		/**
 		 * Defined by ReportInterface.
 		 * @see ReportInterface::addCheckResult()

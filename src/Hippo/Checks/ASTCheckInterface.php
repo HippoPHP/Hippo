@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 	namespace Hippo\Checks;
 
@@ -16,5 +16,5 @@
 		 * @param  File   $file
 		 * @return PhpParser
 		 */
-		public function getNodeTree(File $file);	
+		public function getNodeTree(File $file);
 	}
