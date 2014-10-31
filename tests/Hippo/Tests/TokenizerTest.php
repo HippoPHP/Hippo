@@ -3,6 +3,7 @@
 	namespace Hippo\Tests;
 
 	use Hippo\Tokenizer;
+	use Hippo\File;
 
 	class TokenizerTest extends \PHPUnit_Framework_TestCase {
 		protected $tokenizer;
@@ -25,7 +26,7 @@ $source = <<<ESRC
 	echo 'Hello'; 
 ?>
 ESRC;
-			$this->assertInstanceOf('Hippo\File', $this->tokenizer->tokenize($this->filename, $source));
+			$this->assertInstanceOf('Hippo\TokenList', $this->tokenizer->tokenize(new File($this->filename, $source)));
 		}
 
 		public function testTokenizeWithIdentNamespace() {
@@ -38,6 +39,6 @@ $source = <<<ESRC
 	}
 ?>
 ESRC;
-			$this->assertInstanceOf('Hippo\File', $this->tokenizer->tokenize($this->filename, $source));
+			$this->assertInstanceOf('Hippo\TokenList', $this->tokenizer->tokenize(new File($this->filename, $source)));
 		}
 	}

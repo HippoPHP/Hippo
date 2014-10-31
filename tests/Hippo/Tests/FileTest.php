@@ -62,13 +62,4 @@
 		public function testGetEncoding() {
 			$this->assertEquals('UTF-8', $this->file->getEncoding());
 		}
-
-		public function testSeekTokenTypeMethod() {
-			$this->markTestIncomplete('This test has not been implemented yet.');
-		}
-
-		public function testSeekNextLineMethod() {
-			$this->markTestIncomplete('This test has not been implemented yet.');
-		}
-
 	}

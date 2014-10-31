@@ -4,6 +4,7 @@
 
 	use Hippo\File;
 	use Hippo\Token;
+	use Hippo\TokenList;
 
 	/**
 	 * Tokenizes a file.
@@ -13,12 +14,10 @@
 	class Tokenizer {
 		/**
 		 * Performs tokenization on the file
-		 * @param  string $filename
-		 * @param  string $source
-		 * @return File
+		 * @param  File $file
+		 * @return TokenList
 		 */
-		public function tokenize($filename, $source) {
-			$file   = new File($filename, $source);
+		public function tokenize(File $file) {
 			$line   = 1;
 			$column = 1;
 			$level  = 0;
@@ -27,7 +26,9 @@
 			$namespace      = null;
 			$namespaceLevel = null;
 
-			foreach (token_get_all($source) as $token) {
+			$tokenList = new TokenList;
+
+			foreach (token_get_all($file->getSource()) as $token) {
 				if (is_array($token)) {
 					$type   = $token[0];
 					$lexeme = $token[1];
@@ -73,9 +74,9 @@
 
 				$token->setLevel($level);
 
-				$file[] = $token;
+				$tokenList[] = $token;
 			}
 
-			return $file;
+			return $tokenList;
 		}
 	}
