@@ -4,6 +4,7 @@
 
 	use Hippo\File;
 	use Hippo\Violation;
+	use Hippo\CheckResult;
 
 	/**
 	 * All checks will extend from this Abstract class.
