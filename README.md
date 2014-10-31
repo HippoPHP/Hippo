@@ -4,8 +4,6 @@
 [![Coverage Status](https://coveralls.io/repos/HippoPHP/Hippo/badge.png)](https://coveralls.io/r/HippoPHP/Hippo)
 [![Gitter chat](https://badges.gitter.im/hippophp.png)](https://gitter.im/hippophp)
 
-**You're looking at the development branch. See the [Goals](#goals) below to see what is different in this branch.**
-
 ## About
 
 Hippo originally started life as a fork of [PHPCheckstyle](https://github.com/phpcheckstyle/phpcheckstyle), however due to the complete rewrite, we decided to start a new project.
