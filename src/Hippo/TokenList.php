@@ -4,13 +4,14 @@
 
 	use Hippo\Token;
 	use SplDoublyLinkedList;
+	use SeekableIterator;
 
 	/**
 	 * Seekable container for token list.
 	 * @package Hippo
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
-	class TokenList extends SplDoublyLinkedList {
+	class TokenList extends SplDoublyLinkedList implements SeekableIterator {
 		/**
 		 * Seek to a specific token type.
 		 *
