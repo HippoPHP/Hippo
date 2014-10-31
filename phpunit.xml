@@ -12,7 +12,7 @@
 >
     <testsuites>
         <testsuite name="Hippo Test Suite">
-            <directory>./tests/Hippo/Tests</directory>
+            <directory>./tests/Hippo/</directory>
         </testsuite>
     </testsuites>
     
