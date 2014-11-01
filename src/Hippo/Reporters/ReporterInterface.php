@@ -7,7 +7,7 @@
 	/**
 	 * Reporters should inherit from this.
 	 */
-	interface InterfaceReporter {
+	interface ReporterInterface {
 		public function start();
 
 		/**

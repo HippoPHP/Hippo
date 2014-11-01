@@ -9,7 +9,7 @@
 	 * @package Hippo
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
-	class ArrayReporter implements ReportInterface {
+	class ArrayReporter implements ReporterInterface {
 		/**
 		 * Report array.
 		 * @var array

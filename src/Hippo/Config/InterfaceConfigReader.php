@@ -2,7 +2,7 @@
 
 	namespace Hippo\Config;
 
-	interface InterfaceConfigReader {
+	interface ConfigReaderInterface {
 		/**
 		 * @param string $filename
 		 * @return Config

@@ -10,7 +10,7 @@
 	 * @package Hippo
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
-	class XMLReporter implements ReportInterface {
+	class XMLReporter implements ReporterInterface {
 		/**
 		 * XMLWriter
 		 * @var XMLWriter

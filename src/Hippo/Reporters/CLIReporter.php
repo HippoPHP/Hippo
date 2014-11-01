@@ -9,7 +9,7 @@
 	 * @package Hippo
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
-	class CLIReporter implements ReportInterface {
+	class CLIReporter implements ReporterInterface {
 		protected $firstFile;
 
 		public function start() {

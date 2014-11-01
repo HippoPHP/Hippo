@@ -10,7 +10,7 @@
 	 * @package Hippo
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
-	class CheckstyleReporter implements ReportInterface {
+	class CheckstyleReporter implements ReporterInterface {
 		/**
 		 * XML Writer.
 		 * @var XMLWriter
