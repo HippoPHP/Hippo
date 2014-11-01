@@ -43,18 +43,6 @@
 		protected $fileSystem;
 
 		/**
-		 * @return void
-		 */
-		public static function main() {
-			if (!isset($_SERVER['argv'])) {
-				throw new Exception('Hippo must be run from command line interface.');
-			}
-			$argv = $_SERVER['argv'];
-			$hippoTextUi = new self(array_shift($argv), ArgParser::parse($argv));
-			$hippoTextUi->run();
-		}
-
-		/**
 		 * @param string $pathToSelf
 		 * @param ArgOptions $argOptions
 		 * @return void
@@ -64,6 +52,18 @@
 			$this->checkRunner = new CheckRunner;
 			$this->argOptions = $argOptions;
 			$this->pathToSelf = $pathToSelf;
+		}
+
+		/**
+		 * @return void
+		 */
+		public static function main() {
+			if (!isset($_SERVER['argv'])) {
+				throw new Exception('Hippo must be run from command line interface.');
+			}
+			$argv = $_SERVER['argv'];
+			$hippoTextUi = new self(array_shift($argv), ArgParser::parse($argv));
+			$hippoTextUi->run();
 		}
 
 		/**
