@@ -70,9 +70,12 @@
 			// make this work with --quiet and --verbose also
 			$this->reporters[] = new CLIReporter;
 
+			$success = true;
 			foreach ($this->argOptions->getStrayArguments() as $strayArgument) {
-				$this->executeCheckRunner($strayArgument);
+				$success &= $this->executeCheckRunner($strayArgument);
 			}
+
+			exit($success ? 0 : 1);
 		}
 
 		/**
@@ -84,33 +87,33 @@
 
 		/**
 		 * @param string $path
-		 * @return void
+		 * @return boolean if there were no errors
 		 */
 		protected function executeCheckRunner($path) {
 			if (!file_exists($path)) {
 				throw new Exception('File does not exist: ' . $path);
 			}
 
-			if (is_dir($path)) {
-				$this->executeCheckRunnerForDir($path);
-			} else {
-				$this->executeCheckRunnerForFile($path);
-			}
+			return is_dir($path)
+				? $this->executeCheckRunnerForDir($path)
+				: $this->executeCheckRunnerForFile($path);
 		}
 
 		/**
 		 * @param string $path
-		 * @return void
+		 * @return boolean if there were no errors
 		 */
 		protected function executeCheckRunnerForDir($path) {
+			$success = true;
 			foreach (glob($path . '/**/*.php') as $subPath) {
-				$this->executeCheckRunnerForFile($subPath);
+				$success &= $this->executeCheckRunnerForFile($subPath);
 			}
+			return $success;
 		}
 
 		/**
 		 * @param string $path
-		 * @return void
+		 * @return boolean if there were no errors
 		 */
 		protected function executeCheckRunnerForFile($path) {
 			if (!is_readable($path)) {
@@ -123,6 +126,13 @@
 			$file = new File($path, file_get_contents($path));
 			$checkResults = $this->checkRunner->checkFile($file);
 			$this->reportCheckResults($file, $checkResults);
+
+			foreach ($checkResults as $checkResult) {
+				if ($checkResult->hasFailed()) {
+					return false;
+				}
+			}
+			return true;
 		}
 
 		/**
