@@ -6,6 +6,7 @@
 	use Hippo\ArgParser;
 	use Hippo\ArgOptions;
 	use Hippo\CheckRunner;
+	use Hippo\FileSystem;
 	use Hippo\Reporters\CLIReporter;
 
 	class HippoTextUI {
@@ -33,6 +34,11 @@
 		protected $pathToSelf;
 
 		/**
+		 * @var FileSystem
+		 */
+		protected $fileSystem;
+
+		/**
 		 * @return void
 		 */
 		public static function main() {
@@ -50,6 +56,7 @@
 		 * @return void
 		 */
 		protected function __construct($pathToSelf, ArgOptions $argOptions) {
+			$this->fileSystem = new FileSystem;
 			$this->checkRunner = new CheckRunner;
 			$this->argOptions = $argOptions;
 			$this->pathToSelf = $pathToSelf;
@@ -116,14 +123,7 @@
 		 * @return boolean if there were no errors
 		 */
 		protected function executeCheckRunnerForFile($path) {
-			if (!is_readable($path)) {
-				throw new Exception('Supplied file is not readable: ' . $path);
-			}
-			if (!file_exists($path)) {
-				throw new Exception('Supplied file is not readable: ' . $path);
-			}
-
-			$file = new File($path, file_get_contents($path));
+			$file = new File($path, $this->fileSystem->getContent($path));
 			$checkResults = $this->checkRunner->checkFile($file);
 			$this->reportCheckResults($file, $checkResults);
 
