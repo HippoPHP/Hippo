@@ -17,6 +17,7 @@
 			// If we're extending another standard, use it as a base.
 			if (isset($config['extends'])) {
 				$baseConfigName = $config['extends'];
+				// TODO: This feels ugly. Better way?
 				$baseConfigSrc = file_get_contents(__DIR__ . '/../standards/' . $baseConfigName . '.yml');
 				$baseConfig = $this->parser->parse($baseConfigSrc);
 
