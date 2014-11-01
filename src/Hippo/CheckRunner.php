@@ -5,11 +5,10 @@
 	use Hippo\Exception;
 	use Hippo\File;
 
-	class Hippo {
+	class CheckRunner {
 		protected $checks = array();
-		protected $listenerTokens = array();
 
-		public function check(File $file) {
+		public function checkFile(File $file) {
 			$this->_runChecks($file);
 		}
 
