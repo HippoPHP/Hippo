@@ -11,6 +11,8 @@ Hippo originally started life as a fork of [PHPCheckstyle](https://github.com/ph
 
 Hippo is an open-source tool that helps PHP programmers adhere to certain coding conventions. The tools checks the input PHP source code and reports any violations against the given standards.
 
+Compatible with PHP 5.4 and up.
+
 ## Goals
 
 - [x] Create a proper test suite.
