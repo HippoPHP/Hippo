@@ -1,6 +1,6 @@
 <?php
 
-	namespace Hippo;
+	namespace Hippo\Config;
 
 	abstract class AbstractConfigReader {
 		abstract public function deserialize($config);
