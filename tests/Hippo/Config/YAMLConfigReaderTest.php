@@ -3,6 +3,7 @@
 	namespace Hippo\Tests;
 
 	use Hippo\Config\YAMLConfigReader;
+	use Hippo\Config;
 	use Hippo\FileSystem;
 
 	class YAMLConfigReaderTest extends \PHPUnit_Framework_TestCase {
@@ -26,7 +27,7 @@ YML;
 
 			$config = $this->_reader->loadFromFile('test.txt');
 			$this->assertNotNull($config);
-			$this->assertEquals('PSR-1', $config['standards']);
+			$this->assertEquals('PSR-1', $config->get('standards'));
 		}
 
 		public function testLoadFromFileExtended() {
@@ -49,9 +50,9 @@ YML;
 				->will($this->onConsecutiveCalls($yamlConfig, $baseYamlConfig));
 
 			$config = $this->_reader->loadFromFile('initial.txt');
-			$this->assertFalse($config['bracesOnNewLine']);
-			$this->assertEquals('1', $config['parent']);
-			$this->assertEquals('2', $config['child']);
+			$this->assertFalse($config->get('bracesOnNewLine'));
+			$this->assertEquals('1', $config->get('parent'));
+			$this->assertEquals('2', $config->get('child'));
 		}
 
 		public function testLoadFromFileExtendedTwice() {
@@ -83,10 +84,10 @@ YML;
 				->will($this->onConsecutiveCalls($yamlConfig, $middleYamlConfig, $baseYamlConfig));
 
 			$config = $this->_reader->loadFromFile('initial.txt');
-			$this->assertFalse($config['bracesOnNewLine']);
-			$this->assertEquals('1', $config['parent']);
-			$this->assertEquals('2', $config['middle']);
-			$this->assertEquals('3', $config['child']);
+			$this->assertFalse($config->get('bracesOnNewLine'));
+			$this->assertEquals('1', $config->get('parent'));
+			$this->assertEquals('2', $config->get('middle'));
+			$this->assertEquals('3', $config->get('child'));
 		}
 
 		public function testLoadFromFileExtendedCycle() {
@@ -111,8 +112,8 @@ YML;
 				->will($this->onConsecutiveCalls($childYamlConfig, $baseYamlConfig));
 
 			$config = $this->_reader->loadFromFile('initial.yml');
-			$this->assertFalse($config['bracesOnNewLine']);
-			$this->assertEquals('1', $config['parent']);
-			$this->assertEquals('2', $config['child']);
+			$this->assertFalse($config->get('bracesOnNewLine'));
+			$this->assertEquals('1', $config->get('parent'));
+			$this->assertEquals('2', $config->get('child'));
 		}
 	}

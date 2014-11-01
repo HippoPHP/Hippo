@@ -17,6 +17,10 @@
 			$this->fileSystem = $fileSystem;
 		}
 
+		/**
+		 * @param string $filename
+		 * @return Config
+		 */
 		public function loadFromFile($filename) {
 			$config = $this->parser->parse($this->fileSystem->getContent($filename));
 
@@ -41,7 +45,7 @@
 				}
 			}
 
-			return $config;
+			return new config($config);
 		}
 
 		private function _normalizeConfigName($name) {

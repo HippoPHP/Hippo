@@ -5,7 +5,7 @@
 	interface InterfaceConfigReader {
 		/**
 		 * @param string $filename
-		 * @return array
+		 * @return Config
 		 */
 		function loadFromFile($filename);
 	}
