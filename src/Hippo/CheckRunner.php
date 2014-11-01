@@ -8,14 +8,14 @@
 	class CheckRunner {
 		protected $checks = array();
 
+		/**
+		 * @param File $file
+		 * @return CheckResult[]
+		 */
 		public function checkFile(File $file) {
-			$this->_runChecks($file);
-		}
-
-		private function _runChecks(File $file) {
 			$results = [];
 			foreach ($this->checks as $check) {
-				$results[] = $check->visitFile($file);
+				$results[] = $check->checkFile($file);
 			}
 			return $results;
 		}

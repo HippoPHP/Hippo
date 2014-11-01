@@ -73,12 +73,12 @@
 		}
 
 		/**
-		 * visitFile(): defined by FileCheckInterface.
-		 * @see FileCheckInterface::visitFile()
+		 * checkFile(): defined by FileCheckInterface.
+		 * @see FileCheckInterface::checkFile()
 		 * @param File $file
 		 * @return void
 		 */
-		public function visitFile(File $file) {
+		public function checkFile(File $file) {
 			foreach ($file->getLines() as $line => $data) {
 				$lineLength = iconv_strlen(
 					str_replace("\t", str_repeat(' ', $this->tabExpand), $data['content']),
