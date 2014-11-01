@@ -69,4 +69,9 @@
 			$this->assertTrue($argOptions->getLongOption('long'));
 			$this->assertEquals(['stray1', 'stray2', 'stray3'], $argOptions->getStrayArguments());
 		}
+
+		public function testEmptyStrayArguments() {
+			$argOptions = ArgParser::parse([]);
+			$this->assertEquals([], $argOptions->getStrayArguments());
+		}
 	}
