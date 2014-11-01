@@ -12,6 +12,17 @@
 		}
 
 		public function deserialize($config) {
-			return $this->parser->parse($config);
+			$config = $this->parser->parse($config);
+
+			// If we're extending another standard, use it as a base.
+			if (isset($config['extends'])) {
+				$baseConfigName = $config['extends'];
+				$baseConfigSrc = file_get_contents(__DIR__ . '/../standards/' . $baseConfigName . '.yml');
+				$baseConfig = $this->parser->parse($baseConfigSrc);
+
+				return array_merge($baseConfig, $config);
+			} else {
+				return $config;
+			}
 		}
 	}

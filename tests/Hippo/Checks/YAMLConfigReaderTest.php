@@ -17,7 +17,17 @@ standards: "PSR-1"
 YML;
 
 			$config = $this->_reader->deserialize($yamlConfig);
-
 			$this->assertNotNull($config);
+		}
+
+		public function testDeserializeExtendedMethod() {
+			$yamlConfig = <<<YML
+extends: "PSR-1"
+
+bracesOnNewLine: false
+YML;
+
+			$config = $this->_reader->deserialize($yamlConfig);
+			$this->assertFalse($config['bracesOnNewLine']);
 		}
 	}
