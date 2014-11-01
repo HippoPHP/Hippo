@@ -2,10 +2,10 @@
 
 	namespace Hippo\Config;
 
-	abstract class AbstractConfigReader {
+	interface InterfaceConfigReader {
 		/**
 		 * @param string $filename
 		 * @return array
 		 */
-		abstract public function loadFromFile($filename);
+		function loadFromFile($filename);
 	}

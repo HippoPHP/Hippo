@@ -5,7 +5,7 @@
 	use Hippo\FileSystem;
 	use Symfony\Component\Yaml\Parser as YamlParser;
 
-	class YAMLConfigReader extends AbstractConfigReader {
+	class YAMLConfigReader implements InterfaceConfigReader {
 		protected $parser;
 		protected $fileSystem;
 
