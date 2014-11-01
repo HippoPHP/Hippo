@@ -1,26 +1,30 @@
-<?php 
+<?php
 
 	namespace Hippo\Config;
 
+	use Hippo\FileSystem;
 	use Symfony\Component\Yaml\Parser as YamlParser;
 
 	class YAMLConfigReader extends AbstractConfigReader {
 		protected $parser;
+		protected $fileSystem;
 
-		public function __construct() {
+		/**
+		 * @param FileSystem $fileSystem
+		 */
+		public function __construct(FileSystem $fileSystem) {
 			$this->parser = new YamlParser;
+			$this->fileSystem = $fileSystem;
 		}
 
-		public function deserialize($config) {
-			$config = $this->parser->parse($config);
+		public function loadFromFile($filename) {
+			$config = $this->parser->parse($this->fileSystem->getContent($filename));
 
 			// If we're extending another standard, use it as a base.
 			if (isset($config['extends'])) {
 				$baseConfigName = $config['extends'];
-				// TODO: This feels ugly. Better way?
-				$baseConfigSrc = file_get_contents(__DIR__ . '/../standards/' . $baseConfigName . '.yml');
-				$baseConfig = $this->parser->parse($baseConfigSrc);
-
+				$baseConfigPath = dirname($filename) . DIRECTORY_SEPARATOR . $baseConfigName . '.yml';
+				$baseConfig = $this->parser->parse($this->fileSystem->getContent($baseConfigPath));
 				return array_merge($baseConfig, $config);
 			} else {
 				return $config;

@@ -3,5 +3,9 @@
 	namespace Hippo\Config;
 
 	abstract class AbstractConfigReader {
-		abstract public function deserialize($config);
+		/**
+		 * @param string $filename
+		 * @return array
+		 */
+		abstract public function loadFromFile($filename);
 	}
