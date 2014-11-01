@@ -2,12 +2,16 @@
 
 	namespace Hippo;
 
-	use Hippo\Exception;
-	use Hippo\ArgParser;
 	use Hippo\ArgOptions;
+	use Hippo\ArgParser;
 	use Hippo\CheckRunner;
+	use Hippo\Exception;
 	use Hippo\FileSystem;
 	use Hippo\Reporters\CLIReporter;
+
+	use \RecursiveDirectoryIterator;
+	use \RecursiveIteratorIterator;
+	use \RegexIterator;
 
 	class HippoTextUI {
 		const LONG_OPTION_HELP = 'help';
@@ -111,8 +115,12 @@
 		 * @return boolean if there were no errors
 		 */
 		protected function executeCheckRunnerForDir($path) {
+			$directory = new RecursiveDirectoryIterator($path);
+			$flattened = new RecursiveIteratorIterator($directory);
+			$iterator = new RegexIterator($flattened, '/^.+\.php$/i');
+
 			$success = true;
-			foreach (glob($path . '/**/*.php') as $subPath) {
+			foreach ($iterator as $subPath) {
 				$success &= $this->executeCheckRunnerForFile($subPath);
 			}
 			return $success;
