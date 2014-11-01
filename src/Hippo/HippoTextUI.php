@@ -7,6 +7,9 @@
 	use Hippo\ArgOptions;
 
 	class HippoTextUI {
+		const LONG_OPTION_HELP = 'help';
+		const SHORT_OPTION_HELP = 'h';
+
 		/**
 		 * @var ArgOptions
 		 */
@@ -43,5 +46,17 @@
 		 * @return void
 		 */
 		protected function run() {
+			if ($this->argOptions->getLongOption(self::LONG_OPTION_HELP) === true ||
+				$this->argOptions->getShortOption(self::SHORT_OPTION_HELP) === true) {
+				$this->showHelp();
+				exit(0);
+			}
+		}
+
+		/**
+		 * @return void
+		 */
+		protected function showHelp() {
+			throw new \BadMethodCallException('Not implemented');
 		}
 	}
