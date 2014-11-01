@@ -2,8 +2,6 @@
 
 	namespace Hippo\Checks;
 
-	use Hippo\File;
-
 	/**
 	 * File Check Interface.
 	 * Rules implementing this interface will be visited for every file.

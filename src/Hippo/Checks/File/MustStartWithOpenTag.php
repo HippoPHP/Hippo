@@ -1,10 +1,10 @@
 <?php
 
-	namespace Hippo\Check\Line;
+	namespace Hippo\Checks\Line;
 
 	use Hippo\File;
-	use Hippo\Check\AbstractCheck;
-	use Hippo\Check\FileCheckInterface;
+	use Hippo\Checks\AbstractCheck;
+	use Hippo\Checks\FileCheckInterface;
 
 	class MustStartWithOpenTag extends AbstractCheck implements FileCheckInterface {
 		/**

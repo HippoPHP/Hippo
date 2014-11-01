@@ -1,6 +1,6 @@
 <?php
 
-	namespace Hippo\Check;
+	namespace Hippo\Checks;
 
 	use Hippo\File;
 	use Hippo\Violation;

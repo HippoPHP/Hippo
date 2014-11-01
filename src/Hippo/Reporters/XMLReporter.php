@@ -1,6 +1,6 @@
 <?php
 
-	namespace Hippo\Reporter;
+	namespace Hippo\Reporters;
 
 	use Hippo\CheckResult;
 	use XMLWriter;

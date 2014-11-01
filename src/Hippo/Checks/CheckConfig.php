@@ -1,6 +1,6 @@
 <?php
 
-	namespace Hippo;
+	namespace Hippo\Checks;
 
 	class CheckConfig {
 		public $enabled;

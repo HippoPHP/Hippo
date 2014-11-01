@@ -1,9 +1,9 @@
 <?php
 
-	namespace Hippo\Check\Whitespace;
+	namespace Hippo\Checks\Whitespace;
 
 	use Hippo\File;
-	use Hippo\Check\AbstractCheck;
+	use Hippo\Checks\AbstractCheck;
 
 	class Indentation extends AbstractCheck {
 		const INDENT_STYLE_SPACE = 'space';
