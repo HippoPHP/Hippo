@@ -47,7 +47,7 @@
 		 * @param ArgOptions $argOptions
 		 * @return void
 		 */
-		protected function __construct($pathToSelf, ArgOptions $argOptions) {
+		public function __construct($pathToSelf, ArgOptions $argOptions) {
 			$this->fileSystem = new FileSystem;
 			$this->checkRunner = new CheckRunner;
 			$this->argOptions = $argOptions;
