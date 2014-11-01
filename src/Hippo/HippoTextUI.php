@@ -133,9 +133,11 @@
 			echo 'Checking ' . $file->getFilename() . PHP_EOL;
 
 			foreach ($this->reporters as $reporter) {
+				$reporter->start();
 				foreach ($checkResults as $checkResult) {
 					$reporter->addCheckResult($checkResult);
 				}
+				$reporter->finish();
 			}
 		}
 	}

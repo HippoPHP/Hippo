@@ -18,10 +18,19 @@
 		protected $writer;
 
 		/**
+		 * @var string
+		 */
+		protected $filename;
+
+		/**
 		 * Creates a new writer object, ready to write XML.
 		 * @param string $filename
 		 */
 		public function __construct($filename) {
+			$this->filename = $filename;
+		}
+
+		public function start() {
 			$this->writer = new XMLWriter();
 			$this->writer->openUri($filename);
 			$this->writer->setIndent(true);
@@ -64,8 +73,8 @@
 		 * Closes the file handles.
 		 * @return void
 		 */
-		public function __destruct() {
-	       $this->writer->endElement();
-	       $this->writer->endDocument();
-	   }
+		public function finish() {
+			$this->writer->endElement();
+			$this->writer->endDocument();
+		}
 	}

@@ -10,7 +10,11 @@
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
 	class CLIReporter implements ReportInterface {
-		protected $firstFile = true;
+		protected $firstFile;
+
+		public function start() {
+			$this->firstFile = true;
+		}
 
 		/**
 		 * Defined by ReportInterface.
@@ -45,5 +49,8 @@
 			}
 
 			flush();
+		}
+
+		public function finish() {
 		}
 	}

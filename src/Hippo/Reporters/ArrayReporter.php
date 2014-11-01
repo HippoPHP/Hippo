@@ -16,6 +16,9 @@
 		 */
 		protected $report = array();
 
+		public function start() {
+		}
+
 		/**
 		 * Defined by ReportInterface.
 		 * @see ReportInterface::addCheckResult()
@@ -37,6 +40,13 @@
 					'source' => $violation->getSource()
 				);
 			}
+		}
+
+		public function finish() {
+		}
+
+		public function getArray() {
+			return $this->report;
 		}
 
 		private function _getArrayKey(Violation $violation) {

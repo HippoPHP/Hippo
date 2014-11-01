@@ -17,12 +17,20 @@
 		 */
 		protected $writer;
 
+		public function start() {
+			throw new \BadMethodCallException('Not implemented');
+		}
+
 		/**
 		 * Defined by ReportInterface.
 		 * @see ReportInterface::addCheckResult()
 		 * @param CheckResult $checkResult
 		 */
 		public function addCheckResult(CheckResult $checkResult) {
+			throw new \BadMethodCallException('Not implemented');
+		}
+
+		public function finish() {
 			throw new \BadMethodCallException('Not implemented');
 		}
 	}
