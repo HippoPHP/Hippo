@@ -19,22 +19,4 @@
 			}
 			return $results;
 		}
-
-		private function _verifyResults(File $file, array $checkResults) {
-			foreach ($results as $result) {
-				$this->reportViolationsIfNeeded($result->getViolations());
-			}
-		}
-
-		private function _reportViolationsIfNeeded(CheckResult $checkResult) {
-			if (!$result->hasSucceeded()) {
-				$this->_reportViolations($checkResult);
-			}
-		}
-
-		private function _reportViolations(CheckResult $checkResult) {
-			foreach ($checkResult->getViolations() as $violation) {
-				throw new \BadMethodCallException('Not implemented');
-			}
-		}
 	}

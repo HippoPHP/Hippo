@@ -6,10 +6,16 @@
 	use Hippo\ArgParser;
 	use Hippo\ArgOptions;
 	use Hippo\CheckRunner;
+	use Hippo\Reporters\CLIReporter;
 
 	class HippoTextUI {
 		const LONG_OPTION_HELP = 'help';
 		const SHORT_OPTION_HELP = 'h';
+
+		/**
+		 * @var ReportInterface[]
+		 */
+		protected $reporters;
 
 		/**
 		 * @var CheckRunner
@@ -58,6 +64,11 @@
 				$this->showHelp();
 				exit(0);
 			}
+
+			// TODO:
+			// make this work with a family of --report options, that controls which reporter to use
+			// make this work with --quiet and --verbose also
+			$this->reporters[] = new CLIReporter;
 
 			foreach ($this->argOptions->getStrayArguments() as $strayArgument) {
 				$this->executeCheckRunner($strayArgument);
@@ -109,9 +120,22 @@
 				throw new Exception('Supplied file is not readable: ' . $path);
 			}
 
-			echo 'Checking ' . $path . PHP_EOL;
-
 			$file = new File($path, file_get_contents($path));
-			$this->checkRunner->checkFile($file);
+			$checkResults = $this->checkRunner->checkFile($file);
+			$this->reportCheckResults($file, $checkResults);
+		}
+
+		/**
+		 * @param CheckResult[]
+		 * @return void
+		 */
+		protected function reportCheckResults(File $file, array $checkResults) {
+			echo 'Checking ' . $file->getFilename() . PHP_EOL;
+
+			foreach ($this->reporters as $reporter) {
+				foreach ($checkResults as $checkResult) {
+					$reporter->addCheckResult($checkResult);
+				}
+			}
 		}
 	}
