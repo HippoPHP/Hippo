@@ -5,15 +5,22 @@
 	use Hippo\Exception\BadConfigKeyException;
 
 	class Config {
-		private $array;
+		/**
+		 * @var mixed[]
+		 */
+		private $_array;
 
+		/**
+		 * @param mixed[] $array
+		 */
 		public function __construct(array $array = []) {
-			$this->array = $this->_normalizeArray($array);
+			$this->_array = $this->_normalizeArray($array);
 		}
 
 		/**
 		 * @param string $key
-		 * @throws BadConfigKeyException
+		 * @param mixed $defaultValue
+		 * @throws BadConfigKeyException if default value wasn't supplied and there were problems retrieving the key
 		 * @return mixed
 		 */
 		public function get($key, $defaultValue = null) {
@@ -78,16 +85,16 @@
 		 * @param string $key
 		 * @param boolean $createSections
 		 * @throws BadConfigKeyException
-		 * @return mixed reference to branch under given key
+		 * @return mixed reference to the branch under given key
 		 */
 		private function &_navigateToKey($key, $createSections) {
-			$current = &$this->array;
+			$current = &$this->_array;
 			foreach (explode('.', $key) as $key) {
 				if (!is_array($current)) {
 					if ($createSections) {
 						$current = [];
 					} else {
-						throw new BadConfigKeyException('Trying to access child of scalar value');
+						throw new BadConfigKeyException('Trying to access child of a scalar value');
 					}
 				}
 
