@@ -20,14 +20,31 @@
 		public function loadFromFile($filename) {
 			$config = $this->parser->parse($this->fileSystem->getContent($filename));
 
+			$included = [$this->_normalizeConfigName($filename)];
+
 			// If we're extending another standard, use it as a base.
-			if (isset($config['extends'])) {
+			while (isset($config['extends'])) {
 				$baseConfigName = $config['extends'];
 				$baseConfigPath = dirname($filename) . DIRECTORY_SEPARATOR . $baseConfigName . '.yml';
 				$baseConfig = $this->parser->parse($this->fileSystem->getContent($baseConfigPath));
-				return array_merge($baseConfig, $config);
-			} else {
-				return $config;
+				unset($config['extends']);
+
+				$config = array_merge($baseConfig, $config);
+
+				if (isset($config['extends'])) {
+					if (in_array($this->_normalizeConfigName($config['extends']), $included)) {
+						// Avoid circular dependencies
+						unset($config['extends']);
+					} else {
+						$included[] = $this->_normalizeConfigName($config['extends']);
+					}
+				}
 			}
+
+			return $config;
+		}
+
+		private function _normalizeConfigName($name) {
+			return trim(basename(strtolower($name), '.yml'));
 		}
 	}
