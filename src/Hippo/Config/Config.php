@@ -55,8 +55,11 @@
 		 * @return void
 		 */
 		public function remove($key) {
-			$current = &$this->_navigateToKey($key, false);
-			$current = null;
+			try {
+				$current = &$this->_navigateToKey($key, false);
+				$current = null;
+			} catch (BadConfigKeyException $e) {
+			}
 		}
 
 		/**

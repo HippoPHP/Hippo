@@ -67,12 +67,18 @@
 			$this->assertEquals(2, $config->get('parent.sibling'));
 		}
 
-		public function testBranchCutting() {
+		public function testRemovingBranch() {
 			$config = new Config();
 			$config->set('parent', ['child' => ['grandchild' => 1], 'sibling' => 2]);
 			$config->remove('parent.child');
 			$this->assertEquals(2, $config->get('parent.sibling'));
 			$this->setExpectedException('Hippo\Exception\BadConfigKeyException');
 			$config->get('parent.child');
+		}
+
+		public function testRemovingNonexistingBranch() {
+			$config = new Config();
+			$config->remove('node');
+			$this->assertNull($config->get('node', null));
 		}
 	}
