@@ -56,6 +56,9 @@
 			foreach ($iterator as $i) {
 				$output[] = $i->getRealpath();
 			}
+			usort($output, function($a, $b) {
+				return strnatcasecmp($a, $b);
+			});
 			return $output;
 		}
 	}
