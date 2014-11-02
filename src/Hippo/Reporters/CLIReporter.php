@@ -48,6 +48,7 @@
 				echo $violation->getMessage() . PHP_EOL;
 			}
 
+			echo PHP_EOL;
 			flush();
 		}
 
