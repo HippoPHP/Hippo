@@ -34,4 +34,14 @@
 			$this->argOptions->addStrayArgument('arg2');
 			$this->assertEquals(['arg1', 'arg2'], $this->argOptions->getStrayArguments());
 		}
+
+		public function testGetShortOptions() {
+			$this->argOptions->setShortOption('option', 'value');
+			$this->assertEquals(['option' => 'value'], $this->argOptions->getShortOptions());
+		}
+
+		public function testGetLongOptions() {
+			$this->argOptions->setLongOption('option', 'value');
+			$this->assertEquals(['option' => 'value'], $this->argOptions->getLongOptions());
+		}
 	}
