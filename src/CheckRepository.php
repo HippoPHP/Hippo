@@ -62,7 +62,7 @@
 		}
 
 		private function _canInstantiate(ReflectionClass $reflectionClass) {
-			return $reflectionClass->implementsInterface('Hippo\Checks\CheckInterface')
+			return $reflectionClass->implementsInterface('\HippoPHP\Hippo\Checks\CheckInterface')
 				&& !$reflectionClass->isInterface()
 				&& !$reflectionClass->isAbstract();
 		}
