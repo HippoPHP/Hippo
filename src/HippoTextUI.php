@@ -13,8 +13,12 @@
 	use \HippoPHP\Hippo\Reporters\CLIReporter;
 
 	class HippoTextUI {
+		const VERSION = '0.1.0';
+
 		const LONG_OPTION_HELP = 'help';
 		const SHORT_OPTION_HELP = 'h';
+		const LONG_OPTION_VERSION = 'version';
+		const SHORT_OPTION_VERSION = 'v';
 
 		/**
 		 * @var ReportInterface[]
@@ -98,6 +102,11 @@
 				$this->showHelp();
 				$this->environment->setExitCode(0);
 				$this->environment->shutdown();
+			} elseif ($this->argOptions->getLongOption(self::LONG_OPTION_VERSION) === true ||
+				$this->argOptions->getShortOption(self::SHORT_OPTION_VERSION) === true) {
+				$this->showVersion();
+				$this->environment->setExitCode(0);
+				$this->environment->shutdown();
 			}
 
 			// TODO:
@@ -132,7 +141,13 @@
 		 * @return void
 		 */
 		protected function showHelp() {
-			throw new \BadMethodCallException('Not implemented');
+			echo "Usage: hippo [switches] <directory>\n"
+					. "  -h, --help                Prints this usage information\n"
+					. "  -v, --version             Print version information\n";
+		}
+
+		protected function showVersion() {
+			echo "Hippo " . self::VERSION . "\n\n";
 		}
 
 		/**
