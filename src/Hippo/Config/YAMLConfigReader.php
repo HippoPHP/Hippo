@@ -45,7 +45,7 @@
 				}
 			}
 
-			return new config($config);
+			return new Config($config);
 		}
 
 		private function _normalizeConfigName($name) {
