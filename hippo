@@ -21,7 +21,7 @@ use \HippoPHP\Hippo\HippoTextUI;
 use \HippoPHP\Hippo\Exception\ShutdownException;
 
 try {
-	HippoTextUI::main();
+	HippoTextUI::main(isset($_SERVER['argv']) ? $_SERVER['argv'] : FALSE);
 } catch (ShutdownException $e) {
 	exit($e->getExitCode());
 }

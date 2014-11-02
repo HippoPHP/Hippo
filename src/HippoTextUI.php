@@ -72,11 +72,10 @@
 		/**
 		 * @return void
 		 */
-		public static function main() {
-			if (!isset($_SERVER['argv'])) {
+		public static function main($args) {
+			if (!$args) {
 				throw new Exception('Hippo must be run from command line interface.');
 			}
-			$argv = $_SERVER['argv'];
 			$environment = new Environment;
 			$fileSystem = new FileSystem;
 			$configReader = new YAMLConfigReader($fileSystem);
@@ -87,8 +86,8 @@
 				$fileSystem,
 				$checkRepository,
 				$configReader,
-				array_shift($argv),
-				ArgParser::parse($argv));
+				array_shift($args),
+				ArgParser::parse($args));
 
 			$hippoTextUi->run();
 		}
