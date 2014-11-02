@@ -7,19 +7,19 @@
 	 */
 	class ShutdownException extends \Exception implements ExceptionInterface {
 		/**
-		 * @var integer
+		 * @var int
 		 */
 		private $_exitCode;
 
 		/**
-		 * @param integer $exitCode
+		 * @param int $exitCode
 		 */
 		public function __construct($exitCode) {
 			$this->_exitCode = $exitCode;
 		}
 
 		/**
-		 * @return integer
+		 * @return int
 		 */
 		public function getExitCode() {
 			return $this->_exitCode;

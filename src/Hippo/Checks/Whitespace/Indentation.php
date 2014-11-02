@@ -21,7 +21,7 @@
 
 		/**
 		 * Number of indentation characters per-level.
-		 * @var integer
+		 * @var int
 		 */
 		protected $indentCount = 4;
 

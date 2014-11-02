@@ -9,19 +9,19 @@
 	 */
 	class Environment {
 		/**
-		 * @var integer
+		 * @var int
 		 */
 		private $_exitCode = 0;
 
 		/**
-		 * @return integer
+		 * @return int
 		 */
 		public function getExitCode() {
 			return $this->_exitCode;
 		}
 
 		/**
-		 * @param integer $exitCode
+		 * @param int $exitCode
 		 * @return void
 		 */
 		public function setExitCode($exitCode) {

@@ -1,4 +1,5 @@
 <?php
+
 	namespace Hippo;
 
 	use Hippo\File;

@@ -11,7 +11,7 @@
 	class MaxLength extends AbstractCheck implements CheckInterface {
 		/**
 		 * Limits for emitting violations.
-		 * @var integer[]
+		 * @var int[]
 		 */
 		protected $limits = [
 			Violation::SEVERITY_ERROR => 80,
@@ -21,7 +21,7 @@
 
 		/**
 		 * Defines how many spaces a tab takes up.
-		 * @var integer
+		 * @var int
 		 */
 		protected $tabExpand = 4;
 
