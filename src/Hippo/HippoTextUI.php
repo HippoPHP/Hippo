@@ -9,10 +9,6 @@
 	use Hippo\FileSystem;
 	use Hippo\Reporters\CLIReporter;
 
-	use \RecursiveDirectoryIterator;
-	use \RecursiveIteratorIterator;
-	use \RegexIterator;
-
 	class HippoTextUI {
 		const LONG_OPTION_HELP = 'help';
 		const SHORT_OPTION_HELP = 'h';
@@ -137,10 +133,7 @@
 		 * @return boolean if there were no errors
 		 */
 		protected function executeCheckRunnerForDir($path) {
-			$directory = new RecursiveDirectoryIterator($path);
-			$flattened = new RecursiveIteratorIterator($directory);
-			$iterator = new RegexIterator($flattened, '/^.+\.php$/i');
-
+			$iterator = $this->fileSystem->getAllFiles($path, '/^.+\.php$/i');
 			$success = true;
 			foreach ($iterator as $subPath) {
 				$success &= $this->executeCheckRunnerForFile($subPath);

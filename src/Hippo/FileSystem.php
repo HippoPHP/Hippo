@@ -6,6 +6,10 @@
 	use Hippo\Exception\FileNotWritableException;
 	use Hippo\Exception\FileNotReadableException;
 
+	use \RecursiveDirectoryIterator;
+	use \RecursiveIteratorIterator;
+	use \RegexIterator;
+
 	class FileSystem {
 		/**
 		 * @param string $path
@@ -34,5 +38,24 @@
 				throw new FileNotWritableException($path);
 			}
 			file_put_contents($path, $content);
+		}
+
+		/**
+		 * @param string $path
+		 * @param string $regex
+		 * @return string[]
+		 */
+		public function getAllFiles($initialDirectory, $regex = null) {
+			$directoryIterator = new RecursiveDirectoryIterator($initialDirectory, RecursiveDirectoryIterator::SKIP_DOTS);
+			$flattenedIterator = new RecursiveIteratorIterator($directoryIterator);
+			$iterator = $regex !== null
+				? new RegexIterator($flattenedIterator, $regex)
+				: $flattenedIterator;
+
+			$output = [];
+			foreach ($iterator as $i) {
+				$output[] = $i->getRealpath();
+			}
+			return $output;
 		}
 	}

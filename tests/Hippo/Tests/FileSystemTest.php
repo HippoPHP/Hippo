@@ -53,4 +53,36 @@
 			$subPath = $path . DIRECTORY_SEPARATOR . 'file.txt';
 			$this->_fileSystem->putContent($subPath, 'whatever');
 		}
+
+		public function testGettingAllFilesWithoutNesting() {
+			$folder = $this->_fileSystemTestHelper->createTemporaryFolder();
+			touch($folder . DIRECTORY_SEPARATOR . 'file1.txt');
+			touch($folder . DIRECTORY_SEPARATOR . 'file2.txt');
+			$result = $this->_fileSystem->getAllFiles($folder);
+			$this->assertNotNull($result);
+			$this->assertEquals(2, count($result));
+			$this->assertEquals('file1.txt', basename($result[0]));
+			$this->assertEquals('file2.txt', basename($result[1]));
+		}
+
+		public function testGettingAllFilesWithNesting() {
+			$folder = $this->_fileSystemTestHelper->createTemporaryFolder();
+			touch($folder . DIRECTORY_SEPARATOR . 'file1.txt');
+			mkdir($folder . DIRECTORY_SEPARATOR . 'subfolder');
+			touch($folder . DIRECTORY_SEPARATOR . 'subfolder' . DIRECTORY_SEPARATOR . 'file2.txt');
+			$result = $this->_fileSystem->getAllFiles($folder);
+			$this->assertEquals(2, count($result));
+			$this->assertEquals('file1.txt', basename($result[0]));
+			$this->assertEquals('file2.txt', basename($result[1]));
+			$this->assertContains('subfolder', $result[1]);
+		}
+
+		public function testGettingAllFilesWithRegex() {
+			$folder = $this->_fileSystemTestHelper->createTemporaryFolder();
+			touch($folder . DIRECTORY_SEPARATOR . 'file.txt');
+			touch($folder . DIRECTORY_SEPARATOR . 'file.dat');
+			$result = $this->_fileSystem->getAllFiles($folder, '/\.DAT/i');
+			$this->assertEquals(1, count($result));
+			$this->assertEquals('file.dat', basename($result[0]));
+		}
 	}
