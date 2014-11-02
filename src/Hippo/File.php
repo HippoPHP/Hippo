@@ -1,8 +1,8 @@
 <?php
 
-	namespace Hippo;
+	namespace HippoPHP\Hippo;
 
-	use Hippo\Exception;
+	use HippoPHP\Hippo\Exception;
 	use SeekableIterator;
 
 	/**

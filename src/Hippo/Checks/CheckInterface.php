@@ -1,9 +1,9 @@
 <?php
 
-	namespace Hippo\Checks;
+	namespace HippoPHP\Hippo\Checks;
 
-	use Hippo\File;
-	use Hippo\Config\Config;
+	use HippoPHP\Hippo\File;
+	use HippoPHP\Hippo\Config\Config;
 
 	/**
 	 * Check Interface.

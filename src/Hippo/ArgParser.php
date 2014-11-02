@@ -1,6 +1,6 @@
 <?php
 
-	namespace Hippo;
+	namespace HippoPHP\Hippo;
 
 	/**
 	 * A factory of ArgOptions.

@@ -1,8 +1,8 @@
 <?php
 
-	namespace Hippo\Tests;
+	namespace HippoPHP\Hippo\Tests;
 
-	use Hippo\ArgOptions;
+	use HippoPHP\Hippo\ArgOptions;
 
 	class ArgOptionsText extends \PHPUnit_Framework_TestCase {
 		protected $argOptions;

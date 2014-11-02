@@ -1,8 +1,8 @@
 <?php
 
-	namespace Hippo\Reporters;
+	namespace HippoPHP\Hippo\Reporters;
 
-	use Hippo\CheckResult;
+	use HippoPHP\Hippo\CheckResult;
 
 	/**
 	 * CLI Reporter.

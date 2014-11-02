@@ -1,10 +1,10 @@
 <?php
 
-	namespace Hippo\Tests;
+	namespace HippoPHP\Hippo\Tests;
 
-	use Hippo\FileSystem;
-	use Hippo\Exception\FileNotFoundException;
-	use Hippo\Tests\Helpers\FileSystemTestHelper;
+	use HippoPHP\Hippo\FileSystem;
+	use HippoPHP\Hippo\Exception\FileNotFoundException;
+	use HippoPHP\Hippo\Tests\Helpers\FileSystemTestHelper;
 
 	class FileSystemTest extends \PHPUnit_Framework_TestCase {
 		private $_fileSystem;
@@ -22,7 +22,7 @@
 		}
 
 		public function testGetNonExistingContent() {
-			$this->setExpectedException('Hippo\Exception\FileNotFoundException');
+			$this->setExpectedException('HippoPHP\Hippo\Exception\FileNotFoundException');
 			$this->_fileSystem->getContent('nope');
 		}
 
@@ -34,21 +34,21 @@
 		}
 
 		public function testReadFolder() {
-			$this->setExpectedException('Hippo\Exception\FileNotReadableException');
+			$this->setExpectedException('HippoPHP\Hippo\Exception\FileNotReadableException');
 			$path = $this->_fileSystemTestHelper->getTemporaryFilePath();
 			mkdir($path);
 			$this->_fileSystem->getContent($path, 'whatever');
 		}
 
 		public function testOverwriteFolder() {
-			$this->setExpectedException('Hippo\Exception\FileNotWritableException');
+			$this->setExpectedException('HippoPHP\Hippo\Exception\FileNotWritableException');
 			$path = $this->_fileSystemTestHelper->getTemporaryFilePath();
 			mkdir($path);
 			$this->_fileSystem->putContent($path, 'whatever');
 		}
 
 		public function testSavingToNotWritableTarget() {
-			$this->setExpectedException('Hippo\Exception\FileNotWritableException');
+			$this->setExpectedException('HippoPHP\Hippo\Exception\FileNotWritableException');
 			$path = $this->_fileSystemTestHelper->getTemporaryFilePath();
 			$subPath = $path . DIRECTORY_SEPARATOR . 'file.txt';
 			$this->_fileSystem->putContent($subPath, 'whatever');

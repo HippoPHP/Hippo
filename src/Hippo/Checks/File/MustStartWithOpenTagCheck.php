@@ -1,11 +1,11 @@
 <?php
 
-	namespace Hippo\Checks\Line;
+	namespace HippoPHP\Hippo\Checks\Line;
 
-	use Hippo\Checks\AbstractCheck;
-	use Hippo\Checks\CheckInterface;
-	use Hippo\Config\Config;
-	use Hippo\File;
+	use HippoPHP\Hippo\Checks\AbstractCheck;
+	use HippoPHP\Hippo\Checks\CheckInterface;
+	use HippoPHP\Hippo\Config\Config;
+	use HippoPHP\Hippo\File;
 
 	class MustStartWithOpenTagCheck extends AbstractCheck implements CheckInterface {
 		/**

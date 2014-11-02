@@ -1,6 +1,6 @@
 <?php
 
-	namespace Hippo;
+	namespace HippoPHP\Hippo;
 
 	/**
 	 * A container for command-line-interface arguments.

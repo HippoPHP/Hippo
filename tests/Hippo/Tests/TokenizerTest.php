@@ -1,9 +1,9 @@
 <?php
 
-	namespace Hippo\Tests;
+	namespace HippoPHP\Hippo\Tests;
 
-	use Hippo\Tokenizer;
-	use Hippo\File;
+	use HippoPHP\Hippo\Tokenizer;
+	use HippoPHP\Hippo\File;
 
 	class TokenizerTest extends \PHPUnit_Framework_TestCase {
 		protected $tokenizer;
@@ -17,7 +17,7 @@
 		public function testTokenizeWithDefaultNamespace() {
 $source = <<<ESRC
 <?php 
-	namespace Hippo;
+	namespace HippoPHP\Hippo;
 	if (0 > 1) {
 		echo 'What? Zero can never be higher.';
 	} else {
@@ -26,19 +26,19 @@ $source = <<<ESRC
 	echo 'Hello'; 
 ?>
 ESRC;
-			$this->assertInstanceOf('Hippo\TokenList', $this->tokenizer->tokenize(new File($this->filename, $source)));
+			$this->assertInstanceOf('HippoPHP\Hippo\TokenList', $this->tokenizer->tokenize(new File($this->filename, $source)));
 		}
 
 		public function testTokenizeWithIdentNamespace() {
 $source = <<<ESRC
 <?php 
-	namespace Hippo {
+	namespace HippoPHP\Hippo {
 		function foo() {
 			return "bar";
 		}
 	}
 ?>
 ESRC;
-			$this->assertInstanceOf('Hippo\TokenList', $this->tokenizer->tokenize(new File($this->filename, $source)));
+			$this->assertInstanceOf('HippoPHP\Hippo\TokenList', $this->tokenizer->tokenize(new File($this->filename, $source)));
 		}
 	}

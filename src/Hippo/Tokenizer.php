@@ -1,10 +1,10 @@
 <?php
 
-	namespace Hippo;
+	namespace HippoPHP\Hippo;
 
-	use Hippo\File;
-	use Hippo\Token;
-	use Hippo\TokenList;
+	use HippoPHP\Hippo\File;
+	use HippoPHP\Hippo\Token;
+	use HippoPHP\Hippo\TokenList;
 
 	/**
 	 * Tokenizes a file.

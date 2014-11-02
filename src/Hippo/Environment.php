@@ -1,8 +1,8 @@
 <?php
 
-	namespace Hippo;
+	namespace HippoPHP\Hippo;
 
-	use Hippo\Exception\ShutdownException;
+	use HippoPHP\Hippo\Exception\ShutdownException;
 
 	/**
 	 * @package Hippo

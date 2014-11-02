@@ -1,6 +1,6 @@
 <?php
 
-	namespace Hippo\Exception;
+	namespace HippoPHP\Hippo\Exception;
 
 	/**
 	 * OutOfBoundsException.

@@ -1,8 +1,8 @@
 <?php
 
-	namespace Hippo;
+	namespace HippoPHP\Hippo;
 
-	use Hippo\Token;
+	use HippoPHP\Hippo\Token;
 	use SplDoublyLinkedList;
 	use SeekableIterator;
 

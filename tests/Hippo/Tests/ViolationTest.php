@@ -1,10 +1,10 @@
 <?php
 
-	namespace Hippo\Tests;
+	namespace HippoPHP\Hippo\Tests;
 
-	use Hippo\File;
-	use Hippo\Violation;
-	use Hippo\Exception\OutOfBoundsException;
+	use HippoPHP\Hippo\File;
+	use HippoPHP\Hippo\Violation;
+	use HippoPHP\Hippo\Exception\OutOfBoundsException;
 
 	class ViolationTest extends \PHPUnit_Framework_TestCase {
 		protected $violation;

@@ -1,10 +1,10 @@
 <?php
 
-	namespace Hippo;
+	namespace HippoPHP\Hippo;
 
-	use Hippo\Exception\FileNotFoundException;
-	use Hippo\Exception\FileNotWritableException;
-	use Hippo\Exception\FileNotReadableException;
+	use HippoPHP\Hippo\Exception\FileNotFoundException;
+	use HippoPHP\Hippo\Exception\FileNotWritableException;
+	use HippoPHP\Hippo\Exception\FileNotReadableException;
 
 	use \RecursiveDirectoryIterator;
 	use \RecursiveIteratorIterator;

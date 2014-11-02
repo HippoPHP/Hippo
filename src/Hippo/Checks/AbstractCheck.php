@@ -1,12 +1,12 @@
 <?php
 
-	namespace Hippo\Checks;
+	namespace HippoPHP\Hippo\Checks;
 
-	use Hippo\Checks\CheckInterface;
-	use Hippo\CheckResult;
-	use Hippo\Config\Config;
-	use Hippo\File;
-	use Hippo\Violation;
+	use HippoPHP\Hippo\Checks\CheckInterface;
+	use HippoPHP\Hippo\CheckResult;
+	use HippoPHP\Hippo\Config\Config;
+	use HippoPHP\Hippo\File;
+	use HippoPHP\Hippo\Violation;
 
 	/**
 	 * All checks will extend from this Abstract class.

@@ -1,12 +1,12 @@
 <?php
 
-	namespace Hippo\Tests;
+	namespace HippoPHP\Hippo\Tests;
 
-	use Hippo\CheckRepository;
-	use Hippo\Config\Config;
-	use Hippo\File;
-	use Hippo\FileSystem;
-	use Hippo\Tests\Helpers\FileSystemTestHelper;
+	use HippoPHP\Hippo\CheckRepository;
+	use HippoPHP\Hippo\Config\Config;
+	use HippoPHP\Hippo\File;
+	use HippoPHP\Hippo\FileSystem;
+	use HippoPHP\Hippo\Tests\Helpers\FileSystemTestHelper;
 
 	/**
 	 * Class that tests discovery of Check implementations.
@@ -20,7 +20,7 @@
 		private $_checkRepository;
 
 		public function setUp() {
-			$this->_fileSystemMock = $this->getMockBuilder('Hippo\FileSystem')->disableOriginalConstructor()->getMock();
+			$this->_fileSystemMock = $this->getMockBuilder('HippoPHP\Hippo\FileSystem')->disableOriginalConstructor()->getMock();
 			$this->_fileSystemTestHelper = new FileSystemTestHelper;
 			$this->_checkRepository = new CheckRepository($this->_fileSystemMock);
 		}
@@ -30,8 +30,8 @@
 			$objectName = $this->_getObjectName();
 			file_put_contents($path, <<<ESRC
 <?php
-class $objectName implements Hippo\Checks\CheckInterface {
-	public function checkFile(Hippo\File \$file, Hippo\Config\Config \$config) {
+class $objectName implements HippoPHP\Hippo\Checks\CheckInterface {
+	public function checkFile(HippoPHP\Hippo\File \$file, HippoPHP\Hippo\Config\Config \$config) {
 	}
 
 	public function getConfigRoot() {
@@ -50,7 +50,7 @@ ESRC
 			$objectName = $this->_getObjectName();
 			file_put_contents($path, <<<ESRC
 <?php
-abstract class $objectName implements Hippo\Checks\CheckInterface {
+abstract class $objectName implements HippoPHP\Hippo\Checks\CheckInterface {
 }
 ESRC
 );
@@ -64,7 +64,7 @@ ESRC
 			$objectName = $this->_getObjectName();
 			file_put_contents($path, <<<ESRC
 <?php
-interface $objectName extends Hippo\Checks\CheckInterface {
+interface $objectName extends HippoPHP\Hippo\Checks\CheckInterface {
 }
 ESRC
 );

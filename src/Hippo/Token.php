@@ -1,6 +1,6 @@
 <?php
 
-	namespace Hippo;
+	namespace HippoPHP\Hippo;
 
 	/**
 	 * Represents a Token object.

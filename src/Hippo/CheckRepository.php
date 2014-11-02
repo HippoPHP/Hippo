@@ -1,9 +1,9 @@
 <?php
 
-	namespace Hippo;
+	namespace HippoPHP\Hippo;
 
-	use Hippo\File;
-	use Hippo\Checks\CheckInterface;
+	use HippoPHP\Hippo\File;
+	use HippoPHP\Hippo\Checks\CheckInterface;
 
 	use \ReflectionClass;
 

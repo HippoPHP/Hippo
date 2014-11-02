@@ -1,11 +1,11 @@
 <?php
 
-	namespace Hippo\Tests;
+	namespace HippoPHP\Hippo\Tests;
 
-	use Hippo;
-	use Hippo\File;
-	use Hippo\Violation;
-	use Hippo\CheckResult;
+	use HippoPHP\Hippo;
+	use HippoPHP\Hippo\File;
+	use HippoPHP\Hippo\Violation;
+	use HippoPHP\Hippo\CheckResult;
 
 	class CheckResultTest extends \PHPUnit_Framework_TestCase {
 		protected $instance;
@@ -16,7 +16,7 @@
 		}
 
 		public function testConstructor() {
-			$this->assertInstanceOf('Hippo\CheckResult', $this->instance);
+			$this->assertInstanceOf('HippoPHP\Hippo\CheckResult', $this->instance);
 		}
 
 		public function testGetFileAtStartup() {
@@ -34,7 +34,7 @@
 		public function testSetFile() {
 			$this->instance->setFile(new File('test.php', '<?php echo 1 ?>'));
 
-			$this->assertInstanceOf('Hippo\File', $this->instance->getFile());
+			$this->assertInstanceOf('HippoPHP\Hippo\File', $this->instance->getFile());
 		}
 
 		public function testAddViolation() {

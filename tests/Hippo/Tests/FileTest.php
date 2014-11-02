@@ -1,9 +1,9 @@
 <?php
 
-	namespace Hippo\Tests;
+	namespace HippoPHP\Hippo\Tests;
 
-	use Hippo;
-	use Hippo\File;
+	use HippoPHP\Hippo;
+	use HippoPHP\Hippo\File;
 
 	class FileTest extends \PHPUnit_Framework_TestCase {
 		protected $file;
@@ -13,7 +13,7 @@
 		}
 
 		public function testNewFile() {
-			$this->assertInstanceOf('Hippo\File', $this->file);
+			$this->assertInstanceOf('HippoPHP\Hippo\File', $this->file);
 		}
 
 		public function testGetFilename() {

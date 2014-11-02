@@ -1,6 +1,6 @@
 <?php
 
-	namespace Hippo\Config;
+	namespace HippoPHP\Hippo\Config;
 
 	interface ConfigReaderInterface {
 		/**

@@ -1,17 +1,17 @@
 <?php
 
-	namespace Hippo\Tests;
+	namespace HippoPHP\Hippo\Tests;
 
-	use Hippo\Config\YAMLConfigReader;
-	use Hippo\Config;
-	use Hippo\FileSystem;
+	use HippoPHP\Hippo\Config\YAMLConfigReader;
+	use HippoPHP\Hippo\Config;
+	use HippoPHP\Hippo\FileSystem;
 
 	class YAMLConfigReaderTest extends \PHPUnit_Framework_TestCase {
 		private $_reader;
 		private $_fileSystemMock;
 
 		public function setUp() {
-			$this->_fileSystemMock = $this->getMockBuilder('Hippo\FileSystem')->disableOriginalConstructor()->getMock();
+			$this->_fileSystemMock = $this->getMockBuilder('HippoPHP\Hippo\FileSystem')->disableOriginalConstructor()->getMock();
 			$this->_reader = new YAMLConfigReader($this->_fileSystemMock);
 		}
 

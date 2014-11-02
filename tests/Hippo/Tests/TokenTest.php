@@ -1,8 +1,8 @@
 <?php
 
-	namespace Hippo\Tests;
+	namespace HippoPHP\Hippo\Tests;
 
-	use Hippo\Token;
+	use HippoPHP\Hippo\Token;
 
 	class TokenTest extends \PHPUnit_Framework_TestCase {
 		protected $token;
@@ -29,7 +29,7 @@
 
 		public function testSetLevel() {
 			$token = $this->token->setLevel(1);
-			$this->assertInstanceOf('Hippo\Token', $token);
+			$this->assertInstanceOf('HippoPHP\Hippo\Token', $token);
 		}
 
 		public function testGetLevel() {
@@ -37,7 +37,7 @@
 		}
 
 		public function testSetNamespace() {
-			$this->assertInstanceOf('Hippo\Token', $this->token->setNamespace('Hippo'));
+			$this->assertInstanceOf('HippoPHP\Hippo\Token', $this->token->setNamespace('Hippo'));
 		}
 
 		public function testGetNamespace() {

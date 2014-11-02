@@ -1,8 +1,8 @@
 <?php
 
-	namespace Hippo\Config;
+	namespace HippoPHP\Hippo\Config;
 
-	use Hippo\Exception\BadConfigKeyException;
+	use HippoPHP\Hippo\Exception\BadConfigKeyException;
 
 	class Config {
 		/**
