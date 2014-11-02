@@ -43,6 +43,7 @@
 		protected $fileSystem;
 
 		/**
+		 * @param Environment $environment
 		 * @param FileSystem $fileSystem
 		 * @param CheckRunner $checkRunner
 		 * @param string $pathToSelf
@@ -50,11 +51,13 @@
 		 * @return void
 		 */
 		public function __construct(
+			Environment $environment,
 			FileSystem $fileSystem,
 			CheckRunner $checkRunner,
 			$pathToSelf,
 			ArgOptions $argOptions
 		) {
+			$this->environment = $environment;
 			$this->fileSystem = $fileSystem;
 			$this->checkRunner = $checkRunner;
 			$this->pathToSelf = $pathToSelf;
@@ -69,9 +72,17 @@
 				throw new Exception('Hippo must be run from command line interface.');
 			}
 			$argv = $_SERVER['argv'];
+			$environment = new Environment;
 			$fileSystem = new FileSystem;
 			$checkRunner = new CheckRunner;
-			$hippoTextUi = new self($fileSystem, $checkRunner, array_shift($argv), ArgParser::parse($argv));
+
+			$hippoTextUi = new self(
+				$environment,
+				$fileSystem,
+				$checkRunner,
+				array_shift($argv),
+				ArgParser::parse($argv));
+
 			$hippoTextUi->run();
 		}
 
@@ -82,7 +93,8 @@
 			if ($this->argOptions->getLongOption(self::LONG_OPTION_HELP) === true ||
 				$this->argOptions->getShortOption(self::SHORT_OPTION_HELP) === true) {
 				$this->showHelp();
-				exit(0);
+				$this->environment->setExitCode(0);
+				$this->environment->shutdown();
 			}
 
 			// TODO:
@@ -95,7 +107,8 @@
 				$success &= $this->executeCheckRunner($strayArgument);
 			}
 
-			exit($success ? 0 : 1);
+			$this->environment->setExitCode($success ? 0 : 1);
+			$this->environment->shutdown();
 		}
 
 		/**
