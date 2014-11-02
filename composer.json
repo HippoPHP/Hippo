@@ -41,7 +41,8 @@
     },
     "autoload": {
         "psr-0": {
-            "Hippo\\": "src/"
+            "Hippo\\": "src/",
+            "Hippo\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",
