@@ -26,12 +26,9 @@
 		 */
 		protected $checkResult;
 
-		public function __construct() {
-			$this->checkResult = new CheckResult();
-		}
-
 		public function checkFile(File $file, Config $config) {
 			$this->checkResult = new CheckResult();
+			$this->checkResult->setFile($file);
 			$this->checkFileInternal($file, $config);
 			return $this->checkResult;
 		}
