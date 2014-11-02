@@ -74,13 +74,20 @@
 		}
 
 		/**
-		 * checkFile(): defined by CheckInterface.
-		 * @see CheckInterface::checkFile()
+		 * @return string
+		 */
+		public function getConfigRoot() {
+			return 'file.max_line_length';
+		}
+
+		/**
+		 * checkFileInternal(): defined by AbstractCheck.
+		 * @see AbstractCheck::checkFileInternal()
 		 * @param File $file
 		 * @param Config $config
 		 * @return void
 		 */
-		public function checkFile(File $file, Config $config) {
+		protected function checkFileInternal(File $file, Config $config) {
 			$this->setErrorLimit($config->get('error_limit', $this->errorLimit));
 			$this->setWarningLimit($config->get('warning_limit', $this->warningLimit));
 			$this->setInfoLimit($config->get('info_limit', $this->infoLimit));
@@ -118,10 +125,4 @@
 			}
 		}
 
-		/**
-		 * @return string
-		 */
-		public function getConfigRoot() {
-			return 'file.max_line_length';
-		}
 	}

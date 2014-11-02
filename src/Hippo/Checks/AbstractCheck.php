@@ -4,6 +4,7 @@
 
 	use Hippo\Checks\CheckInterface;
 	use Hippo\CheckResult;
+	use Hippo\Config\Config;
 	use Hippo\File;
 	use Hippo\Violation;
 
@@ -27,6 +28,12 @@
 
 		public function __construct() {
 			$this->checkResult = new CheckResult();
+		}
+
+		public function checkFile(File $file, Config $config) {
+			$this->checkResult = new CheckResult();
+			$this->checkFileInternal($file, $config);
+			return $this->checkResult;
 		}
 
 		/**
@@ -63,4 +70,6 @@
 
 			$this->checkResult->addViolation(new Violation($file, $line, $column, $severity, $message, $source));
 		}
+
+		abstract protected function checKFileInternal(File $file, Config $config);
 	}

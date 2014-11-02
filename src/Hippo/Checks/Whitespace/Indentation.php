@@ -54,13 +54,20 @@
 		}
 
 		/**
-		 * checkFile(): defined by CheckInterface.
-		 * @see CheckInterface::checkFile()
+		 * @return string
+		 */
+		public function getConfigRoot() {
+			return 'file.indentation';
+		}
+
+		/**
+		 * checkFileInternal(): defined by AbstractCheck.
+		 * @see AbstractCheck::checkFileInternal()
 		 * @param File $file
 		 * @param Config $config
 		 * @return void
 		 */
-		public function checkFile(File $file, Config $config) {
+		protected function checkFileInternal(File $file, Config $config) {
 			$this->setIndentStyle($config->get('style', $this->indentStyle));
 			$this->setIndentCount($config->get('count', $this->indentCount));
 
@@ -106,12 +113,5 @@
 			}
 
 			return str_repeat($char, $this->indentCount);
-		}
-
-		/**
-		 * @return string
-		 */
-		public function getConfigRoot() {
-			return 'file.indentation';
 		}
 	}
