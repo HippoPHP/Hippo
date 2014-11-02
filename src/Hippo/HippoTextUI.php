@@ -5,6 +5,7 @@
 	use Hippo\ArgOptions;
 	use Hippo\ArgParser;
 	use Hippo\CheckRunner;
+	use Hippo\CheckRepository;
 	use Hippo\Exception;
 	use Hippo\FileSystem;
 	use Hippo\Reporters\CLIReporter;
@@ -70,7 +71,7 @@
 			$argv = $_SERVER['argv'];
 			$environment = new Environment;
 			$fileSystem = new FileSystem;
-			$checkRunner = new CheckRunner;
+			$checkRunner = new CheckRunner(new CheckRepository($fileSystem));
 
 			$hippoTextUi = new self(
 				$environment,
