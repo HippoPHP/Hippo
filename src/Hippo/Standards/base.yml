@@ -4,7 +4,7 @@ file:
     open_tag:
         enabled: false
     max_line_length:
-        enabled: false
+        enabled: true
         error_limit: 80
         warning_limit: -1
         info_limit: -1
