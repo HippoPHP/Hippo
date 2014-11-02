@@ -16,11 +16,6 @@
             "name": "Marcin Kurczewski",
             "homepage": "http://sakuya.pl",
             "role": "Developer"
-        },
-        {
-            "name": "Benoit Pesty",
-            "homepage": "https://github.com/tchule",
-            "role": "Developer"
         }
     ],
     "require": {
@@ -40,9 +35,13 @@
         "source": "https://github.com/hippophp/hippo"
     },
     "autoload": {
-        "psr-0": {
-            "Hippo\\": "src/",
-            "Hippo\\Tests\\": "tests/"
+        "psr-4": {
+            "HippoPHP\\Hippo\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HippoPHP\\Hippo\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",

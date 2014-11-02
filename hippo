@@ -17,8 +17,8 @@ if (!defined('HIPPO_COMPOSER_INSTALL')) {
 
 require HIPPO_COMPOSER_INSTALL;
 
-use Hippo\HippoTextUI;
-use Hippo\Exception\ShutdownException;
+use HippoPHP\Hippo\HippoTextUI;
+use HippoPHP\Hippo\Exception\ShutdownException;
 
 try {
 	HippoTextUI::main();
