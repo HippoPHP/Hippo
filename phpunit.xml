@@ -12,13 +12,13 @@
 >
     <testsuites>
         <testsuite name="Hippo Test Suite">
-            <directory>./tests/Hippo/</directory>
+            <directory>./tests/</directory>
         </testsuite>
     </testsuites>
     
     <filter>
         <whitelist>
-            <directory suffix=".php">./src/Hippo/</directory>
+            <directory suffix=".php">./src/</directory>
         </whitelist>
     </filter>
 

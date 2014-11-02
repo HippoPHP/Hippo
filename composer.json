@@ -36,7 +36,11 @@
     },
     "autoload": {
         "psr-4": {
-            "HippoPHP\\Hippo\\": "src/",
+            "HippoPHP\\Hippo\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "HippoPHP\\Hippo\\Tests\\": "tests/"
         }
     },
