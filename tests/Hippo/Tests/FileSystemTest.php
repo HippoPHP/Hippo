@@ -4,96 +4,53 @@
 
 	use Hippo\FileSystem;
 	use Hippo\Exception\FileNotFoundException;
+	use Hippo\Tests\Helpers\FileSystemTestHelper;
 
 	class FileSystemTest extends \PHPUnit_Framework_TestCase {
-		protected $fileSystem;
+		private $_fileSystem;
+		private $_fileSystemTestHelper;
 
 		public function setUp() {
-			$this->fileSystem = new FileSystem;
+			$this->_fileSystem = new FileSystem;
+			$this->_fileSystemTestHelper = new FileSystemTestHelper;
 		}
 
 		public function testGetContent() {
-			$path = $this->_getTemporaryFilePath();
-			$this->_runWithCleanup(function() use ($path) {
-				$this->fileSystem->putContent($path, 'whatever');
-				$this->assertEquals('whatever', $this->fileSystem->getContent($path));
-			}, function() use ($path) {
-				$this->_cleanup($path);
-			});
+			$path = $this->_fileSystemTestHelper->getTemporaryFilePath();
+			$this->_fileSystem->putContent($path, 'whatever');
+			$this->assertEquals('whatever', $this->_fileSystem->getContent($path));
 		}
 
 		public function testGetNonExistingContent() {
 			$this->setExpectedException('Hippo\Exception\FileNotFoundException');
-			$this->fileSystem->getContent('nope');
+			$this->_fileSystem->getContent('nope');
 		}
 
 		public function testOverwriteExistingContent() {
-			$path = $this->_getTemporaryFilePath();
-			$this->_runWithCleanup(function() use ($path) {
-				touch($path);
-				$this->fileSystem->putContent($path, 'whatever');
-				$this->assertEquals('whatever', $this->fileSystem->getContent($path));
-			}, function() use ($path) {
-				$this->_cleanup($path);
-			});
+			$path = $this->_fileSystemTestHelper->getTemporaryFilePath();
+			touch($path);
+			$this->_fileSystem->putContent($path, 'whatever');
+			$this->assertEquals('whatever', $this->_fileSystem->getContent($path));
 		}
 
 		public function testReadFolder() {
 			$this->setExpectedException('Hippo\Exception\FileNotReadableException');
-			$path = $this->_getTemporaryFilePath();
-			$this->_runWithCleanup(function() use ($path) {
-				mkdir($path);
-				$this->fileSystem->getContent($path, 'whatever');
-			}, function() use ($path) {
-				$this->_cleanup($path);
-			});
+			$path = $this->_fileSystemTestHelper->getTemporaryFilePath();
+			mkdir($path);
+			$this->_fileSystem->getContent($path, 'whatever');
 		}
 
 		public function testOverwriteFolder() {
 			$this->setExpectedException('Hippo\Exception\FileNotWritableException');
-			$path = $this->_getTemporaryFilePath();
-			$this->_runWithCleanup(function() use ($path) {
-				mkdir($path);
-				$this->fileSystem->putContent($path, 'whatever');
-			}, function() use ($path) {
-				$this->_cleanup($path);
-			});
+			$path = $this->_fileSystemTestHelper->getTemporaryFilePath();
+			mkdir($path);
+			$this->_fileSystem->putContent($path, 'whatever');
 		}
 
 		public function testSavingToNotWritableTarget() {
 			$this->setExpectedException('Hippo\Exception\FileNotWritableException');
-			$path = $this->_getTemporaryFilePath();
+			$path = $this->_fileSystemTestHelper->getTemporaryFilePath();
 			$subPath = $path . DIRECTORY_SEPARATOR . 'file.txt';
-			$this->_runWithCleanup(function() use ($subPath) {
-				$this->fileSystem->putContent($subPath, 'whatever');
-			}, function() use ($path, $subPath) {
-				$this->_cleanup($subPath);
-				$this->_cleanup($path);
-			});
-		}
-
-		private function _getTemporaryFilePath() {
-			return sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'test_' . uniqid() . '_' . microtime(true);
-		}
-
-		private function _cleanup($file) {
-			if (!file_exists($file)) {
-				return;
-			}
-			if (is_dir($file)) {
-				rmdir($file);
-			} else {
-				unlink($file);
-			}
-		}
-
-		private function _runWithCleanUp($mainAction, $cleanupAction) {
-			try {
-				$mainAction();
-			} catch (\Exception $e) {
-				$cleanupAction();
-				throw $e;
-			}
-			$cleanupAction();
+			$this->_fileSystem->putContent($subPath, 'whatever');
 		}
 	}
