@@ -10,22 +10,14 @@
 
 	class MaxLength extends AbstractCheck implements CheckInterface {
 		/**
-		 * Limit for emitting errors.
-		 * @var integer
+		 * Limits for emitting violations.
+		 * @var integer[]
 		 */
-		protected $errorLimit = 80;
-
-		/**
-		 * Limit for emitting warnings.
-		 * @var integer
-		 */
-		protected $warningLimit = null;
-
-		/**
-		 * Limit for emitting infos.
-		 * @var integer
-		 */
-		protected $infoLimit = null;
+		protected $limits = [
+			Violation::SEVERITY_ERROR => 80,
+			Violation::SEVERITY_WARNING => null,
+			Violation::SEVERITY_INFO => null,
+		];
 
 		/**
 		 * Defines how many spaces a tab takes up.
@@ -35,31 +27,13 @@
 
 		/**
 		 * Sets the error line length limit.
+		 * @param int $violationLevel
 		 * @param int $length
 		 * @return MaxLength
 		 */
-		public function setErrorLimit($length) {
-			$this->errorLimit = ((int) $length) ?: null;
-			return $this;
-		}
-
-		/**
-		 * Sets the warning line length limit.
-		 * @param int $length
-		 * @return MaxLength
-		 */
-		public function setWarningLimit($length) {
-			$this->warningLimit = ((int) $length) ?: null;
-			return $this;
-		}
-
-		/**
-		 * Sets the info line length limit.
-		 * @param int $length
-		 * @return MaxLength
-		 */
-		public function setInfoLimit($length) {
-			$this->infoLimit = ((int) $length) ?: null;
+		public function setLimit($violationSeverity, $length) {
+			$length = ((int) $length);
+			$this->limits[$violationSeverity] = $length > 0 ? $length : null;
 			return $this;
 		}
 
@@ -88,37 +62,34 @@
 		 * @return void
 		 */
 		protected function checkFileInternal(File $file, Config $config) {
-			$this->setErrorLimit($config->get('error_limit', $this->errorLimit));
-			$this->setWarningLimit($config->get('warning_limit', $this->warningLimit));
-			$this->setInfoLimit($config->get('info_limit', $this->infoLimit));
+			$this->setLimit(Violation::SEVERITY_ERROR, $config->get('error_limit', $this->errorLimit));
+			$this->setLimit(Violation::SEVERITY_WARNING, $config->get('warning_limit', $this->warningLimit));
+			$this->setLimit(Violation::SEVERITY_INFO, $config->get('info_limit', $this->infoLimit));
 			$this->setTabExpand($config->get('tab_expand', $this->tabExpand));
 
 			foreach ($file->getLines() as $line => $data) {
 				$lineLength = iconv_strlen(
-					str_replace("\t", str_repeat(' ', $this->tabExpand), $data['content']),
+					str_replace("\t", str_repeat(' ', $this->tabExpand), rtrim($data, "\r\n")),
 					$file->getEncoding()
 				);
 
 				$violationLimit = null;
 				$severity = null;
 
-				if ($this->errorLimit !== null && $lineLength > $this->errorLimit) {
-					$violationLimit = $this->errorLimit;
-					$severity       = Violation::SEVERITY_ERROR;
-				} elseif ($this->warningLimit !== null && $lineLength > $this->warningLimit) {
-					$violationLimit = $this->warningLimit;
-					$severity       = Violation::SEVERITY_WARNING;
-				} elseif ($this->infoLimit !== null && $lineLength > $this->infoLimit) {
-					$violationLimit = $this->infoLimit;
-					$severity       = Violation::SEVERITY_INFO;
-				}
+				foreach (Violation::getSeverities() as $severity) {
+					if (!isset($this->limits[$severity]) || $this->limits[$severity] === null) {
+						continue;
+					}
 
-				if ($violationLimit !== null) {
+					if ($lineLength <= $this->limits[$severity]) {
+						continue;
+					}
+
 					$this->addViolation(
 						$file,
 						$line,
 						0,
-						sprintf('Line is longer than %d characters.', $violationLimit),
+						sprintf('Line is longer than %d characters.', $this->limits[$severity]),
 						$severity
 					);
 				}

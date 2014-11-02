@@ -17,6 +17,19 @@
 		const SEVERITY_ERROR   = 3;
 
 		/**
+		 * Violation severities, in order from most deadly to most peaceful.
+		 * @return integer[]
+		 */
+		public static function getSeverities() {
+			return [
+				self::SEVERITY_ERROR,
+				self::SEVERITY_WARNING,
+				self::SEVERITY_INFO,
+				self::SEVERITY_IGNORE,
+			];
+		}
+
+		/**
 		 * The file that the violation was made on.
 		 * @var File
 		 */

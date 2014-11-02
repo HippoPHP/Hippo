@@ -15,6 +15,15 @@
 			$this->violation = new Violation($this->file, 1, 0, 0, "Test", "Test");
 		}
 
+		public function testGetSeveritiies() {
+			$this->assertEquals([
+				Violation::SEVERITY_ERROR,
+				Violation::SEVERITY_WARNING,
+				Violation::SEVERITY_INFO,
+				Violation::SEVERITY_IGNORE],
+				Violation::getSeverities());
+		}
+
 		public function testSeverityIgnoreValue() {
 			$this->assertEquals(0, Violation::SEVERITY_IGNORE);
 		}
