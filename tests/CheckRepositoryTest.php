@@ -21,7 +21,7 @@
 		private $_checkRepository;
 
 		public function setUp() {
-			$this->_fileSystemMock = $this->getMockBuilder('HippoPHP\Hippo\FileSystem')->disableOriginalConstructor()->getMock();
+			$this->_fileSystemMock = $this->getMockBuilder('\HippoPHP\Hippo\FileSystem')->disableOriginalConstructor()->getMock();
 			$this->_fileSystemTestHelper = new FileSystemTestHelper;
 			$this->_checkRepository = new CheckRepository($this->_fileSystemMock);
 		}

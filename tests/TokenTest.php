@@ -29,7 +29,7 @@
 
 		public function testSetLevel() {
 			$token = $this->token->setLevel(1);
-			$this->assertInstanceOf('HippoPHP\Hippo\Token', $token);
+			$this->assertInstanceOf('\HippoPHP\Hippo\Token', $token);
 		}
 
 		public function testGetLevel() {
@@ -37,7 +37,7 @@
 		}
 
 		public function testSetNamespace() {
-			$this->assertInstanceOf('HippoPHP\Hippo\Token', $this->token->setNamespace('Hippo'));
+			$this->assertInstanceOf('\HippoPHP\Hippo\Token', $this->token->setNamespace('Hippo'));
 		}
 
 		public function testGetNamespace() {

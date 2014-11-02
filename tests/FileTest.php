@@ -13,7 +13,7 @@
 		}
 
 		public function testNewFile() {
-			$this->assertInstanceOf('HippoPHP\Hippo\File', $this->file);
+			$this->assertInstanceOf('\HippoPHP\Hippo\File', $this->file);
 		}
 
 		public function testGetFilename() {
