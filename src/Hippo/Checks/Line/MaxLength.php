@@ -62,9 +62,9 @@
 		 * @return void
 		 */
 		protected function checkFileInternal(File $file, Config $config) {
-			$this->setLimit(Violation::SEVERITY_ERROR, $config->get('error_limit', $this->errorLimit));
-			$this->setLimit(Violation::SEVERITY_WARNING, $config->get('warning_limit', $this->warningLimit));
-			$this->setLimit(Violation::SEVERITY_INFO, $config->get('info_limit', $this->infoLimit));
+			$this->setLimit(Violation::SEVERITY_ERROR, $config->get('error_limit', $this->limits[Violation::SEVERITY_ERROR]));
+			$this->setLimit(Violation::SEVERITY_WARNING, $config->get('warning_limit', $this->limits[violation::SEVERITY_WARNING]));
+			$this->setLimit(Violation::SEVERITY_INFO, $config->get('info_limit', $this->limits[Violation::SEVERITY_INFO]));
 			$this->setTabExpand($config->get('tab_expand', $this->tabExpand));
 
 			foreach ($file->getLines() as $line => $data) {
