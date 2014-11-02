@@ -38,13 +38,13 @@
 			echo str_repeat('-', 80) . PHP_EOL;
 
 			foreach ($violations as $violation) {
-				echo $violation->getLine() . ':';
+				echo 'Line ' . $violation->getLine();
 
 				if ($violation->getColumn() > 0) {
-					echo $violation->getColumn() . ':';
+					echo ':' . $violation->getColumn();
 				}
 
-				echo $violation->getSeverityName() . ': ';
+				echo ' ('. $violation->getSeverityName() . ') : ';
 				echo $violation->getMessage() . PHP_EOL;
 			}
 
