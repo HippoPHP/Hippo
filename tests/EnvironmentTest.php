@@ -2,8 +2,8 @@
 
 	namespace HippoPHP\Hippo\Tests;
 
-	use HippoPHP\Hippo\Environment;
-	use HippoPHP\Hippo\Exception\ShutdownException;
+	use \HippoPHP\Hippo\Environment;
+	use \HippoPHP\Hippo\Exception\ShutdownException;
 
 	class EnvironmentTest extends \PHPUnit_Framework_TestCase {
 		private $_environment;

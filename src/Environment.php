@@ -2,7 +2,7 @@
 
 	namespace HippoPHP\Hippo;
 
-	use HippoPHP\Hippo\Exception\ShutdownException;
+	use \HippoPHP\Hippo\Exception\ShutdownException;
 
 	/**
 	 * @package Hippo

@@ -2,11 +2,11 @@
 
 	namespace HippoPHP\Hippo\Checks;
 
-	use HippoPHP\Hippo\Checks\CheckInterface;
-	use HippoPHP\Hippo\CheckResult;
-	use HippoPHP\Hippo\Config\Config;
-	use HippoPHP\Hippo\File;
-	use HippoPHP\Hippo\Violation;
+	use \HippoPHP\Hippo\Checks\CheckInterface;
+	use \HippoPHP\Hippo\CheckResult;
+	use \HippoPHP\Hippo\Config\Config;
+	use \HippoPHP\Hippo\File;
+	use \HippoPHP\Hippo\Violation;
 
 	/**
 	 * All checks will extend from this Abstract class.

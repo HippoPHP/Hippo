@@ -2,10 +2,10 @@
 
 	namespace HippoPHP\Hippo;
 
-	use HippoPHP\Hippo\Exception;
-	use SeekableIterator;
-	use SplDoublyLinkedList;
-	use Countable;
+	use \HippoPHP\Hippo\Exception;
+	use \SeekableIterator;
+	use \SplDoublyLinkedList;
+	use \Countable;
 
 	/**
 	 * Result of running a check.

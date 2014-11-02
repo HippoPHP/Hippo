@@ -2,8 +2,8 @@
 
 	namespace HippoPHP\Hippo\Reporters;
 
-	use HippoPHP\Hippo\CheckResult;
-	use XMLWriter;
+	use \HippoPHP\Hippo\CheckResult;
+	use \XMLWriter;
 
 	/**
 	 * Array Reporter.

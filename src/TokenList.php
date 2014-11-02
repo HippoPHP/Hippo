@@ -2,9 +2,9 @@
 
 	namespace HippoPHP\Hippo;
 
-	use HippoPHP\Hippo\Token;
-	use SplDoublyLinkedList;
-	use SeekableIterator;
+	use \HippoPHP\Hippo\Token;
+	use \SplDoublyLinkedList;
+	use \SeekableIterator;
 
 	/**
 	 * Seekable container for token list.

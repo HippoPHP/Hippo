@@ -2,7 +2,7 @@
 
 	namespace HippoPHP\Hippo\Tests;
 
-	use HippoPHP\Hippo\Token;
+	use \HippoPHP\Hippo\Token;
 
 	class TokenTest extends \PHPUnit_Framework_TestCase {
 		protected $token;

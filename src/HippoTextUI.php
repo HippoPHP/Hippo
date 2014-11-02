@@ -2,15 +2,15 @@
 
 	namespace HippoPHP\Hippo;
 
-	use HippoPHP\Hippo\ArgOptions;
-	use HippoPHP\Hippo\ArgParser;
-	use HippoPHP\Hippo\CheckRepository;
-	use HippoPHP\Hippo\CheckRunner;
-	use HippoPHP\Hippo\Exception;
-	use HippoPHP\Hippo\FileSystem;
-	use HippoPHP\Hippo\Config\ConfigReaderInterface;
-	use HippoPHP\Hippo\Config\YAMLConfigReader;
-	use HippoPHP\Hippo\Reporters\CLIReporter;
+	use \HippoPHP\Hippo\ArgOptions;
+	use \HippoPHP\Hippo\ArgParser;
+	use \HippoPHP\Hippo\CheckRepository;
+	use \HippoPHP\Hippo\CheckRunner;
+	use \HippoPHP\Hippo\Exception;
+	use \HippoPHP\Hippo\FileSystem;
+	use \HippoPHP\Hippo\Config\ConfigReaderInterface;
+	use \HippoPHP\Hippo\Config\YAMLConfigReader;
+	use \HippoPHP\Hippo\Reporters\CLIReporter;
 
 	class HippoTextUI {
 		const LONG_OPTION_HELP = 'help';

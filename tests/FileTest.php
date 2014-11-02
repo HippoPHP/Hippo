@@ -2,8 +2,8 @@
 
 	namespace HippoPHP\Hippo\Tests;
 
-	use HippoPHP\Hippo;
-	use HippoPHP\Hippo\File;
+	use \HippoPHP\Hippo;
+	use \HippoPHP\Hippo\File;
 
 	class FileTest extends \PHPUnit_Framework_TestCase {
 		protected $file;

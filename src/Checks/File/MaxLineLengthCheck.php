@@ -2,11 +2,11 @@
 
 	namespace HippoPHP\Hippo\Checks\Line;
 
-	use HippoPHP\Hippo\Checks\AbstractCheck;
-	use HippoPHP\Hippo\Checks\CheckInterface;
-	use HippoPHP\Hippo\Config\Config;
-	use HippoPHP\Hippo\File;
-	use HippoPHP\Hippo\Violation;
+	use \HippoPHP\Hippo\Checks\AbstractCheck;
+	use \HippoPHP\Hippo\Checks\CheckInterface;
+	use \HippoPHP\Hippo\Config\Config;
+	use \HippoPHP\Hippo\File;
+	use \HippoPHP\Hippo\Violation;
 
 	class MaxLineLengthCheck extends AbstractCheck implements CheckInterface {
 		/**

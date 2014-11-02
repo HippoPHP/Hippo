@@ -2,8 +2,8 @@
 
 	namespace HippoPHP\Hippo;
 
-	use HippoPHP\Hippo\File;
-	use HippoPHP\Hippo\Checks\CheckInterface;
+	use \HippoPHP\Hippo\File;
+	use \HippoPHP\Hippo\Checks\CheckInterface;
 
 	use \ReflectionClass;
 

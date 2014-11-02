@@ -2,7 +2,7 @@
 
 	namespace HippoPHP\Hippo\Tests;
 
-	use HippoPHP\Hippo\ArgParser;
+	use \HippoPHP\Hippo\ArgParser;
 
 	class ArgParserTest extends \PHPUnit_Framework_TestCase {
 		public function testLongArgumentEqual() {

@@ -2,8 +2,8 @@
 
 	namespace HippoPHP\Hippo\Config;
 
-	use HippoPHP\Hippo\FileSystem;
-	use Symfony\Component\Yaml\Parser as YamlParser;
+	use \HippoPHP\Hippo\FileSystem;
+	use \Symfony\Component\Yaml\Parser as YamlParser;
 
 	class YAMLConfigReader implements ConfigReaderInterface {
 		protected $parser;

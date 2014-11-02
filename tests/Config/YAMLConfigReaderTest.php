@@ -2,9 +2,9 @@
 
 	namespace HippoPHP\Hippo\Tests;
 
-	use HippoPHP\Hippo\Config\YAMLConfigReader;
-	use HippoPHP\Hippo\Config;
-	use HippoPHP\Hippo\FileSystem;
+	use \HippoPHP\Hippo\Config\YAMLConfigReader;
+	use \HippoPHP\Hippo\Config;
+	use \HippoPHP\Hippo\FileSystem;
 
 	class YAMLConfigReaderTest extends \PHPUnit_Framework_TestCase {
 		private $_reader;

@@ -2,8 +2,8 @@
 
 	namespace HippoPHP\Hippo;
 
-	use HippoPHP\Hippo\Exception;
-	use SeekableIterator;
+	use \HippoPHP\Hippo\Exception;
+	use \SeekableIterator;
 
 	/**
 	 * File class.

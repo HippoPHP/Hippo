@@ -2,7 +2,7 @@
 
 	namespace HippoPHP\Hippo\Reporters;
 
-	use HippoPHP\Hippo\CheckResult;
+	use \HippoPHP\Hippo\CheckResult;
 
 	/**
 	 * CLI Reporter.

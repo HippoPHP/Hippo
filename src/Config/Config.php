@@ -2,7 +2,7 @@
 
 	namespace HippoPHP\Hippo\Config;
 
-	use HippoPHP\Hippo\Exception\BadConfigKeyException;
+	use \HippoPHP\Hippo\Exception\BadConfigKeyException;
 
 	class Config {
 		/**

@@ -2,9 +2,9 @@
 
 	namespace HippoPHP\Hippo;
 
-	use HippoPHP\Hippo\File;
-	use HippoPHP\Hippo\Token;
-	use HippoPHP\Hippo\TokenList;
+	use \HippoPHP\Hippo\File;
+	use \HippoPHP\Hippo\Token;
+	use \HippoPHP\Hippo\TokenList;
 
 	/**
 	 * Tokenizes a file.

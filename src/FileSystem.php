@@ -2,9 +2,9 @@
 
 	namespace HippoPHP\Hippo;
 
-	use HippoPHP\Hippo\Exception\FileNotFoundException;
-	use HippoPHP\Hippo\Exception\FileNotWritableException;
-	use HippoPHP\Hippo\Exception\FileNotReadableException;
+	use \HippoPHP\Hippo\Exception\FileNotFoundException;
+	use \HippoPHP\Hippo\Exception\FileNotWritableException;
+	use \HippoPHP\Hippo\Exception\FileNotReadableException;
 
 	use \RecursiveDirectoryIterator;
 	use \RecursiveIteratorIterator;

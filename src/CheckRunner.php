@@ -2,8 +2,8 @@
 
 	namespace HippoPHP\Hippo;
 
-	use HippoPHP\Hippo\Config\Config;
-	use HippoPHP\Hippo\File;
+	use \HippoPHP\Hippo\Config\Config;
+	use \HippoPHP\Hippo\File;
 	use \Exception;
 
 	class CheckRunner {

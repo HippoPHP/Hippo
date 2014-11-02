@@ -2,8 +2,8 @@
 
 	namespace HippoPHP\Hippo\Tests;
 
-	use HippoPHP\Hippo\Tokenizer;
-	use HippoPHP\Hippo\File;
+	use \HippoPHP\Hippo\Tokenizer;
+	use \HippoPHP\Hippo\File;
 
 	class TokenizerTest extends \PHPUnit_Framework_TestCase {
 		protected $tokenizer;
