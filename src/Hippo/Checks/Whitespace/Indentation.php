@@ -2,10 +2,11 @@
 
 	namespace Hippo\Checks\Whitespace;
 
-	use Hippo\File;
 	use Hippo\Checks\AbstractCheck;
+	use Hippo\Checks\CheckInterface;
+	use Hippo\File;
 
-	class Indentation extends AbstractCheck {
+	class Indentation extends AbstractCheck implements CheckInterface {
 		const INDENT_STYLE_SPACE = 'space';
 		const INDENT_STYLE_TAB = 'tab';
 

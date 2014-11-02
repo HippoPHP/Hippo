@@ -2,12 +2,12 @@
 
 	namespace Hippo\Checks\Line;
 
+	use Hippo\Checks\AbstractCheck;
+	use Hippo\Checks\CheckInterface;
 	use Hippo\File;
 	use Hippo\Violation;
-	use Hippo\Checks\AbstractCheck;
-	use Hippo\Checks\FileCheckInterface;
 
-	class MaxLength extends AbstractCheck implements FileCheckInterface {
+	class MaxLength extends AbstractCheck implements CheckInterface {
 		/**
 		 * Limit for emitting errors.
 		 * @var integer
@@ -73,8 +73,8 @@
 		}
 
 		/**
-		 * checkFile(): defined by FileCheckInterface.
-		 * @see FileCheckInterface::checkFile()
+		 * checkFile(): defined by CheckInterface.
+		 * @see CheckInterface::checkFile()
 		 * @param File $file
 		 * @return void
 		 */

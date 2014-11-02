@@ -2,9 +2,10 @@
 
 	namespace Hippo\Checks;
 
+	use Hippo\Checks\CheckInterface;
+	use Hippo\CheckResult;
 	use Hippo\File;
 	use Hippo\Violation;
-	use Hippo\CheckResult;
 
 	/**
 	 * All checks will extend from this Abstract class.

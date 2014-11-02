@@ -2,14 +2,14 @@
 
 	namespace Hippo\Checks\Line;
 
-	use Hippo\File;
 	use Hippo\Checks\AbstractCheck;
-	use Hippo\Checks\FileCheckInterface;
+	use Hippo\Checks\CheckInterface;
+	use Hippo\File;
 
-	class MustStartWithOpenTag extends AbstractCheck implements FileCheckInterface {
+	class MustStartWithOpenTag extends AbstractCheck implements CheckInterface {
 		/**
-		 * checkFile(): defined by FileCheckInterface.
-		 * @see FileCheckInterface::checkFile()
+		 * checkFile(): defined by CheckInterface.
+		 * @see CheckInterface::checkFile()
 		 * @param File $file
 		 * @return void
 		 */
