@@ -7,7 +7,7 @@
 	use Hippo\Config\Config;
 	use Hippo\File;
 
-	class MustStartWithOpenTag extends AbstractCheck implements CheckInterface {
+	class MustStartWithOpenTagCheck extends AbstractCheck implements CheckInterface {
 		/**
 		 * @return string
 		 */

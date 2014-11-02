@@ -7,7 +7,7 @@
 	use Hippo\Config\Config;
 	use Hippo\File;
 
-	class Indentation extends AbstractCheck implements CheckInterface {
+	class IndentationCheck extends AbstractCheck implements CheckInterface {
 		//TODO: add "auto", which checks only for consistency
 		const INDENT_STYLE_SPACE = 'space';
 		const INDENT_STYLE_TAB = 'tab';

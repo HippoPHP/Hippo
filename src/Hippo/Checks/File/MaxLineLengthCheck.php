@@ -8,7 +8,7 @@
 	use Hippo\File;
 	use Hippo\Violation;
 
-	class MaxLength extends AbstractCheck implements CheckInterface {
+	class MaxLineLengthCheck extends AbstractCheck implements CheckInterface {
 		/**
 		 * Limits for emitting violations.
 		 * @var int[]
