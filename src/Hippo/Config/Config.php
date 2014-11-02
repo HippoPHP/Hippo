@@ -97,7 +97,7 @@
 					if ($createSections) {
 						$current = [];
 					} else {
-						throw new BadConfigKeyException('Trying to access child of a scalar value');
+						throw new BadConfigKeyException('Trying to access child of a scalar value: ' . $key);
 					}
 				}
 
@@ -105,7 +105,7 @@
 					if ($createSections) {
 						$current[$this->_normalizeKey($key)] = [];
 					} else {
-						throw new BadConfigKeyException('Trying to access a node that doesn\'t exist');
+						throw new BadConfigKeyException('Trying to access a node that doesn\'t exist: ' . $key);
 					}
 				}
 
