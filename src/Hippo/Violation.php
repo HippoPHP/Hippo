@@ -18,7 +18,7 @@
 
 		/**
 		 * Violation severities, in order from most deadly to most peaceful.
-		 * @return integer[]
+		 * @return int[]
 		 */
 		public static function getSeverities() {
 			return [

@@ -77,7 +77,7 @@
 		 * seek(): defined by SeekableIterator interface.
 		 *
 		 * @see    SeekableIterator::seek()
-		 * @param  integer $position
+		 * @param  int $position
 		 * @return void
 		 */
 		public function seek($position) {

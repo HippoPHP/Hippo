@@ -47,16 +47,24 @@
 
 		/**
 		 * Returns whether check succeeded.
-		 * @return bool
+		 * @return boolean
 		 */
 		public function hasSucceeded() {
 			return empty($this->violations);
 		}
 
+		/**
+		 * Returns whether check failed.
+		 * @return boolean
+		 */
 		public function hasFailed() {
 			return empty($this->violations) === false;
 		}
 
+		/**
+		 * @param Violation $violation
+		 * @return void
+		 */
 		public function addViolation(Violation $violation) {
 			$this->violations[] = $violation;
 			$this->violationsDirty = true;
@@ -65,7 +73,7 @@
 		/**
 		 * Return all of the violations on the file.
 		 * Violations are sorted on a line/column basis.
-		 * @return array
+		 * @return Violation[]
 		 */
 		public function getViolations() {
 			$this->_processViolationsIfDirty();
