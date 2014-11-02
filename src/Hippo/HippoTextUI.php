@@ -43,15 +43,22 @@
 		protected $fileSystem;
 
 		/**
+		 * @param FileSystem $fileSystem
+		 * @param CheckRunner $checkRunner
 		 * @param string $pathToSelf
 		 * @param ArgOptions $argOptions
 		 * @return void
 		 */
-		public function __construct($pathToSelf, ArgOptions $argOptions) {
-			$this->fileSystem = new FileSystem;
-			$this->checkRunner = new CheckRunner;
-			$this->argOptions = $argOptions;
+		public function __construct(
+			FileSystem $fileSystem,
+			CheckRunner $checkRunner,
+			$pathToSelf,
+			ArgOptions $argOptions
+		) {
+			$this->fileSystem = $fileSystem;
+			$this->checkRunner = $checkRunner;
 			$this->pathToSelf = $pathToSelf;
+			$this->argOptions = $argOptions;
 		}
 
 		/**
@@ -62,7 +69,9 @@
 				throw new Exception('Hippo must be run from command line interface.');
 			}
 			$argv = $_SERVER['argv'];
-			$hippoTextUi = new self(array_shift($argv), ArgParser::parse($argv));
+			$fileSystem = new FileSystem;
+			$checkRunner = new CheckRunner;
+			$hippoTextUi = new self($fileSystem, $checkRunner, array_shift($argv), ArgParser::parse($argv));
 			$hippoTextUi->run();
 		}
 
