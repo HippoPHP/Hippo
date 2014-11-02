@@ -90,12 +90,13 @@
 			$eols = array("\r", "\n", "\r\n");
 
 			$lines = array();
+			$index = 1;
 			while ($source !== '') {
 				$line = $this->_extractNextLine($source, $eols, $eolUsed);
-				$lines[] = $line;
+				$lines[$index ++] = $line;
 				$source = strval(substr($source, strlen($line)));
 				if ($eolUsed !== null && $source === '') {
-					$lines[] = '';
+					$lines[$index ++] = '';
 					break;
 				}
 			}
