@@ -65,4 +65,18 @@
 		public function getStrayArguments() {
 			return $this->_strayArguments;
 		}
+
+		/**
+		 * @return array
+		 */
+		public function getLongOptions() {
+			return $this->_longOptions;
+		}
+
+		/**
+		 * @return array
+		 */
+		public function getShortOptions() {
+			return $this->_shortOptions;
+		}
 	}
