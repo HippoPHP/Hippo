@@ -29,7 +29,7 @@ Compatible with PHP 5.4 and up.
     - [ ] camelCase
     - [ ] snake_case
     - [ ] PascalCase
-- [ ] Run as a binary with console output and as a library.
+- [X] Run as a binary with console output and as a library.
 - [ ] Switch to [semver](http://semver.org) versioning.
 
 # License
