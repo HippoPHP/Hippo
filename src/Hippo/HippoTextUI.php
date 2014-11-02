@@ -27,11 +27,6 @@
 		protected $checkRepository;
 
 		/**
-		 * @var CheckRunner
-		 */
-		protected $checkRunner;
-
-		/**
 		 * @var ArgOptions
 		 */
 		protected $argOptions;
@@ -115,10 +110,18 @@
 			$standardName = 'base';
 			$baseConfig = $this->configReader->loadFromFile($this->_getStandardPath($standardName));
 
-			$this->checkRunner = new CheckRunner($this->checkRepository, $baseConfig);
 			$success = true;
+			$checkRunner = new CheckRunner($this->fileSystem, $this->checkRepository, $baseConfig);
+			$checkRunner->setObserver(function(File $file, array $checkResults) use (&$success) {
+				$this->reportCheckResults($file, $checkResults);
+				foreach ($checkResults as $checkResult) {
+					if ($checkResult->hasFailed()) {
+						$success = false;
+					}
+				}
+			});
 			foreach ($this->argOptions->getStrayArguments() as $strayArgument) {
-				$success &= $this->executeCheckRunner($strayArgument);
+				$checkRunner->checkPath($strayArgument);
 			}
 
 			$this->environment->setExitCode($success ? 0 : 1);
@@ -130,50 +133,6 @@
 		 */
 		protected function showHelp() {
 			throw new \BadMethodCallException('Not implemented');
-		}
-
-		/**
-		 * @param string $path
-		 * @return boolean if there were no errors
-		 */
-		protected function executeCheckRunner($path) {
-			if (!file_exists($path)) {
-				throw new Exception('File does not exist: ' . $path);
-			}
-
-			return is_dir($path)
-				? $this->executeCheckRunnerForDir($path)
-				: $this->executeCheckRunnerForFile($path);
-		}
-
-		/**
-		 * @param string $path
-		 * @return boolean if there were no errors
-		 */
-		protected function executeCheckRunnerForDir($path) {
-			$iterator = $this->fileSystem->getAllFiles($path, '/^.+\.php$/i');
-			$success = true;
-			foreach ($iterator as $subPath) {
-				$success &= $this->executeCheckRunnerForFile($subPath);
-			}
-			return $success;
-		}
-
-		/**
-		 * @param string $path
-		 * @return boolean if there were no errors
-		 */
-		protected function executeCheckRunnerForFile($path) {
-			$file = new File($path, $this->fileSystem->getContent($path));
-			$checkResults = $this->checkRunner->checkFile($file);
-			$this->reportCheckResults($file, $checkResults);
-
-			foreach ($checkResults as $checkResult) {
-				if ($checkResult->hasFailed()) {
-					return false;
-				}
-			}
-			return true;
 		}
 
 		/**
