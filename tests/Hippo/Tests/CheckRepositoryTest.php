@@ -3,6 +3,8 @@
 	namespace Hippo\Tests;
 
 	use Hippo\CheckRepository;
+	use Hippo\Config\Config;
+	use Hippo\File;
 	use Hippo\FileSystem;
 	use Hippo\Tests\Helpers\FileSystemTestHelper;
 
@@ -29,7 +31,10 @@
 			file_put_contents($path, <<<ESRC
 <?php
 class $objectName implements Hippo\Checks\CheckInterface {
-	public function checkFile(Hippo\File \$file) {
+	public function checkFile(Hippo\File \$file, Hippo\Config\Config \$config) {
+	}
+
+	public function getConfigRoot() {
 	}
 }
 ESRC

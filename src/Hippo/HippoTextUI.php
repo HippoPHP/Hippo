@@ -4,10 +4,12 @@
 
 	use Hippo\ArgOptions;
 	use Hippo\ArgParser;
-	use Hippo\CheckRunner;
 	use Hippo\CheckRepository;
+	use Hippo\CheckRunner;
 	use Hippo\Exception;
 	use Hippo\FileSystem;
+	use Hippo\Config\ConfigReaderInterface;
+	use Hippo\Config\YAMLConfigReader;
 	use Hippo\Reporters\CLIReporter;
 
 	class HippoTextUI {
@@ -18,6 +20,11 @@
 		 * @var ReportInterface[]
 		 */
 		protected $reporters;
+
+		/**
+		 * @var CheckRepository
+		 */
+		protected $checkRepository;
 
 		/**
 		 * @var CheckRunner
@@ -42,7 +49,7 @@
 		/**
 		 * @param Environment $environment
 		 * @param FileSystem $fileSystem
-		 * @param CheckRunner $checkRunner
+		 * @param CheckRepository $checkRepository
 		 * @param string $pathToSelf
 		 * @param ArgOptions $argOptions
 		 * @return void
@@ -50,13 +57,15 @@
 		public function __construct(
 			Environment $environment,
 			FileSystem $fileSystem,
-			CheckRunner $checkRunner,
+			CheckRepository $checkRepository,
+			ConfigReaderInterface $configReader,
 			$pathToSelf,
 			ArgOptions $argOptions
 		) {
 			$this->environment = $environment;
 			$this->fileSystem = $fileSystem;
-			$this->checkRunner = $checkRunner;
+			$this->checkRepository = $checkRepository;
+			$this->configReader = $configReader;
 			$this->pathToSelf = $pathToSelf;
 			$this->argOptions = $argOptions;
 		}
@@ -71,12 +80,14 @@
 			$argv = $_SERVER['argv'];
 			$environment = new Environment;
 			$fileSystem = new FileSystem;
-			$checkRunner = new CheckRunner(new CheckRepository($fileSystem));
+			$configReader = new YAMLConfigReader($fileSystem);
+			$checkRepository = new CheckRepository($fileSystem);
 
 			$hippoTextUi = new self(
 				$environment,
 				$fileSystem,
-				$checkRunner,
+				$checkRepository,
+				$configReader,
 				array_shift($argv),
 				ArgParser::parse($argv));
 
@@ -99,6 +110,12 @@
 			// make this work with --quiet and --verbose also
 			$this->reporters[] = new CLIReporter;
 
+			// TODO:
+			// make this work with --standard
+			$standardName = 'base';
+			$baseConfig = $this->configReader->loadFromFile($this->_getStandardPath($standardName));
+
+			$this->checkRunner = new CheckRunner($this->checkRepository, $baseConfig);
 			$success = true;
 			foreach ($this->argOptions->getStrayArguments() as $strayArgument) {
 				$success &= $this->executeCheckRunner($strayArgument);
@@ -173,5 +190,15 @@
 				}
 				$reporter->finish();
 			}
+		}
+
+		/**
+		 * @param string
+		 * @return string
+		 */
+		private function _getStandardPath($standardName) {
+			return __DIR__ . DIRECTORY_SEPARATOR
+				. 'Standards' . DIRECTORY_SEPARATOR
+				. $standardName . '.yml';
 		}
 	}

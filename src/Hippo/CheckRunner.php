@@ -2,19 +2,27 @@
 
 	namespace Hippo;
 
+	use Hippo\Config\Config;
 	use Hippo\File;
+	use \Exception;
 
 	class CheckRunner {
 		/**
 		 * @var CheckRepository
 		 */
-		protected $checkRepository;
+		private $_checkRepository;
+
+		/**
+		 * @var Config
+		 */
+		private $_config;
 
 		/**
 		 * @param CheckRepository
 		 */
-		public function __construct(CheckRepository $checkRepository) {
-			$this->checkRepository = $checkRepository;
+		public function __construct(CheckRepository $checkRepository, Config $config) {
+			$this->_checkRepository = $checkRepository;
+			$this->_config = $config;
 		}
 
 		/**
@@ -24,9 +32,12 @@
 		public function checkFile(File $file) {
 			//TODO: prepare AST and token context here
 			$results = [];
-			foreach ($this->checkRepository->getChecks() as $check) {
+			foreach ($this->_checkRepository->getChecks() as $check) {
 				//TODO: inject context to Check here
-				$results[] = $check->checkFile($file);
+				$branch = $this->_config->get($check->getConfigRoot());
+				if ($branch->get('enabled') === true) {
+					$results[] = $check->checkFile($file, $branch);
+				}
 			}
 			return $results;
 		}

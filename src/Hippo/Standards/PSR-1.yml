@@ -1,3 +1,4 @@
 name: "PSR-1"
+extends: "base"
 
 bracesOnNewLine: true

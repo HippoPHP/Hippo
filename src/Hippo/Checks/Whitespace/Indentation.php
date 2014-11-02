@@ -4,9 +4,11 @@
 
 	use Hippo\Checks\AbstractCheck;
 	use Hippo\Checks\CheckInterface;
+	use Hippo\Config\Config;
 	use Hippo\File;
 
 	class Indentation extends AbstractCheck implements CheckInterface {
+		//TODO: add "auto", which checks only for consistency
 		const INDENT_STYLE_SPACE = 'space';
 		const INDENT_STYLE_TAB = 'tab';
 
@@ -51,7 +53,17 @@
 			return $this;
 		}
 
-		public function checkFile(File $file) {
+		/**
+		 * checkFile(): defined by CheckInterface.
+		 * @see CheckInterface::checkFile()
+		 * @param File $file
+		 * @param Config $config
+		 * @return void
+		 */
+		public function checkFile(File $file, Config $config) {
+			$this->setIndentStyle($config->get('style', $this->indentStyle));
+			$this->setIndentCount($config->get('count', $this->indentCount));
+
 			$indentation = $this->_getIndentChar();
 
 			$file->rewind();
@@ -94,5 +106,12 @@
 			}
 
 			return str_repeat($char, $this->indentCount);
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getConfigRoot() {
+			return 'file.indentation';
 		}
 	}

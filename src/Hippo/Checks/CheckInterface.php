@@ -3,6 +3,7 @@
 	namespace Hippo\Checks;
 
 	use Hippo\File;
+	use Hippo\Config\Config;
 
 	/**
 	 * Check Interface.
@@ -14,5 +15,10 @@
 		/**
 		 * @return CheckResult
 		 */
-		public function checkFile(File $file);
+		public function checkFile(File $file, Config $config);
+
+		/**
+		 * @return string
+		 */
+		public function getConfigRoot();
 	}

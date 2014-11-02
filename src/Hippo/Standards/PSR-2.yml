@@ -1,3 +1,10 @@
 name: "PSR-2"
+extends: "PSR-1"
 
 bracesOnNewLine: false
+
+file:
+    indentation:
+        enabled: true
+        style: "space"
+        count: 4

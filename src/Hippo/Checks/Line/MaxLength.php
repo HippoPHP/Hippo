@@ -4,6 +4,7 @@
 
 	use Hippo\Checks\AbstractCheck;
 	use Hippo\Checks\CheckInterface;
+	use Hippo\Config\Config;
 	use Hippo\File;
 	use Hippo\Violation;
 
@@ -76,9 +77,15 @@
 		 * checkFile(): defined by CheckInterface.
 		 * @see CheckInterface::checkFile()
 		 * @param File $file
+		 * @param Config $config
 		 * @return void
 		 */
-		public function checkFile(File $file) {
+		public function checkFile(File $file, Config $config) {
+			$this->setErrorLimit($config->get('error_limit', $this->errorLimit));
+			$this->setWarningLimit($config->get('warning_limit', $this->warningLimit));
+			$this->setInfoLimit($config->get('info_limit', $this->infoLimit));
+			$this->setTabExpand($config->get('tab_expand', $this->tabExpand));
+
 			foreach ($file->getLines() as $line => $data) {
 				$lineLength = iconv_strlen(
 					str_replace("\t", str_repeat(' ', $this->tabExpand), $data['content']),
@@ -109,5 +116,12 @@
 					);
 				}
 			}
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getConfigRoot() {
+			return 'file.max_line_length';
 		}
 	}

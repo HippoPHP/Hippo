@@ -1,1 +1,6 @@
-extends: "PSR-1"
+name: "PGS-2"
+extends: "PSR-2"
+
+file:
+    indentation:
+        style: "auto"
