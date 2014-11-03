@@ -1,15 +1,15 @@
 name: "base"
 
 file:
-    open_tag:
-        enabled: false
-    max_line_length:
-        enabled: true
-        error_limit: 80
-        warning_limit: -1
-        info_limit: -1
-        tab_expand: 4
-    indentation:
-        enabled: false
-        style: "tab"
-        count: 1
+  open_tag:
+    enabled: false
+  max_line_length:
+    enabled: true
+    error_limit: 80
+    warning_limit: -1
+    info_limit: -1
+    tab_expand: 4
+  indentation:
+    enabled: false
+    style: "tab"
+    count: 1
