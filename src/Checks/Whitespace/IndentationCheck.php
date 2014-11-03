@@ -2,10 +2,11 @@
 
 	namespace HippoPHP\Hippo\Checks\Whitespace;
 
+	use \HippoPHP\Hippo\File;
+	use \HippoPHP\Hippo\Violation;
+	use \HippoPHP\Hippo\Config\Config;
 	use \HippoPHP\Hippo\Checks\AbstractCheck;
 	use \HippoPHP\Hippo\Checks\CheckInterface;
-	use \HippoPHP\Hippo\Config\Config;
-	use \HippoPHP\Hippo\File;
 
 	class IndentationCheck extends AbstractCheck implements CheckInterface {
 		//TODO: add "auto", which checks only for consistency
