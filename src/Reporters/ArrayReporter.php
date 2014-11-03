@@ -2,6 +2,7 @@
 
 	namespace HippoPHP\Hippo\Reporters;
 
+	use \HippoPHP\Hippo\Violation;
 	use \HippoPHP\Hippo\CheckResult;
 
 	/**
