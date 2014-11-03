@@ -31,7 +31,7 @@
 		 * @return void
 		 */
 		public function putContent($path, $content) {
-			if (file_exists($path) and is_dir($path)) {
+			if (file_exists($path) && is_dir($path)) {
 				throw new FileNotWritableException($path);
 			}
 			if (!is_writable(dirname($path))) {
