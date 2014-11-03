@@ -34,7 +34,9 @@
 			$this->_stopParsing = false;
 			$this->_argOptions = new ArgOptions();
 
-			for ($i = 0; $i < count($argv); $i ++) {
+			$argCount = count($argv);
+
+			for ($i = 0; $i < $argCount; $i ++) {
 				$arg = $argv[$i];
 				$nextArg = isset($argv[$i + 1]) ? $argv[$i + 1] : null;
 				$hasUsedNextArg = $this->_processArg($arg, $nextArg);
