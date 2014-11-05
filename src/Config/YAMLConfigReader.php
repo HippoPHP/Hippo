@@ -48,6 +48,11 @@
 			return new Config($config);
 		}
 
+		/**
+		 * Normalizes a configuration filename
+		 * @param  string $name
+		 * @return string
+		 */
 		private function _normalizeConfigName($name) {
 			return trim(basename(strtolower($name), '.yml'));
 		}
