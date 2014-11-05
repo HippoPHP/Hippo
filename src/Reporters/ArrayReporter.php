@@ -52,9 +52,6 @@
 		 * @see ReportInterface::finish()
 		 */
 		public function finish() {
-		}
-
-		public function getArray() {
 			return $this->report;
 		}
 
