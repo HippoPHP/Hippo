@@ -3,7 +3,6 @@
 [![Build Status](http://img.shields.io/travis/HippoPHP/Hippo.svg?style=flat-square)](https://travis-ci.org/HippoPHP/Hippo)
 [![Code Climate](http://img.shields.io/codeclimate/github/HippoPHP/Hippo.svg?style=flat-square)](https://codeclimate.com/github/HippoPHP/Hippo)
 [![Test Coverage](http://img.shields.io/codeclimate/coverage/github/HippoPHP/Hippo.svg?style=flat-square)](https://codeclimate.com/github/HippoPHP/Hippo)
-[![Gitter chat](http://img.shields.io/badge/Gitter-Join%20Chat-brightgreen.svg)](https://gitter.im/hippophp)
 
 ## About
 
