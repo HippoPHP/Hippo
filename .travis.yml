@@ -24,4 +24,4 @@ script:
   - ./vendor/bin/phpcs --standard=PSR1 -p --report=full --report-checkstyle=build/logs/checkstyle.xml src/ tests/
 
 after_script:
-  - CODECLIMATE_REPO_TOKEN=3893dec64ea1b8a939039133f6f4943c7d41f1b8d51cd7b1417e68568b20a740 ./vendor/bin/test-reporter
+  - ./vendor/bin/test-reporter
