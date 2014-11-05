@@ -2,8 +2,9 @@
 
 	namespace HippoPHP\Hippo\Reporters;
 
-	use \HippoPHP\Hippo\CheckResult;
 	use \XmlWriter;
+	use \HippoPHP\Hippo\FileSystem;
+	use \HippoPHP\Hippo\CheckResult;
 
 	/**
 	 * Checkstyle Reporter.
@@ -23,10 +24,22 @@
 		protected $filename;
 
 		/**
+		 * @var FileSystem
+		 */
+		protected $fileSystem;
+
+		/**
 		 * Creates a new writer object, ready to write XML.
+		 * @param FileSystem $fileSystem
+		 */
+		public function __construct(FileSystem $fileSystem) {
+			$this->fileSystem = new FileSystem;
+		}
+
+		/**
 		 * @param string $filename
 		 */
-		public function __construct($filename) {
+		public function setFilename($fileName) {
 			$this->filename = $filename;
 		}
 
@@ -36,7 +49,7 @@
 		 */
 		public function start() {
 			$this->writer = new XMLWriter();
-			$this->writer->openUri($filename);
+			$this->writer->openMemory();
 			$this->writer->setIndent(true);
 			$this->writer->setIndentString('    ');
 
@@ -80,5 +93,7 @@
 		public function finish() {
 			$this->writer->endElement();
 			$this->writer->endDocument();
+
+			$this->fileSystem->putContent($this->filename, $this->writer->outputMemory());
 		}
 	}

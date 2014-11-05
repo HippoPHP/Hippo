@@ -31,11 +31,15 @@
 		 * @return void
 		 */
 		public function putContent($path, $content) {
-			if (file_exists($path) && is_dir($path)) {
-				throw new FileNotWritableException($path);
-			}
-			if (!is_writable(dirname($path))) {
-				throw new FileNotWritableException($path);
+			$isStream = strpos($path, 'php://') !== FALSE;
+
+			if (!$isStream) {
+				if (file_exists($path) && is_dir($path)) {
+					throw new FileNotWritableException($path);
+				}
+				if (!is_writable(dirname($path))) {
+					throw new FileNotWritableException($path);
+				}
 			}
 			file_put_contents($path, $content);
 		}
