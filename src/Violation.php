@@ -145,8 +145,8 @@
 		 * @param  string $severityName
 		 * @return int
 		 */
-		public function getSeverityFromString($severityName) {
-			$severityNames = array_flip($this->_getSeverityNames());
+		public static function getSeverityFromString($severityName) {
+			$severityNames = array_flip(self::_getSeverityNames());
 			if (isset($severityNames[$severityName])) {
 				return $severityNames[$severityName];
 			}
@@ -157,7 +157,7 @@
 		 * Array of severity levels to the severity name.
 		 * @return array
 		 */
-		private function _getSeverityNames() {
+		private static function _getSeverityNames() {
 			return array(
 				self::SEVERITY_IGNORE => 'ignore',
 				self::SEVERITY_INFO => 'info',

@@ -41,23 +41,23 @@
 		}
 
 		public function testGetSeverityFromStringIgnore() {
-			$this->assertEquals(Violation::SEVERITY_IGNORE, $this->violation->getSeverityFromString('ignore'));
+			$this->assertEquals(Violation::SEVERITY_IGNORE, Violation::getSeverityFromString('ignore'));
 		}
 
 		public function testGetSeverityFromStringInfo() {
-			$this->assertEquals(Violation::SEVERITY_INFO, $this->violation->getSeverityFromString('info'));
+			$this->assertEquals(Violation::SEVERITY_INFO, Violation::getSeverityFromString('info'));
 		}
 
 		public function testGetSeverityFromStringWarning() {
-			$this->assertEquals(Violation::SEVERITY_WARNING, $this->violation->getSeverityFromString('warning'));
+			$this->assertEquals(Violation::SEVERITY_WARNING, Violation::getSeverityFromString('warning'));
 		}
 
 		public function testGetSeverityFromStringError() {
-			$this->assertEquals(Violation::SEVERITY_ERROR, $this->violation->getSeverityFromString('error'));
+			$this->assertEquals(Violation::SEVERITY_ERROR, Violation::getSeverityFromString('error'));
 		}
 
 		public function testGetSeverityFromStringNull() {
-			$this->assertNull($this->violation->getSeverityFromString('foobar'));
+			$this->assertNull(Violation::getSeverityFromString('foobar'));
 		}
 
 		public function testGetFile() {
