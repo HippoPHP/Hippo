@@ -56,6 +56,14 @@
 		}
 
 		/**
+		 * Returns the reports array.
+		 * @return array
+		 */
+		public function getReport() {
+			return $this->report;
+		}
+
+		/**
 		 * Generates a key for a violation.
 		 * @param Violation $violation
 		 * @return string
