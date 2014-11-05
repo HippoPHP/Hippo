@@ -2,7 +2,6 @@
 
 	namespace HippoPHP\Hippo\Reporters;
 
-	use \HippoPHP\Hippo\FileSystem;
 	use \HippoPHP\Hippo\CheckResult;
 
 	/**
