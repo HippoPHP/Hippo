@@ -2,6 +2,7 @@
 
 	namespace HippoPHP\Hippo\Reporters;
 
+	use \HippoPHP\Hippo\FileSystem;
 	use \HippoPHP\Hippo\CheckResult;
 
 	/**
@@ -10,10 +11,15 @@
 	 * @author James Brooks <jbrooksuk@me.com>
 	 */
 	class CLIReporter implements ReporterInterface {
-		protected $firstFile;
+		private $_firstFile;
+		private $_fileSystem;
+
+		public function __construct() {
+			$this->_fileSystem = new FileSystem;
+		}
 
 		public function start() {
-			$this->firstFile = true;
+			$this->_firstFile = true;
 		}
 
 		/**
@@ -28,30 +34,34 @@
 				return;
 			}
 
-			if ($this->firstFile) {
-				$this->firstFile = false;
+			if ($this->_firstFile) {
+				$this->_firstFile = false;
 			} else {
-				echo PHP_EOL;
+				$this->_write(PHP_EOL);
 			}
 
-			echo $checkResult->getFile()->getFilename() . ':' . PHP_EOL;
-			echo str_repeat('-', 80) . PHP_EOL;
+			$this->_write($checkResult->getFile()->getFilename() . ':' . PHP_EOL);
+			$this->_write(str_repeat('-', 80) . PHP_EOL);
 
 			foreach ($violations as $violation) {
-				echo 'Line ' . $violation->getLine();
+				$this->_write('Line ' . $violation->getLine());
 
 				if ($violation->getColumn() > 0) {
-					echo ':' . $violation->getColumn();
+					$this->_write(':' . $violation->getColumn());
 				}
 
-				echo ' ('. $violation->getSeverityName() . ') : ';
-				echo $violation->getMessage() . PHP_EOL;
+				$this->_write(' ('. $violation->getSeverityName() . ') : ');
+				$this->_write($violation->getMessage() . PHP_EOL);
 			}
 
-			echo PHP_EOL;
+			$this->_write(PHP_EOL);
 			flush();
 		}
 
 		public function finish() {
+		}
+
+		private function _write($content) {
+			return $this->_fileSystem->putContent('php://stdout', $content);
 		}
 	}
