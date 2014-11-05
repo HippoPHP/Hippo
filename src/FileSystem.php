@@ -31,7 +31,7 @@
 		 * @return void
 		 */
 		public function putContent($path, $content) {
-			$isStream = strpos('php://', $path) !== 0;
+			$isStream = strpos($path, 'php://') !== FALSE;
 
 			if (!$isStream) {
 				if (file_exists($path) && is_dir($path)) {
