@@ -14,8 +14,11 @@
 		private $_firstFile;
 		private $_fileSystem;
 
-		public function __construct() {
-			$this->_fileSystem = new FileSystem;
+		/**
+		 * @param FileSystem $fileSystem
+		 */
+		public function __construct(FileSystem $fileSystem) {
+			$this->_fileSystem = $fileSystem;
 		}
 
 		public function start() {

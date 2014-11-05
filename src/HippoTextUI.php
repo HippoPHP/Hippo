@@ -112,7 +112,7 @@
 			// TODO:
 			// make this work with a family of --report options, that controls which reporter to use
 			// make this work with --quiet and --verbose also
-			$this->reporters[] = new CLIReporter;
+			$this->reporters[] = new CLIReporter($this->fileSystem);
 
 			// TODO:
 			// make this work with --standard

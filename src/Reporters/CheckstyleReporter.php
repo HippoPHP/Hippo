@@ -30,11 +30,17 @@
 
 		/**
 		 * Creates a new writer object, ready to write XML.
+		 * @param FileSystem $fileSystem
+		 */
+		public function __construct(FileSystem $fileSystem) {
+			$this->fileSystem = new FileSystem;
+		}
+
+		/**
 		 * @param string $filename
 		 */
-		public function __construct($filename) {
+		public function setFilename($fileName) {
 			$this->filename = $filename;
-			$this->fileSystem = new FileSystem;
 		}
 
 		public function start() {
