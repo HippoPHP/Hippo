@@ -12,6 +12,10 @@
 	class CLIReporter implements ReporterInterface {
 		protected $firstFile;
 
+		/**
+		 * Defined by ReportInterface.
+		 * @see ReportInterface::start()
+		 */
 		public function start() {
 			$this->firstFile = true;
 		}
@@ -52,6 +56,10 @@
 			flush();
 		}
 
+		/**
+		 * Defined by ReportInterface.
+		 * @see ReportInterface::finish()
+		 */
 		public function finish() {
 		}
 	}

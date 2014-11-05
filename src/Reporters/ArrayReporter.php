@@ -17,6 +17,10 @@
 		 */
 		protected $report = array();
 
+		/**
+		 * Defined by ReportInterface.
+		 * @see ReportInterface::start()
+		 */
 		public function start() {
 		}
 
@@ -43,6 +47,10 @@
 			}
 		}
 
+		/**
+		 * Defined by ReportInterface.
+		 * @see ReportInterface::finish()
+		 */
 		public function finish() {
 		}
 
@@ -50,6 +58,11 @@
 			return $this->report;
 		}
 
+		/**
+		 * Generates a key for a violation.
+		 * @param Violation $violation
+		 * @return string
+		 */
 		private function _getArrayKey(Violation $violation) {
 			return $violation->getFile()->getFilename() . ':' . $violation->getLine();
 		}

@@ -26,6 +26,12 @@
 		 */
 		protected $checkResult;
 
+		/**
+		 * Runs checks on the file
+		 * @param  File   $file
+		 * @param  Config $config
+		 * @return CheckResult
+		 */
 		public function checkFile(File $file, Config $config) {
 			$this->checkResult = new CheckResult();
 			$this->checkResult->setFile($file);

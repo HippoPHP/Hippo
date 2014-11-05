@@ -30,6 +30,10 @@
 			$this->filename = $filename;
 		}
 
+		/**
+		 * Defined by ReportInterface.
+		 * @see ReportInterface::start()
+		 */
 		public function start() {
 			$this->writer = new XMLWriter();
 			$this->writer->openUri($filename);
@@ -70,8 +74,8 @@
 		}
 
 		/**
-		 * Closes the file handles.
-		 * @return void
+		 * Defined by ReportInterface.
+		 * @see ReportInterface::finish()
 		 */
 		public function finish() {
 			$this->writer->endElement();

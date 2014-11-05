@@ -8,6 +8,10 @@
 	 * Reporters should inherit from this.
 	 */
 	interface ReporterInterface {
+		/**
+		 * Method called at the beginning of a check.
+		 * @return mixed
+		 */
 		public function start();
 
 		/**
@@ -17,5 +21,9 @@
 		 */
 		public function addCheckResult(CheckResult $checkResult);
 
+		/**
+		 * Method called at the end of a check.
+		 * @return mixed
+		 */
 		public function finish();
 	}
