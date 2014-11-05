@@ -22,8 +22,8 @@
 		const SHORT_OPTION_HELP = 'h';
 		const LONG_OPTION_VERSION = 'version';
 		const SHORT_OPTION_VERSION = 'v';
-		const LONG_OPTION_LOG_LEVELS = 'log';
-		const SHORT_OPTION_LOG_LEVELS = 'l';
+		const LONG_OPTION_LOG_SEVERITIES = 'log';
+		const SHORT_OPTION_LOG_SEVERITIES = 'l';
 
 		/**
 		 * @var ReportInterface[]
@@ -101,7 +101,7 @@
 		 * @return void
 		 */
 		protected function run() {
-			$loggedSeverityLevels = Violation::getSeverities();
+			$loggedSeverities = Violation::getSeverities();
 
 			foreach ($this->argOptions->getAllOptions() as $key => $value) {
 				switch ($key) {
@@ -119,9 +119,9 @@
 						$this->environment->shutdown();
 						break;
 
-					case self::SHORT_OPTION_LOG_LEVELS:
-					case self::LONG_OPTION_LOG_LEVELS:
-						$loggedSeverityLevels = $this->_getSeverityLevelsFromArgument($value);
+					case self::SHORT_OPTION_LOG_SEVERITIES:
+					case self::LONG_OPTION_LOG_SEVERITIES:
+						$loggedSeverities = $this->_getSeveritiesFromArgument($value);
 						break;
 
 					default:
@@ -235,16 +235,16 @@
 		 * @param string $arg
 		 * @return int[]
 		 */
-		private function _getSeverityLevelsFromArgument($arg) {
+		private function _getSeveritiesFromArgument($arg) {
 			$values = $this->_splitUserArgument($arg);
-			$severityLevels = [];
+			$severities = [];
 			foreach ($values as $value) {
 				$severity = Violation::getSeverityFromString($value);
 				if ($severity === null) {
 					throw new UnrecognizedOptionException('Unrecognized severity: ' . $value);
 				}
-				$severityLevels []= $severity;
+				$severities []= $severity;
 			}
-			return array_unique($severityLevels);
+			return array_unique($severities);
 		}
 	}
