@@ -32,7 +32,7 @@
 
 		public function start() {
 			$this->writer = new XMLWriter();
-			$this->writer->openUri($filename);
+			$this->writer->openUri($this->filename);
 			$this->writer->setIndent(true);
 			$this->writer->setIndentString('    ');
 
