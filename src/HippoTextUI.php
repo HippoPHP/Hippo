@@ -132,7 +132,9 @@
 			// TODO:
 			// make this work with a family of --report options, that controls which reporter to use
 			// make this work with --quiet and --verbose also
-			$this->reporters[] = new CLIReporter($this->fileSystem);
+			$cliReporter = new CLIReporter($this->fileSystem);
+			$cliReporter->setLoggedSeverities($loggedSeverities);
+			$this->reporters[] = $cliReporter;
 
 			// TODO:
 			// make this work with --standard
