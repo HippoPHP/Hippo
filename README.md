@@ -25,10 +25,10 @@ Compatible with PHP 5.4 and up.
     - [ ] PGS-2
     - [ ] Zend
     - [ ] PEAR
-- [ ] Configuration keys should allow flexibility in the naming pattern, it shouldn't matter so long as it is a valid name.
-    - [ ] camelCase
-    - [ ] snake_case
-    - [ ] PascalCase
+- [x] Configuration keys should allow flexibility in the naming pattern, it shouldn't matter so long as it is a valid name.
+    - [x] camelCase
+    - [x] snake_case
+    - [x] PascalCase
 - [X] Run as a binary with console output and as a library.
 - [ ] Switch to [semver](http://semver.org) versioning.
 
