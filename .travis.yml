@@ -1,9 +1,5 @@
 language: php
 
-cache:
-  directories:
-    - $COMPOSER_CACHE_DIR
-
 php:
   - 5.4
   - 5.5
