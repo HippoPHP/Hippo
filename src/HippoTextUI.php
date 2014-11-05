@@ -15,6 +15,7 @@
 	use \HippoPHP\Hippo\Reporters\CheckstyleReporter;
 
 	class HippoTextUI {
+		// TODO: Fetch the version from composer.json
 		const VERSION = '0.1.0';
 
 		const LONG_OPTION_HELP = 'help';
