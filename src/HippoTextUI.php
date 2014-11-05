@@ -121,7 +121,7 @@
 
 			$success = true;
 			$checkRunner = new CheckRunner($this->fileSystem, $this->checkRepository, $baseConfig);
-			
+
 			array_map(array($this, '_startReporter'), $this->reporters);
 			$checkRunner->setObserver(function(File $file, array $checkResults) use (&$success) {
 				$this->reportCheckResults($file, $checkResults);
@@ -135,7 +135,7 @@
 			foreach ($this->argOptions->getStrayArguments() as $strayArgument) {
 				$checkRunner->checkPath($strayArgument);
 			}
-			
+
 			array_map(array($this, '_finishReporter'), $this->reporters);
 
 			$this->environment->setExitCode($success ? 0 : 1);
