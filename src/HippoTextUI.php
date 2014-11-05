@@ -147,6 +147,7 @@
 		}
 
 		/**
+		 * Shows the help information.
 		 * @return void
 		 */
 		protected function showHelp() {
@@ -155,6 +156,10 @@
 					. "  -v, --version             Print version information\n";
 		}
 
+		/**
+		 * Shows the version information.
+		 * @return void
+		 */
 		protected function showVersion() {
 			echo "Hippo " . self::VERSION . "\n\n";
 		}
