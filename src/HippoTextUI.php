@@ -11,6 +11,7 @@
 	use \HippoPHP\Hippo\Config\ConfigReaderInterface;
 	use \HippoPHP\Hippo\Config\YAMLConfigReader;
 	use \HippoPHP\Hippo\Reporters\CLIReporter;
+	use \HippoPHP\Hippo\Reporters\CheckstyleReporter;
 
 	class HippoTextUI {
 		const VERSION = '0.1.0';
@@ -120,6 +121,8 @@
 
 			$success = true;
 			$checkRunner = new CheckRunner($this->fileSystem, $this->checkRepository, $baseConfig);
+			
+			array_map(array($this, '_startReporter'), $this->reporters);
 			$checkRunner->setObserver(function(File $file, array $checkResults) use (&$success) {
 				$this->reportCheckResults($file, $checkResults);
 				foreach ($checkResults as $checkResult) {
@@ -128,9 +131,12 @@
 					}
 				}
 			});
+
 			foreach ($this->argOptions->getStrayArguments() as $strayArgument) {
 				$checkRunner->checkPath($strayArgument);
 			}
+			
+			array_map(array($this, '_finishReporter'), $this->reporters);
 
 			$this->environment->setExitCode($success ? 0 : 1);
 			$this->environment->shutdown();
@@ -157,11 +163,9 @@
 			echo 'Checking ' . $file->getFilename() . PHP_EOL;
 
 			foreach ($this->reporters as $reporter) {
-				$reporter->start();
 				foreach ($checkResults as $checkResult) {
 					$reporter->addCheckResult($checkResult);
 				}
-				$reporter->finish();
 			}
 		}
 
@@ -173,5 +177,23 @@
 			return __DIR__ . DIRECTORY_SEPARATOR
 				. 'Standards' . DIRECTORY_SEPARATOR
 				. $standardName . '.yml';
+		}
+
+		/**
+		 * Starts the reporter. Can be used for setup.
+		 * @param  ReporterInterface $reporter
+		 * @return mixed
+		 */
+		private function _startReporter(&$reporter) {
+			return $reporter->start();
+		}
+
+		/**
+		 * Finishes the reporter. Usually used for cleanups.
+		 * @param  ReporterInterface $reporter
+		 * @return mixed
+		 */
+		private function _finishReporter(&$reporter) {
+			return $reporter->finish();
 		}
 	}
