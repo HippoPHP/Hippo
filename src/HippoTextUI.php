@@ -9,6 +9,7 @@
 	use \HippoPHP\Hippo\Exception;
 	use \HippoPHP\Hippo\Exception\UnrecognizedOptionException;
 	use \HippoPHP\Hippo\FileSystem;
+	use \HippoPHP\Hippo\Violation;
 	use \HippoPHP\Hippo\Config\ConfigReaderInterface;
 	use \HippoPHP\Hippo\Config\YAMLConfigReader;
 	use \HippoPHP\Hippo\Reporters\CLIReporter;
@@ -21,6 +22,8 @@
 		const SHORT_OPTION_HELP = 'h';
 		const LONG_OPTION_VERSION = 'version';
 		const SHORT_OPTION_VERSION = 'v';
+		const LONG_OPTION_LOG_LEVELS = 'log';
+		const SHORT_OPTION_LOG_LEVELS = 'l';
 
 		/**
 		 * @var ReportInterface[]
@@ -98,6 +101,8 @@
 		 * @return void
 		 */
 		protected function run() {
+			$loggedSeverityLevels = Violation::getSeverities();
+
 			foreach ($this->argOptions->getAllOptions() as $key => $value) {
 				switch ($key) {
 					case self::SHORT_OPTION_HELP:
@@ -112,6 +117,11 @@
 						$this->showVersion();
 						$this->environment->setExitCode(0);
 						$this->environment->shutdown();
+						break;
+
+					case self::SHORT_OPTION_LOG_LEVELS:
+					case self::LONG_OPTION_LOG_LEVELS:
+						$loggedSeverityLevels = $this->_getSeverityLevelsFromArgument($value);
 						break;
 
 					default:
@@ -211,5 +221,30 @@
 		 */
 		private function _finishReporter(&$reporter) {
 			return $reporter->finish();
+		}
+
+		/**
+		 * @param string $arg
+		 * @return string[]
+		 */
+		private function _splitUserArgument($arg) {
+			return preg_split('/[\s,;]+/', $arg);
+		}
+
+		/**
+		 * @param string $arg
+		 * @return int[]
+		 */
+		private function _getSeverityLevelsFromArgument($arg) {
+			$values = $this->_splitUserArgument($arg);
+			$severityLevels = [];
+			foreach ($values as $value) {
+				$severity = Violation::getSeverityFromString($value);
+				if ($severity === null) {
+					throw new UnrecognizedOptionException('Unrecognized severity: ' . $value);
+				}
+				$severityLevels []= $severity;
+			}
+			return array_unique($severityLevels);
 		}
 	}
