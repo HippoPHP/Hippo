@@ -153,6 +153,10 @@
 			return null;
 		}
 
+		/**
+		 * Array of severity levels to the severity name.
+		 * @return array
+		 */
 		private function _getSeverityNames() {
 			return array(
 				self::SEVERITY_IGNORE => 'ignore',

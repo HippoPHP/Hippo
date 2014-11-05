@@ -35,6 +35,10 @@
 			return $this->_checks;
 		}
 
+		/**
+		 * If the checks haven't been ran, then we need to run them.
+		 * @return void
+		 */
 		private function _buildIfNecessary() {
 			if (!$this->_hasBeenBuilt) {
 				$this->_build();
@@ -42,6 +46,10 @@
 			}
 		}
 
+		/**
+		 * Builds a list of checks to run.
+		 * @return void
+		 */
 		private function _build() {
 			foreach ($this->_fileSystem->getAllFiles($this->_getRootDirectory(), '/^.*\.php$/') as $filePath) {
 				require_once($filePath);
@@ -57,10 +65,19 @@
 			}
 		}
 
+		/**
+		 * Returns the root checks directory.
+		 * @return string
+		 */
 		private function _getRootDirectory() {
 			return __DIR__ . DIRECTORY_SEPARATOR . 'Checks';
 		}
 
+		/**
+		 * Determines whether a "check" does indeed implement CheckInterface.
+		 * @param  ReflectionClass $reflectionClass
+		 * @return bool
+		 */
 		private function _canInstantiate(ReflectionClass $reflectionClass) {
 			return $reflectionClass->implementsInterface('\HippoPHP\Hippo\Checks\CheckInterface')
 				&& !$reflectionClass->isInterface()

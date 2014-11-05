@@ -89,6 +89,10 @@
 			return count($this->violations);
 		}
 
+		/**
+		 * Resorts the violations array if it's been changed.
+		 * @return void
+		 */
 		private function _processViolationsIfDirty() {
 			if ($this->violationsDirty) {
 				$this->_sortViolations();
@@ -96,6 +100,10 @@
 			}
 		}
 
+		/**
+		 * Sorts the violations by line then column.
+		 * @return void
+		 */
 		private function _sortViolations() {
 			usort($this->violations, function(Violation $a, Violation $b) {
 				if ($a->getLine() === $b->getLine()) {
