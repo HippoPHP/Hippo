@@ -18,10 +18,18 @@ if (!defined('HIPPO_COMPOSER_INSTALL')) {
 require HIPPO_COMPOSER_INSTALL;
 
 use \HippoPHP\Hippo\HippoTextUI;
+use \HippoPHP\Hippo\Exception\UnrecognizedOptionException;
 use \HippoPHP\Hippo\Exception\ShutdownException;
+
+function handleGenericError(\Exception $e) {
+	echo $e->getMessage() . PHP_EOL;
+	exit(1);
+}
 
 try {
 	HippoTextUI::main(isset($_SERVER['argv']) ? $_SERVER['argv'] : FALSE);
+} catch (UnrecognizedOptionException $e) {
+	handleGenericError($e);
 } catch (ShutdownException $e) {
 	exit($e->getExitCode());
 }

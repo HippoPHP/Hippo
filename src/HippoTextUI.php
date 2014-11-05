@@ -7,6 +7,7 @@
 	use \HippoPHP\Hippo\CheckRepository;
 	use \HippoPHP\Hippo\CheckRunner;
 	use \HippoPHP\Hippo\Exception;
+	use \HippoPHP\Hippo\Exception\UnrecognizedOptionException;
 	use \HippoPHP\Hippo\FileSystem;
 	use \HippoPHP\Hippo\Config\ConfigReaderInterface;
 	use \HippoPHP\Hippo\Config\YAMLConfigReader;
@@ -96,16 +97,25 @@
 		 * @return void
 		 */
 		protected function run() {
-			if ($this->argOptions->getLongOption(self::LONG_OPTION_HELP) === true ||
-				$this->argOptions->getShortOption(self::SHORT_OPTION_HELP) === true) {
-				$this->showHelp();
-				$this->environment->setExitCode(0);
-				$this->environment->shutdown();
-			} elseif ($this->argOptions->getLongOption(self::LONG_OPTION_VERSION) === true ||
-				$this->argOptions->getShortOption(self::SHORT_OPTION_VERSION) === true) {
-				$this->showVersion();
-				$this->environment->setExitCode(0);
-				$this->environment->shutdown();
+			foreach ($this->argOptions->getAllOptions() as $key => $value) {
+				switch ($key) {
+					case self::SHORT_OPTION_HELP:
+					case self::LONG_OPTION_HELP:
+						$this->showHelp();
+						$this->environment->setExitCode(0);
+						$this->environment->shutdown();
+						break;
+
+					case self::SHORT_OPTION_VERSION:
+					case self::LONG_OPTION_VERSION:
+						$this->showVersion();
+						$this->environment->setExitCode(0);
+						$this->environment->shutdown();
+						break;
+
+					default:
+						throw new UnrecognizedOptionException('Unrecognized option: ' . $key);
+				}
 			}
 
 			// TODO:

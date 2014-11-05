@@ -44,4 +44,10 @@
 			$this->argOptions->setLongOption('option', 'value');
 			$this->assertEquals(['option' => 'value'], $this->argOptions->getLongOptions());
 		}
+
+		public function testGetAllOptions() {
+			$this->argOptions->setShortOption('o', 'value');
+			$this->argOptions->setLongOption('option', 'value');
+			$this->assertEquals(['o' => 'value', 'option' => 'value'], $this->argOptions->getAllOptions());
+		}
 	}

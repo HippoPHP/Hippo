@@ -79,4 +79,11 @@
 		public function getShortOptions() {
 			return $this->_shortOptions;
 		}
+
+		/**
+		 * @return array
+		 */
+		public function getAllOptions() {
+			return array_merge($this->_longOptions, $this->_shortOptions);
+		}
 	}
