@@ -30,7 +30,7 @@ Compatible with PHP 5.4 and up.
     - [x] snake_case
     - [x] PascalCase
 - [X] Run as a binary with console output and as a library.
-- [ ] Switch to [semver](http://semver.org) versioning.
+- [x] Switch to [semver](http://semver.org) versioning.
 
 # License
 See [LICENSE](/LICENSE.txt)
