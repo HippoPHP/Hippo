@@ -181,6 +181,7 @@
 		}
 
 		/**
+		 * Returns the absolute path for a standards file.
 		 * @param string
 		 * @return string
 		 */
