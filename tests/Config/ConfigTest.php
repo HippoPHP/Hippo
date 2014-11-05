@@ -1,6 +1,6 @@
 <?php
 
-	namespace HippoPHP\Hippo\Tests;
+	namespace HippoPHP\Hippo\Tests\Config;
 
 	use \HippoPHP\Hippo\Config\Config;
 	use \HippoPHP\Hippo\Exception\BadConfigKeyException;
