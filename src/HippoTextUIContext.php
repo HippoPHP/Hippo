@@ -26,11 +26,18 @@
 		const SHORT_OPTION_VERSION = 'v';
 		const LONG_OPTION_LOG_SEVERITIES = 'log';
 		const SHORT_OPTION_LOG_SEVERITIES = 'l';
+		const SHORT_OPTION_STRICT_MODE = 's';
+		const LONG_OPTION_STRICT_MODE = 'strict';
 
 		/**
 		 * @var int
 		 */
 		private $_action = self::ACTION_UNKNOWN;
+
+		/**
+		 * @var boolean
+		 */
+		private $_strictModeEnabled = false;
 
 		/**
 		 * @var int[]
@@ -86,6 +93,13 @@
 		}
 
 		/**
+		 * @return boolean
+		 */
+		public function hasStrictModeEnabled() {
+			return $this->_strictModeEnabled;
+		}
+
+		/**
 		 * @param string $arg
 		 * @return int[]
 		 */
@@ -124,6 +138,11 @@
 						$this->_loggedSeverities = $this->_getSeveritiesFromArgument($value);
 						break;
 
+					case self::SHORT_OPTION_STRICT_MODE:
+					case self::LONG_OPTION_STRICT_MODE:
+						$this->_strictModeEnabled = $this->_getFlagValue($value);
+						break;
+
 					// TODO:
 					// --strict
 					// --quiet
@@ -152,5 +171,13 @@
 		 */
 		private function _splitUserArgument($arg) {
 			return preg_split('/[\s,;]+/', $arg);
+		}
+
+		/**
+		 * @param mixed $arg
+		 * @return boolean
+		 */
+		private function _getFlagValue($arg) {
+			return $arg === null ? true : boolval($arg);
 		}
 	}
