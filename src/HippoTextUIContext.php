@@ -2,7 +2,7 @@
 
 	namespace HippoPHP\Hippo;
 
-	use \HippoPHP\Hippo\ArgOptions;
+	use \HippoPHP\Hippo\ArgContainer;
 	use \HippoPHP\Hippo\ArgParser;
 	use \HippoPHP\Hippo\FileSystem;
 	use \HippoPHP\Hippo\Violation;
@@ -12,7 +12,7 @@
 
 	/**
 	 * Helper class for HippoTextUI, that acts as an object factory
-	 * and encapsulates all the program options by reading ArgOptions.
+	 * and encapsulates all the program options by reading ArgContainer.
 	 * @see HippoTextUI
 	 */
 	class HippoTextUIContext {
@@ -63,11 +63,11 @@
 			$argParserOptions->markFlag('quiet');
 			$argParserOptions->markFlag('verbose');
 			$argParserOptions->markFlag('strict');
-			$argOptions = ArgParser::parse($args, $argParserOptions);
+			$argContainer = ArgParser::parse($args, $argParserOptions);
 
 			$this->_loggedSeverities = Violation::getSeverities();
 
-			$this->_parseArgOptions($argOptions);
+			$this->_processArgContainer($argContainer);
 
 			$cliReporter = new CLIReporter($fileSystem);
 			$cliReporter->setLoggedSeverities($this->_loggedSeverities);
@@ -119,11 +119,11 @@
 		}
 
 		/**
-		 * @param ArgOptions $argOptions
+		 * @param ArgContainer $argContainer
 		 * @return void
 		 */
-		private function _parseArgOptions(ArgOptions $argOptions) {
-			foreach ($argOptions->getAllOptions() as $key => $value) {
+		private function _processArgContainer(ArgContainer $argContainer) {
+			foreach ($argContainer->getAllOptions() as $key => $value) {
 				switch ($key) {
 					case 'help':
 					case 'h':
@@ -163,7 +163,7 @@
 				}
 			}
 
-			foreach ($argOptions->getStrayArguments() as $strayArgument) {
+			foreach ($argContainer->getStrayArguments() as $strayArgument) {
 				$this->_pathsToCheck[] = $strayArgument;
 			}
 
