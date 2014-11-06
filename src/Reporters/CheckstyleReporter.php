@@ -33,7 +33,7 @@
 		 * @param FileSystem $fileSystem
 		 */
 		public function __construct(FileSystem $fileSystem) {
-			$this->fileSystem = new FileSystem;
+			$this->fileSystem = $fileSystem;
 		}
 
 		/**

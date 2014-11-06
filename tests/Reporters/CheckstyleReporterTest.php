@@ -12,7 +12,12 @@
 			$reporter->setFilename('checkstyle.xml');
 			$reporter->start();
 			$reporter->finish();
-			$this->assertEquals('', $this->getSavedContent());
+			$expectedLines = <<<EXML
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.5"/>
+
+EXML;
+			$this->assertEquals($expectedLines, $this->getSavedContent());
 		}
 
 		public function testReportWithNoViolations() {
@@ -21,10 +26,17 @@
 			$reporter->start();
 			$reporter->addCheckResult($this->getEmptyCheckResult('whatever.php'));
 			$reporter->finish();
-			$this->assertEquals('', $this->getSavedContent());
+			$expectedLines = <<<EXML
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.5">
+    <file name="whatever.php"/>
+</checkstyle>
+
+EXML;
+			$this->assertEquals($expectedLines, $this->getSavedContent());
 		}
 
-		/*public function testBasicReport() {
+		public function testBasicReport() {
 			$reporter = new CheckstyleReporter($this->fileSystemMock);
 			$reporter->setFilename('checkstyle.xml');
 			$reporter->start();
@@ -39,14 +51,10 @@
         <error line="2" column="5" severity="2" message="second message" source="&lt;?php"/>
         <error line="3" column="6" severity="3" message="third message" source="&lt;?php"/>
     </file>
-    <file name="anotherfile.php">
-        <error line="1" column="4" severity="1" message="first message" source="&lt;?php"/>
-        <error line="2" column="5" severity="2" message="second message" source="&lt;?php"/>
-        <error line="3" column="6" severity="3" message="third message" source="&lt;?php"/>
-    </file>
 </checkstyle>
+
 EXML;
 
 			$this->assertEquals($expectedLines, $this->getSavedContent());
-		}*/
+		}
 	}
