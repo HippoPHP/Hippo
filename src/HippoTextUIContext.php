@@ -35,12 +35,12 @@
 		/**
 		 * @var int[]
 		 */
-		private $_loggedSeverities;
+		private $_loggedSeverities = [];
 
 		/**
 		 * @var ReportInterface[]
 		 */
-		private $_reporters;
+		private $_reporters = [];
 
 		/**
 		 * @var string[]
