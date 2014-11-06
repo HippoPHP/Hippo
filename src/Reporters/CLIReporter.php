@@ -45,16 +45,22 @@
 		 * @param CheckResult $checkResult
 		 */
 		public function addCheckResult(CheckResult $checkResult) {
-			$violations = $this->_getFilteredViolations($checkResult->getViolations());
-
-			if (!$violations) {
+			if (empty($this->_loggedSeverities)) {
 				return;
 			}
+
+			$violations = $this->_getFilteredViolations($checkResult->getViolations());
 
 			if ($this->_firstFile) {
 				$this->_firstFile = false;
 			} else {
 				$this->_write(PHP_EOL);
+			}
+
+			$this->_write('Checking ' . $checkResult->getFile()->getFilename() . PHP_EOL);
+
+			if (!$violations) {
+				return;
 			}
 
 			$this->_write($checkResult->getFile()->getFilename() . ':' . PHP_EOL);

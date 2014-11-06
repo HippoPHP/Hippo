@@ -175,8 +175,6 @@
 		 * @return void
 		 */
 		protected function reportCheckResults(array $reporters, File $file, array $checkResults) {
-			echo 'Checking ' . $file->getFilename() . PHP_EOL;
-
 			foreach ($reporters as $reporter) {
 				foreach ($checkResults as $checkResult) {
 					$reporter->addCheckResult($checkResult);

@@ -20,6 +20,15 @@
 			$reporter->start();
 			$reporter->addCheckResult($this->getEmptyCheckResult('whatever.php'));
 			$reporter->finish();
+			$this->assertEquals('Checking whatever.php' . PHP_EOL, $this->getSavedContent());
+		}
+
+		public function testSilentReport() {
+			$reporter = new CLIReporter($this->fileSystemMock);
+			$reporter->setLoggedSeverities([]);
+			$reporter->start();
+			$reporter->addCheckResult($this->getEmptyCheckResult('whatever.php'));
+			$reporter->finish();
 			$this->assertEquals('', $this->getSavedContent());
 		}
 
@@ -31,6 +40,7 @@
 			$reporter->finish();
 
 			$expectedLines = [
+				'Checking whatever.php',
 				'whatever.php:',
 				'--------------------------------------------------------------------------------',
 				'Line 1:4 (info) : first message',
@@ -49,6 +59,7 @@
 			$reporter->finish();
 
 			$expectedLines = [
+				'Checking whatever.php',
 				'whatever.php:',
 				'--------------------------------------------------------------------------------',
 				'Line 1:4 (info) : first message',
@@ -69,6 +80,7 @@
 			$reporter->finish();
 
 			$expectedLines = [
+				'Checking whatever.php',
 				'whatever.php:',
 				'--------------------------------------------------------------------------------',
 				'Line 1:4 (info) : first message',
@@ -76,6 +88,7 @@
 				'Line 3:6 (error) : third message',
 				'',
 				'',
+				'Checking anotherfile.php',
 				'anotherfile.php:',
 				'--------------------------------------------------------------------------------',
 				'Line 1:4 (info) : first message',
