@@ -45,6 +45,9 @@
             "HippoPHP\\Hippo\\Tests\\": "tests/"
         }
     },
+    "bin": [
+        "hippo"
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }
