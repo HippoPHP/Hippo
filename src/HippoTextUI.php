@@ -13,8 +13,6 @@
 	use \HippoPHP\Hippo\HippoTextUIContext;
 
 	class HippoTextUI {
-		const VERSION = '0.1.0';
-
 		/**
 		 * @var CheckRepository
 		 */
@@ -167,7 +165,7 @@
 		 * @return void
 		 */
 		protected function showVersion() {
-			echo "Hippo " . self::VERSION . "\n\n";
+			echo "Hippo " . $this->_getPackageVersion() . "\n\n";
 		}
 
 		/**
@@ -213,5 +211,26 @@
 		 */
 		private function _finishReporter(&$reporter) {
 			return $reporter->finish();
+		}
+
+		/**
+		 * Returns the package version number for Hippo via composer.json
+		 * @return string
+		 */
+		private function _getPackageVersion() {
+			$content = file_get_contents($this->_getComposerPath());
+			$package = json_decode($content);
+
+			return $package->version;
+		}
+
+		/**
+		 * Returns the absolute path for composer.json
+		 * @return string
+		 */
+		private function _getComposerPath() {
+			return __DIR__ . DIRECTORY_SEPARATOR
+				. '..' . DIRECTORY_SEPARATOR
+				. 'composer.json';
 		}
 	}
