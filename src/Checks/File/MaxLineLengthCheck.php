@@ -92,7 +92,7 @@
 						$file,
 						$line,
 						0,
-						sprintf('Line is longer than %d characters.', $this->limits[$severity]),
+						sprintf('Line is too long. [%d/%d]', $lineLength, $this->limits[$severity]),
 						$severity
 					);
 				}
