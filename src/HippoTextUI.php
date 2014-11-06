@@ -6,29 +6,14 @@
 	use \HippoPHP\Hippo\ArgParser;
 	use \HippoPHP\Hippo\CheckRepository;
 	use \HippoPHP\Hippo\CheckRunner;
-	use \HippoPHP\Hippo\Exception;
-	use \HippoPHP\Hippo\Exception\UnrecognizedOptionException;
-	use \HippoPHP\Hippo\FileSystem;
-	use \HippoPHP\Hippo\Violation;
 	use \HippoPHP\Hippo\Config\ConfigReaderInterface;
 	use \HippoPHP\Hippo\Config\YAMLConfigReader;
-	use \HippoPHP\Hippo\Reporters\CLIReporter;
-	use \HippoPHP\Hippo\Reporters\CheckstyleReporter;
+	use \HippoPHP\Hippo\Exception;
+	use \HippoPHP\Hippo\FileSystem;
+	use \HippoPHP\Hippo\HippoTextUIContext;
 
 	class HippoTextUI {
 		const VERSION = '0.1.0';
-
-		const LONG_OPTION_HELP = 'help';
-		const SHORT_OPTION_HELP = 'h';
-		const LONG_OPTION_VERSION = 'version';
-		const SHORT_OPTION_VERSION = 'v';
-		const LONG_OPTION_LOG_SEVERITIES = 'log';
-		const SHORT_OPTION_LOG_SEVERITIES = 'l';
-
-		/**
-		 * @var ReportInterface[]
-		 */
-		protected $reporters;
 
 		/**
 		 * @var CheckRepository
@@ -101,41 +86,35 @@
 		 * @return void
 		 */
 		protected function run() {
-			$loggedSeverities = Violation::getSeverities();
+			$context = new HippoTextUIContext($this->fileSystem, $this->argOptions);
 
-			foreach ($this->argOptions->getAllOptions() as $key => $value) {
-				switch ($key) {
-					case self::SHORT_OPTION_HELP:
-					case self::LONG_OPTION_HELP:
-						$this->showHelp();
-						$this->environment->setExitCode(0);
-						$this->environment->shutdown();
-						break;
+			switch ($context->getAction()) {
+				case HippoTextUIContext::ACTION_HELP:
+					$this->showHelp();
+					$this->environment->setExitCode(0);
+					$this->environment->shutdown();
+					break;
 
-					case self::SHORT_OPTION_VERSION:
-					case self::LONG_OPTION_VERSION:
-						$this->showVersion();
-						$this->environment->setExitCode(0);
-						$this->environment->shutdown();
-						break;
+				case HippoTextUIContext::ACTION_VERSION:
+					$this->showVersion();
+					$this->environment->setExitCode(0);
+					$this->environment->shutdown();
+					break;
 
-					case self::SHORT_OPTION_LOG_SEVERITIES:
-					case self::LONG_OPTION_LOG_SEVERITIES:
-						$loggedSeverities = $this->_getSeveritiesFromArgument($value);
-						break;
+				case HippoTextUIContext::ACTION_CHECK:
+					$this->runChecks($context);
+					break;
 
-					default:
-						throw new UnrecognizedOptionException('Unrecognized option: ' . $key);
-				}
+				default:
+					throw new Exception('Unrecognized action');
 			}
+		}
 
-			// TODO:
-			// make this work with a family of --report options, that controls which reporter to use
-			// make this work with --quiet and --verbose also
-			$cliReporter = new CLIReporter($this->fileSystem);
-			$cliReporter->setLoggedSeverities($loggedSeverities);
-			$this->reporters[] = $cliReporter;
-
+		/**
+		 * @param HippoTextUIContext $context
+		 * @return void
+		 */
+		protected function runChecks(HippoTextUIContext $context) {
 			// TODO:
 			// make this work with --standard
 			$standardName = 'base';
@@ -144,9 +123,9 @@
 			$success = true;
 			$checkRunner = new CheckRunner($this->fileSystem, $this->checkRepository, $baseConfig);
 
-			array_map(array($this, '_startReporter'), $this->reporters);
-			$checkRunner->setObserver(function(File $file, array $checkResults) use (&$success) {
-				$this->reportCheckResults($file, $checkResults);
+			array_map(array($this, '_startReporter'), $context->getReporters());
+			$checkRunner->setObserver(function(File $file, array $checkResults) use ($context, &$success) {
+				$this->reportCheckResults($context->getReporters(), $file, $checkResults);
 				foreach ($checkResults as $checkResult) {
 					if ($checkResult->hasFailed()) {
 						$success = false;
@@ -154,11 +133,11 @@
 				}
 			});
 
-			foreach ($this->argOptions->getStrayArguments() as $strayArgument) {
-				$checkRunner->checkPath($strayArgument);
+			foreach ($context->getPathsToCheck() as $path) {
+				$checkRunner->checkPath($path);
 			}
 
-			array_map(array($this, '_finishReporter'), $this->reporters);
+			array_map(array($this, '_finishReporter'), $context->getReporters());
 
 			$this->environment->setExitCode($success ? 0 : 1);
 			$this->environment->shutdown();
@@ -183,13 +162,15 @@
 		}
 
 		/**
-		 * @param CheckResult[]
+		 * @param ReporterInterface[] $reporters
+		 * @param File $file
+		 * @param CheckResult[] $checkResults
 		 * @return void
 		 */
-		protected function reportCheckResults(File $file, array $checkResults) {
+		protected function reportCheckResults(array $reporters, File $file, array $checkResults) {
 			echo 'Checking ' . $file->getFilename() . PHP_EOL;
 
-			foreach ($this->reporters as $reporter) {
+			foreach ($reporters as $reporter) {
 				foreach ($checkResults as $checkResult) {
 					$reporter->addCheckResult($checkResult);
 				}
@@ -223,30 +204,5 @@
 		 */
 		private function _finishReporter(&$reporter) {
 			return $reporter->finish();
-		}
-
-		/**
-		 * @param string $arg
-		 * @return string[]
-		 */
-		private function _splitUserArgument($arg) {
-			return preg_split('/[\s,;]+/', $arg);
-		}
-
-		/**
-		 * @param string $arg
-		 * @return int[]
-		 */
-		private function _getSeveritiesFromArgument($arg) {
-			$values = $this->_splitUserArgument($arg);
-			$severities = [];
-			foreach ($values as $value) {
-				$severity = Violation::getSeverityFromString($value);
-				if ($severity === null) {
-					throw new UnrecognizedOptionException('Unrecognized severity: ' . $value);
-				}
-				$severities []= $severity;
-			}
-			return array_unique($severities);
 		}
 	}
