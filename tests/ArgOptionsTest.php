@@ -4,7 +4,7 @@
 
 	use \HippoPHP\Hippo\ArgOptions;
 
-	class ArgOptionsText extends \PHPUnit_Framework_TestCase {
+	class ArgOptionsTest extends \PHPUnit_Framework_TestCase {
 		protected $argOptions;
 
 		public function setUp() {
