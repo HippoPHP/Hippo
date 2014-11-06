@@ -62,6 +62,19 @@
 		}
 
 		/**
+		 * @return int|null
+		 */
+		public function getMaximumViolationSeverity() {
+			$ret = null;
+			foreach ($this->violations as $violation) {
+				if (($ret === null) || ($violation->getSeverity() > $ret)) {
+					$ret = $violation->getSeverity();
+				}
+			}
+			return $ret;
+		}
+
+		/**
 		 * @param Violation $violation
 		 * @return void
 		 */

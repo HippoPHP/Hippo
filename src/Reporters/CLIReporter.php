@@ -4,6 +4,7 @@
 
 	use \HippoPHP\Hippo\FileSystem;
 	use \HippoPHP\Hippo\CheckResult;
+	use \HippoPHP\Hippo\Violation;
 
 	/**
 	 * CLI Reporter.
@@ -13,12 +14,21 @@
 	class CLIReporter implements ReporterInterface {
 		private $_firstFile;
 		private $_fileSystem;
+		private $_loggedSeverities;
 
 		/**
 		 * @param FileSystem $fileSystem
 		 */
 		public function __construct(FileSystem $fileSystem) {
 			$this->_fileSystem = $fileSystem;
+			$this->_loggedSeverities = Violation::getSeverities();
+		}
+
+		/**
+		 * @param int[] $severities
+		 */
+		public function setLoggedSeverities(array $severities) {
+			$this->_loggedSeverities = $severities;
 		}
 
 		/**
@@ -35,16 +45,22 @@
 		 * @param CheckResult $checkResult
 		 */
 		public function addCheckResult(CheckResult $checkResult) {
-			$violations = $checkResult->getViolations();
-
-			if (!$violations) {
+			if (empty($this->_loggedSeverities)) {
 				return;
 			}
+
+			$violations = $this->_getFilteredViolations($checkResult->getViolations());
 
 			if ($this->_firstFile) {
 				$this->_firstFile = false;
 			} else {
 				$this->_write(PHP_EOL);
+			}
+
+			$this->_write('Checking ' . $checkResult->getFile()->getFilename() . PHP_EOL);
+
+			if (!$violations) {
+				return;
 			}
 
 			$this->_write($checkResult->getFile()->getFilename() . ':' . PHP_EOL);
@@ -74,5 +90,15 @@
 
 		private function _write($content) {
 			return $this->_fileSystem->putContent('php://stdout', $content);
+		}
+
+		/**
+		 * @param Violation[] $violations
+		 * @return Violation[]
+		 */
+		private function _getFilteredViolations(array $violations) {
+			return array_filter($violations, function($violation) {
+				return in_array($violation->getSeverity(), $this->_loggedSeverities);
+			});
 		}
 	}

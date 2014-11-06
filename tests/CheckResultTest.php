@@ -46,6 +46,21 @@
 			$this->assertFalse($this->instance->hasSucceeded());
 		}
 
+		public function testEmptyMaximumViolationSeverity() {
+			$this->assertNull($this->instance->getMaximumViolationSeverity());
+		}
+
+		public function testMaximumViolationSeverity() {
+			$file = new File('test.php', '<? echo 1; ?>');
+			$violation1 = new Violation($file, 1, 1, Violation::SEVERITY_INFO, 'Do not use short opening tags.', '<?');
+			$this->instance->addViolation($violation1);
+
+			$violation2 = new Violation($file, 1, 1, Violation::SEVERITY_WARNING, 'Do not use short opening tags.', '<?');
+			$this->instance->addViolation($violation2);
+
+			$this->assertEquals(Violation::SEVERITY_WARNING, $this->instance->getMaximumViolationSeverity());
+		}
+
 		/**
 		 * @dataProvider violationOrderProvider
 		 */

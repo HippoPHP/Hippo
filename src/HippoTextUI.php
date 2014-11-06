@@ -2,38 +2,24 @@
 
 	namespace HippoPHP\Hippo;
 
-	use \HippoPHP\Hippo\ArgOptions;
-	use \HippoPHP\Hippo\ArgParser;
 	use \HippoPHP\Hippo\CheckRepository;
 	use \HippoPHP\Hippo\CheckRunner;
-	use \HippoPHP\Hippo\Exception;
-	use \HippoPHP\Hippo\Exception\UnrecognizedOptionException;
-	use \HippoPHP\Hippo\FileSystem;
 	use \HippoPHP\Hippo\Config\ConfigReaderInterface;
 	use \HippoPHP\Hippo\Config\YAMLConfigReader;
-	use \HippoPHP\Hippo\Reporters\CLIReporter;
-	use \HippoPHP\Hippo\Reporters\CheckstyleReporter;
+	use \HippoPHP\Hippo\Exception;
+	use \HippoPHP\Hippo\FileSystem;
+	use \HippoPHP\Hippo\HippoTextUIContext;
 
 	class HippoTextUI {
-		const LONG_OPTION_HELP = 'help';
-		const SHORT_OPTION_HELP = 'h';
-		const LONG_OPTION_VERSION = 'version';
-		const SHORT_OPTION_VERSION = 'v';
-
-		/**
-		 * @var ReportInterface[]
-		 */
-		protected $reporters;
-
 		/**
 		 * @var CheckRepository
 		 */
 		protected $checkRepository;
 
 		/**
-		 * @var ArgOptions
+		 * @var HippoTextUIContext
 		 */
-		protected $argOptions;
+		protected $context;
 
 		/**
 		 * @var string
@@ -50,7 +36,7 @@
 		 * @param FileSystem $fileSystem
 		 * @param CheckRepository $checkRepository
 		 * @param string $pathToSelf
-		 * @param ArgOptions $argOptions
+		 * @param HippoTextUIContext $context
 		 * @return void
 		 */
 		public function __construct(
@@ -59,14 +45,14 @@
 			CheckRepository $checkRepository,
 			ConfigReaderInterface $configReader,
 			$pathToSelf,
-			ArgOptions $argOptions
+			HippoTextUIContext $context
 		) {
 			$this->environment = $environment;
 			$this->fileSystem = $fileSystem;
 			$this->checkRepository = $checkRepository;
 			$this->configReader = $configReader;
 			$this->pathToSelf = $pathToSelf;
-			$this->argOptions = $argOptions;
+			$this->context = $context;
 		}
 
 		/**
@@ -81,13 +67,16 @@
 			$configReader = new YAMLConfigReader($fileSystem);
 			$checkRepository = new CheckRepository($fileSystem);
 
+			$pathToSelf = array_shift($args);
+			$context = new HippoTextUIContext($fileSystem, $args);
+
 			$hippoTextUi = new self(
 				$environment,
 				$fileSystem,
 				$checkRepository,
 				$configReader,
-				array_shift($args),
-				ArgParser::parse($args));
+				$pathToSelf,
+				$context);
 
 			$hippoTextUi->run();
 		}
@@ -96,55 +85,57 @@
 		 * @return void
 		 */
 		protected function run() {
-			foreach ($this->argOptions->getAllOptions() as $key => $value) {
-				switch ($key) {
-					case self::SHORT_OPTION_HELP:
-					case self::LONG_OPTION_HELP:
-						$this->showHelp();
-						$this->environment->setExitCode(0);
-						$this->environment->shutdown();
-						break;
+			switch ($this->context->getAction()) {
+				case HippoTextUIContext::ACTION_HELP:
+					$this->showHelp();
+					$this->environment->setExitCode(0);
+					$this->environment->shutdown();
+					break;
 
-					case self::SHORT_OPTION_VERSION:
-					case self::LONG_OPTION_VERSION:
-						$this->showVersion();
-						$this->environment->setExitCode(0);
-						$this->environment->shutdown();
-						break;
+				case HippoTextUIContext::ACTION_VERSION:
+					$this->showVersion();
+					$this->environment->setExitCode(0);
+					$this->environment->shutdown();
+					break;
 
-					default:
-						throw new UnrecognizedOptionException('Unrecognized option: ' . $key);
-				}
+				case HippoTextUIContext::ACTION_CHECK:
+					$this->runChecks();
+					break;
+
+				default:
+					throw new Exception('Unrecognized action');
 			}
+		}
 
-			// TODO:
-			// make this work with a family of --report options, that controls which reporter to use
-			// make this work with --quiet and --verbose also
-			$this->reporters[] = new CLIReporter($this->fileSystem);
-
-			// TODO:
-			// make this work with --standard
-			$standardName = 'base';
-			$baseConfig = $this->configReader->loadFromFile($this->_getStandardPath($standardName));
+		/**
+		 * @return void
+		 */
+		protected function runChecks() {
+			$baseConfig = $this->configReader->loadFromFile($this->_getStandardPath($this->context->getConfigName()));
 
 			$success = true;
 			$checkRunner = new CheckRunner($this->fileSystem, $this->checkRepository, $baseConfig);
 
-			array_map(array($this, '_startReporter'), $this->reporters);
-			$checkRunner->setObserver(function(File $file, array $checkResults) use (&$success) {
-				$this->reportCheckResults($file, $checkResults);
-				foreach ($checkResults as $checkResult) {
-					if ($checkResult->hasFailed()) {
-						$success = false;
-					}
-				}
-			});
+			array_map(array($this, '_startReporter'), $this->context->getReporters());
+			$checkRunner->setObserver(
+				function(File $file, array $checkResults) use (&$success) {
+					$minimumSeverityToFail = $this->context->hasStrictModeEnabled()
+						? Violation::SEVERITY_IGNORE
+						: Violation::SEVERITY_ERROR;
 
-			foreach ($this->argOptions->getStrayArguments() as $strayArgument) {
-				$checkRunner->checkPath($strayArgument);
+					$this->reportCheckResults($this->context->getReporters(), $file, $checkResults);
+					foreach ($checkResults as $checkResult) {
+						if ($checkResult->count() > 0) {
+							$success &= $checkResult->getMaximumViolationSeverity() < $minimumSeverityToFail;
+						}
+					}
+				});
+
+			foreach ($this->context->getPathsToCheck() as $path) {
+				$checkRunner->checkPath($path);
 			}
 
-			array_map(array($this, '_finishReporter'), $this->reporters);
+			array_map(array($this, '_finishReporter'), $this->context->getReporters());
 
 			$this->environment->setExitCode($success ? 0 : 1);
 			$this->environment->shutdown();
@@ -156,8 +147,33 @@
 		 */
 		protected function showHelp() {
 			echo "Usage: hippo [switches] <directory>\n"
-					. "  -h, --help                Prints this usage information\n"
-					. "  -v, --version             Print version information\n";
+				. "  -h, --help                Prints this usage information\n"
+				. "  -v, --version             Print version information\n"
+				. "  -l, --log LOGLEVELS       Sets which severity levels should be logged\n"
+				. "                            (default: \"info,warning,error\")\n"
+				. "  -s, --strict 1|0          Enables or disables strict mode (default: 0)\n"
+				. "                            Strict mode will exit with code 1 on any violation.\n"
+				. "  -v, --verbose 1|0         Same as --log \"info,warning,error\"\n"
+				. "  -q, --quiet 1|0           Same as --log \"\"\n"
+				. "  -c, --config PATH         Use specific config (default: \"base\")\n"
+				. "  --report-xml PATH         Output a Checkstyle-compatible XML to PATH\n";
+			echo "\n";
+			echo "Available configs:\n";
+			foreach ($this->_getAllStandardNames() as $standardName) {
+				echo "  - $standardName\n";
+			}
+		}
+
+		/**
+		 * @return string[]
+		 */
+		private function _getAllStandardNames() {
+			$result = [];
+			$ymlFiles = $this->fileSystem->getAllFiles($this->_getStandardsFolder(), '/\.yml$/');
+			foreach ($ymlFiles as $ymlFilePath) {
+				$result[] = basename($ymlFilePath, '.yml');
+			}
+			return $result;
 		}
 
 		/**
@@ -169,17 +185,25 @@
 		}
 
 		/**
-		 * @param CheckResult[]
+		 * @param ReporterInterface[] $reporters
+		 * @param File $file
+		 * @param CheckResult[] $checkResults
 		 * @return void
 		 */
-		protected function reportCheckResults(File $file, array $checkResults) {
-			echo 'Checking ' . $file->getFilename() . PHP_EOL;
-
-			foreach ($this->reporters as $reporter) {
+		protected function reportCheckResults(array $reporters, File $file, array $checkResults) {
+			foreach ($reporters as $reporter) {
 				foreach ($checkResults as $checkResult) {
 					$reporter->addCheckResult($checkResult);
 				}
 			}
+		}
+
+		/**
+		 * Returns the absolute path for the folder that contains standard files.
+		 * @return string
+		 */
+		private function _getStandardsFolder() {
+			return __DIR__ . DIRECTORY_SEPARATOR . 'Standards';
 		}
 
 		/**
@@ -188,9 +212,7 @@
 		 * @return string
 		 */
 		private function _getStandardPath($standardName) {
-			return __DIR__ . DIRECTORY_SEPARATOR
-				. 'Standards' . DIRECTORY_SEPARATOR
-				. $standardName . '.yml';
+			return $this->_getStandardsFolder() . DIRECTORY_SEPARATOR . $standardName . '.yml';
 		}
 
 		/**

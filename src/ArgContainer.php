@@ -6,7 +6,7 @@
 	 * A container for command-line-interface arguments.
 	 * @package Hippo
 	 */
-	class ArgOptions {
+	class ArgContainer {
 		/**
 		 * @var array
 		 */
