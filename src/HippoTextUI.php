@@ -111,10 +111,7 @@
 		 * @return void
 		 */
 		protected function runChecks() {
-			// TODO:
-			// make this work with --standard
-			$standardName = 'base';
-			$baseConfig = $this->configReader->loadFromFile($this->_getStandardPath($standardName));
+			$baseConfig = $this->configReader->loadFromFile($this->_getStandardPath($this->context->getConfigName()));
 
 			$success = true;
 			$checkRunner = new CheckRunner($this->fileSystem, $this->checkRepository, $baseConfig);
@@ -158,7 +155,25 @@
 				. "                            Strict mode will exit with code 1 on any violation.\n"
 				. "  -v, --verbose 1|0         Same as --log \"info,warning,error\"\n"
 				. "  -q, --quiet 1|0           Same as --log \"\"\n"
+				. "  -c, --config PATH         Use specific config (default: \"base\")\n"
 				. "  --report-xml PATH         Output a Checkstyle-compatible XML to PATH\n";
+			echo "\n";
+			echo "Available configs:\n";
+			foreach ($this->_getAllStandardNames() as $standardName) {
+				echo "  - $standardName\n";
+			}
+		}
+
+		/**
+		 * @return string[]
+		 */
+		private function _getAllStandardNames() {
+			$result = [];
+			$ymlFiles = $this->fileSystem->getAllFiles($this->_getStandardsFolder(), '/\.yml$/');
+			foreach ($ymlFiles as $ymlFilePath) {
+				$result[] = basename($ymlFilePath, '.yml');
+			}
+			return $result;
 		}
 
 		/**
@@ -184,14 +199,20 @@
 		}
 
 		/**
+		 * Returns the absolute path for the folder that contains standard files.
+		 * @return string
+		 */
+		private function _getStandardsFolder() {
+			return __DIR__ . DIRECTORY_SEPARATOR . 'Standards';
+		}
+
+		/**
 		 * Returns the absolute path for a standards file.
 		 * @param string
 		 * @return string
 		 */
 		private function _getStandardPath($standardName) {
-			return __DIR__ . DIRECTORY_SEPARATOR
-				. 'Standards' . DIRECTORY_SEPARATOR
-				. $standardName . '.yml';
+			return $this->_getStandardsFolder() . DIRECTORY_SEPARATOR . $standardName . '.yml';
 		}
 
 		/**

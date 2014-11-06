@@ -37,6 +37,11 @@
 		private $_strictModeEnabled = false;
 
 		/**
+		 * @var string
+		 */
+		private $_configName = 'base';
+
+		/**
 		 * @var int[]
 		 */
 		private $_loggedSeverities = [];
@@ -110,6 +115,13 @@
 		}
 
 		/**
+		 * @return string
+		 */
+		public function getConfigName() {
+			return $this->_configName;
+		}
+
+		/**
 		 * @param string[] $arg
 		 * @return int[]
 		 */
@@ -160,6 +172,14 @@
 					case 'quiet':
 					case 'q':
 						$this->_loggedSeverities = $value ? [] : Violation::getSeverities();
+						break;
+
+					case 'config':
+					case 'c':
+						if (!$value) {
+							throw new UnrecognizedOptionException('Must specify config path');
+						}
+						$this->_configName = $value;
 						break;
 
 					case 'report-xml':
