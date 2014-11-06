@@ -21,19 +21,6 @@
 		const ACTION_HELP = 2;
 		const ACTION_VERSION = 3;
 
-		const LONG_OPTION_HELP = 'help';
-		const SHORT_OPTION_HELP = 'h';
-		const LONG_OPTION_VERSION = 'version';
-		const SHORT_OPTION_VERSION = 'v';
-		const LONG_OPTION_LOG_SEVERITIES = 'log';
-		const SHORT_OPTION_LOG_SEVERITIES = 'l';
-		const LONG_OPTION_STRICT_MODE = 'strict';
-		const SHORT_OPTION_STRICT_MODE = 's';
-		const LONG_OPTION_VERBOSE = 'verbose';
-		const SHORT_OPTION_VERBOSE = 'v';
-		const LONG_OPTION_QUIET = 'quiet';
-		const SHORT_OPTION_QUIET = 'q';
-
 		/**
 		 * @var int
 		 */
@@ -68,12 +55,12 @@
 			array $args
 		) {
 			$argParserOptions = new ArgParserOptions();
-			$argParserOptions->markFlag(self::SHORT_OPTION_QUIET);
-			$argParserOptions->markFlag(self::LONG_OPTION_QUIET);
-			$argParserOptions->markFlag(self::SHORT_OPTION_VERBOSE);
-			$argParserOptions->markFlag(self::LONG_OPTION_VERBOSE);
-			$argParserOptions->markFlag(self::SHORT_OPTION_STRICT_MODE);
-			$argParserOptions->markFlag(self::LONG_OPTION_STRICT_MODE);
+			$argParserOptions->markFlag('q');
+			$argParserOptions->markFlag('v');
+			$argParserOptions->markFlag('s');
+			$argParserOptions->markFlag('quiet');
+			$argParserOptions->markFlag('verbose');
+			$argParserOptions->markFlag('strict');
 			$argOptions = ArgParser::parse($args, $argParserOptions);
 
 			$this->_loggedSeverities = Violation::getSeverities();
@@ -137,33 +124,33 @@
 		private function _parseArgOptions(ArgOptions $argOptions) {
 			foreach ($argOptions->getAllOptions() as $key => $value) {
 				switch ($key) {
-					case self::SHORT_OPTION_HELP:
-					case self::LONG_OPTION_HELP:
+					case 'help':
+					case 'h':
 						$this->_action = self::ACTION_HELP;
 						break;
 
-					case self::SHORT_OPTION_VERSION:
-					case self::LONG_OPTION_VERSION:
+					case 'version':
+					case 'v':
 						$this->_action = self::ACTION_VERSION;
 						break;
 
-					case self::SHORT_OPTION_LOG_SEVERITIES:
-					case self::LONG_OPTION_LOG_SEVERITIES:
+					case 'log':
+					case 'l':
 						$this->_loggedSeverities = $this->_getSeveritiesFromArgument($value);
 						break;
 
-					case self::SHORT_OPTION_STRICT_MODE:
-					case self::LONG_OPTION_STRICT_MODE:
+					case 'strict':
+					case 's':
 						$this->_strictModeEnabled = $value;
 						break;
 
-					case self::SHORT_OPTION_VERBOSE:
-					case self::LONG_OPTION_VERBOSE:
+					case 'verbose':
+					case 'v':
 						$this->_loggedSeverities = $value ? Violation::getSeverities() : [];
 						break;
 
-					case self::SHORT_OPTION_QUIET:
-					case self::LONG_OPTION_QUIET:
+					case 'quiet':
+					case 'q':
 						$this->_loggedSeverities = $value ? [] : Violation::getSeverities();
 						break;
 
