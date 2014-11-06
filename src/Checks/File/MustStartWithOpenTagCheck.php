@@ -7,6 +7,9 @@
 	use \HippoPHP\Hippo\Config\Config;
 	use \HippoPHP\Hippo\File;
 
+	/**
+	 * Checks the open tag.
+	 */
 	class MustStartWithOpenTagCheck extends AbstractCheck implements CheckInterface {
 		/**
 		 * @return string

@@ -8,6 +8,9 @@
 	use \HippoPHP\Hippo\File;
 	use \HippoPHP\Hippo\Violation;
 
+	/**
+	 * Warns about the line length limits.
+	 */
 	class MaxLineLengthCheck extends AbstractCheck implements CheckInterface {
 		/**
 		 * Limits for emitting violations.
