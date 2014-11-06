@@ -2,8 +2,6 @@
 
 	namespace HippoPHP\Hippo;
 
-	use \HippoPHP\Hippo\ArgOptions;
-	use \HippoPHP\Hippo\ArgParser;
 	use \HippoPHP\Hippo\CheckRepository;
 	use \HippoPHP\Hippo\CheckRunner;
 	use \HippoPHP\Hippo\Config\ConfigReaderInterface;
@@ -19,9 +17,9 @@
 		protected $checkRepository;
 
 		/**
-		 * @var ArgOptions
+		 * @var HippoTextUIContext
 		 */
-		protected $argOptions;
+		protected $context;
 
 		/**
 		 * @var string
@@ -38,7 +36,7 @@
 		 * @param FileSystem $fileSystem
 		 * @param CheckRepository $checkRepository
 		 * @param string $pathToSelf
-		 * @param ArgOptions $argOptions
+		 * @param HippoTextUIContext $context
 		 * @return void
 		 */
 		public function __construct(
@@ -47,14 +45,14 @@
 			CheckRepository $checkRepository,
 			ConfigReaderInterface $configReader,
 			$pathToSelf,
-			ArgOptions $argOptions
+			HippoTextUIContext $context
 		) {
 			$this->environment = $environment;
 			$this->fileSystem = $fileSystem;
 			$this->checkRepository = $checkRepository;
 			$this->configReader = $configReader;
 			$this->pathToSelf = $pathToSelf;
-			$this->argOptions = $argOptions;
+			$this->context = $context;
 		}
 
 		/**
@@ -69,13 +67,16 @@
 			$configReader = new YAMLConfigReader($fileSystem);
 			$checkRepository = new CheckRepository($fileSystem);
 
+			$pathToSelf = array_shift($args);
+			$context = new HippoTextUIContext($fileSystem, $args);
+
 			$hippoTextUi = new self(
 				$environment,
 				$fileSystem,
 				$checkRepository,
 				$configReader,
-				array_shift($args),
-				ArgParser::parse($args));
+				$pathToSelf,
+				$context);
 
 			$hippoTextUi->run();
 		}
@@ -84,9 +85,7 @@
 		 * @return void
 		 */
 		protected function run() {
-			$context = new HippoTextUIContext($this->fileSystem, $this->argOptions);
-
-			switch ($context->getAction()) {
+			switch ($this->context->getAction()) {
 				case HippoTextUIContext::ACTION_HELP:
 					$this->showHelp();
 					$this->environment->setExitCode(0);
@@ -100,7 +99,7 @@
 					break;
 
 				case HippoTextUIContext::ACTION_CHECK:
-					$this->runChecks($context);
+					$this->runChecks();
 					break;
 
 				default:
@@ -109,10 +108,9 @@
 		}
 
 		/**
-		 * @param HippoTextUIContext $context
 		 * @return void
 		 */
-		protected function runChecks(HippoTextUIContext $context) {
+		protected function runChecks() {
 			// TODO:
 			// make this work with --standard
 			$standardName = 'base';
@@ -121,14 +119,14 @@
 			$success = true;
 			$checkRunner = new CheckRunner($this->fileSystem, $this->checkRepository, $baseConfig);
 
-			array_map(array($this, '_startReporter'), $context->getReporters());
+			array_map(array($this, '_startReporter'), $this->context->getReporters());
 			$checkRunner->setObserver(
-				function(File $file, array $checkResults) use ($context, &$success) {
-					$minimumSeverityToFail = $context->hasStrictModeEnabled()
+				function(File $file, array $checkResults) use (&$success) {
+					$minimumSeverityToFail = $this->context->hasStrictModeEnabled()
 						? Violation::SEVERITY_IGNORE
 						: Violation::SEVERITY_ERROR;
 
-					$this->reportCheckResults($context->getReporters(), $file, $checkResults);
+					$this->reportCheckResults($this->context->getReporters(), $file, $checkResults);
 					foreach ($checkResults as $checkResult) {
 						if ($checkResult->count() > 0) {
 							$success &= $checkResult->getMaximumViolationSeverity() < $minimumSeverityToFail;
@@ -136,11 +134,11 @@
 					}
 				});
 
-			foreach ($context->getPathsToCheck() as $path) {
+			foreach ($this->context->getPathsToCheck() as $path) {
 				$checkRunner->checkPath($path);
 			}
 
-			array_map(array($this, '_finishReporter'), $context->getReporters());
+			array_map(array($this, '_finishReporter'), $this->context->getReporters());
 
 			$this->environment->setExitCode($success ? 0 : 1);
 			$this->environment->shutdown();

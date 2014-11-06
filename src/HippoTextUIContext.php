@@ -3,6 +3,7 @@
 	namespace HippoPHP\Hippo;
 
 	use \HippoPHP\Hippo\ArgOptions;
+	use \HippoPHP\Hippo\ArgParser;
 	use \HippoPHP\Hippo\FileSystem;
 	use \HippoPHP\Hippo\Violation;
 	use \HippoPHP\Hippo\Exception\UnrecognizedOptionException;
@@ -60,12 +61,14 @@
 
 		/**
 		 * @param FileSystem $fileSystem
-		 * @param ArgOptions $argOptions
+		 * @param string[] $args
 		 */
 		public function __construct(
 			FileSystem $fileSystem,
-			ArgOptions $argOptions
+			array $args
 		) {
+			$argOptions = ArgParser::parse($args);
+
 			$this->_loggedSeverities = Violation::getSeverities();
 
 			$this->_parseArgOptions($argOptions);
