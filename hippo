@@ -18,6 +18,7 @@ if (!defined('HIPPO_COMPOSER_INSTALL')) {
 require HIPPO_COMPOSER_INSTALL;
 
 use \HippoPHP\Hippo\HippoTextUI;
+use \HippoPHP\Hippo\Exception\FileNotFoundException;
 use \HippoPHP\Hippo\Exception\UnrecognizedOptionException;
 use \HippoPHP\Hippo\Exception\ShutdownException;
 
@@ -28,6 +29,8 @@ function handleGenericError(\Exception $e) {
 
 try {
 	HippoTextUI::main(isset($_SERVER['argv']) ? $_SERVER['argv'] : FALSE);
+} catch (FileNotFoundException $e) {
+	handleGenericError($e);
 } catch (UnrecognizedOptionException $e) {
 	handleGenericError($e);
 } catch (ShutdownException $e) {
