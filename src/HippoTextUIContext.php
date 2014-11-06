@@ -67,7 +67,14 @@
 			FileSystem $fileSystem,
 			array $args
 		) {
-			$argOptions = ArgParser::parse($args);
+			$argParserOptions = new ArgParserOptions();
+			$argParserOptions->markFlag(self::SHORT_OPTION_QUIET);
+			$argParserOptions->markFlag(self::LONG_OPTION_QUIET);
+			$argParserOptions->markFlag(self::SHORT_OPTION_VERBOSE);
+			$argParserOptions->markFlag(self::LONG_OPTION_VERBOSE);
+			$argParserOptions->markFlag(self::SHORT_OPTION_STRICT_MODE);
+			$argParserOptions->markFlag(self::LONG_OPTION_STRICT_MODE);
+			$argOptions = ArgParser::parse($args, $argParserOptions);
 
 			$this->_loggedSeverities = Violation::getSeverities();
 
@@ -147,17 +154,17 @@
 
 					case self::SHORT_OPTION_STRICT_MODE:
 					case self::LONG_OPTION_STRICT_MODE:
-						$this->_strictModeEnabled = $this->_getFlagValue($value);
+						$this->_strictModeEnabled = $value;
 						break;
 
 					case self::SHORT_OPTION_VERBOSE:
 					case self::LONG_OPTION_VERBOSE:
-						$this->_loggedSeverities = $this->_getFlagValue($value) ? Violation::getSeverities() : [];
+						$this->_loggedSeverities = $value ? Violation::getSeverities() : [];
 						break;
 
 					case self::SHORT_OPTION_QUIET:
 					case self::LONG_OPTION_QUIET:
-						$this->_loggedSeverities = $this->_getFlagValue($value) ? [] : Violation::getSeverities();
+						$this->_loggedSeverities = $value ? [] : Violation::getSeverities();
 						break;
 
 					// TODO:
@@ -185,13 +192,5 @@
 		 */
 		private function _splitUserArgument($arg) {
 			return preg_split('/[\s,;]+/', $arg);
-		}
-
-		/**
-		 * @param mixed $arg
-		 * @return boolean
-		 */
-		private function _getFlagValue($arg) {
-			return $arg === null ? true : boolval($arg);
 		}
 	}

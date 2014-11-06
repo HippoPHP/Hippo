@@ -3,6 +3,7 @@
 	namespace HippoPHP\Hippo\Tests;
 
 	use \HippoPHP\Hippo\ArgParser;
+	use \HippoPHP\Hippo\ArgParserOptions;
 
 	class ArgParserTest extends \PHPUnit_Framework_TestCase {
 		public function testLongArgumentEqual() {
@@ -45,6 +46,22 @@
 			$argOptions = ArgParser::parse(['-short', '-short2']);
 			$this->assertTrue($argOptions->getShortOption('short'));
 			$this->assertTrue($argOptions->getShortOption('short2'));
+		}
+
+		public function testFlagsWithNonBooleanStrayArgument() {
+			$argParserOptions = new ArgParserOptions();
+			$argParserOptions->markFlag('flag');
+			$argOptions = ArgParser::parse(['--flag', 'stray'], $argParserOptions);
+			$this->assertTrue($argOptions->getLongOption('flag'));
+			$this->assertEquals(['stray'], $argOptions->getStrayArguments());
+		}
+
+		public function testFlagsWithBooleanStrayArgument() {
+			$argParserOptions = new ArgParserOptions();
+			$argParserOptions->markFlag('flag');
+			$argOptions = ArgParser::parse(['--flag', '0', 'stray'], $argParserOptions);
+			$this->assertFalse($argOptions->getLongOption('flag'));
+			$this->assertEquals(['stray'], $argOptions->getStrayArguments());
 		}
 
 		public function testStrayArguments() {

@@ -18,12 +18,27 @@
 		private $_argOptions;
 
 		/**
+		 * @var ArgParserOptions
+		 */
+		private $_argParserOptions;
+
+		/**
 		 * @param string[] $argv
+		 * @param ArgParserOptions $argParserOptions
 		 * @return ArgOptions
 		 */
-		public static function parse(array $argv) {
-			$parser = new self;
+		public static function parse(array $argv, ArgParserOptions $argParserOptions = null) {
+			$parser = new self($argParserOptions);
 			return $parser->_parse($argv);
+		}
+
+		/**
+		 * @param ArgParserOptions $argParserOptions
+		 */
+		private function __construct(ArgParserOptions $argParserOptions = null) {
+			$this->_argParserOptions = $argParserOptions === null
+				? new ArgParserOptions()
+				: $argParserOptions;
 		}
 
 		/**
@@ -91,6 +106,12 @@
 			$index = strpos($arg, '=');
 			if ($index !== false) {
 				return substr($arg, $index + 1);
+			} elseif ($this->_argParserOptions->isFlag($this->_normalizeArg($arg))) {
+				if ($nextArg !== null && !$this->_isArgument($nextArg) && $this->_isBool($nextArg)) {
+					$hasUsedNextArg = true;
+					return boolval($nextArg);
+				}
+				return true;
 			} elseif ($nextArg !== null && !$this->_isArgument($nextArg)) {
 				$hasUsedNextArg = true;
 				return $nextArg;
@@ -127,5 +148,9 @@
 		 */
 		private function _isArgument($arg) {
 			return $this->_isLongArgument($arg) || $this->_isShortArgument($arg);
+		}
+
+		private function _isBool($arg) {
+			return $arg === '0' || $arg === '1';
 		}
 	}
