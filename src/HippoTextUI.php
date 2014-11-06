@@ -155,7 +155,11 @@
 		protected function showHelp() {
 			echo "Usage: hippo [switches] <directory>\n"
 					. "  -h, --help                Prints this usage information\n"
-					. "  -v, --version             Print version information\n";
+					. "  -v, --version             Print version information\n"
+					. "  -l, --log LOGLEVELS       Sets which severity levels should be logged\n"
+					. "                            (default: \"info,warning,error\")\n"
+					. "  -s, --strict 1|0          Enables or disables strict mode (default: 0)\n"
+					. "                            Strict mode will exit with code 1 on any violation.\n";
 		}
 
 		/**
