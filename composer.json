@@ -1,5 +1,6 @@
 {
     "name": "hippophp/hippo",
+    "version": "0.1.0",
     "description": "Hippo is an open-source tool that helps PHP programmers adhere to certain coding conventions",
     "type": "library",
     "keywords": ["checkstyle","standard","convention", "coding standards", "validator"],
