@@ -128,7 +128,7 @@
 		 */
 		private function _processStringValue($normalizedArg, $value) {
 			if ($this->_argParserOptions->isFlag($normalizedArg)) {
-				return boolval($value);
+				return $this->_toBool($value);
 			} elseif ($this->_argParserOptions->isArray($normalizedArg)) {
 				return preg_split('/[\s,;]+/', $value);
 			}
@@ -165,7 +165,23 @@
 			return $this->_isLongArgument($arg) || $this->_isShortArgument($arg);
 		}
 
+		/**
+		 * @param string $arg
+		 * @return boolean
+		 */
 		private function _isBool($arg) {
-			return $arg === '0' || $arg === '1';
+			return $this->_toBool($arg) !== null;
+		}
+
+		/**
+		 * @param string $arg
+		 * @return boolean
+		 */
+		private function _toBool($arg) {
+			if ($arg === '0')
+				return false;
+			elseif ($arg === '1')
+				return true;
+			return null;
 		}
 	}
