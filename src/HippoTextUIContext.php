@@ -26,8 +26,12 @@
 		const SHORT_OPTION_VERSION = 'v';
 		const LONG_OPTION_LOG_SEVERITIES = 'log';
 		const SHORT_OPTION_LOG_SEVERITIES = 'l';
-		const SHORT_OPTION_STRICT_MODE = 's';
 		const LONG_OPTION_STRICT_MODE = 'strict';
+		const SHORT_OPTION_STRICT_MODE = 's';
+		const LONG_OPTION_VERBOSE = 'verbose';
+		const SHORT_OPTION_VERBOSE = 'v';
+		const LONG_OPTION_QUIET = 'quiet';
+		const SHORT_OPTION_QUIET = 'q';
 
 		/**
 		 * @var int
@@ -143,10 +147,17 @@
 						$this->_strictModeEnabled = $this->_getFlagValue($value);
 						break;
 
+					case self::SHORT_OPTION_VERBOSE:
+					case self::LONG_OPTION_VERBOSE:
+						$this->_loggedSeverities = $this->_getFlagValue($value) ? Violation::getSeverities() : [];
+						break;
+
+					case self::SHORT_OPTION_QUIET:
+					case self::LONG_OPTION_QUIET:
+						$this->_loggedSeverities = $this->_getFlagValue($value) ? [] : Violation::getSeverities();
+						break;
+
 					// TODO:
-					// --strict
-					// --quiet
-					// --verbose
 					// --report-xml PATH
 
 					default:
