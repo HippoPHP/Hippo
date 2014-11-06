@@ -15,9 +15,10 @@
 	 * @see HippoTextUI
 	 */
 	class HippoTextUIContext {
-		const ACTION_CHECK = 0;
-		const ACTION_HELP = 1;
-		const ACTION_VERSION = 2;
+		const ACTION_UNKNOWN = 0;
+		const ACTION_CHECK = 1;
+		const ACTION_HELP = 2;
+		const ACTION_VERSION = 3;
 
 		const LONG_OPTION_HELP = 'help';
 		const SHORT_OPTION_HELP = 'h';
@@ -29,7 +30,7 @@
 		/**
 		 * @var int
 		 */
-		private $_action = self::ACTION_CHECK;
+		private $_action = self::ACTION_UNKNOWN;
 
 		/**
 		 * @var int[]
@@ -136,6 +137,12 @@
 
 			foreach ($argOptions->getStrayArguments() as $strayArgument) {
 				$this->_pathsToCheck[] = $strayArgument;
+			}
+
+			if ($this->_action == self::ACTION_UNKNOWN) {
+				$this->_action = empty($this->_pathsToCheck)
+					? self::ACTION_HELP
+					: self::ACTION_CHECK;
 			}
 		}
 
