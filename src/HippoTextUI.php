@@ -124,14 +124,19 @@
 			$checkRunner = new CheckRunner($this->fileSystem, $this->checkRepository, $baseConfig);
 
 			array_map(array($this, '_startReporter'), $context->getReporters());
-			$checkRunner->setObserver(function(File $file, array $checkResults) use ($context, &$success) {
-				$this->reportCheckResults($context->getReporters(), $file, $checkResults);
-				foreach ($checkResults as $checkResult) {
-					if ($checkResult->hasFailed()) {
-						$success = false;
+			$checkRunner->setObserver(
+				function(File $file, array $checkResults) use ($context, &$success) {
+					$minimumSeverityToFail = $context->hasStrictModeEnabled()
+						? Violation::SEVERITY_IGNORE
+						: Violation::SEVERITY_ERROR;
+
+					$this->reportCheckResults($context->getReporters(), $file, $checkResults);
+					foreach ($checkResults as $checkResult) {
+						if ($checkResult->count() > 0) {
+							$success &= $checkResult->getMaximumViolationSeverity() < $minimumSeverityToFail;
+						}
 					}
-				}
-			});
+				});
 
 			foreach ($context->getPathsToCheck() as $path) {
 				$checkRunner->checkPath($path);
