@@ -118,7 +118,7 @@
 				return $this->_processStringValue($normalizedArg, $nextArg);
 			}
 
-			return true;
+			return null;
 		}
 
 		/**

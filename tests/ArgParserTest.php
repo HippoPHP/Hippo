@@ -16,43 +16,43 @@
 			$this->assertEquals('option', $argContainer->getLongOption('long'));
 		}
 
-		public function testLongFlagArguments() {
+		public function testLongArgumentsWithoutValue() {
 			$argContainer = ArgParser::parse(['--long']);
-			$this->assertTrue($argContainer->getLongOption('long'));
+			$this->assertNull($argContainer->getLongOption('long'));
 		}
 
-		public function testLongConsecutiveFlagArguments() {
+		public function testLongConsecutiveArgumentsWithoutValue() {
 			$argContainer = ArgParser::parse(['--long', '--long2']);
-			$this->assertTrue($argContainer->getLongOption('long'));
-			$this->assertTrue($argContainer->getLongOption('long2'));
+			$this->assertNull($argContainer->getLongOption('long'));
+			$this->assertNull($argContainer->getLongOption('long2'));
 		}
 
-		public function testShortArgumentEqual() {
+		public function testShortArgumentWithoutValue() {
+			$argContainer = ArgParser::parse(['-short']);
+			$this->assertNull($argContainer->getShortOption('short'));
+		}
+
+		public function testShortConsecutiveArgumentsWithoutValue() {
+			$argContainer = ArgParser::parse(['-short', '-short2']);
+			$this->assertNull($argContainer->getShortOption('short'));
+			$this->assertNull($argContainer->getShortOption('short2'));
+		}
+
+		public function testShortArgumentWithValue() {
 			$argContainer = ArgParser::parse(['-short=option']);
 			$this->assertEquals('option', $argContainer->getShortOption('short'));
 		}
 
-		public function testShortArgumentAlternative() {
+		public function testShortArgumentWithValueInNextArgument() {
 			$argContainer = ArgParser::parse(['-short', 'option']);
 			$this->assertEquals('option', $argContainer->getShortOption('short'));
 		}
 
-		public function testShortFlagArguments() {
-			$argContainer = ArgParser::parse(['-short']);
-			$this->assertTrue($argContainer->getShortOption('short'));
-		}
-
-		public function testShortFlagArgumentWithBooleanInlineArgument() {
+		public function testShortFlagWithValue() {
 			$argParserOptions = new ArgParserOptions();
 			$argParserOptions->markFlag('short');
 			$argContainer = ArgParser::parse(['-short=1'], $argParserOptions);
 			$this->assertTrue($argContainer->getShortOption('short'));
-		}
-
-		public function testShortConsecutiveFlagArguments() {
-			$argContainer = ArgParser::parse(['-short', '-short2']);
-			$this->assertTrue($argContainer->getShortOption('short'));
-			$this->assertTrue($argContainer->getShortOption('short2'));
 		}
 
 		public function testFlagsWithNonBooleanStrayArgument() {
@@ -86,8 +86,8 @@
 
 		public function testMixedLongAndShortFlags() {
 			$argContainer = ArgParser::parse(['--flag', '-flag']);
-			$this->assertTrue($argContainer->getLongOption('flag'));
-			$this->assertTrue($argContainer->getShortOption('flag'));
+			$this->assertNull($argContainer->getLongOption('flag'));
+			$this->assertNull($argContainer->getShortOption('flag'));
 		}
 
 		public function testStrayArgumentsMixedWithOptions() {
@@ -98,7 +98,7 @@
 
 		public function testStrayArgumentsMixedWithOptionsManualStop() {
 			$argContainer = ArgParser::parse(['--long', '--', 'stray1', 'stray2', 'stray3']);
-			$this->assertTrue($argContainer->getLongOption('long'));
+			$this->assertNull($argContainer->getLongOption('long'));
 			$this->assertEquals(['stray1', 'stray2', 'stray3'], $argContainer->getStrayArguments());
 		}
 
