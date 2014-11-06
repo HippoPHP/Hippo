@@ -102,22 +102,37 @@
 		 */
 		private function _extractArgValue($arg, $nextArg, &$hasUsedNextArg) {
 			$hasUsedNextArg = false;
+			$normalizedArg = $this->_normalizeArg($arg);
 
 			$index = strpos($arg, '=');
 			if ($index !== false) {
-				return substr($arg, $index + 1);
-			} elseif ($this->_argParserOptions->isFlag($this->_normalizeArg($arg))) {
+				return $this->_processStringValue($normalizedArg, substr($arg, $index + 1));
+			} elseif ($this->_argParserOptions->isFlag($normalizedArg)) {
 				if ($nextArg !== null && !$this->_isArgument($nextArg) && $this->_isBool($nextArg)) {
 					$hasUsedNextArg = true;
-					return boolval($nextArg);
+					return $this->_processStringValue($normalizedArg, $nextArg);
 				}
 				return true;
 			} elseif ($nextArg !== null && !$this->_isArgument($nextArg)) {
 				$hasUsedNextArg = true;
-				return $nextArg;
+				return $this->_processStringValue($normalizedArg, $nextArg);
 			}
 
 			return true;
+		}
+
+		/**
+		 * @param string $normalizedArg
+		 * @param string $value
+		 * @return mixed
+		 */
+		private function _processStringValue($normalizedArg, $value) {
+			if ($this->_argParserOptions->isFlag($normalizedArg)) {
+				return boolval($value);
+			} elseif ($this->_argParserOptions->isArray($normalizedArg)) {
+				return preg_split('/[\s,;]+/', $value);
+			}
+			return $value;
 		}
 
 		/**

@@ -42,6 +42,13 @@
 			$this->assertTrue($argOptions->getShortOption('short'));
 		}
 
+		public function testShortFlagArgumentWithBooleanInlineArgument() {
+			$argParserOptions = new ArgParserOptions();
+			$argParserOptions->markFlag('short');
+			$argOptions = ArgParser::parse(['-short=1'], $argParserOptions);
+			$this->assertTrue($argOptions->getShortOption('short'));
+		}
+
 		public function testShortConsecutiveFlagArguments() {
 			$argOptions = ArgParser::parse(['-short', '-short2']);
 			$this->assertTrue($argOptions->getShortOption('short'));
@@ -61,6 +68,14 @@
 			$argParserOptions->markFlag('flag');
 			$argOptions = ArgParser::parse(['--flag', '0', 'stray'], $argParserOptions);
 			$this->assertFalse($argOptions->getLongOption('flag'));
+			$this->assertEquals(['stray'], $argOptions->getStrayArguments());
+		}
+
+		public function testArrayArgument() {
+			$argParserOptions = new ArgParserOptions();
+			$argParserOptions->markArray('arg');
+			$argOptions = ArgParser::parse(['--arg', '1,2,3;4 5', 'stray'], $argParserOptions);
+			$this->assertEquals(['1', '2', '3', '4', '5'], $argOptions->getLongOption('arg'));
 			$this->assertEquals(['stray'], $argOptions->getStrayArguments());
 		}
 

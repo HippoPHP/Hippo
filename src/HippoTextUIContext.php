@@ -55,6 +55,8 @@
 			array $args
 		) {
 			$argParserOptions = new ArgParserOptions();
+			$argParserOptions->markArray('l');
+			$argParserOptions->markArray('log');
 			$argParserOptions->markFlag('q');
 			$argParserOptions->markFlag('v');
 			$argParserOptions->markFlag('s');
@@ -101,11 +103,10 @@
 		}
 
 		/**
-		 * @param string $arg
+		 * @param string[] $arg
 		 * @return int[]
 		 */
-		private function _getSeveritiesFromArgument($arg) {
-			$values = $this->_splitUserArgument($arg);
+		private function _getSeveritiesFromArgument(array $values) {
 			$severities = [];
 			foreach ($values as $value) {
 				$severity = Violation::getSeverityFromString($value);
@@ -171,13 +172,5 @@
 					? self::ACTION_HELP
 					: self::ACTION_CHECK;
 			}
-		}
-
-		/**
-		 * @param string $arg
-		 * @return string[]
-		 */
-		private function _splitUserArgument($arg) {
-			return preg_split('/[\s,;]+/', $arg);
 		}
 	}

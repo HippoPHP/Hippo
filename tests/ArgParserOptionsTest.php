@@ -19,4 +19,13 @@
 			$this->argParserOptions->markFlag('nope');
 			$this->assertTrue($this->argParserOptions->isFlag('nope'));
 		}
+
+		public function testIsNotArray() {
+			$this->assertFalse($this->argParserOptions->isArray('nope'));
+		}
+
+		public function testIsArray() {
+			$this->argParserOptions->markArray('nope');
+			$this->assertTrue($this->argParserOptions->isArray('nope'));
+		}
 	}
