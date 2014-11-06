@@ -26,7 +26,9 @@
 		 * @return void
 		 */
 		protected function checkFileInternal(File $file, Config $config) {
-			if (count($file) > 0 && $file->bottom()->getType() !== T_OPEN_TAG) {
+			$tokens = token_get_all($file->getSource());
+			$firstToken = $tokens[0][0];
+			if (count($file) > 0 && $firstToken !== T_OPEN_TAG) {
 				$this->addViolation($file, 1, 1, 'Files must begin with the PHP open tag.');
 			}
 		}
