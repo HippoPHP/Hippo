@@ -22,6 +22,11 @@
 		const ACTION_VERSION = 3;
 
 		/**
+		 * @var FileSystem
+		 */
+		private $_fileSystem;
+
+		/**
 		 * @var int
 		 */
 		private $_action = self::ACTION_UNKNOWN;
@@ -54,6 +59,8 @@
 			FileSystem $fileSystem,
 			array $args
 		) {
+			$this->_fileSystem = $fileSystem;
+
 			$argParserOptions = new ArgParserOptions();
 			$argParserOptions->markArray('l');
 			$argParserOptions->markArray('log');
@@ -69,7 +76,7 @@
 
 			$this->_processArgContainer($argContainer);
 
-			$cliReporter = new CLIReporter($fileSystem);
+			$cliReporter = new CLIReporter($this->_fileSystem);
 			$cliReporter->setLoggedSeverities($this->_loggedSeverities);
 			$this->_reporters[] = $cliReporter;
 		}
@@ -155,8 +162,12 @@
 						$this->_loggedSeverities = $value ? [] : Violation::getSeverities();
 						break;
 
-					// TODO:
-					// --report-xml PATH
+					case 'report-xml':
+						$targetFilename = $value === null ? 'checkstyle.xml' : $value;
+						$checkstyleReporter = new CheckstyleReporter($this->_fileSystem);
+						$checkstyleReporter->setFilename($targetFilename);
+						$this->_reporters[] = $checkstyleReporter;
+						break;
 
 					default:
 						throw new UnrecognizedOptionException('Unrecognized option: ' . $key);
