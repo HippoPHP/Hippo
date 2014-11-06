@@ -227,7 +227,7 @@
 		 * @return string
 		 */
 		private function _getComposerPath() {
-			return __DIR__ . DIRECTORY_SEPARATOR 
+			return __DIR__ . DIRECTORY_SEPARATOR
 				. '..' . DIRECTORY_SEPARATOR
 				. 'composer.json';
 		}
