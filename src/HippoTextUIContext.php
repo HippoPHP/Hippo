@@ -70,7 +70,6 @@
 			$argParserOptions->markArray('l');
 			$argParserOptions->markArray('log');
 			$argParserOptions->markFlag('q');
-			$argParserOptions->markFlag('v');
 			$argParserOptions->markFlag('s');
 			$argParserOptions->markFlag('quiet');
 			$argParserOptions->markFlag('verbose');
@@ -138,7 +137,7 @@
 				$this->_createArgMapping([$this, '_handleVersionArgument'], ['v', 'version']),
 				$this->_createArgMapping([$this, '_handleStrictArgument'], ['s', 'strict']),
 				$this->_createArgMapping([$this, '_handleLogArgument'], ['l', 'log']),
-				$this->_createArgMapping([$this, '_handleVerboseArgument'], ['v', 'verbose']),
+				$this->_createArgMapping([$this, '_handleVerboseArgument'], ['verbose']),
 				$this->_createArgMapping([$this, '_handleQuietArgument'], ['q', 'quiet']),
 				$this->_createArgMapping([$this, '_handleXmlReportArgument'], ['report-xml']),
 				$this->_createArgMapping([$this, '_handleConfigArgument'], ['c', 'config']),

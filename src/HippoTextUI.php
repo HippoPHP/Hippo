@@ -153,8 +153,8 @@
 				. "                            (default: \"info,warning,error\")\n"
 				. "  -s, --strict 1|0          Enables or disables strict mode (default: 0)\n"
 				. "                            Strict mode will exit with code 1 on any violation.\n"
-				. "  -v, --verbose 1|0         Same as --log \"info,warning,error\"\n"
 				. "  -q, --quiet 1|0           Same as --log \"\"\n"
+				. "      --verbose 1|0         Same as --log \"info,warning,error\"\n"
 				. "  -c, --config PATH         Use specific config (default: \"base\")\n"
 				. "  --report-xml PATH         Output a Checkstyle-compatible XML to PATH\n";
 			echo "\n";
