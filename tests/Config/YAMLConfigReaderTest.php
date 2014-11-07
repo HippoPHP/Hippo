@@ -55,6 +55,27 @@ YML;
 			$this->assertEquals('2', $config->get('child'));
 		}
 
+		public function testExtensionArrayScalarConflict() {
+			$baseYamlConfig = <<<YML
+test: 1
+YML;
+
+			$yamlConfig = <<<YML
+extends: "base"
+test:
+  child: 2
+YML;
+
+			$this->_fileSystemMock
+				->expects($this->exactly(2))
+				->method('getContent')
+				->withConsecutive(['initial.yml'], ['.' . DIRECTORY_SEPARATOR . 'base.yml'])
+				->will($this->onConsecutiveCalls($yamlConfig, $baseYamlConfig));
+
+			$this->setExpectedException('\Exception', 'Cannot merge a scalar with an array');
+			$config = $this->_reader->loadFromFile('initial.yml');
+		}
+
 		public function testLoadFromFileExtendedTwice() {
 			$baseYamlConfig = <<<YML
 bracesOnNewLine: true
@@ -116,4 +137,41 @@ YML;
 			$this->assertEquals('1', $config->get('parent'));
 			$this->assertEquals('2', $config->get('child'));
 		}
+
+		public function testMultipleExtensionWithRecursion() {
+			$baseYamlConfig = <<<YML
+test:
+  grandparent:
+    set: true
+YML;
+
+			$middleYamlConfig = <<<YML
+extends: "base"
+test:
+  parent:
+    set: true
+YML;
+
+			$yamlConfig = <<<YML
+extends: "middle"
+test:
+  child:
+    set: true
+YML;
+
+			$this->_fileSystemMock
+				->expects($this->exactly(3))
+				->method('getContent')
+				->withConsecutive(
+					['initial.txt'],
+					['.' . DIRECTORY_SEPARATOR . 'middle.yml'],
+					['.' . DIRECTORY_SEPARATOR . 'base.yml'])
+				->will($this->onConsecutiveCalls($yamlConfig, $middleYamlConfig, $baseYamlConfig));
+
+			$config = $this->_reader->loadFromFile('initial.txt');
+			$this->assertTrue($config->get('test.grandparent.set'));
+			$this->assertTrue($config->get('test.parent.set'));
+			$this->assertTrue($config->get('test.child.set'));
+		}
+
 	}

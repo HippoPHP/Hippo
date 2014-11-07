@@ -33,7 +33,7 @@
 				$baseConfig = $this->parser->parse($this->fileSystem->getContent($baseConfigPath));
 				unset($config['extends']);
 
-				$config = array_merge($baseConfig, $config);
+				$config = $this->_mergeRecursive($baseConfig, $config);
 
 				if (isset($config['extends'])) {
 					if (in_array($this->_normalizeConfigName($config['extends']), $included)) {
@@ -55,5 +55,36 @@
 		 */
 		private function _normalizeConfigName($name) {
 			return trim(basename(strtolower($name), '.yml'));
+		}
+
+		/**
+		 * @param mixed[] $array1
+		 * @param mixed[] $array2
+		 * @return mixed[]
+		 */
+		private function _mergeRecursive($array1, $array2) {
+			$result = [];
+			foreach (array_merge(array_keys($array1), array_keys($array2)) as $key) {
+				if (!isset($array1[$key])) {
+					$result[$key] = $array2[$key];
+					continue;
+				}
+
+				if (!isset($array2[$key])) {
+					$result[$key] = $array1[$key];
+					continue;
+				}
+
+				if (is_array($array1[$key]) || is_array($array2[$key])) {
+					if (!is_array($array1[$key]) || !is_array($array2[$key])) {
+						throw new \Exception('Cannot merge a scalar with an array');
+					}
+					$result[$key] = $this->_mergeRecursive($array1[$key], $array2[$key]);
+					continue;
+				}
+
+				$result[$key] = $array2[$key];
+			}
+			return $result;
 		}
 	}
