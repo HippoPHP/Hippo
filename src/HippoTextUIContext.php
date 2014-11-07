@@ -122,19 +122,27 @@
 		}
 
 		/**
-		 * @param string[] $arg
-		 * @return int[]
+		 * @param callable $action
+		 * @param string[] $arguments
 		 */
-		private function _getSeveritiesFromArgument(array $values) {
-			$severities = [];
-			foreach ($values as $value) {
-				$severity = Violation::getSeverityFromString($value);
-				if ($severity === null) {
-					throw new UnrecognizedOptionException('Unrecognized severity: ' . $value);
-				}
-				$severities []= $severity;
-			}
-			return array_unique($severities);
+		private function _createArgMapping(callable $action, array $arguments) {
+			return ['action' => $action, 'arguments' => $arguments];
+		}
+
+		/**
+		 * @return array
+		 */
+		private function _buildArgMappings() {
+			return [
+				$this->_createArgMapping([$this, '_handleHelpArgument'], ['h', 'help']),
+				$this->_createArgMapping([$this, '_handleVersionArgument'], ['v', 'version']),
+				$this->_createArgMapping([$this, '_handleStrictArgument'], ['s', 'strict']),
+				$this->_createArgMapping([$this, '_handleLogArgument'], ['l', 'log']),
+				$this->_createArgMapping([$this, '_handleVerboseArgument'], ['v', 'verbose']),
+				$this->_createArgMapping([$this, '_handleQuietArgument'], ['q', 'quiet']),
+				$this->_createArgMapping([$this, '_handleXmlReportArgument'], ['report-xml']),
+				$this->_createArgMapping([$this, '_handleConfigArgument'], ['c', 'config']),
+			];
 		}
 
 		/**
@@ -142,55 +150,21 @@
 		 * @return void
 		 */
 		private function _processArgContainer(ArgContainer $argContainer) {
-			foreach ($argContainer->getAllOptions() as $key => $value) {
-				switch ($key) {
-					case 'help':
-					case 'h':
-						$this->_action = self::ACTION_HELP;
-						break;
+			$mappings = $this->_buildArgMappings();
 
-					case 'version':
-					case 'v':
-						$this->_action = self::ACTION_VERSION;
-						break;
+			foreach ($argContainer->getAllOptions() as $argName => $argValue) {
+				$handled = false;
 
-					case 'log':
-					case 'l':
-						$this->_loggedSeverities = $this->_getSeveritiesFromArgument($value);
+				foreach ($mappings as $mapping) {
+					if (in_array($argName, $mapping['arguments'])) {
+						$mapping['action']($argValue);
+						$handled = true;
 						break;
+					}
+				}
 
-					case 'strict':
-					case 's':
-						$this->_strictModeEnabled = $value;
-						break;
-
-					case 'verbose':
-					case 'v':
-						$this->_loggedSeverities = $value ? Violation::getSeverities() : [];
-						break;
-
-					case 'quiet':
-					case 'q':
-						$this->_loggedSeverities = $value ? [] : Violation::getSeverities();
-						break;
-
-					case 'config':
-					case 'c':
-						if (!$value) {
-							throw new UnrecognizedOptionException('Must specify config path');
-						}
-						$this->_configName = $value;
-						break;
-
-					case 'report-xml':
-						$targetFilename = $value === null ? 'checkstyle.xml' : $value;
-						$checkstyleReporter = new CheckstyleReporter($this->_fileSystem);
-						$checkstyleReporter->setFilename($targetFilename);
-						$this->_reporters[] = $checkstyleReporter;
-						break;
-
-					default:
-						throw new UnrecognizedOptionException('Unrecognized option: ' . $key);
+				if (!$handled) {
+					throw new UnrecognizedOptionException('Unrecognized option: ' . $argName);
 				}
 			}
 
@@ -203,5 +177,51 @@
 					? self::ACTION_HELP
 					: self::ACTION_CHECK;
 			}
+		}
+
+		private function _handleHelpArgument($argValue) {
+			$this->_action = self::ACTION_HELP;
+		}
+
+		private function _handleVersionArgument($argValue) {
+			$this->_action = self::ACTION_VERSION;
+		}
+
+		private function _handleStrictArgument($argValue) {
+			$this->_strictModeEnabled = $argValue;
+		}
+
+		private function _handleLogArgument($argValue) {
+			$severities = [];
+			foreach ($argValue as $value) {
+				$severity = Violation::getSeverityFromString($value);
+				if ($severity === null) {
+					throw new UnrecognizedOptionException('Unrecognized severity: ' . $value);
+				}
+				$severities []= $severity;
+			}
+			$this->_loggedSeverities = array_unique($severities);
+		}
+
+		private function _handleVerboseArgument($argValue) {
+			$this->_loggedSeverities = $argValue ? Violation::getSeverities() : [];
+		}
+
+		private function _handleQuietArgument($argValue) {
+			$this->_loggedSeverities = $argValue ? [] : Violation::getSeverities();
+		}
+
+		private function _handleXmlReportArgument($argValue) {
+			$targetFilename = $argValue === null ? 'checkstyle.xml' : $argValue;
+			$checkstyleReporter = new CheckstyleReporter($this->_fileSystem);
+			$checkstyleReporter->setFilename($targetFilename);
+			$this->_reporters[] = $checkstyleReporter;
+		}
+
+		private function _handleConfigArgument($argValue) {
+			if (!$argValue) {
+				throw new UnrecognizedOptionException('Must specify config path');
+			}
+			$this->_configName = $argValue;
 		}
 	}
