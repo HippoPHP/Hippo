@@ -4,7 +4,7 @@
 
 	use \HippoPHP\Hippo\Config\Config;
 	use \HippoPHP\Hippo\File;
-	use \Exception;
+	use \HippoPHP\Hippo\Exception\FileNotFoundException;
 
 	class CheckRunner {
 		/**
@@ -55,7 +55,7 @@
 		 */
 		public function checkPath($path) {
 			if (!file_exists($path)) {
-				throw new Exception('File does not exist: ' . $path);
+				throw new FileNotFoundException('File does not exist: ' . $path);
 			}
 
 			return is_dir($path)
