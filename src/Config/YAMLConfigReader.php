@@ -22,7 +22,7 @@
 		 * @return Config
 		 */
 		public function loadFromFile($filename) {
-			$config = $this->parser->parse($this->fileSystem->getContent($filename));
+			$config = $this->_parseFile($filename);
 
 			$included = [$this->_normalizeConfigName($filename)];
 
@@ -30,7 +30,7 @@
 			while (isset($config['extends'])) {
 				$baseConfigName = $config['extends'];
 				$baseConfigPath = dirname($filename) . DIRECTORY_SEPARATOR . $baseConfigName . '.yml';
-				$baseConfig = $this->parser->parse($this->fileSystem->getContent($baseConfigPath));
+				$baseConfig = $this->_parseFile($baseConfigPath);
 				unset($config['extends']);
 
 				$config = $this->_mergeRecursive($baseConfig, $config);
@@ -46,6 +46,18 @@
 			}
 
 			return new Config($config);
+		}
+
+		/**
+		 * @param string $filePath
+		 * @return array<*,*>
+		 */
+		private function _parseFile($filePath) {
+			$result = $this->parser->parse($this->fileSystem->getContent($filePath));
+			if (is_string($result)) {
+				throw new \Exception('Config must be an array');
+			}
+			return $result;
 		}
 
 		/**

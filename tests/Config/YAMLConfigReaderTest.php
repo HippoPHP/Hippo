@@ -15,6 +15,20 @@
 			$this->_reader = new YAMLConfigReader($this->_fileSystemMock);
 		}
 
+		public function testJustAString() {
+			$yamlConfig = <<<YML
+string
+YML;
+
+			$this->_fileSystemMock
+				->expects($this->once())
+				->method('getContent')
+				->willReturn($yamlConfig);
+
+			$this->setExpectedException('\Exception', 'Config must be an array');
+			$this->_reader->loadFromFile('test.txt');
+		}
+
 		public function testLoadFromFile() {
 			$yamlConfig = <<<YML
 standards: "PSR-1"
