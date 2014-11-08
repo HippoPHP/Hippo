@@ -13,7 +13,7 @@
 	 */
 	interface CheckInterface {
 		/**
-		 * @return CheckResult
+		 * @return \HippoPHP\Hippo\CheckResult
 		 */
 		public function checkFile(File $file, Config $config);
 

@@ -22,7 +22,7 @@
 
 		/**
 		 * Result of the check.
-		 * @var CheckResult
+		 * @var \HippoPHP\Hippo\CheckResult
 		 */
 		protected $checkResult;
 
@@ -30,7 +30,7 @@
 		 * Runs checks on the file
 		 * @param  File   $file
 		 * @param  Config $config
-		 * @return CheckResult
+		 * @return \HippoPHP\Hippo\CheckResult
 		 */
 		public function checkFile(File $file, Config $config) {
 			$this->checkResult = new CheckResult();
@@ -42,7 +42,7 @@
 		/**
 		 * Set the severity level of the check.
 		 * @param int $severity
-		 * @return AbstractCheck
+		 * @return \HippoPHP\Hippo\AbstractCheck
 		 */
 		public function setSeverity($severity) {
 			if (null !== ($severity = Violation::getSeverityFromString($severity))) {
