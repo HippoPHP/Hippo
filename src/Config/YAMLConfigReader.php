@@ -58,9 +58,9 @@
 		}
 
 		/**
-		 * @param mixed[] $array1
-		 * @param mixed[] $array2
-		 * @return mixed[]
+		 * @param array<*,*> $array1
+		 * @param array<*,*> $array2
+		 * @return array<*,*>
 		 */
 		private function _mergeRecursive($array1, $array2) {
 			$result = [];

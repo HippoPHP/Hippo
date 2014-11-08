@@ -6,12 +6,12 @@
 
 	class Config {
 		/**
-		 * @var mixed[]
+		 * @var array<*,*>
 		 */
 		private $_array;
 
 		/**
-		 * @param mixed[] $array
+		 * @param array<*,*> $array
 		 */
 		public function __construct(array $array = []) {
 			$this->_array = $this->_normalizeArray($array);
@@ -64,8 +64,8 @@
 		}
 
 		/**
-		 * @param mixed[] $array
-		 * @return mixed[]
+		 * @param array<*,*> $array
+		 * @return array<*,*>
 		 */
 		private function _normalizeArray(array $array) {
 			$output = [];
