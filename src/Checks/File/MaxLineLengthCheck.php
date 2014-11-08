@@ -76,7 +76,6 @@
 					$file->getEncoding()
 				);
 
-				$violationLimit = null;
 				$severity = null;
 
 				foreach (Violation::getSeverities() as $severity) {
