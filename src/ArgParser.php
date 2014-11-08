@@ -108,7 +108,7 @@
 			if ($index !== false) {
 				return $this->_processStringValue($normalizedArg, substr($arg, $index + 1));
 			} elseif ($this->_argParserOptions->isFlag($normalizedArg)) {
-				if ($nextArg !== null && !$this->_isArgument($nextArg) && $this->_isBool($nextArg)) {
+				if ($this->_isBool($nextArg)) {
 					$hasUsedNextArg = true;
 					return $this->_processStringValue($normalizedArg, $nextArg);
 				}
