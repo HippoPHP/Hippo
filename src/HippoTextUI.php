@@ -32,6 +32,16 @@
 		protected $fileSystem;
 
 		/**
+		 * @var Environment
+		 */
+		protected $environment;
+
+		/**
+		 * @var ConfigReaderInterface
+		 */
+		protected $configReader;
+
+		/**
 		 * @param Environment $environment
 		 * @param FileSystem $fileSystem
 		 * @param CheckRepository $checkRepository
