@@ -2,11 +2,13 @@
 
 	namespace HippoPHP\Hippo\Checks\Whitespace;
 
-	use \HippoPHP\Hippo\File;
-	use \HippoPHP\Hippo\Violation;
-	use \HippoPHP\Hippo\Config\Config;
+	use \HippoPHP\Hippo\CheckContext;
 	use \HippoPHP\Hippo\Checks\AbstractCheck;
 	use \HippoPHP\Hippo\Checks\CheckInterface;
+	use \HippoPHP\Hippo\Config\Config;
+	use \HippoPHP\Hippo\Violation;
+	use \HippoPHP\Tokenizer\TokenListIterator;
+	use \HippoPHP\Tokenizer\TokenType;
 
 	class IndentationCheck extends AbstractCheck implements CheckInterface {
 		//TODO: add "auto", which checks only for consistency
@@ -64,48 +66,59 @@
 		/**
 		 * checkFileInternal(): defined by AbstractCheck.
 		 * @see AbstractCheck::checkFileInternal()
-		 * @param File $file
+		 * @param CheckContext $checkContext
 		 * @param Config $config
 		 * @return void
 		 */
-		protected function checkFileInternal(File $file, Config $config) {
+		protected function checkFileInternal(CheckContext $checkContext, Config $config) {
+			$file = $checkContext->getFile();
+
 			$this->setIndentStyle($config->get('style', $this->indentStyle));
 			$this->setIndentCount($config->get('count', $this->indentCount));
 
-			$indentation = $this->_getIndentChar();
+			$indentation = $this->_getBaseIndentation();
+			$lines = $this->_getLines($checkContext->getTokenList());
 
-			$file->rewind();
-
-			while (true) {
-				$token = $file->current();
-				$level = $token->getLevel();
-
-				$file->next();
-				if ($file->current()->getType() === '}' || $file->current()->getType() === ')') {
-					$level--;
+			$level = 0;
+			foreach ($lines as $lineNumber => $line) {
+				$actualIndentation = '';
+				if (count($line) > 0) {
+					if ($line[0]->isType(TokenType::TOKEN_WHITESPACE)) {
+						$actualIndentation = $line[0]->getContent();
+					}
 				}
-				$file->prev();
 
-				$expectedIndentation = str_repeat($indentation, $level);
-				$actualIndentation = $token->getTrailingWhitespace();
+				foreach ($line as $token) {
+					$content = $token->getContent();
+					if ($content === '}' || $content === ')' || $content === ']') {
+						$level --;
+					}
+				}
+
+				$expectedIndentation = $level > 0 ? str_repeat($indentation, $level) : '';
 
 				if ($expectedIndentation !== $actualIndentation) {
 					$this->addViolation(
 						$file,
-						$token,
-						$column,
-						sprintf("Unexpected indentation found at level %d", $level),
+						$lineNumber,
+						count($line) > 0 ? $line[0]->getColumn() + strlen($line[0]->getContent()) : 1,
+						sprintf('Unexpected indentation (expected: %s, actual: %s)',
+							$this->_escape($expectedIndentation),
+							$this->_escape($actualIndentation)),
 						Violation::SEVERITY_WARNING
 					);
 				}
 
-				if (!$file->seekNextLine()) {
-					return;
+				foreach ($line as $token) {
+					$content = $token->getContent();
+					if ($content === '{' || $content === '(' || $content === '[') {
+						$level ++;
+					}
 				}
 			}
 		}
 
-		private function _getIndentChar() {
+		private function _getBaseIndentation() {
 			$char = '';
 			if ($this->indentStyle === self::INDENT_STYLE_SPACE) {
 				$char = ' ';
@@ -114,5 +127,25 @@
 			}
 
 			return str_repeat($char, $this->indentCount);
+		}
+
+		private function _getLines($tokenList) {
+			$lines = [];
+			$line = [];
+			$lineNumber = 1;
+			foreach ($tokenList as $token) {
+				$line[] = $token;
+				if ($token->isType(TokenType::TOKEN_EOL)) {
+					$lines[$lineNumber] = $line;
+					$line = [];
+					$lineNumber ++;
+				}
+			}
+			$lines[$lineNumber] = $line;
+			return $lines;
+		}
+
+		private function _escape($string) {
+			return str_replace(["\t", ' '], ['\\t', '\\ '], $string);
 		}
 	}

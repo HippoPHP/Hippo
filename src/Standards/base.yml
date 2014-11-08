@@ -2,7 +2,7 @@ name: "base"
 
 file:
   open_tag:
-    enabled: false
+    enabled: true
   max_line_length:
     enabled: true
     error_limit: 120

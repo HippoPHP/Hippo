@@ -2,7 +2,7 @@
 
 	namespace HippoPHP\Hippo\Checks;
 
-	use \HippoPHP\Hippo\File;
+	use \HippoPHP\Hippo\CheckContext;
 	use \HippoPHP\Hippo\Config\Config;
 
 	/**
@@ -13,9 +13,11 @@
 	 */
 	interface CheckInterface {
 		/**
+		 * @param CheckContext $checkContext
+		 * @param Config       $config
 		 * @return \HippoPHP\Hippo\CheckResult
 		 */
-		public function checkFile(File $file, Config $config);
+		public function checkFile(CheckContext $checkContext, Config $config);
 
 		/**
 		 * @return string
