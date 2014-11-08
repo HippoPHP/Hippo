@@ -79,23 +79,16 @@
 			foreach (array_merge(array_keys($array1), array_keys($array2)) as $key) {
 				if (!isset($array1[$key])) {
 					$result[$key] = $array2[$key];
-					continue;
-				}
-
-				if (!isset($array2[$key])) {
+				} elseif (!isset($array2[$key])) {
 					$result[$key] = $array1[$key];
-					continue;
-				}
-
-				if (is_array($array1[$key]) || is_array($array2[$key])) {
+				} elseif (is_array($array1[$key]) || is_array($array2[$key])) {
 					if (!is_array($array1[$key]) || !is_array($array2[$key])) {
 						throw new \Exception('Cannot merge a scalar with an array');
 					}
 					$result[$key] = $this->_mergeRecursive($array1[$key], $array2[$key]);
-					continue;
+				} else {
+					$result[$key] = $array2[$key];
 				}
-
-				$result[$key] = $array2[$key];
 			}
 			return $result;
 		}
