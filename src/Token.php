@@ -16,7 +16,7 @@
 
 		/**
 		 * Token lexme.
-		 * @var int
+		 * @var string
 		 */
 		protected $lexeme;
 
