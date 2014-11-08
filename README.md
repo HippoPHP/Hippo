@@ -3,7 +3,7 @@
 [![Build Status](http://img.shields.io/travis/HippoPHP/Hippo.svg?style=flat-square)](https://travis-ci.org/HippoPHP/Hippo)
 [![Code Climate](http://img.shields.io/codeclimate/github/HippoPHP/Hippo.svg?style=flat-square)](https://codeclimate.com/github/HippoPHP/Hippo)
 [![Test Coverage](http://img.shields.io/codeclimate/coverage/github/HippoPHP/Hippo.svg?style=flat-square)](https://codeclimate.com/github/HippoPHP/Hippo)
-[![Dependencies](https://www.versioneye.com/user/projects/545de609eb8df2d3b4000051/badge.svg?style=flat)](https://www.versioneye.com/user/projects/545de609eb8df2d3b4000051)
+[![Dependencies](http://www.versioneye.com/user/projects/545de609eb8df2d3b4000051/badge.svg?style=flat)](http://www.versioneye.com/user/projects/545de609eb8df2d3b4000051)
 
 
 ## About
