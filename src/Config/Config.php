@@ -59,6 +59,7 @@
 				$current = &$this->_navigateToKey($key, false);
 				$current = null;
 			} catch (BadConfigKeyException $e) {
+				// If we try to remove an empty node, don't error.
 			}
 		}
 
