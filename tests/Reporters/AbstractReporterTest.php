@@ -32,15 +32,18 @@
 			return $this->_savedContent;
 		}
 
-		protected function getEmptyCheckResult($filename) {
-			$file = new File($filename);
+		protected function getFile($filename) {
+			return new File($filename);
+		}
+
+		protected function getEmptyCheckResult(File $file) {
 			$checkResult = new CheckResult();
 			$checkResult->setFile($file);
 			return $checkResult;
 		}
 
-		protected function getBasicCheckResult($filename) {
-			$checkResult = $this->getEmptyCheckResult($filename);
+		protected function getBasicCheckResult(File $file) {
+			$checkResult = $this->getEmptyCheckResult($file);
 			$file = $checkResult->getFile();
 
 			$info = new Violation($file, 1, 4, Violation::SEVERITY_INFO, 'first message', '<?php');

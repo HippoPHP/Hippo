@@ -2,8 +2,9 @@
 
 	namespace HippoPHP\Hippo\Reporters;
 
-	use \HippoPHP\Hippo\FileSystem;
 	use \HippoPHP\Hippo\CheckResult;
+	use \HippoPHP\Hippo\File;
+	use \HippoPHP\Hippo\FileSystem;
 	use \HippoPHP\Hippo\Violation;
 
 	/**
@@ -41,15 +42,14 @@
 
 		/**
 		 * Defined by ReportInterface.
-		 * @see ReportInterface::addCheckResult()
-		 * @param CheckResult $checkResult
+		 * @see ReportInterface::addCheckResults()
+		 * @param File $file
+		 * @param CheckResult[] $checkResults
 		 */
-		public function addCheckResult(CheckResult $checkResult) {
+		public function addCheckResults(File $file, array $checkResults) {
 			if (empty($this->_loggedSeverities)) {
 				return;
 			}
-
-			$violations = $this->_getFilteredViolations($checkResult->getViolations());
 
 			if ($this->_firstFile) {
 				$this->_firstFile = false;
@@ -57,27 +57,31 @@
 				$this->_write(PHP_EOL);
 			}
 
-			$this->_write('Checking ' . $checkResult->getFile()->getFilename() . PHP_EOL);
+			$this->_write('Checking ' . $file->getFilename() . PHP_EOL);
 
-			if (!$violations) {
-				return;
-			}
+			foreach ($checkResults as $checkResult) {
+				$violations = $this->_getFilteredViolations($checkResult->getViolations());
 
-			$this->_write($checkResult->getFile()->getFilename() . ':' . PHP_EOL);
-			$this->_write(str_repeat('-', 80) . PHP_EOL);
-
-			foreach ($violations as $violation) {
-				$this->_write('Line ' . $violation->getLine());
-
-				if ($violation->getColumn() > 0) {
-					$this->_write(':' . $violation->getColumn());
+				if (!$violations) {
+					return;
 				}
 
-				$this->_write(' ('. $violation->getSeverityName() . ') : ');
-				$this->_write($violation->getMessage() . PHP_EOL);
-			}
+				$this->_write($file->getFilename() . ':' . PHP_EOL);
+				$this->_write(str_repeat('-', 80) . PHP_EOL);
 
-			$this->_write(PHP_EOL);
+				foreach ($violations as $violation) {
+					$this->_write('Line ' . $violation->getLine());
+
+					if ($violation->getColumn() > 0) {
+						$this->_write(':' . $violation->getColumn());
+					}
+
+					$this->_write(' ('. $violation->getSeverityName() . ') : ');
+					$this->_write($violation->getMessage() . PHP_EOL);
+				}
+
+				$this->_write(PHP_EOL);
+			}
 			flush();
 		}
 

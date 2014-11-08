@@ -15,17 +15,19 @@
 		}
 
 		public function testReportWithNoViolations() {
+			$file = $this->getFile('whatever.php');
 			$reporter = new ArrayReporter();
 			$reporter->start();
-			$reporter->addCheckResult($this->getEmptyCheckResult('whatever.php'));
+			$reporter->addCheckResults($file, [$this->getEmptyCheckResult($file)]);
 			$reporter->finish();
 			$this->assertEquals([], $reporter->getReport());
 		}
 
 		public function testBasicReport() {
+			$file = $this->getFile('whatever.php');
 			$reporter = new ArrayReporter();
 			$reporter->start();
-			$reporter->addCheckResult($this->getBasicCheckResult('whatever.php'));
+			$reporter->addCheckResults($file, [$this->getBasicCheckResult($file)]);
 			$reporter->finish();
 
 			$expectedLines = [

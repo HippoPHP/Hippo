@@ -2,8 +2,9 @@
 
 	namespace HippoPHP\Hippo\Reporters;
 
-	use \HippoPHP\Hippo\Violation;
 	use \HippoPHP\Hippo\CheckResult;
+	use \HippoPHP\Hippo\File;
+	use \HippoPHP\Hippo\Violation;
 
 	/**
 	 * Array Reporter.
@@ -26,24 +27,27 @@
 
 		/**
 		 * Defined by ReportInterface.
-		 * @see ReportInterface::addCheckResult()
-		 * @param CheckResult $checkResult
+		 * @see ReportInterface::addCheckResults()
+		 * @param File $file
+		 * @param CheckResult $checkResults
 		 */
-		public function addCheckResult(CheckResult $checkResult) {
-			foreach ($checkResult->getViolations() as $violation) {
-				$key = $this->_getArrayKey($violation);
-				if (!isset($this->report[$key])) {
-					$this->report[$key] = array();
-				}
+		public function addCheckResults(File $file, array $checkResults) {
+			foreach ($checkResults as $checkResult) {
+				foreach ($checkResult->getViolations() as $violation) {
+					$key = $this->_getArrayKey($violation);
+					if (!isset($this->report[$key])) {
+						$this->report[$key] = array();
+					}
 
-				$this->report[$key][] = array(
-					'file' => $violation->getFile()->getFilename(),
-					'line' => $violation->getLine(),
-					'column' => $violation->getColumn(),
-					'severity' => $violation->getSeverity(),
-					'message' => $violation->getMessage(),
-					'source' => $violation->getSource()
-				);
+					$this->report[$key][] = array(
+						'file' => $file->getFilename(),
+						'line' => $violation->getLine(),
+						'column' => $violation->getColumn(),
+						'severity' => $violation->getSeverity(),
+						'message' => $violation->getMessage(),
+						'source' => $violation->getSource()
+					);
+				}
 			}
 		}
 
