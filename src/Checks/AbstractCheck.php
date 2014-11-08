@@ -2,8 +2,9 @@
 
 	namespace HippoPHP\Hippo\Checks;
 
-	use \HippoPHP\Hippo\Checks\CheckInterface;
+	use \HippoPHP\Hippo\CheckContext;
 	use \HippoPHP\Hippo\CheckResult;
+	use \HippoPHP\Hippo\Checks\CheckInterface;
 	use \HippoPHP\Hippo\Config\Config;
 	use \HippoPHP\Hippo\File;
 	use \HippoPHP\Hippo\Violation;
@@ -28,14 +29,14 @@
 
 		/**
 		 * Runs checks on the file
-		 * @param  File   $file
-		 * @param  Config $config
+		 * @param  CheckContext $checkContext
+		 * @param  Config       $config
 		 * @return \HippoPHP\Hippo\CheckResult
 		 */
-		public function checkFile(File $file, Config $config) {
+		public function checkFile(CheckContext $checkContext, Config $config) {
 			$this->checkResult = new CheckResult();
-			$this->checkResult->setFile($file);
-			$this->checkFileInternal($file, $config);
+			$this->checkResult->setFile($checkContext->getFile());
+			$this->checkFileInternal($checkContext, $config);
 			return $this->checkResult;
 		}
 
@@ -74,5 +75,5 @@
 			$this->checkResult->addViolation(new Violation($file, $line, $column, $severity, $message, $source));
 		}
 
-		abstract protected function checKFileInternal(File $file, Config $config);
+		abstract protected function checKFileInternal(CheckContext $checkContext, Config $config);
 	}

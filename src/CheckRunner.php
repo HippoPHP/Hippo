@@ -2,9 +2,10 @@
 
 	namespace HippoPHP\Hippo;
 
+	use \HippoPHP\Hippo\CheckContextProvider;
 	use \HippoPHP\Hippo\Config\Config;
-	use \HippoPHP\Hippo\File;
 	use \HippoPHP\Hippo\Exception\FileNotFoundException;
+	use \HippoPHP\Hippo\File;
 
 	class CheckRunner {
 		/**
@@ -68,13 +69,12 @@
 		 * @return CheckResult[]
 		 */
 		public function checkFile(File $file) {
-			//TODO: prepare AST and token context here
+			$checkContext = new CheckContext($file);
 			$results = [];
 			foreach ($this->_checkRepository->getChecks() as $check) {
-				//TODO: inject context to Check here
 				$branch = $this->_config->get($check->getConfigRoot());
 				if ($branch->get('enabled') === true) {
-					$results[] = $check->checkFile($file, $branch);
+					$results[] = $check->checkFile($checkContext, $branch);
 				}
 			}
 			return $results;

@@ -2,10 +2,10 @@
 
 	namespace HippoPHP\Hippo\Checks\Line;
 
+	use \HippoPHP\Hippo\CheckContext;
 	use \HippoPHP\Hippo\Checks\AbstractCheck;
 	use \HippoPHP\Hippo\Checks\CheckInterface;
 	use \HippoPHP\Hippo\Config\Config;
-	use \HippoPHP\Hippo\File;
 
 	/**
 	 * Checks the open tag.
@@ -21,11 +21,12 @@
 		/**
 		 * checkFileInternal(): defined by AbstractCheck.
 		 * @see AbstractCheck::checkFileInternal()
-		 * @param File $file
+		 * @param CheckContext $checkContext
 		 * @param Config $config
 		 * @return void
 		 */
-		protected function checkFileInternal(File $file, Config $config) {
+		protected function checkFileInternal(CheckContext $checkContext, Config $config) {
+			$file = $checkContext->getFile();
 			$tokens = token_get_all($file->getSource());
 			$firstToken = $tokens[0][0];
 			if (count($file) > 0 && $firstToken !== T_OPEN_TAG) {

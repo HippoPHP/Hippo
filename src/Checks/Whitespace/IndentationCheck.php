@@ -2,11 +2,11 @@
 
 	namespace HippoPHP\Hippo\Checks\Whitespace;
 
-	use \HippoPHP\Hippo\File;
-	use \HippoPHP\Hippo\Violation;
-	use \HippoPHP\Hippo\Config\Config;
+	use \HippoPHP\Hippo\CheckContext;
 	use \HippoPHP\Hippo\Checks\AbstractCheck;
 	use \HippoPHP\Hippo\Checks\CheckInterface;
+	use \HippoPHP\Hippo\Config\Config;
+	use \HippoPHP\Hippo\Violation;
 
 	class IndentationCheck extends AbstractCheck implements CheckInterface {
 		//TODO: add "auto", which checks only for consistency
@@ -64,11 +64,13 @@
 		/**
 		 * checkFileInternal(): defined by AbstractCheck.
 		 * @see AbstractCheck::checkFileInternal()
-		 * @param File $file
+		 * @param CheckContext $checkContext
 		 * @param Config $config
 		 * @return void
 		 */
-		protected function checkFileInternal(File $file, Config $config) {
+		protected function checkFileInternal(CheckContext $checkContext, Config $config) {
+			$file = $checkContext->getFile();
+
 			$this->setIndentStyle($config->get('style', $this->indentStyle));
 			$this->setIndentCount($config->get('count', $this->indentCount));
 
