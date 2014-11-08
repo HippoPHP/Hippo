@@ -5,7 +5,7 @@ file:
     enabled: false
   max_line_length:
     enabled: true
-    error_limit: 80
+    error_limit: 120
     warning_limit: -1
     info_limit: -1
     tab_expand: 4
