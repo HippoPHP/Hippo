@@ -2,7 +2,7 @@
 
 	namespace HippoPHP\Hippo\Reporters;
 
-	use \XmlWriter;
+	use \XMLWriter;
 	use \HippoPHP\Hippo\FileSystem;
 	use \HippoPHP\Hippo\CheckResult;
 
@@ -14,7 +14,7 @@
 	class CheckstyleReporter implements ReporterInterface {
 		/**
 		 * XML Writer.
-		 * @var XMLWriter
+		 * @var \XMLWriter
 		 */
 		protected $writer;
 
