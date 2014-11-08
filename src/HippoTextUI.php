@@ -133,7 +133,7 @@
 						? Violation::SEVERITY_IGNORE
 						: Violation::SEVERITY_ERROR;
 
-					$this->reportCheckResults($this->context->getReporters(), $checkResults);
+					$this->reportCheckResults($this->context->getReporters(), $file, $checkResults);
 					foreach ($checkResults as $checkResult) {
 						if ($checkResult->count() > 0) {
 							$success &= $checkResult->getMaximumViolationSeverity() < $minimumSeverityToFail;
@@ -196,14 +196,13 @@
 
 		/**
 		 * @param ReporterInterface[] $reporters
+		 * @param File $file
 		 * @param CheckResult[] $checkResults
 		 * @return void
 		 */
-		protected function reportCheckResults(array $reporters, array $checkResults) {
+		protected function reportCheckResults(array $reporters, File $file, array $checkResults) {
 			foreach ($reporters as $reporter) {
-				foreach ($checkResults as $checkResult) {
-					$reporter->addCheckResult($checkResult);
-				}
+				$reporter->addCheckResults($file, $checkResults);
 			}
 		}
 

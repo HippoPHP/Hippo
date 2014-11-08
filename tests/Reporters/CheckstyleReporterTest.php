@@ -21,10 +21,11 @@ EXML;
 		}
 
 		public function testReportWithNoViolations() {
+			$file = $this->getFile('whatever.php');
 			$reporter = new CheckstyleReporter($this->fileSystemMock);
 			$reporter->setFilename('checkstyle.xml');
 			$reporter->start();
-			$reporter->addCheckResult($this->getEmptyCheckResult('whatever.php'));
+			$reporter->addCheckResults($file, [$this->getEmptyCheckResult($file)]);
 			$reporter->finish();
 			$expectedLines = <<<EXML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -37,10 +38,11 @@ EXML;
 		}
 
 		public function testBasicReport() {
+			$file = $this->getFile('whatever.php');
 			$reporter = new CheckstyleReporter($this->fileSystemMock);
 			$reporter->setFilename('checkstyle.xml');
 			$reporter->start();
-			$reporter->addCheckResult($this->getBasicCheckResult('whatever.php'));
+			$reporter->addCheckResults($file, [$this->getBasicCheckResult($file)]);
 			$reporter->finish();
 
 			$expectedLines = <<<EXML

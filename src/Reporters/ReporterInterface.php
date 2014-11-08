@@ -3,6 +3,7 @@
 	namespace HippoPHP\Hippo\Reporters;
 
 	use \HippoPHP\Hippo\CheckResult;
+	use \HippoPHP\Hippo\File;
 
 	/**
 	 * Reporters should inherit from this.
@@ -16,10 +17,11 @@
 
 		/**
 		 * Adds a check result to the report.
-		 * @param CheckResult $checkResult
+		 * @param File $file
+		 * @param CheckResult[] $checkResults
 		 * @return void
 		 */
-		public function addCheckResult(CheckResult $checkResult);
+		public function addCheckResults(File $file, array $checkResult);
 
 		/**
 		 * Method called at the end of a check.
