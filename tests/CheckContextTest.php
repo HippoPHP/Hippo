@@ -32,6 +32,7 @@
 		public function testGetSyntaxTree() {
 			$syntaxTree = $this->_checkContext->getSyntaxTree();
 			$this->assertNotNull($syntaxTree);
-			$this->assertInstanceOf('\PhpParser\Parser', $syntaxTree);
+			$this->assertTrue(is_array($syntaxTree));
+			$this->assertInstanceOf('\PhpParser\Node\Stmt\InlineHTML', $syntaxTree[0]);
 		}
 	}
