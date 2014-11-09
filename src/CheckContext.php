@@ -2,9 +2,11 @@
 
 	namespace HippoPHP\Hippo;
 
-	use \HippoPHP\Hippo\Exception;
 	use \HippoPHP\Hippo\File;
+	use \HippoPHP\Hippo\Exception;
 	use \HippoPHP\Tokenizer\Tokenizer;
+	use \PhpParser\Parser;
+	use \PhpParser\Lexer\Emulative;
 
 	class CheckContext {
 		const CONTEXT_TOKEN_LIST = 'tokenList';
@@ -43,7 +45,9 @@
 		 */
 		public function getSyntaxTree() {
 			return $this->_lazyGet(self::CONTEXT_AST, function() {
-				throw new BadMethodCallException('Not implemented');
+				$parser = new Parser(new Emulative);
+				$stmts = $parser->parse($this->_file->getSource());
+				return $stmts;
 			});
 		}
 

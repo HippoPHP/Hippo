@@ -5,6 +5,7 @@
 	use \HippoPHP\Hippo\File;
 	use \HippoPHP\Hippo\CheckContext;
 	use \HippoPHP\Tokenizer\Token;
+	use \PhpParser\Parser;
 
 	class CheckContextTest extends \PHPUnit_Framework_TestCase {
 		private $_file;
@@ -29,7 +30,9 @@
 		}
 
 		public function testGetSyntaxTree() {
-			$this->markTestSkipped();
-			//syntax tree retrieval is not implemented yet
+			$syntaxTree = $this->_checkContext->getSyntaxTree();
+			$this->assertNotNull($syntaxTree);
+			$this->assertTrue(is_array($syntaxTree));
+			$this->assertInstanceOf('\PhpParser\Node\Stmt\InlineHTML', $syntaxTree[0]);
 		}
 	}
