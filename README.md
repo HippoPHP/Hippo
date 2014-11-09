@@ -17,8 +17,8 @@ Compatible with PHP 5.4 and up.
 ## Goals
 
 - [x] Create a proper test suite.
-- [ ] Checks should be able to implement different kind of check types, giving more freedom on a per-check basis.
-- [ ] Integrate PHP-Parser for AST. Checks can extend some kind of AST Node Tree class.
+- [x] Checks should be able to implement different kind of check types, giving more freedom on a per-check basis.
+- [x] Integrate PHP-Parser for AST. Checks can extend some kind of AST Node Tree class.
 - [ ] Set default standards to [PSR 2](http://www.php-fig.org/psr/psr-2/).
     - [ ] Standards and configurations should be able to be extended.
     - [ ] PSR-1
