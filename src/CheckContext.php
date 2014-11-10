@@ -64,7 +64,7 @@
 		 * @return mixed
 		 */
 		private function _lazyGet($cacheKey, callable $factory) {
-			if (!isset($this->_cache[$cacheKey])){
+			if (!isset($this->_cache[$cacheKey])) {
 				$this->_cache[$cacheKey] = $factory();
 			}
 			return $this->_cache[$cacheKey];
