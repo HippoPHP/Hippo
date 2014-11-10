@@ -10,6 +10,6 @@ file:
     info_limit: -1
     tab_expand: 4
   indentation:
-    enabled: false
+    enabled: true
     style: "tab"
     count: 1
