@@ -51,12 +51,12 @@
 
 			$argCount = count($argv);
 
-			for ($i = 0; $i < $argCount; $i ++) {
+			for ($i = 0; $i < $argCount; $i++) {
 				$arg = $argv[$i];
 				$nextArg = isset($argv[$i + 1]) ? $argv[$i + 1] : null;
 				$hasUsedNextArg = $this->_processArg($arg, $nextArg);
 				if ($hasUsedNextArg) {
-					++ $i;
+					$i++;
 				}
 			}
 
@@ -151,6 +151,11 @@
 			return !$this->_isLongArgument($arg) && $arg{0} === '-';
 		}
 
+		/**
+		 * Normalizes an argument key.
+		 * @param  string $arg
+		 * @return string
+		 */
 		private function _normalizeArg($arg) {
 			if (strpos($arg, '=') !== false)
 				$arg = substr($arg, 0, strpos($arg, '='));
@@ -178,10 +183,11 @@
 		 * @return boolean
 		 */
 		private function _toBool($arg) {
-			if ($arg === '0')
+			if ($arg === '0') {
 				return false;
-			elseif ($arg === '1')
+			} elseif ($arg === '1') {
 				return true;
+			}
 			return null;
 		}
 	}

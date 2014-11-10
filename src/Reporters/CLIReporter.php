@@ -57,6 +57,7 @@
 				$this->_write(PHP_EOL);
 			}
 
+			// TODO: Only output if the file has violations?
 			$this->_write('Checking ' . $file->getFilename() . PHP_EOL);
 
 			foreach ($checkResults as $checkResult) {
@@ -92,8 +93,13 @@
 		public function finish() {
 		}
 
+		/**
+		 * Writes to stdout
+		 * @param  string $content
+		 * @return void
+		 */
 		private function _write($content) {
-			return $this->_fileSystem->putContent('php://stdout', $content);
+			$this->_fileSystem->putContent('php://stdout', $content);
 		}
 
 		/**

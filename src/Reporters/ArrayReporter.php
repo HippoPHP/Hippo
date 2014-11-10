@@ -16,7 +16,7 @@
 		 * Report array.
 		 * @var array
 		 */
-		protected $report = array();
+		protected $report = [];
 
 		/**
 		 * Defined by ReportInterface.
@@ -36,16 +36,16 @@
 				foreach ($checkResult->getViolations() as $violation) {
 					$key = $this->_getArrayKey($violation);
 					if (!isset($this->report[$key])) {
-						$this->report[$key] = array();
+						$this->report[$key] = [];
 					}
 
-					$this->report[$key][] = array(
+					$this->report[$key][] = [
 						'file' => $file->getFilename(),
 						'line' => $violation->getLine(),
 						'column' => $violation->getColumn(),
 						'severity' => $violation->getSeverity(),
 						'message' => $violation->getMessage(),
-					);
+					];
 				}
 			}
 		}

@@ -31,7 +31,7 @@
 		 * Lines of the file.
 		 * @var array
 		 */
-		protected $lines = array();
+		protected $lines = [];
 
 		/**
 		 * Create a new file representation.
@@ -87,9 +87,9 @@
 		 * @return array
 		 */
 		private function _buildLinesFromSource($source) {
-			$eols = array("\r", "\n", "\r\n");
+			$eols = ["\r", "\n", "\r\n"];
 
-			$lines = array();
+			$lines = [];
 			$index = 1;
 			while ($source !== '') {
 				$line = $this->_extractNextLine($source, $eols, $eolUsed);

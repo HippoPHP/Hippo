@@ -66,38 +66,40 @@
 		 */
 		protected function checkFileInternal(CheckContext $checkContext, Config $config) {
 			$file = $checkContext->getFile();
+			$lines = $file->getLines();
 
-			$this->setLimit(Violation::SEVERITY_ERROR, $config->get('error_limit', $this->limits[Violation::SEVERITY_ERROR]));
-			$this->setLimit(Violation::SEVERITY_WARNING, $config->get('warning_limit', $this->limits[violation::SEVERITY_WARNING]));
-			$this->setLimit(Violation::SEVERITY_INFO, $config->get('info_limit', $this->limits[Violation::SEVERITY_INFO]));
-			$this->setTabExpand($config->get('tab_expand', $this->tabExpand));
+			if (count($lines) > 0) {
+				$this->setLimit(Violation::SEVERITY_ERROR, $config->get('error_limit', $this->limits[Violation::SEVERITY_ERROR]));
+				$this->setLimit(Violation::SEVERITY_WARNING, $config->get('warning_limit', $this->limits[violation::SEVERITY_WARNING]));
+				$this->setLimit(Violation::SEVERITY_INFO, $config->get('info_limit', $this->limits[Violation::SEVERITY_INFO]));
+				$this->setTabExpand($config->get('tab_expand', $this->tabExpand));
 
-			foreach ($file->getLines() as $line => $data) {
-				$lineLength = iconv_strlen(
-					str_replace("\t", str_repeat(' ', $this->tabExpand), rtrim($data, "\r\n")),
-					$file->getEncoding()
-				);
-
-				$severity = null;
-
-				foreach (Violation::getSeverities() as $severity) {
-					if (!isset($this->limits[$severity]) || $this->limits[$severity] === null) {
-						continue;
-					}
-
-					if ($lineLength <= $this->limits[$severity]) {
-						continue;
-					}
-
-					$this->addViolation(
-						$file,
-						$line,
-						0,
-						sprintf('Line is too long. [%d/%d]', $lineLength, $this->limits[$severity]),
-						$severity
+				foreach ($lines as $line => $data) {
+					$lineLength = iconv_strlen(
+						str_replace("\t", str_repeat(' ', $this->tabExpand), rtrim($data, "\r\n")),
+						$file->getEncoding()
 					);
+
+					$severity = null;
+
+					foreach (Violation::getSeverities() as $severity) {
+						if (!isset($this->limits[$severity]) || $this->limits[$severity] === null) {
+							continue;
+						}
+
+						if ($lineLength <= $this->limits[$severity]) {
+							continue;
+						}
+
+						$this->addViolation(
+							$file,
+							$line,
+							0,
+							sprintf('Line is too long. [%d/%d]', $lineLength, $this->limits[$severity]),
+							$severity
+						);
+					}
 				}
 			}
 		}
-
 	}
