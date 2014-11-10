@@ -81,7 +81,6 @@
 
 					$this->writer->writeAttribute('severity', $violation->getSeverity());
 					$this->writer->writeAttribute('message', $violation->getMessage());
-					$this->writer->writeAttribute('source', $violation->getSource());
 
 					$this->writer->endElement();
 				}

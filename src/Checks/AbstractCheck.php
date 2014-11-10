@@ -62,17 +62,11 @@
 		 * @param int $severity
 		 */
 		protected function addViolation(File $file, $line, $column, $message, $severity = null) {
-			$source = get_class($this);
-
-			if (strpos($source, 'Hippo\\Check\\') === 0) {
-				$source = 'Hippo\\' . substr($source, strlen('Hippo\\Check\\'));
-			}
-
 			if ($severity === null) {
 				$severity = $this->severity;
 			}
 
-			$this->checkResult->addViolation(new Violation($file, $line, $column, $severity, $message, $source));
+			$this->checkResult->addViolation(new Violation($file, $line, $column, $severity, $message));
 		}
 
 		abstract protected function checkFileInternal(CheckContext $checkContext, Config $config);

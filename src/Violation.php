@@ -60,27 +60,19 @@
 		protected $message;
 
 		/**
-		 * The source of the error.
-		 * @var string
-		 */
-		protected $source;
-
-		/**
 		 * Creates a new violation.
 		 * @param int $line
 		 * @param int $column
 		 * @param int $severity
 		 * @param string $message
-		 * @param string $source
 		 * @return void
 		 */
-		public function __construct(File $file, $line, $column, $severity, $message, $source) {
+		public function __construct(File $file, $line, $column, $severity, $message) {
 			$this->file = $file;
 			$this->line = (int) $line;
 			$this->column = (int) $column;
 			$this->severity = min(self::SEVERITY_ERROR, max(self::SEVERITY_IGNORE, (int) $severity));
 			$this->message = $message;
-			$this->source = $source;
 		}
 
 		/**
@@ -130,14 +122,6 @@
 		 */
 		public function getMessage() {
 			return $this->message;
-		}
-
-		/**
-		 * Returns the source rule of the error.
-		 * @return string
-		 */
-		public function getSource() {
-			return $this->source;
 		}
 
 		/**
