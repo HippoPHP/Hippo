@@ -6,7 +6,6 @@
 	use \HippoPHP\Hippo\Checks\AbstractCheck;
 	use \HippoPHP\Hippo\Checks\CheckInterface;
 	use \HippoPHP\Hippo\Config\Config;
-	use \HippoPHP\Tokenizer\TokenType;
 
 	/**
 	 * Checks the open tag.
@@ -30,7 +29,7 @@
 			$file = $checkContext->getFile();
 			$tokens = $checkContext->getTokenList();
 			$firstToken = $tokens[0];
-			if (count($file) > 0 && !$firstToken->isType(TokenType::TOKEN_OPEN_TAG)) {
+			if (count($file) > 0 && !$firstToken->isType(T_OPEN_TAG)) {
 				$this->addViolation($file, 1, 1, 'Files must begin with the PHP open tag.');
 			}
 		}
