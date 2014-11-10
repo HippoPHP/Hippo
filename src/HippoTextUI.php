@@ -156,6 +156,7 @@
 		 * @return void
 		 */
 		protected function showHelp() {
+			$this->showVersion();
 			echo "Usage: hippo [switches] <directory>\n"
 				. "  -h, --help                Prints this usage information\n"
 				. "  -v, --version             Print version information\n"
