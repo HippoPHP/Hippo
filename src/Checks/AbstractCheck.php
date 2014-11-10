@@ -75,5 +75,5 @@
 			$this->checkResult->addViolation(new Violation($file, $line, $column, $severity, $message, $source));
 		}
 
-		abstract protected function checKFileInternal(CheckContext $checkContext, Config $config);
+		abstract protected function checkFileInternal(CheckContext $checkContext, Config $config);
 	}
