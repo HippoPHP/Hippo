@@ -7,8 +7,6 @@
 	use \HippoPHP\Hippo\Checks\CheckInterface;
 	use \HippoPHP\Hippo\Config\Config;
 	use \HippoPHP\Hippo\Violation;
-	use \HippoPHP\Tokenizer\TokenListIterator;
-	use \HippoPHP\Tokenizer\TokenType;
 
 	class IndentationCheck extends AbstractCheck implements CheckInterface {
 		//TODO: add "auto", which checks only for consistency
@@ -83,7 +81,7 @@
 			foreach ($lines as $lineNumber => $line) {
 				$actualIndentation = '';
 				if (count($line) > 0) {
-					if ($line[0]->isType(TokenType::TOKEN_WHITESPACE)) {
+					if ($line[0]->isType(T_WHITESPACE)) {
 						$actualIndentation = $line[0]->getContent();
 					}
 				}
@@ -135,6 +133,7 @@
 			$lineNumber = 1;
 			foreach ($tokenList as $token) {
 				$line[] = $token;
+				// TODO: Fix end of line token.
 				if ($token->isType(TokenType::TOKEN_EOL)) {
 					$lines[$lineNumber] = $line;
 					$line = [];

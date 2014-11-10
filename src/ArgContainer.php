@@ -10,17 +10,17 @@
 		/**
 		 * @var array
 		 */
-		private $_longOptions = array();
+		private $_longOptions = [];
 
 		/**
 		 * @var array
 		 */
-		private $_shortOptions = array();
+		private $_shortOptions = [];
 
 		/**
 		 * @var array
 		 */
-		private $_strayArguments = array();
+		private $_strayArguments = [];
 
 		/**
 		 * @param string $arg

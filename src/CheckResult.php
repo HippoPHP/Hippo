@@ -21,7 +21,7 @@
 		 * Violations held against the file.
 		 * @var array
 		 */
-		protected $violations = array();
+		protected $violations = [];
 
 		/**
 		 * Which file is this check result for

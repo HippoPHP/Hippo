@@ -142,10 +142,11 @@
 		 * @return array
 		 */
 		private static function _getSeverityNames() {
-			return array(
+			return [
 				self::SEVERITY_IGNORE => 'ignore',
 				self::SEVERITY_INFO => 'info',
 				self::SEVERITY_WARNING => 'warning',
-				self::SEVERITY_ERROR => 'error');
+				self::SEVERITY_ERROR => 'error',
+			];
 		}
 	}
