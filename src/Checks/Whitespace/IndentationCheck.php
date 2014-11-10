@@ -89,7 +89,7 @@
 					}
 				}
 
-				$this->_loopLine($level, self::CLOSE_BRACE);
+				$this->_loopLine($line, $level, self::CLOSE_BRACE);
 
 				$expectedIndentation = $level > 0 ? str_repeat($indentation, $level) : '';
 
@@ -105,11 +105,11 @@
 					);
 				}
 
-				$this->_loopLine($level, self::OPEN_BRACE);
+				$this->_loopLine($line, $level, self::OPEN_BRACE);
 			}
 		}
 
-		private function _loopLine(&$level, $type = self::OPEN_BRACE) {
+		private function _loopLine($line, &$level, $type = self::OPEN_BRACE) {
 			foreach ($line as $token) {
 				$content = $token->getContent();
 				if ($type === self::OPEN_BRACE) {
