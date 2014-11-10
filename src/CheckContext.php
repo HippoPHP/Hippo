@@ -30,7 +30,7 @@
 		}
 
 		/**
-		 * @return string[]
+		 * @return \HippoPHP\Tokenizer\TokenListIterator
 		 */
 		public function getTokenList() {
 			return $this->_lazyGet(self::CONTEXT_TOKEN_LIST, function() {
