@@ -45,7 +45,6 @@
 						'column' => $violation->getColumn(),
 						'severity' => $violation->getSeverity(),
 						'message' => $violation->getMessage(),
-						'source' => $violation->getSource()
 					);
 				}
 			}

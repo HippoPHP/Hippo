@@ -12,7 +12,7 @@
 
 		public function setUp() {
 			$this->file = new File();
-			$this->violation = new Violation($this->file, 1, 0, 0, "Test", "Test");
+			$this->violation = new Violation($this->file, 1, 0, 0, "Test");
 		}
 
 		public function testGetSeveritiies() {
@@ -106,9 +106,5 @@
 
 		public function testGetMessage() {
 			$this->assertEquals('Test', $this->violation->getMessage());
-		}
-
-		public function testGetSource() {
-			$this->assertEquals('Test', $this->violation->getSource());
 		}
 	}

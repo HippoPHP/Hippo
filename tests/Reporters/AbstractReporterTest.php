@@ -46,9 +46,9 @@
 			$checkResult = $this->getEmptyCheckResult($file);
 			$file = $checkResult->getFile();
 
-			$info = new Violation($file, 1, 4, Violation::SEVERITY_INFO, 'first message', '<?php');
-			$warning = new Violation($file, 2, 5, Violation::SEVERITY_WARNING, 'second message', '<?php');
-			$error = new Violation($file, 3, 6, Violation::SEVERITY_ERROR, 'third message', '<?php');
+			$info = new Violation($file, 1, 4, Violation::SEVERITY_INFO, 'first message');
+			$warning = new Violation($file, 2, 5, Violation::SEVERITY_WARNING, 'second message');
+			$error = new Violation($file, 3, 6, Violation::SEVERITY_ERROR, 'third message');
 
 			$checkResult->addViolation($info);
 			$checkResult->addViolation($error);

@@ -38,7 +38,6 @@
 						'column' => 4,
 						'severity' => 1,
 						'message' => 'first message',
-						'source' => '<?php'
 					]
 				],
 				'whatever.php:2' => [
@@ -48,7 +47,6 @@
 						'column' => 5,
 						'severity' => 2,
 						'message' => 'second message',
-						'source' => '<?php'
 					]
 				],
 				'whatever.php:3' => [
@@ -58,7 +56,6 @@
 						'column' => 6,
 						'severity' => 3,
 						'message' => 'third message',
-						'source' => '<?php'
 					]
 				]
 			];
