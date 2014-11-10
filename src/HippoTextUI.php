@@ -192,7 +192,7 @@
 		 * @return void
 		 */
 		protected function showVersion() {
-			echo "Hippo " . $this->_getPackageVersion() . "\n\n";
+			echo "Hippo " . $this->_getPackageVersion() . " by " . $this->_getAuthors() . "\n\n";
 		}
 
 		/**
@@ -251,6 +251,21 @@
 			$package = json_decode($content);
 
 			return $package->version;
+		}
+
+		/**
+		 * Returns package authors.
+		 * @return string
+		 */
+		private function _getAuthors() {
+			$content = file_get_contents($this->_getComposerPath());
+			$package = json_decode($content, true);
+
+			$authors = array_map(function($author) {
+				return $author['name'];
+			}, $package['authors']);
+
+			return implode(', ', $authors);
 		}
 
 		/**
