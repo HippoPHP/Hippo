@@ -2,9 +2,10 @@
 
 	namespace HippoPHP\Hippo\Reporters;
 
-	use \XmlWriter;
-	use \HippoPHP\Hippo\FileSystem;
 	use \HippoPHP\Hippo\CheckResult;
+	use \HippoPHP\Hippo\File;
+	use \HippoPHP\Hippo\FileSystem;
+	use \XMLWriter;
 
 	/**
 	 * Checkstyle Reporter.
@@ -14,7 +15,7 @@
 	class CheckstyleReporter implements ReporterInterface {
 		/**
 		 * XML Writer.
-		 * @var XMLWriter
+		 * @var \XMLWriter
 		 */
 		protected $writer;
 
@@ -60,27 +61,30 @@
 
 		/**
 		 * Defined by ReportInterface.
-		 * @see ReportInterface::addCheckResult()
-		 * @param CheckResult $checkResult
+		 * @see ReportInterface::addCheckResults()
+		 * @param File $file
+		 * @param CheckResult[] $checkResults
 		 */
-		public function addCheckResult(CheckResult $checkResult) {
+		public function addCheckResults(File $file, array $checkResults) {
 			$this->writer->startElement('file');
-			$this->writer->writeAttribute('name', $checkResult->getFile()->getFilename());
+			$this->writer->writeAttribute('name', $file->getFilename());
 
-			foreach ($checkResult->getViolations() as $violation) {
-				$this->writer->startElement('error');
+			foreach ($checkResults as $checkResult) {
+				foreach ($checkResult->getViolations() as $violation) {
+					$this->writer->startElement('error');
 
-				$this->writer->writeAttribute('line', $violation->getLine());
+					$this->writer->writeAttribute('line', $violation->getLine());
 
-				if ($violation->getColumn() > 0) {
-					$this->writer->writeAttribute('column', $violation->getColumn());
+					if ($violation->getColumn() > 0) {
+						$this->writer->writeAttribute('column', $violation->getColumn());
+					}
+
+					$this->writer->writeAttribute('severity', $violation->getSeverity());
+					$this->writer->writeAttribute('message', $violation->getMessage());
+					$this->writer->writeAttribute('source', $violation->getSource());
+
+					$this->writer->endElement();
 				}
-
-				$this->writer->writeAttribute('severity', $violation->getSeverity());
-				$this->writer->writeAttribute('message', $violation->getMessage());
-				$this->writer->writeAttribute('source', $violation->getSource());
-
-				$this->writer->endElement();
 			}
 
 			$this->writer->endElement();

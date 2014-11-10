@@ -202,9 +202,7 @@
 		 */
 		protected function reportCheckResults(array $reporters, File $file, array $checkResults) {
 			foreach ($reporters as $reporter) {
-				foreach ($checkResults as $checkResult) {
-					$reporter->addCheckResult($checkResult);
-				}
+				$reporter->addCheckResults($file, $checkResults);
 			}
 		}
 

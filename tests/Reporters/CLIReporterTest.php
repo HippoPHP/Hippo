@@ -16,27 +16,30 @@
 		}
 
 		public function testReportWithNoViolations() {
+			$file = $this->getFile('whatever.php');
 			$reporter = new CLIReporter($this->fileSystemMock);
 			$reporter->start();
-			$reporter->addCheckResult($this->getEmptyCheckResult('whatever.php'));
+			$reporter->addCheckResults($file, [$this->getEmptyCheckResult($file)]);
 			$reporter->finish();
 			$this->assertEquals('Checking whatever.php' . PHP_EOL, $this->getSavedContent());
 		}
 
 		public function testSilentReport() {
+			$file = $this->getFile('whatever.php');
 			$reporter = new CLIReporter($this->fileSystemMock);
 			$reporter->setLoggedSeverities([]);
 			$reporter->start();
-			$reporter->addCheckResult($this->getEmptyCheckResult('whatever.php'));
+			$reporter->addCheckResults($file, [$this->getEmptyCheckResult($file)]);
 			$reporter->finish();
 			$this->assertEquals('', $this->getSavedContent());
 		}
 
 		public function testOmittingWarnings() {
+			$file = $this->getFile('whatever.php');
 			$reporter = new CLIReporter($this->fileSystemMock);
 			$reporter->setLoggedSeverities([Violation::SEVERITY_INFO, Violation::SEVERITY_ERROR]);
 			$reporter->start();
-			$reporter->addCheckResult($this->getBasicCheckResult('whatever.php'));
+			$reporter->addCheckResults($file, [$this->getBasicCheckResult($file)]);
 			$reporter->finish();
 
 			$expectedLines = [
@@ -53,9 +56,10 @@
 		}
 
 		public function testBasicReport() {
+			$file = $this->getFile('whatever.php');
 			$reporter = new CLIReporter($this->fileSystemMock);
 			$reporter->start();
-			$reporter->addCheckResult($this->getBasicCheckResult('whatever.php'));
+			$reporter->addCheckResults($file, [$this->getBasicCheckResult($file)]);
 			$reporter->finish();
 
 			$expectedLines = [
@@ -73,10 +77,12 @@
 		}
 
 		public function testReportWithTwoFiles() {
+			$file1 = $this->getFile('whatever.php');
+			$file2 = $this->getFile('anotherfile.php');
 			$reporter = new CLIReporter($this->fileSystemMock);
 			$reporter->start();
-			$reporter->addCheckResult($this->getBasicCheckResult('whatever.php'));
-			$reporter->addCheckResult($this->getBasicCheckResult('anotherfile.php'));
+			$reporter->addCheckResults($file1, [$this->getBasicCheckResult($file1)]);
+			$reporter->addCheckResults($file2, [$this->getBasicCheckResult($file2)]);
 			$reporter->finish();
 
 			$expectedLines = [

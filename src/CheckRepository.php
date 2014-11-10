@@ -59,7 +59,6 @@
 			foreach (get_declared_classes() as $class) {
 				$reflectionClass = new ReflectionClass($class);
 				if ($this->_canInstantiate($reflectionClass)) {
-					//TODO: incorporate config here
 					$this->_checks[] = $reflectionClass->newInstance();
 				}
 			}

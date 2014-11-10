@@ -2,10 +2,10 @@
 
 	namespace HippoPHP\Hippo\Tests;
 
+	use \HippoPHP\Hippo\CheckContext;
 	use \HippoPHP\Hippo\CheckRepository;
-	use \HippoPHP\Hippo\Config\Config;
 	use \HippoPHP\Hippo\Checks\CheckInterface;
-	use \HippoPHP\Hippo\File;
+	use \HippoPHP\Hippo\Config\Config;
 	use \HippoPHP\Hippo\FileSystem;
 	use \HippoPHP\Hippo\Tests\Helpers\FileSystemTestHelper;
 
@@ -32,7 +32,7 @@
 			file_put_contents($path, <<<ESRC
 <?php
 class $objectName implements \HippoPHP\Hippo\Checks\CheckInterface {
-	public function checkFile(\HippoPHP\Hippo\File \$file, \HippoPHP\Hippo\Config\Config \$config) {
+	public function checkFile(\HippoPHP\Hippo\CheckContext \$checkContext, \HippoPHP\Hippo\Config\Config \$config) {
 	}
 
 	public function getConfigRoot() {

@@ -20,4 +20,5 @@ script:
   - ./vendor/bin/phpcs --standard=PSR1 -p --report=full --report-checkstyle=build/logs/checkstyle.xml src/ tests/
 
 after_script:
-  - ./vendor/bin/test-reporter
+  - bin/test-reporter --stdout > codeclimate.json
+  - "curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.1)' https://codeclimate.com/test_reports"

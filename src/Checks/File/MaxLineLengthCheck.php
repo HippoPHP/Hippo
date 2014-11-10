@@ -2,10 +2,10 @@
 
 	namespace HippoPHP\Hippo\Checks\Line;
 
+	use \HippoPHP\Hippo\CheckContext;
 	use \HippoPHP\Hippo\Checks\AbstractCheck;
 	use \HippoPHP\Hippo\Checks\CheckInterface;
 	use \HippoPHP\Hippo\Config\Config;
-	use \HippoPHP\Hippo\File;
 	use \HippoPHP\Hippo\Violation;
 
 	/**
@@ -60,11 +60,13 @@
 		/**
 		 * checkFileInternal(): defined by AbstractCheck.
 		 * @see AbstractCheck::checkFileInternal()
-		 * @param File $file
+		 * @param CheckContext $checkContext
 		 * @param Config $config
 		 * @return void
 		 */
-		protected function checkFileInternal(File $file, Config $config) {
+		protected function checkFileInternal(CheckContext $checkContext, Config $config) {
+			$file = $checkContext->getFile();
+
 			$this->setLimit(Violation::SEVERITY_ERROR, $config->get('error_limit', $this->limits[Violation::SEVERITY_ERROR]));
 			$this->setLimit(Violation::SEVERITY_WARNING, $config->get('warning_limit', $this->limits[violation::SEVERITY_WARNING]));
 			$this->setLimit(Violation::SEVERITY_INFO, $config->get('info_limit', $this->limits[Violation::SEVERITY_INFO]));

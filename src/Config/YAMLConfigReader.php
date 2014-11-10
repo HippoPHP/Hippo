@@ -22,7 +22,7 @@
 		 * @return Config
 		 */
 		public function loadFromFile($filename) {
-			$config = $this->parser->parse($this->fileSystem->getContent($filename));
+			$config = $this->_parseFile($filename);
 
 			$included = [$this->_normalizeConfigName($filename)];
 
@@ -30,7 +30,7 @@
 			while (isset($config['extends'])) {
 				$baseConfigName = $config['extends'];
 				$baseConfigPath = dirname($filename) . DIRECTORY_SEPARATOR . $baseConfigName . '.yml';
-				$baseConfig = $this->parser->parse($this->fileSystem->getContent($baseConfigPath));
+				$baseConfig = $this->_parseFile($baseConfigPath);
 				unset($config['extends']);
 
 				$config = $this->_mergeRecursive($baseConfig, $config);
@@ -49,6 +49,18 @@
 		}
 
 		/**
+		 * @param string $filePath
+		 * @return array<*,*>
+		 */
+		private function _parseFile($filePath) {
+			$result = $this->parser->parse($this->fileSystem->getContent($filePath));
+			if (is_string($result)) {
+				throw new \Exception('Config must be an array');
+			}
+			return $result;
+		}
+
+		/**
 		 * Normalizes a configuration filename
 		 * @param  string $name
 		 * @return string
@@ -58,32 +70,25 @@
 		}
 
 		/**
-		 * @param mixed[] $array1
-		 * @param mixed[] $array2
-		 * @return mixed[]
+		 * @param array<*,*> $array1
+		 * @param array<*,*> $array2
+		 * @return array<*,*>
 		 */
 		private function _mergeRecursive($array1, $array2) {
 			$result = [];
 			foreach (array_merge(array_keys($array1), array_keys($array2)) as $key) {
 				if (!isset($array1[$key])) {
 					$result[$key] = $array2[$key];
-					continue;
-				}
-
-				if (!isset($array2[$key])) {
+				} elseif (!isset($array2[$key])) {
 					$result[$key] = $array1[$key];
-					continue;
-				}
-
-				if (is_array($array1[$key]) || is_array($array2[$key])) {
+				} elseif (is_array($array1[$key]) || is_array($array2[$key])) {
 					if (!is_array($array1[$key]) || !is_array($array2[$key])) {
 						throw new \Exception('Cannot merge a scalar with an array');
 					}
 					$result[$key] = $this->_mergeRecursive($array1[$key], $array2[$key]);
-					continue;
+				} else {
+					$result[$key] = $array2[$key];
 				}
-
-				$result[$key] = $array2[$key];
 			}
 			return $result;
 		}

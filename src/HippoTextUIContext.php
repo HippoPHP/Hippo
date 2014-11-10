@@ -178,11 +178,11 @@
 			}
 		}
 
-		private function _handleHelpArgument($argValue) {
+		private function _handleHelpArgument() {
 			$this->_action = self::ACTION_HELP;
 		}
 
-		private function _handleVersionArgument($argValue) {
+		private function _handleVersionArgument() {
 			$this->_action = self::ACTION_VERSION;
 		}
 
