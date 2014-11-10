@@ -24,9 +24,9 @@
 		public function testGetTokenList() {
 			$tokenList = $this->_checkContext->getTokenList();
 			$this->assertNotNull($tokenList);
-			$this->assertTrue(is_array($tokenList));
+			$this->assertTrue(is_array($tokenList->getTokens()));
 			$this->assertEquals(1, count($tokenList));
-			$this->assertInstanceOf('\HippoPHP\Tokenizer\Token', $tokenList[0]);
+			$this->assertInstanceOf('\HippoPHP\Tokenizer\Token', $tokenList->current());
 		}
 
 		public function testGetSyntaxTree() {
