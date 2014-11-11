@@ -56,7 +56,7 @@
 		 */
 		public function checkPath($path) {
 			if (!file_exists($path)) {
-				throw new FileNotFoundException('File does not exist: ' . $path);
+				throw new FileNotFoundException($path);
 			}
 
 			return is_dir($path)
