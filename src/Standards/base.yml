@@ -13,3 +13,6 @@ file:
     enabled: false
     style: "tab"
     count: 1
+naming:
+  bitwise:
+    enabled: true
