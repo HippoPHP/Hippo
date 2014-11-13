@@ -50,7 +50,10 @@
 		 * @return string[]
 		 */
 		public function getAllFiles($initialDirectory, $regex = null) {
-			$directoryIterator = new RecursiveDirectoryIterator($initialDirectory, RecursiveDirectoryIterator::SKIP_DOTS);
+			$directoryIterator = new RecursiveDirectoryIterator(
+				$initialDirectory,
+				RecursiveDirectoryIterator::SKIP_DOTS
+			);
 			$flattenedIterator = new RecursiveIteratorIterator($directoryIterator);
 			$iterator = $regex !== null
 				? new RegexIterator($flattenedIterator, $regex)
