@@ -23,29 +23,7 @@
 		 */
 		public function loadFromFile($filename) {
 			$config = $this->_parseFile($filename);
-
-			$included = [$this->_normalizeConfigName($filename)];
-
-			// If we're extending another standard, use it as a base.
-			while (isset($config['extends'])) {
-				$baseConfigName = $config['extends'];
-				$baseConfigPath = dirname($filename) . DIRECTORY_SEPARATOR . $baseConfigName . '.yml';
-				$baseConfig = $this->_parseFile($baseConfigPath);
-				unset($config['extends']);
-
-				$config = $this->_mergeRecursive($baseConfig, $config);
-
-				if (isset($config['extends'])) {
-					if (in_array($this->_normalizeConfigName($config['extends']), $included)) {
-						// Avoid circular dependencies
-						unset($config['extends']);
-					} else {
-						$included[] = $this->_normalizeConfigName($config['extends']);
-					}
-				}
-			}
-
-			return new Config($config);
+			return $this->_load($config, $filename);
 		}
 
 		/**
@@ -54,10 +32,20 @@
 		 */
 		public function loadFromString($string) {
 			$config = $this->_parseString($string);
+			return $this->_load($config);
+		}
+
+		private function _load($config, $filename = false) {
+			if ($filename) {
+				$included = [$this->_normalizeConfigName($filename)];
+			} else {
+				$included = [];
+			}
 
 			while (isset($config['extends'])) {
 				$baseConfigName = $config['extends'];
-				$baseConfigPath = '.' . DIRECTORY_SEPARATOR . $baseConfigName . '.yml';
+				$baseConfigDir = ($filename ? dirname($filename) : '.');
+				$baseConfigPath = $baseConfigDir . DIRECTORY_SEPARATOR . $baseConfigName . '.yml';
 				$baseConfig = $this->_parseFile($baseConfigPath);
 				unset($config['extends']);
 
