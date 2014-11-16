@@ -16,3 +16,7 @@ file:
 naming:
   bitwise:
     enabled: true
+style:
+  quotes:
+    enabled: true
+    style: "single"
