@@ -26,3 +26,5 @@ style:
     enabled: true
   elseif:
     enabled: true
+  strict_equality:
+    enabled: true
