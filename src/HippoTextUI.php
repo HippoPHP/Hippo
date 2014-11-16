@@ -192,7 +192,7 @@
 		 * @return void
 		 */
 		protected function showVersion() {
-			echo "Hippo " . $this->_getPackageVersion() . " by " . $this->_getAuthors() . "\n\n";
+			echo 'Hippo ' . $this->_getPackageVersion() . ' by ' . $this->_getAuthors() . "\n\n";
 		}
 
 		/**
