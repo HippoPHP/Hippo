@@ -49,11 +49,47 @@
 		}
 
 		/**
+		 * @param string $string
+		 * @return Config
+		 */
+		public function loadFromString($string) {
+			$config = $this->_parseString($string);
+
+			while (isset($config['extends'])) {
+				$baseConfigName = $config['extends'];
+				$baseConfigPath = '.' . DIRECTORY_SEPARATOR . $baseConfigName . '.yml';
+				$baseConfig = $this->_parseFile($baseConfigPath);
+				unset($config['extends']);
+
+				$config = $this->_mergeRecursive($baseConfig, $config);
+
+				if (isset($config['extends'])) {
+					if (in_array($this->_normalizeConfigName($config['extends']), $included)) {
+						// Avoid circular dependencies
+						unset($config['extends']);
+					} else {
+						$included[] = $this->_normalizeConfigName($config['extends']);
+					}
+				}
+			}
+
+			return new Config($config);
+		}
+
+		/**
 		 * @param string $filePath
 		 * @return array<*,*>
 		 */
 		private function _parseFile($filePath) {
-			$result = $this->parser->parse($this->fileSystem->getContent($filePath));
+			return $this->_parseString($this->fileSystem->getContent($filePath));
+		}
+
+		/**
+		 * @param  string $string
+		 * @return array<*,*>
+		 */
+		private function _parseString($string) {
+			$result = $this->parser->parse($string);
 			if (is_string($result)) {
 				throw new \Exception('Config must be an array');
 			}
