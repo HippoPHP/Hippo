@@ -48,6 +48,7 @@
 		 */
 		public function setObserver(callable $observer) {
 			$this->_observer = $observer;
+			return $this;
 		}
 
 		/**
