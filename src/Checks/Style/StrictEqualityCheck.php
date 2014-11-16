@@ -10,6 +10,11 @@
 	use \HippoPHP\Hippo\Exception\BadConfigKeyException;
 
 	class StrictEqualityCheck extends AbstractCheck implements CheckInterface {
+		private $_sources = [
+			'==',
+			'!='
+		];
+
 		/**
 		 * @return string
 		 */
@@ -31,17 +36,25 @@
 			try {
 				do {
 					// Jump us to the next token we want to check.
-					$tokens->seekToType(T_IS_EQUAL);
+					$tokens->seekToType([
+						T_IS_EQUAL,
+						T_IS_NOT_EQUAL
+					]);
 
 					$token = $tokens->current();
 
-					$this->addViolation(
-						$file,
-						$token->getLine(),
-						$token->getColumn(),
-						'Avoid the use of the equality operator `==`.',
-						Violation::SEVERITY_WARNING
-					);
+					if (in_array($token->getContent(), $this->_sources)) {
+						$this->addViolation(
+							$file,
+							$token->getLine(),
+							$token->getColumn(),
+							sprintf(
+								'Avoid the use of the non-strict operator `%s`.',
+								$token->getContent()
+							),
+							Violation::SEVERITY_WARNING
+						);
+					}
 				} while ($tokens->valid());
 			} catch (\HippoPHP\Tokenizer\Exception\OutOfBoundsException $e) {
 				// Ignore the exception, we're at the end of the file.
