@@ -10,13 +10,36 @@
 
 	class EncodingCheck extends AbstractCheck implements CheckInterface {
 		/**
+		 * Set BOM encoding string.
+		 */
+		const BOM = '\xEF\xBB\xBF';
+
+		/**
 		 * File encoding to check for.
 		 * @var string
 		 */
 		protected $encoding = 'UTF-8';
 
+		/**
+		 * Are we checking for a BOM too?
+		 * @var bool
+		 */
+		protected $bom = true;
+
+		/**
+		 * Sets the file encoding type to check for.
+		 * @param string $encoding
+		 */
 		public function setEncodingType($encoding) {
 			$this->encoding = $encoding;
+		}
+
+		/**
+		 * Do we want to use BOM?
+		 * @param bool $bom
+		 */
+		public function setWithBOM($bom) {
+			$this->bom = $bom;
 		}
 
 		/**
@@ -35,21 +58,37 @@
 		 */
 		protected function checkFileInternal(CheckContext $checkContext, Config $config) {
 			$file = $checkContext->getFile();
-			$tokens = $checkContext->getTokenList();
-
 			$this->setEncodingType($config->get('encoding', $this->encoding));
+			$this->setWithBOM($config->get('bom', $this->bom));
 
-			if (!mb_check_encoding($file->getSource(), $this->encoding)) {
+			$encoding = mb_detect_encoding($file->getSource(), $this->encoding, true);
+
+			if ($encoding !== $this->encoding) {
 				$this->addViolation(
 					$file,
-					$token->getLine(),
-					$token->getColumn(),
+					0,
+					0,
 					sprintf(
-						'File encoding should be %s',
-						$this->encoding
+						'File encoding should be %s. Currently using %s',
+						$this->encoding,
+						$encoding
+
 					),
 					Violation::SEVERITY_INFO
 				);
+
+				// Are we checking for BOM too?
+				if ($this->bom) {
+					if (false === strpos($file->getSource, self::BOM)) {
+						$this->addViolation(
+							$file,
+							0,
+							0,
+							'Files should be saved with BOM.',
+							Violation::SEVERITY_INFO
+						);
+					}
+				}
 			}
 		}
 	}
