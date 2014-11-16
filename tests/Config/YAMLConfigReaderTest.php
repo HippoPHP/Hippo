@@ -29,6 +29,16 @@ YML;
 			$this->_reader->loadFromFile('test.txt');
 		}
 
+		public function testLoadFromString() {
+			$yamlConfig = <<<YML
+standards: "PSR-1"
+YML;
+
+			$config = $this->_reader->loadFromString($yamlConfig);
+			$this->assertNotNull($config);
+			$this->assertEquals('PSR-1', $config->get('standards'));
+		}
+
 		public function testLoadFromFile() {
 			$yamlConfig = <<<YML
 standards: "PSR-1"

@@ -23,13 +23,29 @@
 		 */
 		public function loadFromFile($filename) {
 			$config = $this->_parseFile($filename);
+			return $this->_load($config, $filename);
+		}
 
-			$included = [$this->_normalizeConfigName($filename)];
+		/**
+		 * @param string $string
+		 * @return Config
+		 */
+		public function loadFromString($string) {
+			$config = $this->_parseString($string);
+			return $this->_load($config);
+		}
 
-			// If we're extending another standard, use it as a base.
+		private function _load($config, $filename = false) {
+			if ($filename) {
+				$included = [$this->_normalizeConfigName($filename)];
+			} else {
+				$included = [];
+			}
+
 			while (isset($config['extends'])) {
 				$baseConfigName = $config['extends'];
-				$baseConfigPath = dirname($filename) . DIRECTORY_SEPARATOR . $baseConfigName . '.yml';
+				$baseConfigDir = ($filename ? dirname($filename) : '.');
+				$baseConfigPath = $baseConfigDir . DIRECTORY_SEPARATOR . $baseConfigName . '.yml';
 				$baseConfig = $this->_parseFile($baseConfigPath);
 				unset($config['extends']);
 
@@ -53,7 +69,15 @@
 		 * @return array<*,*>
 		 */
 		private function _parseFile($filePath) {
-			$result = $this->parser->parse($this->fileSystem->getContent($filePath));
+			return $this->_parseString($this->fileSystem->getContent($filePath));
+		}
+
+		/**
+		 * @param  string $string
+		 * @return array<*,*>
+		 */
+		private function _parseString($string) {
+			$result = $this->parser->parse($string);
 			if (is_string($result)) {
 				throw new \Exception('Config must be an array');
 			}
