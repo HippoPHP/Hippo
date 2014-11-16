@@ -35,6 +35,11 @@
 			return $this->_load($config);
 		}
 
+		/**
+		 * @param  array  $config
+		 * @param  mixed $filename
+		 * @return Config
+		 */
 		private function _load($config, $filename = false) {
 			if ($filename) {
 				$included = [$this->_normalizeConfigName($filename)];
