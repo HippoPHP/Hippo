@@ -13,10 +13,9 @@ file:
     enabled: false
     style: "tab"
     count: 1
-naming:
+style:
   bitwise:
     enabled: true
-style:
   quotes:
     enabled: true
     style: "single"
