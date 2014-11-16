@@ -13,6 +13,8 @@ file:
     enabled: false
     style: "tab"
     count: 1
+  encoding:
+    enabled: true
 style:
   bitwise:
     enabled: true
