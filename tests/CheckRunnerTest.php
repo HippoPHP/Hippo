@@ -2,20 +2,44 @@
 
 	namespace HippoPHP\Hippo\Tests;
 
-	use \HippoPHP\Hippo;
+	use \HippoPHP\Hippo\Config;
+	use \HippoPHP\Hippo\FileSystem;
 	use \HippoPHP\Hippo\CheckRunner;
+	use \HippoPHP\Hippo\CheckRepository;
+	use \HippoPHP\Hippo\Config\YAMLConfigReader;
 
 	class CheckRunnerTest extends \PHPUnit_Framework_TestCase {
+		private $_fileSystemMock;
+
 		protected $instance;
-		protected $file;
 
 		public function setUp() {
-			// $this->instance = new CheckResult;
+			$this->_fileSystemMock = $this->getMockBuilder('HippoPHP\Hippo\FileSystem')->disableOriginalConstructor()->getMock();
+
+			$fileSystem = new FileSystem;
+			$checkRepository = new CheckRepository($fileSystem);
+			$configReader = new YAMLConfigReader($this->_fileSystemMock);
+
+			$yamlConfig = <<<YML
+standards: "PSR-1"
+YML;
+
+			$this->_fileSystemMock
+				->expects($this->once())
+				->method('getContent')
+				->willReturn($yamlConfig);
+
+			$config = $configReader->loadFromFile('test.txt');
+
+			$this->instance = new CheckRunner($fileSystem, $checkRepository, $config);
 		}
 
 		public function testSetObserver() {
-			$this->markTestIncomplete(
-				'This test has not been implemented yet.'
+			$callable = function() { /**/ };
+
+			$this->assertInstanceOf(
+				'\HippoPHP\Hippo\CheckRunner',
+				$this->instance->setObserver($callable)
 			);
 		}
 
