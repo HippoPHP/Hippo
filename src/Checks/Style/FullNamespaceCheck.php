@@ -34,11 +34,9 @@
 
 					// We should now be at `use`.
 					// Now we need to skip the whitespace.
-					$tokens->next();
-					$tokens->next();
+					$token = $tokens->next(2)->current();
 
 					// Now if the next token does not equal T_NS_SEPARATOR we are not fully qualified.
-					$token = $tokens->current();
 					if (!$token->isType(T_NS_SEPARATOR)) {
 						$this->addViolation(
 							$file,

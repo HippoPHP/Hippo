@@ -28,8 +28,7 @@
 		protected function checkFileInternal(CheckContext $checkContext, Config $config) {
 			$file = $checkContext->getFile();
 			$tokens = $checkContext->getTokenList();
-			$tokens->end();
-			$endToken = $tokens->current();
+			$endToken = $tokens->end()->current();
 			if (count($file) > 0 && !$endToken->isType(T_CLOSE_TAG)) {
 				$this->addViolation($file, $endToken->getLine(), 0, 'Files must end with a closing tag.');
 			}

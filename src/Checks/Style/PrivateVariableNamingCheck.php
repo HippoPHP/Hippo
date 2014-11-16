@@ -40,10 +40,7 @@
 				do {
 					// Jump us to the next token we want to check.
 					$tokens->seekToType(T_PRIVATE);
-					$tokens->next();
-					$tokens->next();
-
-					$token = $tokens->current();
+					$token = $tokens->next(2)->current();
 
 					if ($token->isType(T_VARIABLE)) {
 						if (preg_match($this->_pattern, $token->getContent())) {

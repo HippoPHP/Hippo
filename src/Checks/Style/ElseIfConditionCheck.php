@@ -33,13 +33,11 @@
 					$tokens->seekToType(T_ELSE);
 
 					// Move to the next token.
-					$tokens->next();
-					$token = $tokens->current();
+					$token = $tokens->next()->current();
 
 					// Check that the next token is not equal to T_WHITESPACE T_IF.
 					if ($token->isType(T_WHITESPACE)) {
-						$tokens->next(); // Move forward.
-						$nextToken = $tokens->current();
+						$nextToken = $tokens->next()->current(); // Move forward.
 						if ($nextToken->isType(T_IF)) {
 							$this->addViolation(
 								$file,
