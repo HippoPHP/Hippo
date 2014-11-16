@@ -3,6 +3,8 @@ name: "base"
 file:
   open_tag:
     enabled: true
+  end_tag:
+    enabled: false
   max_line_length:
     enabled: true
     error_limit: 120
