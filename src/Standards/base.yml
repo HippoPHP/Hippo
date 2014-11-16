@@ -13,6 +13,9 @@ file:
     enabled: false
     style: "tab"
     count: 1
+  encoding:
+    enabled: true
+    bom: true
 style:
   bitwise:
     enabled: true
