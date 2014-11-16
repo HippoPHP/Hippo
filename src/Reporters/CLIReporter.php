@@ -60,13 +60,14 @@
 			// TODO: Only output if the file has violations?
 			$this->_write('Checking ' . $file->getFilename() . PHP_EOL);
 
+			$violations = [];
 			foreach ($checkResults as $checkResult) {
-				$violations = $this->_getFilteredViolations($checkResult->getViolations());
+				$violations = array_merge(
+					$violations,
+					$this->_getFilteredViolations($checkResult->getViolations()));
+			}
 
-				if (!$violations) {
-					return;
-				}
-
+			if ($violations) {
 				$this->_write($file->getFilename() . ':' . PHP_EOL);
 				$this->_write(str_repeat('-', 80) . PHP_EOL);
 
@@ -80,9 +81,9 @@
 					$this->_write(' ('. $violation->getSeverityName() . ') : ');
 					$this->_write($violation->getMessage() . PHP_EOL);
 				}
-
 				$this->_write(PHP_EOL);
 			}
+
 			flush();
 		}
 
