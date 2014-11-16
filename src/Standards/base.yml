@@ -24,3 +24,5 @@ style:
     style: "single"
   fully_qualified_namespaces:
     enabled: true
+  elseif:
+    enabled: true
