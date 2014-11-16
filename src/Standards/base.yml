@@ -13,6 +13,8 @@ file:
     enabled: false
     style: "tab"
     count: 1
+  banned_opening_tags:
+    enabled: true
 naming:
   bitwise:
     enabled: true
