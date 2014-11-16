@@ -28,3 +28,5 @@ style:
     enabled: true
   strict_equality:
     enabled: true
+  private_variable_naming:
+    enabled: true
