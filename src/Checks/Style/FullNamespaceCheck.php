@@ -36,14 +36,16 @@
 					// Now we need to skip the whitespace.
 					$token = $tokens->next(2)->current();
 
-					// Now if the next token does not equal T_NS_SEPARATOR we are not fully qualified.
-					if (!$token->isType(T_NS_SEPARATOR)) {
-						$this->addViolation(
-							$file,
-							$token->getLine(),
-							$token->getColumn(),
-							'Use fully qualified namespaces.'
-						);
+					if ($token->getContent() !== '(') {
+						// Now if the next token does not equal T_NS_SEPARATOR we are not fully qualified.
+						if (!$token->isType(T_NS_SEPARATOR)) {
+							$this->addViolation(
+								$file,
+								$token->getLine(),
+								$token->getColumn(),
+								'Use fully qualified namespaces.'
+							);
+						}
 					}
 				} while ($tokens->valid());
 			} catch (\HippoPHP\Tokenizer\Exception\OutOfBoundsException $e) {
