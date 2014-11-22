@@ -39,13 +39,13 @@ $ composer install
 Once Hippo is in a directory you can run it with:
 
 ```bash
-$ ./hippo ./src
+$ ./bin/hippo ./src
 ```
 
 By default Hippo will output everything to `STDOUT`. You can get help information with:
 
 ```bash
-$ ./hippo --help
+$ ./bin/hippo --help
 Hippo 0.1.0 by James Brooks, Marcin Kurczewski
 
 Usage: hippo [switches] <directory>
