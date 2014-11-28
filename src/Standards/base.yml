@@ -39,3 +39,6 @@ style:
 comments:
   no_shell_comments:
     enabled: true
+whitespace:
+  no_trailing_whitespace:
+    enabled: true
