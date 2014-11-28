@@ -7,7 +7,6 @@
 	use \HippoPHP\Hippo\Config\Config;
 	use \HippoPHP\Hippo\Checks\AbstractCheck;
 	use \HippoPHP\Hippo\Checks\CheckInterface;
-	use \HippoPHP\Hippo\Exception\BadConfigKeyException;
 
 	class NoShellCommentsCheck extends AbstractCheck implements CheckInterface {
 		/**
