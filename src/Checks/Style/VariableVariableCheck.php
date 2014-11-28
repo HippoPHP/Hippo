@@ -1,6 +1,6 @@
 <?php
 
-	namespace HippoPHP\Hippo\Checks\Comments;
+	namespace HippoPHP\Hippo\Checks\Style;
 
 	use \HippoPHP\Hippo\Violation;
 	use \HippoPHP\Hippo\CheckContext;
