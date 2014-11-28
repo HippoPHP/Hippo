@@ -10,7 +10,7 @@
 	use \HippoPHP\Hippo\Exception\BadConfigKeyException;
 
 	class NoShellCommentsCheck extends AbstractCheck implements CheckInterface {
-			/**
+		/**
 		 * @return string
 		 */
 		public function getConfigRoot() {
