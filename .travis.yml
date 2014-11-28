@@ -16,7 +16,7 @@ before_script:
   - travis_retry composer install --no-interaction --prefer-source --dev
 
 script:
-  - vendor/bin/phpunit --verbose --coverage-text
+  - ./vendor/bin/phpunit --verbose --coverage-text
   - ./vendor/bin/phpcs --standard=PSR1 -p --report=full --report-checkstyle=build/logs/checkstyle.xml src/ tests/
 
 after_script:

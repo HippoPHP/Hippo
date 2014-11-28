@@ -5,6 +5,73 @@
 [![Test Coverage](http://img.shields.io/codeclimate/coverage/github/HippoPHP/Hippo.svg?style=flat-square)](https://codeclimate.com/github/HippoPHP/Hippo)
 [![Dependencies](http://www.versioneye.com/user/projects/545de609eb8df2d3b4000051/badge.svg?style=flat-square)](http://www.versioneye.com/user/projects/545de609eb8df2d3b4000051)
 
+## Installation & Usage
+
+Installing and using Hippo is really straightforward with [Composer](https://getcomposer.org).
+
+### Installation
+
+To start using Hippo in your project add the following to `composer.json`:
+
+```json
+"require": {
+    "hippophp/hippo": "*"
+}
+```
+
+If you want to develop Hippo, you'll need [Git](http://git-scm.org) and >= PHP 5.4 installed on your system.
+
+Clone the repo to your local environment:
+
+```bash
+$ git clone git@github.com:hippophp/hippo.git
+```
+
+Then install the dependencies:
+
+```bash
+$ cd hippo
+$ composer install
+```
+
+### Usage
+
+Once Hippo is in a directory you can run it with:
+
+```bash
+$ ./bin/hippo ./src
+```
+
+By default Hippo will output everything to `STDOUT`. You can get help information with:
+
+```bash
+$ ./bin/hippo --help
+Hippo 0.1.0 by James Brooks, Marcin Kurczewski
+
+Usage: hippo [switches] <directory>
+  -h, --help                Prints this usage information
+  -v, --version             Print version information
+  -l, --log LOGLEVELS       Sets which severity levels should be logged
+                            (default: "info,warning,error")
+  -s, --strict 1|0          Enables or disables strict mode (default: 0)
+                            Strict mode will exit with code 1 on any violation.
+  -q, --quiet 1|0           Same as --log ""
+      --verbose 1|0         Same as --log "info,warning,error"
+  -c, --config PATH         Use specific config (default: "base")
+  --report-xml PATH         Output a Checkstyle-compatible XML to PATH
+
+Available configs:
+  - base
+  - PEAR
+  - PGS-2
+  - PSR-1
+  - PSR-2
+  - Zend
+```
+
+## Tests
+
+We've built a test system against Hippo. Tests are ran on Travis CI for every pull request which is made.
 
 ## About
 
