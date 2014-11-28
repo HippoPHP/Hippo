@@ -32,3 +32,6 @@ style:
     enabled: true
   private_variable_naming:
     enabled: true
+comments:
+  no_shell_comments:
+    enabled: true
