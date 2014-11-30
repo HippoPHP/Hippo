@@ -35,11 +35,12 @@
 		 * @return \HippoPHP\Tokenizer\TokenListIterator
 		 */
 		public function getTokenList() {
-			return $this->_lazyFactory->retrieve(self::CONTEXT_TOKEN_LIST, function() {
+			$tokenListIterator = $this->_lazyFactory->retrieve(self::CONTEXT_TOKEN_LIST, function() {
 				$tokenizer = new Tokenizer();
-				$tokenList = $tokenizer->tokenize($this->_file->getSource());
-				return $tokenList;
+				return $tokenizer->tokenize($this->_file->getSource());
 			});
+			$tokenListIterator->rewind();
+			return $tokenListIterator;
 		}
 
 		/**

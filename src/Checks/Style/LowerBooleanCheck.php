@@ -32,7 +32,6 @@
 		protected function checkFileInternal(CheckContext $checkContext, Config $config) {
 			$file = $checkContext->getFile();
 			$tokens = $checkContext->getTokenList();
-			$tokens->rewind(); // I'm not sure why we keep needing to do this?
 
 			try {
 				do {
