@@ -32,7 +32,6 @@
 			if (count($file) > 0 && !$endToken->isType(T_CLOSE_TAG)) {
 				$this->addViolation($file, $endToken->getLine(), 0, 'Files must end with a closing tag.');
 			}
-			$tokens->rewind(); // Without this, the token list seems to go weird.
 		}
 
 	}
