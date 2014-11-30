@@ -32,7 +32,8 @@
 					continue;
 				}
 
-				if ($line !== ltrim($line)) {
+				$line = rtrim($line, "\r\n");
+				if ($line !== rtrim($line)) {
 					$this->addViolation(
 						$file,
 						$lineNo,
