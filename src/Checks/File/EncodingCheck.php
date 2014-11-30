@@ -58,6 +58,19 @@
 		 */
 		protected function checkFileInternal(CheckContext $checkContext, Config $config) {
 			$file = $checkContext->getFile();
+
+			if (!function_exists('mb_detect_encoding'))
+			{
+				$this->addViolation(
+					$file,
+					0,
+					0,
+					'PHP MB extension is disabled. Cannot detect file encoding.',
+					Violation::SEVERITY_WARNING
+				);
+				return;
+			}
+
 			$this->setEncodingType($config->get('encoding', $this->encoding));
 			$this->setWithBOM($config->get('bom', $this->bom));
 
