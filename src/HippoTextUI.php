@@ -86,7 +86,8 @@
 				$checkRepository,
 				$configReader,
 				$pathToSelf,
-				$context);
+				$context
+			);
 
 			$hippoTextUi->run();
 		}
