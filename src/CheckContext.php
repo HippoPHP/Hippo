@@ -2,8 +2,8 @@
 
 	namespace HippoPHP\Hippo;
 
-	use \HippoPHP\Hippo\Exception;
 	use \HippoPHP\Hippo\File;
+	use \HippoPHP\Hippo\Exception;
 	use \HippoPHP\Hippo\LazyFactory;
 	use \HippoPHP\Tokenizer\Tokenizer;
 	use \PhpParser\Parser;
