@@ -18,6 +18,8 @@ file:
   encoding:
     enabled: true
     bom: true
+  no_inline_html:
+    enabled: true
 style:
   bitwise:
     enabled: true
@@ -41,4 +43,6 @@ comments:
     enabled: true
 whitespace:
   no_trailing_whitespace:
+    enabled: true
+  whitespace_around_braces:
     enabled: true
