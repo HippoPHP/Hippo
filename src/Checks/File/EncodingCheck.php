@@ -59,8 +59,7 @@
 		protected function checkFileInternal(CheckContext $checkContext, Config $config) {
 			$file = $checkContext->getFile();
 
-			if (!function_exists('mb_detect_encoding'))
-			{
+			if (!function_exists('mb_detect_encoding')) {
 				$this->addViolation(
 					$file,
 					0,
