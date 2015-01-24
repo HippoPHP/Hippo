@@ -1,17 +1,20 @@
 <?php
 
-	namespace HippoPHP\Hippo\Config;
+namespace HippoPHP\Hippo\Config;
 
-	interface ConfigReaderInterface {
-		/**
-		 * @param string $filename
-		 * @return Config
-		 */
-		function loadFromFile($filename);
+interface ConfigReaderInterface
+{
+        /**
+         * @param string $filename
+         *
+         * @return Config
+         */
+        public function loadFromFile($filename);
 
-		/**
-		 * @param string $string
-		 * @return Config
-		 */
-		function loadFromString($string);
-	}
+        /**
+         * @param string $string
+         *
+         * @return Config
+         */
+        public function loadFromString($string);
+}

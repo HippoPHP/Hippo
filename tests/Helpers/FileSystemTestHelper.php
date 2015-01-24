@@ -1,54 +1,60 @@
 <?php
 
-	namespace HippoPHP\Hippo\Tests\Helpers;
+namespace HippoPHP\Hippo\tests\Helpers;
 
-	use \RecursiveIteratorIterator;
-	use \RecursiveDirectoryIterator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
-	/**
-	 * @package Hippo
-	 */
-	class FileSystemTestHelper {
-		private $_foldersToCleanup = [];
+/**
+     */
+    class FileSystemTestHelper
+    {
+        private $_foldersToCleanup = [];
 
-		public function __destruct() {
-			$this->cleanup();
-		}
+        public function __destruct()
+        {
+            $this->cleanup();
+        }
 
-		public function cleanup() {
-			foreach ($this->_foldersToCleanup as $folder) {
-				$this->_remove($folder);
-			}
-		}
+        public function cleanup()
+        {
+            foreach ($this->_foldersToCleanup as $folder) {
+                $this->_remove($folder);
+            }
+        }
 
-		public function createTemporaryFolder() {
-			$tempPath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'test_' . uniqid() . '_' . microtime(true);
-			$this->_foldersToCleanup[] = $tempPath;
-			mkdir($tempPath);
-			return $tempPath;
-		}
+        public function createTemporaryFolder()
+        {
+            $tempPath = sys_get_temp_dir().DIRECTORY_SEPARATOR.'test_'.uniqid().'_'.microtime(true);
+            $this->_foldersToCleanup[] = $tempPath;
+            mkdir($tempPath);
 
-		public function getTemporaryFilePath() {
-			return $this->createTemporaryFolder() . DIRECTORY_SEPARATOR . microtime(true);
-		}
+            return $tempPath;
+        }
 
-		private function _remove($path) {
-			if (!file_exists($path)) {
-				return;
-			}
-			if (is_dir($path)) {
-				$iterator = new RecursiveIteratorIterator(
-					new RecursiveDirectoryIterator($path, RecursiveDirectoryIterator::SKIP_DOTS),
-					RecursiveIteratorIterator::CHILD_FIRST);
+        public function getTemporaryFilePath()
+        {
+            return $this->createTemporaryFolder().DIRECTORY_SEPARATOR.microtime(true);
+        }
 
-				foreach ($iterator as $i) {
-					$todo = ($i->isDir() ? 'rmdir' : 'unlink');
-					$todo($i->getRealPath());
-				}
+        private function _remove($path)
+        {
+            if (!file_exists($path)) {
+                return;
+            }
+            if (is_dir($path)) {
+                $iterator = new RecursiveIteratorIterator(
+                    new RecursiveDirectoryIterator($path, RecursiveDirectoryIterator::SKIP_DOTS),
+                    RecursiveIteratorIterator::CHILD_FIRST);
 
-				rmdir($path);
-			} else {
-				unlink($path);
-			}
-		}
-	}
+                foreach ($iterator as $i) {
+                    $todo = ($i->isDir() ? 'rmdir' : 'unlink');
+                    $todo($i->getRealPath());
+                }
+
+                rmdir($path);
+            } else {
+                unlink($path);
+            }
+        }
+    }

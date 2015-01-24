@@ -1,11 +1,12 @@
 <?php
 
-	namespace HippoPHP\Hippo\Exception;
+namespace HippoPHP\Hippo\Exception;
 
-	/**
-	 * ExceptionInterface.
-	 * @package Hippo
-	 * @author James Brooks <jbrooksuk@me.com>
-	 */
-	interface ExceptionInterface {
-	}
+/**
+     * ExceptionInterface.
+     *
+     * @author James Brooks <jbrooksuk@me.com>
+     */
+    interface ExceptionInterface
+    {
+    }

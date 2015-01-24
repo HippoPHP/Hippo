@@ -1,59 +1,66 @@
 <?php
 
-	namespace HippoPHP\Hippo\Tests\Reporters;
+namespace HippoPHP\Hippo\tests\Reporters;
 
-	use \HippoPHP\Hippo\CheckResult;
-	use \HippoPHP\Hippo\Violation;
-	use \HippoPHP\Hippo\File;
+use HippoPHP\Hippo\CheckResult;
+use HippoPHP\Hippo\File;
+use HippoPHP\Hippo\Violation;
 
-	abstract class AbstractReporterTest extends \PHPUnit_Framework_TestCase {
-		protected $fileSystemMock;
-		private $_savedContent;
+abstract class AbstractReporterTest extends \PHPUnit_Framework_TestCase
+{
+        protected $fileSystemMock;
+    private $_savedContent;
 
-		public function setUp() {
-			$this->fileSystemMock = $this
-				->getMockBuilder('\HippoPHP\Hippo\FileSystem')
-				->disableOriginalConstructor()
-				->getMock();
+    public function setUp()
+    {
+        $this->fileSystemMock = $this
+                ->getMockBuilder('\HippoPHP\Hippo\FileSystem')
+                ->disableOriginalConstructor()
+                ->getMock();
 
-			$this->_savedContent = '';
+        $this->_savedContent = '';
 
-			$this->fileSystemMock
-				->method('putContent')
-				->will($this->returnCallback(
-					function($file, $content) {
-						$this->_savedContent .= $content;
-					}));
+        $this->fileSystemMock
+                ->method('putContent')
+                ->will($this->returnCallback(
+                    function ($file, $content) {
+                        $this->_savedContent .= $content;
+                    }));
 
-			parent::setUp();
-		}
+        parent::setUp();
+    }
 
-		protected function getSavedContent() {
-			return $this->_savedContent;
-		}
+    protected function getSavedContent()
+    {
+        return $this->_savedContent;
+    }
 
-		protected function getFile($filename) {
-			return new File($filename);
-		}
+    protected function getFile($filename)
+    {
+        return new File($filename);
+    }
 
-		protected function getEmptyCheckResult(File $file) {
-			$checkResult = new CheckResult();
-			$checkResult->setFile($file);
-			return $checkResult;
-		}
+    protected function getEmptyCheckResult(File $file)
+    {
+        $checkResult = new CheckResult();
+        $checkResult->setFile($file);
 
-		protected function getBasicCheckResult(File $file) {
-			$checkResult = $this->getEmptyCheckResult($file);
-			$file = $checkResult->getFile();
+        return $checkResult;
+    }
 
-			$info = new Violation($file, 1, 4, Violation::SEVERITY_INFO, 'first message');
-			$warning = new Violation($file, 2, 5, Violation::SEVERITY_WARNING, 'second message');
-			$error = new Violation($file, 3, 6, Violation::SEVERITY_ERROR, 'third message');
+    protected function getBasicCheckResult(File $file)
+    {
+        $checkResult = $this->getEmptyCheckResult($file);
+        $file = $checkResult->getFile();
 
-			$checkResult->addViolation($info);
-			$checkResult->addViolation($error);
-			$checkResult->addViolation($warning);
+        $info = new Violation($file, 1, 4, Violation::SEVERITY_INFO, 'first message');
+        $warning = new Violation($file, 2, 5, Violation::SEVERITY_WARNING, 'second message');
+        $error = new Violation($file, 3, 6, Violation::SEVERITY_ERROR, 'third message');
 
-			return $checkResult;
-		}
-	}
+        $checkResult->addViolation($info);
+        $checkResult->addViolation($error);
+        $checkResult->addViolation($warning);
+
+        return $checkResult;
+    }
+}

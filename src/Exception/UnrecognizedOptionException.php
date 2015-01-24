@@ -1,10 +1,10 @@
 <?php
 
-	namespace HippoPHP\Hippo\Exception;
+namespace HippoPHP\Hippo\Exception;
 
-	/**
-	 * UnrecognizedOptionException.
-	 */
-	class UnrecognizedOptionException extends \Exception implements ExceptionInterface {
-	}
-
+/**
+     * UnrecognizedOptionException.
+     */
+    class UnrecognizedOptionException extends \Exception implements ExceptionInterface
+    {
+    }
