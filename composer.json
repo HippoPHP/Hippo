@@ -1,52 +1,52 @@
 {
-    "name": "hippophp/hippo",
-    "version": "0.1.0",
-    "description": "Hippo is an open-source tool that helps PHP programmers adhere to certain coding conventions",
-    "type": "library",
-    "keywords": ["checkstyle","standard","convention", "coding standards", "validator"],
-    "homepage": "https://github.com/HippoPHP/Hippo",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "James Brooks",
-            "email": "jbrooksuk@me.com",
-            "homepage": "http://james-brooks.uk",
-            "role": "Developer"
-        },
-        {
-            "name": "Marcin Kurczewski",
-            "homepage": "http://sakuya.pl",
-            "role": "Developer"
-        }
-    ],
-    "support": {
-        "wiki": "https://github.com/hippophp/hippo/wiki",
-        "source": "https://github.com/hippophp/hippo"
+  "name": "hippophp/hippo",
+  "version": "0.1.0",
+  "description": "Hippo is an open-source tool that helps PHP programmers adhere to certain coding conventions",
+  "type": "library",
+  "keywords": ["checkstyle","standard","convention", "coding standards", "validator"],
+  "homepage": "https://github.com/HippoPHP/Hippo",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "James Brooks",
+      "email": "jbrooksuk@me.com",
+      "homepage": "http://james-brooks.uk",
+      "role": "Developer"
     },
-    "require": {
-        "php": ">=5.4.0",
-        "hippophp/tokenizer": "dev-master",
-        "nikic/php-parser": "~1.0.0",
-        "symfony/yaml": "~2.1"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "~4.3.0",
-        "squizlabs/php_codesniffer": "~2.0",
-        "codeclimate/php-test-reporter": "dev-master"
-    },
-    "autoload": {
-        "psr-4": {
-            "HippoPHP\\Hippo\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "HippoPHP\\Hippo\\Tests\\": "tests/"
-        }
-    },
-    "bin": [
-        "bin/hippo"
-    ],
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    {
+      "name": "Marcin Kurczewski",
+      "homepage": "http://sakuya.pl",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "wiki": "https://github.com/hippophp/hippo/wiki",
+    "source": "https://github.com/hippophp/hippo"
+  },
+  "require": {
+    "php": ">=5.4.0",
+    "hippophp/tokenizer": "dev-master",
+    "nikic/php-parser": "~1.0.0",
+    "symfony/yaml": "~2.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.3.0",
+    "squizlabs/php_codesniffer": "~2.0",
+    "codeclimate/php-test-reporter": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "HippoPHP\\Hippo\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "HippoPHP\\Hippo\\Tests\\": "tests/"
+    }
+  },
+  "bin": [
+      "bin/hippo"
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
