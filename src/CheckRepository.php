@@ -3,10 +3,10 @@
 namespace HippoPHP\Hippo;
 
 use HippoPHP\Hippo\Checks\CheckInterface;
-    use ReflectionClass;
+use ReflectionClass;
 
-    class CheckRepository
-    {
+class CheckRepository
+{
         /**
          * @var boolean
          */
@@ -22,10 +22,10 @@ use HippoPHP\Hippo\Checks\CheckInterface;
          */
         private $_fileSystem;
 
-        public function __construct(FileSystem $fileSystem)
-        {
-            $this->_fileSystem = $fileSystem;
-        }
+    public function __construct(FileSystem $fileSystem)
+    {
+        $this->_fileSystem = $fileSystem;
+    }
 
         /**
          * @return Check[]
@@ -93,4 +93,4 @@ use HippoPHP\Hippo\Checks\CheckInterface;
                 && !$reflectionClass->isInterface()
                 && !$reflectionClass->isAbstract();
         }
-    }
+}

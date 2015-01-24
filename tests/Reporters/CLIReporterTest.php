@@ -3,11 +3,11 @@
 namespace HippoPHP\Hippo\tests\Reporters;
 
 use HippoPHP\Hippo\Reporters\CLIReporter;
-    use HippoPHP\Hippo\Tests\Reporters\AbstractReporterTest;
-    use HippoPHP\Hippo\Violation;
+use HippoPHP\Hippo\Tests\Reporters\AbstractReporterTest;
+use HippoPHP\Hippo\Violation;
 
-    class CLIReporterTest extends AbstractReporterTest
-    {
+class CLIReporterTest extends AbstractReporterTest
+{
         public function testEmptyReport()
         {
             $reporter = new CLIReporter($this->fileSystemMock);
@@ -16,37 +16,37 @@ use HippoPHP\Hippo\Reporters\CLIReporter;
             $this->assertEquals('', $this->getSavedContent());
         }
 
-        public function testReportWithNoViolations()
-        {
-            $file = $this->getFile('whatever.php');
-            $reporter = new CLIReporter($this->fileSystemMock);
-            $reporter->start();
-            $reporter->addCheckResults($file, [$this->getEmptyCheckResult($file)]);
-            $reporter->finish();
-            $this->assertEquals('Checking whatever.php'.PHP_EOL, $this->getSavedContent());
-        }
+    public function testReportWithNoViolations()
+    {
+        $file = $this->getFile('whatever.php');
+        $reporter = new CLIReporter($this->fileSystemMock);
+        $reporter->start();
+        $reporter->addCheckResults($file, [$this->getEmptyCheckResult($file)]);
+        $reporter->finish();
+        $this->assertEquals('Checking whatever.php'.PHP_EOL, $this->getSavedContent());
+    }
 
-        public function testSilentReport()
-        {
-            $file = $this->getFile('whatever.php');
-            $reporter = new CLIReporter($this->fileSystemMock);
-            $reporter->setLoggedSeverities([]);
-            $reporter->start();
-            $reporter->addCheckResults($file, [$this->getEmptyCheckResult($file)]);
-            $reporter->finish();
-            $this->assertEquals('', $this->getSavedContent());
-        }
+    public function testSilentReport()
+    {
+        $file = $this->getFile('whatever.php');
+        $reporter = new CLIReporter($this->fileSystemMock);
+        $reporter->setLoggedSeverities([]);
+        $reporter->start();
+        $reporter->addCheckResults($file, [$this->getEmptyCheckResult($file)]);
+        $reporter->finish();
+        $this->assertEquals('', $this->getSavedContent());
+    }
 
-        public function testOmittingWarnings()
-        {
-            $file = $this->getFile('whatever.php');
-            $reporter = new CLIReporter($this->fileSystemMock);
-            $reporter->setLoggedSeverities([Violation::SEVERITY_INFO, Violation::SEVERITY_ERROR]);
-            $reporter->start();
-            $reporter->addCheckResults($file, [$this->getBasicCheckResult($file)]);
-            $reporter->finish();
+    public function testOmittingWarnings()
+    {
+        $file = $this->getFile('whatever.php');
+        $reporter = new CLIReporter($this->fileSystemMock);
+        $reporter->setLoggedSeverities([Violation::SEVERITY_INFO, Violation::SEVERITY_ERROR]);
+        $reporter->start();
+        $reporter->addCheckResults($file, [$this->getBasicCheckResult($file)]);
+        $reporter->finish();
 
-            $expectedLines = [
+        $expectedLines = [
                 'Checking whatever.php',
                 'whatever.php:',
                 '--------------------------------------------------------------------------------',
@@ -55,19 +55,19 @@ use HippoPHP\Hippo\Reporters\CLIReporter;
                 '',
                 '',
             ];
-            $fullText = implode(PHP_EOL, $expectedLines);
-            $this->assertEquals($fullText, $this->getSavedContent());
-        }
+        $fullText = implode(PHP_EOL, $expectedLines);
+        $this->assertEquals($fullText, $this->getSavedContent());
+    }
 
-        public function testBasicReport()
-        {
-            $file = $this->getFile('whatever.php');
-            $reporter = new CLIReporter($this->fileSystemMock);
-            $reporter->start();
-            $reporter->addCheckResults($file, [$this->getBasicCheckResult($file)]);
-            $reporter->finish();
+    public function testBasicReport()
+    {
+        $file = $this->getFile('whatever.php');
+        $reporter = new CLIReporter($this->fileSystemMock);
+        $reporter->start();
+        $reporter->addCheckResults($file, [$this->getBasicCheckResult($file)]);
+        $reporter->finish();
 
-            $expectedLines = [
+        $expectedLines = [
                 'Checking whatever.php',
                 'whatever.php:',
                 '--------------------------------------------------------------------------------',
@@ -77,21 +77,21 @@ use HippoPHP\Hippo\Reporters\CLIReporter;
                 '',
                 '',
             ];
-            $fullText = implode(PHP_EOL, $expectedLines);
-            $this->assertEquals($fullText, $this->getSavedContent());
-        }
+        $fullText = implode(PHP_EOL, $expectedLines);
+        $this->assertEquals($fullText, $this->getSavedContent());
+    }
 
-        public function testReportWithTwoFiles()
-        {
-            $file1 = $this->getFile('whatever.php');
-            $file2 = $this->getFile('anotherfile.php');
-            $reporter = new CLIReporter($this->fileSystemMock);
-            $reporter->start();
-            $reporter->addCheckResults($file1, [$this->getBasicCheckResult($file1)]);
-            $reporter->addCheckResults($file2, [$this->getBasicCheckResult($file2)]);
-            $reporter->finish();
+    public function testReportWithTwoFiles()
+    {
+        $file1 = $this->getFile('whatever.php');
+        $file2 = $this->getFile('anotherfile.php');
+        $reporter = new CLIReporter($this->fileSystemMock);
+        $reporter->start();
+        $reporter->addCheckResults($file1, [$this->getBasicCheckResult($file1)]);
+        $reporter->addCheckResults($file2, [$this->getBasicCheckResult($file2)]);
+        $reporter->finish();
 
-            $expectedLines = [
+        $expectedLines = [
                 'Checking whatever.php',
                 'whatever.php:',
                 '--------------------------------------------------------------------------------',
@@ -109,7 +109,7 @@ use HippoPHP\Hippo\Reporters\CLIReporter;
                 '',
                 '',
             ];
-            $fullText = implode(PHP_EOL, $expectedLines);
-            $this->assertEquals($fullText, $this->getSavedContent());
-        }
+        $fullText = implode(PHP_EOL, $expectedLines);
+        $this->assertEquals($fullText, $this->getSavedContent());
     }
+}

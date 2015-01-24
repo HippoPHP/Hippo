@@ -3,10 +3,10 @@
 namespace HippoPHP\Hippo\tests\Reporters;
 
 use HippoPHP\Hippo\Reporters\CheckstyleReporter;
-    use HippoPHP\Hippo\Tests\Reporters\AbstractReporterTest;
+use HippoPHP\Hippo\Tests\Reporters\AbstractReporterTest;
 
-    class CheckstyleReporterTest extends AbstractReporterTest
-    {
+class CheckstyleReporterTest extends AbstractReporterTest
+{
         public function testEmptyReport()
         {
             $reporter = new CheckstyleReporter($this->fileSystemMock);
@@ -21,34 +21,34 @@ EXML;
             $this->assertEquals($expectedLines, $this->getSavedContent());
         }
 
-        public function testReportWithNoViolations()
-        {
-            $file = $this->getFile('whatever.php');
-            $reporter = new CheckstyleReporter($this->fileSystemMock);
-            $reporter->setFilename('checkstyle.xml');
-            $reporter->start();
-            $reporter->addCheckResults($file, [$this->getEmptyCheckResult($file)]);
-            $reporter->finish();
-            $expectedLines = <<<EXML
+    public function testReportWithNoViolations()
+    {
+        $file = $this->getFile('whatever.php');
+        $reporter = new CheckstyleReporter($this->fileSystemMock);
+        $reporter->setFilename('checkstyle.xml');
+        $reporter->start();
+        $reporter->addCheckResults($file, [$this->getEmptyCheckResult($file)]);
+        $reporter->finish();
+        $expectedLines = <<<EXML
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="5.5">
     <file name="whatever.php"/>
 </checkstyle>
 
 EXML;
-            $this->assertEquals($expectedLines, $this->getSavedContent());
-        }
+        $this->assertEquals($expectedLines, $this->getSavedContent());
+    }
 
-        public function testBasicReport()
-        {
-            $file = $this->getFile('whatever.php');
-            $reporter = new CheckstyleReporter($this->fileSystemMock);
-            $reporter->setFilename('checkstyle.xml');
-            $reporter->start();
-            $reporter->addCheckResults($file, [$this->getBasicCheckResult($file)]);
-            $reporter->finish();
+    public function testBasicReport()
+    {
+        $file = $this->getFile('whatever.php');
+        $reporter = new CheckstyleReporter($this->fileSystemMock);
+        $reporter->setFilename('checkstyle.xml');
+        $reporter->start();
+        $reporter->addCheckResults($file, [$this->getBasicCheckResult($file)]);
+        $reporter->finish();
 
-            $expectedLines = <<<EXML
+        $expectedLines = <<<EXML
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="5.5">
     <file name="whatever.php">
@@ -60,6 +60,6 @@ EXML;
 
 EXML;
 
-            $this->assertEquals($expectedLines, $this->getSavedContent());
-        }
+        $this->assertEquals($expectedLines, $this->getSavedContent());
     }
+}

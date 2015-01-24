@@ -4,7 +4,7 @@ namespace HippoPHP\Hippo;
 
 use Countable;
 
-    /**
+/**
      * Result of running a check.
      */
     class CheckResult implements Countable

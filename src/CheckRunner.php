@@ -3,10 +3,10 @@
 namespace HippoPHP\Hippo;
 
 use HippoPHP\Hippo\Config\Config;
-    use HippoPHP\Hippo\Exception\FileNotFoundException;
+use HippoPHP\Hippo\Exception\FileNotFoundException;
 
-    class CheckRunner
-    {
+class CheckRunner
+{
         /**
          * @var FileSystem
          */
@@ -119,4 +119,4 @@ use HippoPHP\Hippo\Config\Config;
 
             return $checkResults;
         }
-    }
+}

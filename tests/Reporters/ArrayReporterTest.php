@@ -3,10 +3,10 @@
 namespace HippoPHP\Hippo\tests\Reporters;
 
 use HippoPHP\Hippo\Reporters\ArrayReporter;
-    use HippoPHP\Hippo\Tests\Reporters\AbstractReporterTest;
+use HippoPHP\Hippo\Tests\Reporters\AbstractReporterTest;
 
-    class ArrayReporterTest extends AbstractReporterTest
-    {
+class ArrayReporterTest extends AbstractReporterTest
+{
         public function testEmptyReport()
         {
             $reporter = new ArrayReporter();
@@ -15,25 +15,25 @@ use HippoPHP\Hippo\Reporters\ArrayReporter;
             $this->assertEquals([], $reporter->getReport());
         }
 
-        public function testReportWithNoViolations()
-        {
-            $file = $this->getFile('whatever.php');
-            $reporter = new ArrayReporter();
-            $reporter->start();
-            $reporter->addCheckResults($file, [$this->getEmptyCheckResult($file)]);
-            $reporter->finish();
-            $this->assertEquals([], $reporter->getReport());
-        }
+    public function testReportWithNoViolations()
+    {
+        $file = $this->getFile('whatever.php');
+        $reporter = new ArrayReporter();
+        $reporter->start();
+        $reporter->addCheckResults($file, [$this->getEmptyCheckResult($file)]);
+        $reporter->finish();
+        $this->assertEquals([], $reporter->getReport());
+    }
 
-        public function testBasicReport()
-        {
-            $file = $this->getFile('whatever.php');
-            $reporter = new ArrayReporter();
-            $reporter->start();
-            $reporter->addCheckResults($file, [$this->getBasicCheckResult($file)]);
-            $reporter->finish();
+    public function testBasicReport()
+    {
+        $file = $this->getFile('whatever.php');
+        $reporter = new ArrayReporter();
+        $reporter->start();
+        $reporter->addCheckResults($file, [$this->getBasicCheckResult($file)]);
+        $reporter->finish();
 
-            $expectedLines = [
+        $expectedLines = [
                 'whatever.php:1' => [
                     0 => [
                         'file'     => 'whatever.php',
@@ -62,6 +62,6 @@ use HippoPHP\Hippo\Reporters\ArrayReporter;
                     ],
                 ],
             ];
-            $this->assertEquals($expectedLines, $reporter->getReport());
-        }
+        $this->assertEquals($expectedLines, $reporter->getReport());
     }
+}

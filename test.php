@@ -1,4 +1,4 @@
 <?php
-	echo 'Whoop';
+    echo 'Whoop';
 ?>
 <strong>Hello there</strong>
