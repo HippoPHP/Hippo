@@ -70,9 +70,9 @@ class Violation
     /**
      * Creates a new violation.
      *
-     * @param int $line
-     * @param int $column
-     * @param int $severity
+     * @param int    $line
+     * @param int    $column
+     * @param int    $severity
      * @param string $message
      *
      * @return void
@@ -151,7 +151,7 @@ class Violation
     /**
      * Get a severity level from a severity name.
      *
-     * @param  string $severityName
+     * @param string $severityName
      *
      * @return int
      */

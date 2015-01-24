@@ -39,7 +39,7 @@ class BitwiseCheck extends AbstractCheck implements CheckInterface
      * @see AbstractCheck::checkFileInternal()
      *
      * @param CheckContext $checkContext
-     * @param Config $config
+     * @param Config       $config
      *
      * @return void
      */

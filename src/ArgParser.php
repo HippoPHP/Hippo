@@ -23,7 +23,7 @@ class ArgParser
     private $_argParserOptions;
 
     /**
-     * @param string[] $argv
+     * @param string[]         $argv
      * @param ArgParserOptions $argParserOptions
      *
      * @return ArgContainer
@@ -107,8 +107,8 @@ class ArgParser
     }
 
     /**
-     * @param string $arg
-     * @param string $nextArg
+     * @param string  $arg
+     * @param string  $nextArg
      * @param boolean $hasUsedNextArg
      *
      * @return mixed
@@ -179,7 +179,7 @@ class ArgParser
     /**
      * Normalizes an argument key.
      *
-     * @param  string $arg
+     * @param string $arg
      *
      * @return string
      */

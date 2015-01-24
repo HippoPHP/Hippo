@@ -56,7 +56,7 @@ class HippoTextUIContext
 
     /**
      * @param FileSystem $fileSystem
-     * @param string[] $args
+     * @param string[]   $args
      */
     public function __construct(
         FileSystem $fileSystem,

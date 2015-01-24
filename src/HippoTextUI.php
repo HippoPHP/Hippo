@@ -38,10 +38,10 @@ class HippoTextUI
     protected $configReader;
 
     /**
-     * @param Environment $environment
-     * @param FileSystem $fileSystem
-     * @param CheckRepository $checkRepository
-     * @param string $pathToSelf
+     * @param Environment        $environment
+     * @param FileSystem         $fileSystem
+     * @param CheckRepository    $checkRepository
+     * @param string             $pathToSelf
      * @param HippoTextUIContext $context
      *
      * @return void
@@ -204,8 +204,8 @@ class HippoTextUI
 
     /**
      * @param ReporterInterface[] $reporters
-     * @param File $file
-     * @param CheckResult[] $checkResults
+     * @param File                $file
+     * @param CheckResult[]       $checkResults
      *
      * @return void
      */
@@ -241,7 +241,7 @@ class HippoTextUI
     /**
      * Starts the reporter. Can be used for setup.
      *
-     * @param  ReporterInterface $reporter
+     * @param ReporterInterface $reporter
      *
      * @return mixed
      */
@@ -253,7 +253,7 @@ class HippoTextUI
     /**
      * Finishes the reporter. Usually used for cleanups.
      *
-     * @param  ReporterInterface $reporter
+     * @param ReporterInterface $reporter
      *
      * @return mixed
      */

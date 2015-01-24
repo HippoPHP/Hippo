@@ -120,9 +120,9 @@ class File
     }
 
     /**
-     * @param string $source
+     * @param string   $source
      * @param string[] $eols
-     * @param string $eolUsed
+     * @param string   $eolUsed
      *
      * @return string
      */

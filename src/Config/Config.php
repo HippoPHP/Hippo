@@ -21,7 +21,7 @@ class Config
 
     /**
      * @param string $key
-     * @param mixed $defaultValue
+     * @param mixed  $defaultValue
      *
      * @throws BadConfigKeyException if default value wasn't supplied and there were problems retrieving the key
      *
@@ -46,7 +46,7 @@ class Config
 
     /**
      * @param string $key
-     * @param mixed $value
+     * @param mixed  $value
      *
      * @return void
      */
@@ -101,7 +101,7 @@ class Config
     }
 
     /**
-     * @param string $key
+     * @param string  $key
      * @param boolean $createSections
      *
      * @throws BadConfigKeyException

@@ -83,7 +83,7 @@ class CheckRepository
     /**
      * Determines whether a "check" does indeed implement CheckInterface.
      *
-     * @param  ReflectionClass $reflectionClass
+     * @param ReflectionClass $reflectionClass
      *
      * @return bool
      */

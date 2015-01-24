@@ -24,7 +24,7 @@ class ArgContainer
 
     /**
      * @param string $arg
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function setShortOption($arg, $value)
     {
@@ -33,7 +33,7 @@ class ArgContainer
 
     /**
      * @param string $arg
-     * @param mixed $value
+     * @param mixed  $value
      */
     public function setLongOption($arg, $value)
     {

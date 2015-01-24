@@ -44,8 +44,8 @@ class YAMLConfigReader implements ConfigReaderInterface
     }
 
     /**
-     * @param  array  $config
-     * @param  mixed $filename
+     * @param array $config
+     * @param mixed $filename
      *
      * @return Config
      */
@@ -90,7 +90,7 @@ class YAMLConfigReader implements ConfigReaderInterface
     }
 
     /**
-     * @param  string $string
+     * @param string $string
      *
      * @return array<*,*>
      */
@@ -107,7 +107,7 @@ class YAMLConfigReader implements ConfigReaderInterface
     /**
      * Normalizes a configuration filename.
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return string
      */

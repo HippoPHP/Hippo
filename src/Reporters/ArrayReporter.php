@@ -34,7 +34,7 @@ class ArrayReporter implements ReporterInterface
      *
      * @see ReportInterface::addCheckResults()
      *
-     * @param File $file
+     * @param File        $file
      * @param CheckResult $checkResults
      */
     public function addCheckResults(File $file, array $checkResults)

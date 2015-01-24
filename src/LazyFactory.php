@@ -18,7 +18,7 @@ class LazyFactory
     }
 
     /**
-     * @param mixed $cacheKey
+     * @param mixed    $cacheKey
      * @param callable $factory
      *
      * @return mixed

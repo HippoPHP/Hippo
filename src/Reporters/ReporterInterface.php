@@ -20,7 +20,7 @@ interface ReporterInterface
     /**
      * Adds a check result to the report.
      *
-     * @param File $file
+     * @param File          $file
      * @param CheckResult[] $checkResults
      *
      * @return void
