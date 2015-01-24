@@ -8,7 +8,7 @@ use HippoPHP\Hippo\Violation;
 
 abstract class AbstractReporterTest extends \PHPUnit_Framework_TestCase
 {
-        protected $fileSystemMock;
+    protected $fileSystemMock;
     private $_savedContent;
 
     public function setUp()

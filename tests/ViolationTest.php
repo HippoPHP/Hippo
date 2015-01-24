@@ -7,7 +7,7 @@ use HippoPHP\Hippo\Violation;
 
 class ViolationTest extends \PHPUnit_Framework_TestCase
 {
-        protected $violation;
+    protected $violation;
     protected $file;
 
     public function setUp()
@@ -19,11 +19,11 @@ class ViolationTest extends \PHPUnit_Framework_TestCase
     public function testGetSeveritiies()
     {
         $this->assertEquals([
-                Violation::SEVERITY_ERROR,
-                Violation::SEVERITY_WARNING,
-                Violation::SEVERITY_INFO,
-                Violation::SEVERITY_IGNORE, ],
-                Violation::getSeverities());
+            Violation::SEVERITY_ERROR,
+            Violation::SEVERITY_WARNING,
+            Violation::SEVERITY_INFO,
+            Violation::SEVERITY_IGNORE,
+        ], Violation::getSeverities());
     }
 
     public function testSeverityIgnoreValue()
@@ -115,14 +115,14 @@ class ViolationTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('error', $mock->getSeverityName());
     }
 
-        /**
-         * getSeverityName should return error by default.
-         */
-        public function testGetSeverityNameException()
-        {
-            $mock = new Violation($this->file, 1, 0, 100, "Test", "Exception");
-            $this->assertEquals('error', $mock->getSeverityName());
-        }
+    /**
+     * getSeverityName should return error by default.
+     */
+    public function testGetSeverityNameException()
+    {
+        $mock = new Violation($this->file, 1, 0, 100, "Test", "Exception");
+        $this->assertEquals('error', $mock->getSeverityName());
+    }
 
     public function testGetMessage()
     {

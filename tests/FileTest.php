@@ -7,7 +7,7 @@ use HippoPHP\Hippo\File;
 
 class FileTest extends \PHPUnit_Framework_TestCase
 {
-        protected $file;
+    protected $file;
 
     public function setUp()
     {

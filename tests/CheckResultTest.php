@@ -9,7 +9,7 @@ use HippoPHP\Hippo\Violation;
 
 class CheckResultTest extends \PHPUnit_Framework_TestCase
 {
-        protected $instance;
+    protected $instance;
     protected $file;
 
     public function setUp()
@@ -71,18 +71,18 @@ class CheckResultTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(Violation::SEVERITY_WARNING, $this->instance->getMaximumViolationSeverity());
     }
 
-        /**
-         * @dataProvider violationOrderProvider
-         */
-        public function testViolationOrder(array $inputViolations, array $expectedViolations)
-        {
-            foreach ($inputViolations as $violation) {
-                $this->instance->addViolation($violation);
-            }
-
-            $actualViolations = $this->instance->getViolations();
-            $this->assertEquals($expectedViolations, $actualViolations);
+    /**
+     * @dataProvider violationOrderProvider
+     */
+    public function testViolationOrder(array $inputViolations, array $expectedViolations)
+    {
+        foreach ($inputViolations as $violation) {
+            $this->instance->addViolation($violation);
         }
+
+        $actualViolations = $this->instance->getViolations();
+        $this->assertEquals($expectedViolations, $actualViolations);
+    }
 
     public function violationOrderProvider()
     {
@@ -94,13 +94,14 @@ class CheckResultTest extends \PHPUnit_Framework_TestCase
         $violationLine2Col2 = new Violation($file, 2, 2, Violation::SEVERITY_ERROR, null, null);
 
         return [
-                [[$violationLine1Col1, $violationLine1Col1], [$violationLine1Col1, $violationLine1Col1]],
-                [[$violationLine1Col1, $violationLine2Col1], [$violationLine1Col1, $violationLine2Col1]],
-                [[$violationLine2Col1, $violationLine1Col1], [$violationLine1Col1, $violationLine2Col1]],
-                [[$violationLine2Col1, $violationLine3Col1], [$violationLine2Col1, $violationLine3Col1]],
-                [
-                    [$violationLine2Col1, $violationLine1Col2, $violationLine3Col1, $violationLine2Col2],
-                    [$violationLine1Col2, $violationLine2Col1, $violationLine2Col2, $violationLine3Col1], ],
-            ];
+            [[$violationLine1Col1, $violationLine1Col1], [$violationLine1Col1, $violationLine1Col1]],
+            [[$violationLine1Col1, $violationLine2Col1], [$violationLine1Col1, $violationLine2Col1]],
+            [[$violationLine2Col1, $violationLine1Col1], [$violationLine1Col1, $violationLine2Col1]],
+            [[$violationLine2Col1, $violationLine3Col1], [$violationLine2Col1, $violationLine3Col1]],
+            [
+                [$violationLine2Col1, $violationLine1Col2, $violationLine3Col1, $violationLine2Col2],
+                [$violationLine1Col2, $violationLine2Col1, $violationLine2Col2, $violationLine3Col1],
+            ],
+        ];
     }
 }

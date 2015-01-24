@@ -6,23 +6,23 @@ use HippoPHP\Hippo\CheckContext;
 use HippoPHP\Hippo\Config\Config;
 
 /**
-     * Check Interface.
-     * Rules implementing this interface will be visited for every file.
+ * Check Interface.
+ * Rules implementing this interface will be visited for every file.
+ *
+ * @author James Brooks <jbrooksuk@me.com>
+ */
+interface CheckInterface
+{
+    /**
+     * @param CheckContext $checkContext
+     * @param Config       $config
      *
-     * @author James Brooks <jbrooksuk@me.com>
+     * @return \HippoPHP\Hippo\CheckResult
      */
-    interface CheckInterface
-    {
-        /**
-         * @param CheckContext $checkContext
-         * @param Config       $config
-         *
-         * @return \HippoPHP\Hippo\CheckResult
-         */
-        public function checkFile(CheckContext $checkContext, Config $config);
+    public function checkFile(CheckContext $checkContext, Config $config);
 
-        /**
-         * @return string
-         */
-        public function getConfigRoot();
-    }
+    /**
+     * @return string
+     */
+    public function getConfigRoot();
+}

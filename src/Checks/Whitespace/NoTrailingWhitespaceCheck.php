@@ -10,44 +10,44 @@ use HippoPHP\Hippo\Violation;
 
 class NoTrailingWhitespaceCheck extends AbstractCheck implements CheckInterface
 {
-        /**
-         * @return string
-         */
-        public function getConfigRoot()
-        {
-            return 'whitespace.no_trailing_whitespace';
-        }
+    /**
+     * @return string
+     */
+    public function getConfigRoot()
+    {
+        return 'whitespace.no_trailing_whitespace';
+    }
 
-        /**
-         * checkFileInternal(): defined by AbstractCheck.
-         *
-         * @see AbstractCheck::checkFileInternal()
-         *
-         * @param CheckContext $checkContext
-         * @param Config $config
-         *
-         * @return void
-         */
-        protected function checkFileInternal(CheckContext $checkContext, Config $config)
-        {
-            $file = $checkContext->getFile();
-            $lines = $file->getLines();
+    /**
+     * checkFileInternal(): defined by AbstractCheck.
+     *
+     * @see AbstractCheck::checkFileInternal()
+     *
+     * @param CheckContext $checkContext
+     * @param Config $config
+     *
+     * @return void
+     */
+    protected function checkFileInternal(CheckContext $checkContext, Config $config)
+    {
+        $file = $checkContext->getFile();
+        $lines = $file->getLines();
 
-            foreach ($lines as $lineNo => $line) {
-                if (trim($line) === '') {
-                    continue;
-                }
+        foreach ($lines as $lineNo => $line) {
+            if (trim($line) === '') {
+                continue;
+            }
 
-                $line = rtrim($line, "\r\n");
-                if ($line !== rtrim($line)) {
-                    $this->addViolation(
-                        $file,
-                        $lineNo,
-                        0,
-                        'Excess trailing spaces at end of line.',
-                        Violation::SEVERITY_INFO
-                    );
-                }
+            $line = rtrim($line, "\r\n");
+            if ($line !== rtrim($line)) {
+                $this->addViolation(
+                    $file,
+                    $lineNo,
+                    0,
+                    'Excess trailing spaces at end of line.',
+                    Violation::SEVERITY_INFO
+                );
             }
         }
+    }
 }

@@ -7,12 +7,12 @@ use HippoPHP\Hippo\Exception\BadConfigKeyException;
 
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {
-        public function testGetNonExistingValue()
-        {
-            $config = new Config();
-            $this->setExpectedException('HippoPHP\Hippo\Exception\BadConfigKeyException');
-            $config->get('nope');
-        }
+    public function testGetNonExistingValue()
+    {
+        $config = new Config();
+        $this->setExpectedException('HippoPHP\Hippo\Exception\BadConfigKeyException');
+        $config->get('nope');
+    }
 
     public function testGetNonExistingValueWithDefault()
     {

@@ -8,7 +8,7 @@ use HippoPHP\Tokenizer\Token;
 
 class CheckContextTest extends \PHPUnit_Framework_TestCase
 {
-        private $_file;
+    private $_file;
     private $_checkContext;
 
     public function setUp()

@@ -8,7 +8,7 @@ use HippoPHP\Hippo\FileSystem;
 
 class YAMLConfigReaderTest extends \PHPUnit_Framework_TestCase
 {
-        private $_reader;
+    private $_reader;
     private $_fileSystemMock;
 
     public function setUp()

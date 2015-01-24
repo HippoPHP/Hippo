@@ -6,7 +6,7 @@ use HippoPHP\Hippo\LazyFactory;
 
 class LazyFactoryTest extends \PHPUnit_Framework_TestCase
 {
-        private $_lazyFactory;
+    private $_lazyFactory;
 
     public function setUp()
     {

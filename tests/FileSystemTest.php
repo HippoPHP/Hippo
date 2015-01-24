@@ -8,7 +8,7 @@ use HippoPHP\Hippo\Tests\Helpers\FileSystemTestHelper;
 
 class FileSystemTest extends \PHPUnit_Framework_TestCase
 {
-        private $_fileSystem;
+    private $_fileSystem;
     private $_fileSystemTestHelper;
 
     public function setUp()

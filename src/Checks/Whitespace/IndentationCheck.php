@@ -10,126 +10,126 @@ use HippoPHP\Hippo\Violation;
 
 class IndentationCheck extends AbstractCheck implements CheckInterface
 {
-        //TODO: add "auto", which checks only for consistency
-        const INDENT_STYLE_SPACE = 'space';
+    // TODO: add "auto", which checks only for consistency
+    const INDENT_STYLE_SPACE = 'space';
     const INDENT_STYLE_TAB = 'tab';
 
-        /**
-         * Style of indent.
-         * Either 'tab' or 'space'.
-         *
-         * @var string
-         */
-        protected $indentStyle = self::INDENT_STYLE_SPACE;
+    /**
+     * Style of indent.
+     * Either 'tab' or 'space'.
+     *
+     * @var string
+     */
+    protected $indentStyle = self::INDENT_STYLE_SPACE;
 
-        /**
-         * Number of indentation characters per-level.
-         *
-         * @var int
-         */
-        protected $indentCount = 4;
+    /**
+     * Number of indentation characters per-level.
+     *
+     * @var int
+     */
+    protected $indentCount = 4;
 
-        /**
-         * Sets the indentation style.
-         *
-         * @param string $style
-         *
-         * @return Indentation
-         */
-        public function setIndentStyle($style)
-        {
-            $style = strtolower($style);
+    /**
+     * Sets the indentation style.
+     *
+     * @param string $style
+     *
+     * @return Indentation
+     */
+    public function setIndentStyle($style)
+    {
+        $style = strtolower($style);
 
-            switch ($style) {
-                case self::INDENT_STYLE_SPACE:
-                case self::INDENT_STYLE_TAB:
-                    $this->indentStyle = $style;
-                    break;
-            }
-
-            return $this;
+        switch ($style) {
+            case self::INDENT_STYLE_SPACE:
+            case self::INDENT_STYLE_TAB:
+                $this->indentStyle = $style;
+                break;
         }
 
-        /**
-         * Sets the indentation count.
-         *
-         * @param int $count
-         *
-         * @return Indentation
-         */
-        public function setIndentCount($count)
-        {
-            $this->indentCount = max(1, (int) $count);
+        return $this;
+    }
 
-            return $this;
-        }
+    /**
+     * Sets the indentation count.
+     *
+     * @param int $count
+     *
+     * @return Indentation
+     */
+    public function setIndentCount($count)
+    {
+        $this->indentCount = max(1, (int) $count);
 
-        /**
-         * @return string
-         */
-        public function getConfigRoot()
-        {
-            return 'file.indentation';
-        }
+        return $this;
+    }
 
-        /**
-         * checkFileInternal(): defined by AbstractCheck.
-         *
-         * @see AbstractCheck::checkFileInternal()
-         *
-         * @param CheckContext $checkContext
-         * @param Config $config
-         *
-         * @return void
-         */
-        protected function checkFileInternal(CheckContext $checkContext, Config $config)
-        {
-            $file = $checkContext->getFile();
+    /**
+     * @return string
+     */
+    public function getConfigRoot()
+    {
+        return 'file.indentation';
+    }
 
-            $this->setIndentStyle($config->get('style', $this->indentStyle));
-            $this->setIndentCount($config->get('count', $this->indentCount));
+    /**
+     * checkFileInternal(): defined by AbstractCheck.
+     *
+     * @see AbstractCheck::checkFileInternal()
+     *
+     * @param CheckContext $checkContext
+     * @param Config $config
+     *
+     * @return void
+     */
+    protected function checkFileInternal(CheckContext $checkContext, Config $config)
+    {
+        $file = $checkContext->getFile();
 
-            $indentation = $this->_getBaseIndentation();
-            $lines = $this->_getLines($checkContext->getTokenList());
+        $this->setIndentStyle($config->get('style', $this->indentStyle));
+        $this->setIndentCount($config->get('count', $this->indentCount));
 
-            $level = 0;
-            foreach ($lines as $lineNumber => $line) {
-                $actualIndentation = '';
-                if (count($line) > 0) {
-                    if ($line[0]->isType(T_WHITESPACE)) {
-                        $actualIndentation = $line[0]->getContent();
-                    }
-                }
+        $indentation = $this->_getBaseIndentation();
+        $lines = $this->_getLines($checkContext->getTokenList());
 
-                foreach ($line as $token) {
-                    $content = $token->getContent();
-                    if ($content === '}' || $content === ')' || $content === ']') {
-                        $level --;
-                    }
-                }
-
-                $expectedIndentation = $level > 0 ? str_repeat($indentation, $level) : '';
-
-                if ($expectedIndentation !== $actualIndentation) {
-                    $this->addViolation(
-                        $file,
-                        $lineNumber,
-                        count($line) > 0 ? $line[0]->getColumn() + strlen($line[0]->getContent()) : 1,
-                        sprintf('Unexpected indentation (expected: %s, actual: %s)',
-                            $this->_escape($expectedIndentation),
-                            $this->_escape($actualIndentation)),
-                        Violation::SEVERITY_WARNING
-                    );
-                }
-
-                foreach ($line as $token) {
-                    $content = $token->getContent();
-                    if ($content === '{' || $content === '(' || $content === '[') {
-                        $level ++;
-                    }
+        $level = 0;
+        foreach ($lines as $lineNumber => $line) {
+            $actualIndentation = '';
+            if (count($line) > 0) {
+                if ($line[0]->isType(T_WHITESPACE)) {
+                    $actualIndentation = $line[0]->getContent();
                 }
             }
+
+            foreach ($line as $token) {
+                $content = $token->getContent();
+                if ($content === '}' || $content === ')' || $content === ']') {
+                    $level --;
+                }
+            }
+
+            $expectedIndentation = $level > 0 ? str_repeat($indentation, $level) : '';
+
+            if ($expectedIndentation !== $actualIndentation) {
+                $this->addViolation(
+                    $file,
+                    $lineNumber,
+                    count($line) > 0 ? $line[0]->getColumn() + strlen($line[0]->getContent()) : 1,
+                    sprintf('Unexpected indentation (expected: %s, actual: %s)',
+                        $this->_escape($expectedIndentation),
+                        $this->_escape($actualIndentation)),
+                    Violation::SEVERITY_WARNING
+                );
+            }
+
+            foreach ($line as $token) {
+                $content = $token->getContent();
+                if ($content === '{' || $content === '(' || $content === '[') {
+                    $level ++;
+                }
+            }
         }
+    }
 
     private function _getBaseIndentation()
     {

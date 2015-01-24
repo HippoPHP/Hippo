@@ -10,39 +10,39 @@ use HippoPHP\Hippo\Violation;
 
 class NoInlineHTMLCheck extends AbstractCheck implements CheckInterface
 {
-        /**
-         * @return string
-         */
-        public function getConfigRoot()
-        {
-            return 'file.no_inline_html';
-        }
+    /**
+     * @return string
+     */
+    public function getConfigRoot()
+    {
+        return 'file.no_inline_html';
+    }
 
-        /**
-         * checkFileInternal(): defined by AbstractCheck.
-         *
-         * @see AbstractCheck::checkFileInternal()
-         *
-         * @param CheckContext $checkContext
-         * @param Config $config
-         *
-         * @return void
-         */
-        protected function checkFileInternal(CheckContext $checkContext, Config $config)
-        {
-            $file = $checkContext->getFile();
-            $ast = $checkContext->getSyntaxTree();
+    /**
+     * checkFileInternal(): defined by AbstractCheck.
+     *
+     * @see AbstractCheck::checkFileInternal()
+     *
+     * @param CheckContext $checkContext
+     * @param Config $config
+     *
+     * @return void
+     */
+    protected function checkFileInternal(CheckContext $checkContext, Config $config)
+    {
+        $file = $checkContext->getFile();
+        $ast = $checkContext->getSyntaxTree();
 
-            foreach ($ast as $node) {
-                if ($node instanceof \PhpParser\Node\Stmt\InlineHTML) {
-                    $this->addViolation(
-                        $file,
-                        $node->getLine(),
-                        0,
-                        'PHP files should not contain inline HTML.',
-                        Violation::SEVERITY_WARNING
-                    );
-                }
+        foreach ($ast as $node) {
+            if ($node instanceof \PhpParser\Node\Stmt\InlineHTML) {
+                $this->addViolation(
+                    $file,
+                    $node->getLine(),
+                    0,
+                    'PHP files should not contain inline HTML.',
+                    Violation::SEVERITY_WARNING
+                );
             }
         }
+    }
 }

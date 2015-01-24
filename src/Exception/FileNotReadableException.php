@@ -3,14 +3,14 @@
 namespace HippoPHP\Hippo\Exception;
 
 /**
+ */
+class FileNotReadableException extends \Exception implements ExceptionInterface
+{
+    /**
+     * @param string $path
      */
-    class FileNotReadableException extends \Exception implements ExceptionInterface
+    public function __construct($path)
     {
-        /**
-         * @param string $path
-         */
-        public function __construct($path)
-        {
-            parent::__construct('File not readable: '.$path);
-        }
+        parent::__construct('File not readable: '.$path);
     }
+}

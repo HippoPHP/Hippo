@@ -3,14 +3,14 @@
 namespace HippoPHP\Hippo\Exception;
 
 /**
+ */
+class FileNotWritableException extends \Exception implements ExceptionInterface
+{
+    /**
+     * @param string $path
      */
-    class FileNotWritableException extends \Exception implements ExceptionInterface
+    public function __construct($path)
     {
-        /**
-         * @param string $path
-         */
-        public function __construct($path)
-        {
-            parent::__construct('File not writable: '.$path);
-        }
+        parent::__construct('File not writable: '.$path);
     }
+}

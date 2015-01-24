@@ -7,19 +7,19 @@ use HippoPHP\Hippo\Tests\Reporters\AbstractReporterTest;
 
 class CheckstyleReporterTest extends AbstractReporterTest
 {
-        public function testEmptyReport()
-        {
-            $reporter = new CheckstyleReporter($this->fileSystemMock);
-            $reporter->setFilename('checkstyle.xml');
-            $reporter->start();
-            $reporter->finish();
-            $expectedLines = <<<EXML
+    public function testEmptyReport()
+    {
+        $reporter = new CheckstyleReporter($this->fileSystemMock);
+        $reporter->setFilename('checkstyle.xml');
+        $reporter->start();
+        $reporter->finish();
+        $expectedLines = <<<EXML
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="5.5"/>
 
 EXML;
-            $this->assertEquals($expectedLines, $this->getSavedContent());
-        }
+        $this->assertEquals($expectedLines, $this->getSavedContent());
+    }
 
     public function testReportWithNoViolations()
     {

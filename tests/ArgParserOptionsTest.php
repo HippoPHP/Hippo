@@ -6,7 +6,7 @@ use HippoPHP\Hippo\ArgParserOptions;
 
 class ArgParserOptionsTest extends \PHPUnit_Framework_TestCase
 {
-        protected $argParserOptions;
+    protected $argParserOptions;
 
     public function setUp()
     {

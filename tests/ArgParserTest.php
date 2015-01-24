@@ -7,11 +7,11 @@ use HippoPHP\Hippo\ArgParserOptions;
 
 class ArgParserTest extends \PHPUnit_Framework_TestCase
 {
-        public function testLongArgumentEqual()
-        {
-            $argContainer = ArgParser::parse(['--long=option']);
-            $this->assertEquals('option', $argContainer->getLongOption('long'));
-        }
+    public function testLongArgumentEqual()
+    {
+        $argContainer = ArgParser::parse(['--long=option']);
+        $this->assertEquals('option', $argContainer->getLongOption('long'));
+    }
 
     public function testLongArgumentAlternative()
     {

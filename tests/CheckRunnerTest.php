@@ -10,7 +10,7 @@ use HippoPHP\Hippo\FileSystem;
 
 class CheckRunnerTest extends \PHPUnit_Framework_TestCase
 {
-        private $_fileSystemMock;
+    private $_fileSystemMock;
 
     protected $instance;
 
@@ -41,22 +41,22 @@ YML;
         $callable = function () { /**/ };
 
         $this->assertInstanceOf(
-                '\HippoPHP\Hippo\CheckRunner',
-                $this->instance->setObserver($callable)
-            );
+            '\HippoPHP\Hippo\CheckRunner',
+            $this->instance->setObserver($callable)
+        );
     }
 
     public function testCheckPath()
     {
         $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-            );
+            'This test has not been implemented yet.'
+        );
     }
 
     public function testCheckFile()
     {
         $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-            );
+            'This test has not been implemented yet.'
+        );
     }
 }

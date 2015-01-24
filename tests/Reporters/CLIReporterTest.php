@@ -8,13 +8,13 @@ use HippoPHP\Hippo\Violation;
 
 class CLIReporterTest extends AbstractReporterTest
 {
-        public function testEmptyReport()
-        {
-            $reporter = new CLIReporter($this->fileSystemMock);
-            $reporter->start();
-            $reporter->finish();
-            $this->assertEquals('', $this->getSavedContent());
-        }
+    public function testEmptyReport()
+    {
+        $reporter = new CLIReporter($this->fileSystemMock);
+        $reporter->start();
+        $reporter->finish();
+        $this->assertEquals('', $this->getSavedContent());
+    }
 
     public function testReportWithNoViolations()
     {
@@ -47,14 +47,14 @@ class CLIReporterTest extends AbstractReporterTest
         $reporter->finish();
 
         $expectedLines = [
-                'Checking whatever.php',
-                'whatever.php:',
-                '--------------------------------------------------------------------------------',
-                'Line 1:4 (info) : first message',
-                'Line 3:6 (error) : third message',
-                '',
-                '',
-            ];
+            'Checking whatever.php',
+            'whatever.php:',
+            '--------------------------------------------------------------------------------',
+            'Line 1:4 (info) : first message',
+            'Line 3:6 (error) : third message',
+            '',
+            '',
+        ];
         $fullText = implode(PHP_EOL, $expectedLines);
         $this->assertEquals($fullText, $this->getSavedContent());
     }
@@ -68,15 +68,15 @@ class CLIReporterTest extends AbstractReporterTest
         $reporter->finish();
 
         $expectedLines = [
-                'Checking whatever.php',
-                'whatever.php:',
-                '--------------------------------------------------------------------------------',
-                'Line 1:4 (info) : first message',
-                'Line 2:5 (warning) : second message',
-                'Line 3:6 (error) : third message',
-                '',
-                '',
-            ];
+            'Checking whatever.php',
+            'whatever.php:',
+            '--------------------------------------------------------------------------------',
+            'Line 1:4 (info) : first message',
+            'Line 2:5 (warning) : second message',
+            'Line 3:6 (error) : third message',
+            '',
+            '',
+        ];
         $fullText = implode(PHP_EOL, $expectedLines);
         $this->assertEquals($fullText, $this->getSavedContent());
     }
@@ -92,23 +92,24 @@ class CLIReporterTest extends AbstractReporterTest
         $reporter->finish();
 
         $expectedLines = [
-                'Checking whatever.php',
-                'whatever.php:',
-                '--------------------------------------------------------------------------------',
-                'Line 1:4 (info) : first message',
-                'Line 2:5 (warning) : second message',
-                'Line 3:6 (error) : third message',
-                '',
-                '',
-                'Checking anotherfile.php',
-                'anotherfile.php:',
-                '--------------------------------------------------------------------------------',
-                'Line 1:4 (info) : first message',
-                'Line 2:5 (warning) : second message',
-                'Line 3:6 (error) : third message',
-                '',
-                '',
-            ];
+            'Checking whatever.php',
+            'whatever.php:',
+            '--------------------------------------------------------------------------------',
+            'Line 1:4 (info) : first message',
+            'Line 2:5 (warning) : second message',
+            'Line 3:6 (error) : third message',
+            '',
+            '',
+            'Checking anotherfile.php',
+            'anotherfile.php:',
+            '--------------------------------------------------------------------------------',
+            'Line 1:4 (info) : first message',
+            'Line 2:5 (warning) : second message',
+            'Line 3:6 (error) : third message',
+            '',
+            '',
+        ];
+
         $fullText = implode(PHP_EOL, $expectedLines);
         $this->assertEquals($fullText, $this->getSavedContent());
     }

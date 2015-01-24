@@ -8,35 +8,35 @@ use HippoPHP\Hippo\Checks\CheckInterface;
 use HippoPHP\Hippo\Config\Config;
 
 /**
-     * Checks the open tag.
+ * Checks the open tag.
+ */
+class MustStartWithOpenTagCheck extends AbstractCheck implements CheckInterface
+{
+    /**
+     * @return string
      */
-    class MustStartWithOpenTagCheck extends AbstractCheck implements CheckInterface
+    public function getConfigRoot()
     {
-        /**
-         * @return string
-         */
-        public function getConfigRoot()
-        {
-            return 'file.open_tag';
-        }
+        return 'file.open_tag';
+    }
 
-        /**
-         * checkFileInternal(): defined by AbstractCheck.
-         *
-         * @see AbstractCheck::checkFileInternal()
-         *
-         * @param CheckContext $checkContext
-         * @param Config $config
-         *
-         * @return void
-         */
-        protected function checkFileInternal(CheckContext $checkContext, Config $config)
-        {
-            $file = $checkContext->getFile();
-            $tokens = $checkContext->getTokenList();
-            $firstToken = $tokens->rewind()->current();
-            if (!$firstToken->isType(T_OPEN_TAG)) {
-                $this->addViolation($file, 1, 1, 'Files must begin with the PHP open tag.');
-            }
+    /**
+     * checkFileInternal(): defined by AbstractCheck.
+     *
+     * @see AbstractCheck::checkFileInternal()
+     *
+     * @param CheckContext $checkContext
+     * @param Config $config
+     *
+     * @return void
+     */
+    protected function checkFileInternal(CheckContext $checkContext, Config $config)
+    {
+        $file = $checkContext->getFile();
+        $tokens = $checkContext->getTokenList();
+        $firstToken = $tokens->rewind()->current();
+        if (!$firstToken->isType(T_OPEN_TAG)) {
+            $this->addViolation($file, 1, 1, 'Files must begin with the PHP open tag.');
         }
     }
+}

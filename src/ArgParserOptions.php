@@ -4,16 +4,16 @@ namespace HippoPHP\Hippo;
 
 class ArgParserOptions
 {
-        const TYPE_FLAG = 1;
+    const TYPE_FLAG = 1;
     const TYPE_ARRAY = 2;
 
-        /**
-         * @var array
-         */
-        private $_marked = [
-            self::TYPE_FLAG  => [],
-            self::TYPE_ARRAY => [],
-        ];
+    /**
+     * @var array
+     */
+    private $_marked = [
+        self::TYPE_FLAG  => [],
+        self::TYPE_ARRAY => [],
+    ];
 
     public function markFlag($argName)
     {

@@ -6,7 +6,7 @@ use HippoPHP\Hippo\ArgContainer;
 
 class ArgContainerTest extends \PHPUnit_Framework_TestCase
 {
-        protected $argContainer;
+    protected $argContainer;
 
     public function setUp()
     {
