@@ -27,7 +27,7 @@ style:
     enabled: true
     style: "single"
   fully_qualified_namespaces:
-    enabled: true
+    enabled: false
   elseif:
     enabled: true
   strict_equality:
