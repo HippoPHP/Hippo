@@ -47,6 +47,11 @@
     "bin": [
         "bin/hippo"
     ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
