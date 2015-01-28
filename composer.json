@@ -25,7 +25,7 @@
     },
     "require": {
         "php": ">=5.4.0",
-        "hippophp/tokenizer": "1.0.*@dev",
+        "hippophp/tokenizer": "~1.0@dev",
         "nikic/php-parser": "~1.1",
         "symfony/yaml": "~2.1"
     },
