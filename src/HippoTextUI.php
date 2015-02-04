@@ -2,6 +2,7 @@
 
 namespace HippoPHP\Hippo;
 
+use Exception;
 use HippoPHP\Hippo\Config\ConfigReaderInterface;
 use HippoPHP\Hippo\Config\YAMLConfigReader;
 
