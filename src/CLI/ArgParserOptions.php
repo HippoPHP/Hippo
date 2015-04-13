@@ -1,6 +1,6 @@
 <?php
 
-namespace HippoPHP\Hippo;
+namespace HippoPHP\Hippo\CLI;
 
 class ArgParserOptions
 {
@@ -10,7 +10,7 @@ class ArgParserOptions
     /**
      * @var array
      */
-    private $_marked = [
+    private $marked = [
         self::TYPE_FLAG  => [],
         self::TYPE_ARRAY => [],
     ];
@@ -37,11 +37,11 @@ class ArgParserOptions
 
     private function _mark($argName, $type)
     {
-        $this->_marked[$type][] = $argName;
+        $this->marked[$type][] = $argName;
     }
 
     private function _isMarked($argName, $type)
     {
-        return isset($this->_marked[$type]) && in_array($argName, $this->_marked[$type]);
+        return isset($this->marked[$type]) && in_array($argName, $this->marked[$type]);
     }
 }

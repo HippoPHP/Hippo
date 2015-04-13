@@ -1,6 +1,6 @@
 <?php
 
-namespace HippoPHP\Hippo;
+namespace HippoPHP\Hippo\CLI;
 
 /**
  * A container for command-line-interface arguments.

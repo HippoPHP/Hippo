@@ -1,6 +1,6 @@
 <?php
 
-namespace HippoPHP\Hippo;
+namespace HippoPHP\Hippo\CLI;
 
 /**
  * A factory of ArgContainer.
@@ -10,17 +10,17 @@ class ArgParser
     /**
      * @var bool
      */
-    private $_stopParsing;
+    private $stopParsing;
 
     /**
      * @var ArgContainer
      */
-    private $_argContainer;
+    private $argContainer;
 
     /**
      * @var ArgParserOptions
      */
-    private $_argParserOptions;
+    private $argParserOptions;
 
     /**
      * @param string[]         $argv
@@ -40,7 +40,7 @@ class ArgParser
      */
     private function __construct(ArgParserOptions $argParserOptions = null)
     {
-        $this->_argParserOptions = $argParserOptions === null
+        $this->argParserOptions = $argParserOptions === null
             ? new ArgParserOptions()
             : $argParserOptions;
     }
@@ -52,8 +52,8 @@ class ArgParser
      */
     private function _parse(array $argv)
     {
-        $this->_stopParsing = false;
-        $this->_argContainer = new ArgContainer();
+        $this->stopParsing = false;
+        $this->argContainer = new ArgContainer();
 
         $argCount = count($argv);
 
@@ -66,7 +66,7 @@ class ArgParser
             }
         }
 
-        return $this->_argContainer;
+        return $this->argContainer;
     }
 
     /**
@@ -78,14 +78,14 @@ class ArgParser
     private function _processArg($arg, $nextArg)
     {
         if ($arg === '--') {
-            $this->_stopParsing = true;
+            $this->stopParsing = true;
 
             return false;
         }
 
-        if (!$this->_stopParsing) {
+        if (!$this->stopParsing) {
             if ($this->_isLongArgument($arg)) {
-                $this->_argContainer->setLongOption(
+                $this->argContainer->setLongOption(
                     $this->_normalizeArg($arg),
                     $this->_extractArgValue($arg, $nextArg, $hasUsedNextArg));
 
@@ -93,7 +93,7 @@ class ArgParser
             }
 
             if ($this->_isShortArgument($arg)) {
-                $this->_argContainer->setShortOption(
+                $this->argContainer->setShortOption(
                     $this->_normalizeArg($arg),
                     $this->_extractArgValue($arg, $nextArg, $hasUsedNextArg));
 
@@ -101,7 +101,7 @@ class ArgParser
             }
         }
 
-        $this->_argContainer->addStrayArgument($arg);
+        $this->argContainer->addStrayArgument($arg);
 
         return false;
     }
@@ -121,7 +121,7 @@ class ArgParser
         $index = strpos($arg, '=');
         if ($index !== false) {
             return $this->_processStringValue($normalizedArg, substr($arg, $index + 1));
-        } elseif ($this->_argParserOptions->isFlag($normalizedArg)) {
+        } elseif ($this->argParserOptions->isFlag($normalizedArg)) {
             if ($this->_isBool($nextArg)) {
                 $hasUsedNextArg = true;
 
@@ -146,9 +146,9 @@ class ArgParser
      */
     private function _processStringValue($normalizedArg, $value)
     {
-        if ($this->_argParserOptions->isFlag($normalizedArg)) {
+        if ($this->argParserOptions->isFlag($normalizedArg)) {
             return $this->_toBool($value);
-        } elseif ($this->_argParserOptions->isArray($normalizedArg)) {
+        } elseif ($this->argParserOptions->isArray($normalizedArg)) {
             return preg_split('/[\s,;]+/', $value);
         }
 

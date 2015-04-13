@@ -2,6 +2,9 @@
 
 namespace HippoPHP\Hippo;
 
+use HippoPHP\Hippo\CLI\ArgContainer;
+use HippoPHP\Hippo\CLI\ArgParser;
+use HippoPHP\Hippo\CLI\ArgParserOptions;
 use HippoPHP\Hippo\Exception\UnrecognizedOptionException;
 use HippoPHP\Hippo\Reporters\CheckstyleReporter;
 use HippoPHP\Hippo\Reporters\CLIReporter;
