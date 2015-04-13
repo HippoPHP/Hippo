@@ -67,7 +67,6 @@ Available configs:
   - PGS-2
   - PSR-1
   - PSR-2
-  - Zend
 ```
 
 ## Tests
