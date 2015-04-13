@@ -2,11 +2,7 @@
 
 namespace HippoPHP\Hippo\tests;
 
-use HippoPHP\Hippo\CheckContext;
 use HippoPHP\Hippo\CheckRepository;
-use HippoPHP\Hippo\Checks\CheckInterface;
-use HippoPHP\Hippo\Config\Config;
-use HippoPHP\Hippo\FileSystem;
 use HippoPHP\Hippo\Tests\Helpers\FileSystemTestHelper;
 
 /**

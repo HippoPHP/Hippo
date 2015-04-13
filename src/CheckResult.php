@@ -12,7 +12,7 @@ class CheckResult implements Countable
     /**
      * Was modified since last violation retrieval?
      *
-     * @var boolean
+     * @var bool
      */
     protected $violationsDirty;
 
@@ -53,7 +53,7 @@ class CheckResult implements Countable
     /**
      * Returns whether check succeeded.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasSucceeded()
     {
@@ -63,7 +63,7 @@ class CheckResult implements Countable
     /**
      * Returns whether check failed.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasFailed()
     {

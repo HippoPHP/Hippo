@@ -4,7 +4,6 @@ namespace HippoPHP\Hippo\tests\Config;
 
 use HippoPHP\Hippo\Config;
 use HippoPHP\Hippo\Config\YAMLConfigReader;
-use HippoPHP\Hippo\FileSystem;
 
 class YAMLConfigReaderTest extends \PHPUnit_Framework_TestCase
 {

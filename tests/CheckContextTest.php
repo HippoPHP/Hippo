@@ -4,7 +4,6 @@ namespace HippoPHP\Hippo\tests;
 
 use HippoPHP\Hippo\CheckContext;
 use HippoPHP\Hippo\File;
-use HippoPHP\Tokenizer\Token;
 
 class CheckContextTest extends \PHPUnit_Framework_TestCase
 {

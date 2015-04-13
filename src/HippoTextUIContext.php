@@ -30,7 +30,7 @@ class HippoTextUIContext
     private $_action = self::ACTION_UNKNOWN;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $_strictModeEnabled = false;
 
@@ -108,7 +108,7 @@ class HippoTextUIContext
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function hasStrictModeEnabled()
     {

@@ -4,7 +4,6 @@ namespace HippoPHP\Hippo\tests;
 
 use HippoPHP\Hippo\CheckRepository;
 use HippoPHP\Hippo\CheckRunner;
-use HippoPHP\Hippo\Config;
 use HippoPHP\Hippo\Config\YAMLConfigReader;
 use HippoPHP\Hippo\FileSystem;
 

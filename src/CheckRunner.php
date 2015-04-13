@@ -56,7 +56,7 @@ class CheckRunner
     /**
      * @param string $path
      *
-     * @return boolean if there were no errors
+     * @return bool if there were no errors
      */
     public function checkPath($path)
     {

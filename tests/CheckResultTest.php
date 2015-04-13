@@ -2,7 +2,6 @@
 
 namespace HippoPHP\Hippo\tests;
 
-use HippoPHP\Hippo;
 use HippoPHP\Hippo\CheckResult;
 use HippoPHP\Hippo\File;
 use HippoPHP\Hippo\Violation;

@@ -101,8 +101,8 @@ class Config
     }
 
     /**
-     * @param string  $key
-     * @param boolean $createSections
+     * @param string $key
+     * @param bool   $createSections
      *
      * @throws BadConfigKeyException
      *

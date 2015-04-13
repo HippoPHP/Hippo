@@ -2,7 +2,6 @@
 
 namespace HippoPHP\Hippo\tests;
 
-use HippoPHP\Hippo;
 use HippoPHP\Hippo\File;
 
 class FileTest extends \PHPUnit_Framework_TestCase
@@ -31,9 +30,9 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     public function testGetOneLine()
     {
-        $file = new File('test.php', "<?php echo 1;");
+        $file = new File('test.php', '<?php echo 1;');
         $this->assertEquals([
-                1 => "<?php echo 1;", ],
+                1 => '<?php echo 1;', ],
                 $file->getLines());
     }
 
@@ -42,7 +41,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $file = new File('test.php', "<?php echo 1;\necho 2 ?>");
         $this->assertEquals([
                 1 => "<?php echo 1;\n",
-                2 => "echo 2 ?>", ],
+                2 => 'echo 2 ?>', ],
                 $file->getLines());
     }
 

@@ -3,7 +3,6 @@
 namespace HippoPHP\Hippo\tests\Config;
 
 use HippoPHP\Hippo\Config\Config;
-use HippoPHP\Hippo\Exception\BadConfigKeyException;
 
 class ConfigTest extends \PHPUnit_Framework_TestCase
 {

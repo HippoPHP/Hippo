@@ -8,7 +8,7 @@ namespace HippoPHP\Hippo;
 class ArgParser
 {
     /**
-     * @var boolean
+     * @var bool
      */
     private $_stopParsing;
 
@@ -73,7 +73,7 @@ class ArgParser
      * @param string $arg
      * @param string $nextArg
      *
-     * @return boolean whether the next arg was used
+     * @return bool whether the next arg was used
      */
     private function _processArg($arg, $nextArg)
     {
@@ -107,9 +107,9 @@ class ArgParser
     }
 
     /**
-     * @param string  $arg
-     * @param string  $nextArg
-     * @param boolean $hasUsedNextArg
+     * @param string $arg
+     * @param string $nextArg
+     * @param bool   $hasUsedNextArg
      *
      * @return mixed
      */
@@ -158,7 +158,7 @@ class ArgParser
     /**
      * @param string $arg
      *
-     * @return boolean
+     * @return bool
      */
     private function _isLongArgument($arg)
     {
@@ -168,7 +168,7 @@ class ArgParser
     /**
      * @param string $arg
      *
-     * @return boolean
+     * @return bool
      */
     private function _isShortArgument($arg)
     {
@@ -195,7 +195,7 @@ class ArgParser
     /**
      * @param string $arg
      *
-     * @return boolean
+     * @return bool
      */
     private function _isArgument($arg)
     {
@@ -205,7 +205,7 @@ class ArgParser
     /**
      * @param string $arg
      *
-     * @return boolean
+     * @return bool
      */
     private function _isBool($arg)
     {
@@ -215,7 +215,7 @@ class ArgParser
     /**
      * @param string $arg
      *
-     * @return boolean
+     * @return bool
      */
     private function _toBool($arg)
     {

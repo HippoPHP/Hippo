@@ -8,7 +8,7 @@ use ReflectionClass;
 class CheckRepository
 {
     /**
-     * @var boolean
+     * @var bool
      */
     private $_hasBeenBuilt = false;
 

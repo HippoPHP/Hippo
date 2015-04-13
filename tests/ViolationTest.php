@@ -13,7 +13,7 @@ class ViolationTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->file = new File();
-        $this->violation = new Violation($this->file, 1, 0, 0, "Test");
+        $this->violation = new Violation($this->file, 1, 0, 0, 'Test');
     }
 
     public function testGetSeveritiies()
@@ -93,25 +93,25 @@ class ViolationTest extends \PHPUnit_Framework_TestCase
 
     public function testGetSeverityNameIgnore()
     {
-        $mock = new Violation($this->file, 1, 0, 0, "Test", "Ignore");
+        $mock = new Violation($this->file, 1, 0, 0, 'Test', 'Ignore');
         $this->assertEquals('ignore', $mock->getSeverityName());
     }
 
     public function testGetSeverityNameInfo()
     {
-        $mock = new Violation($this->file, 1, 0, 1, "Test", "Info");
+        $mock = new Violation($this->file, 1, 0, 1, 'Test', 'Info');
         $this->assertEquals('info', $mock->getSeverityName());
     }
 
     public function testGetSeverityNameWarning()
     {
-        $mock = new Violation($this->file, 1, 0, 2, "Test", "Warning");
+        $mock = new Violation($this->file, 1, 0, 2, 'Test', 'Warning');
         $this->assertEquals('warning', $mock->getSeverityName());
     }
 
     public function testGetSeverityNameError()
     {
-        $mock = new Violation($this->file, 1, 0, 3, "Test", "Error");
+        $mock = new Violation($this->file, 1, 0, 3, 'Test', 'Error');
         $this->assertEquals('error', $mock->getSeverityName());
     }
 
@@ -120,7 +120,7 @@ class ViolationTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSeverityNameException()
     {
-        $mock = new Violation($this->file, 1, 0, 100, "Test", "Exception");
+        $mock = new Violation($this->file, 1, 0, 100, 'Test', 'Exception');
         $this->assertEquals('error', $mock->getSeverityName());
     }
 

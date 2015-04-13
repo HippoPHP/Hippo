@@ -10,7 +10,7 @@ use HippoPHP\Hippo\Violation;
 
 class PrivateVariableNamingCheck extends AbstractCheck implements CheckInterface
 {
-    private $_pattern = "/^_[a-z][a-zA-Z0-9]*$/";
+    private $_pattern = '/^_[a-z][a-zA-Z0-9]*$/';
 
     public function setPattern($pattern)
     {

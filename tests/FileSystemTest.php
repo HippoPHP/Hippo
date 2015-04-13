@@ -2,7 +2,6 @@
 
 namespace HippoPHP\Hippo\tests;
 
-use HippoPHP\Hippo\Exception\FileNotFoundException;
 use HippoPHP\Hippo\FileSystem;
 use HippoPHP\Hippo\Tests\Helpers\FileSystemTestHelper;
 
