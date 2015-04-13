@@ -1,6 +1,6 @@
 <?php
 
-namespace HippoPHP\Hippo\tests;
+namespace HippoPHP\Hippo\Tests;
 
 use HippoPHP\Hippo\CheckContext;
 use HippoPHP\Hippo\File;

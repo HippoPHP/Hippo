@@ -1,9 +1,9 @@
 <?php
 
-namespace HippoPHP\Hippo\tests;
+namespace HippoPHP\Hippo\Tests\CLI;
 
-use HippoPHP\Hippo\ArgParser;
-use HippoPHP\Hippo\ArgParserOptions;
+use HippoPHP\Hippo\CLI\ArgParser;
+use HippoPHP\Hippo\CLI\ArgParserOptions;
 
 class ArgParserTest extends \PHPUnit_Framework_TestCase
 {

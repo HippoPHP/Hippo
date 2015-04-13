@@ -1,6 +1,6 @@
 <?php
 
-namespace HippoPHP\Hippo\tests\Reporters;
+namespace HippoPHP\Hippo\Tests\Reporters;
 
 use HippoPHP\Hippo\Reporters\ArrayReporter;
 use HippoPHP\Hippo\Tests\Reporters\AbstractReporterTest;

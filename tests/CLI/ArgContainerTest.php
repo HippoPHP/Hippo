@@ -1,8 +1,8 @@
 <?php
 
-namespace HippoPHP\Hippo\tests;
+namespace HippoPHP\Hippo\Tests\CLI;
 
-use HippoPHP\Hippo\ArgContainer;
+use HippoPHP\Hippo\CLI\ArgContainer;
 
 class ArgContainerTest extends \PHPUnit_Framework_TestCase
 {

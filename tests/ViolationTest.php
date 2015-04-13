@@ -1,6 +1,6 @@
 <?php
 
-namespace HippoPHP\Hippo\tests;
+namespace HippoPHP\Hippo\Tests;
 
 use HippoPHP\Hippo\File;
 use HippoPHP\Hippo\Violation;

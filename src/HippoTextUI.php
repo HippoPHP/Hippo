@@ -6,15 +6,15 @@ use Exception;
 use HippoPHP\Hippo\Config\ConfigReaderInterface;
 use HippoPHP\Hippo\Config\YAMLConfigReader;
 
-class HippoTextUI
+class HippoTextUI implements HippoInterface
 {
     /**
-     * @var CheckRepository
+     * @var \HippoPHP\Hippo\CheckRepository
      */
     protected $checkRepository;
 
     /**
-     * @var HippoTextUIContext
+     * @var \HippoPHP\Hippo\HippoTextUIContext
      */
     protected $context;
 
@@ -24,26 +24,26 @@ class HippoTextUI
     protected $pathToSelf;
 
     /**
-     * @var FileSystem
+     * @var \HippoPHP\Hippo\FileSystem
      */
     protected $fileSystem;
 
     /**
-     * @var Environment
+     * @var \HippoPHP\Hippo\Environment
      */
     protected $environment;
 
     /**
-     * @var ConfigReaderInterface
+     * @var \HippoPHP\Hippo\Config\ConfigReaderInterface
      */
     protected $configReader;
 
     /**
-     * @param Environment        $environment
-     * @param FileSystem         $fileSystem
-     * @param CheckRepository    $checkRepository
-     * @param string             $pathToSelf
-     * @param HippoTextUIContext $context
+     * @param \HippoPHP\Hippo\Environment        $environment
+     * @param \HippoPHP\Hippo\FileSystem         $fileSystem
+     * @param \HippoPHP\Hippo\CheckRepository    $checkRepository
+     * @param string                             $pathToSelf
+     * @param \HippoPHP\Hippo\HippoTextUIContext $context
      *
      * @return void
      */

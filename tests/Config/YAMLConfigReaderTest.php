@@ -1,6 +1,6 @@
 <?php
 
-namespace HippoPHP\Hippo\tests\Config;
+namespace HippoPHP\Hippo\Tests\Config;
 
 use HippoPHP\Hippo\Config;
 use HippoPHP\Hippo\Config\YAMLConfigReader;
