@@ -10,7 +10,7 @@ use HippoPHP\Hippo\Config\Config;
 /**
  * Checks the open tag.
  */
-class MustEndWithCloseTagCheck extends AbstractCheck implements CheckInterface
+class ClosingTagCheck extends AbstractCheck implements CheckInterface
 {
     /**
      * @return string
@@ -35,8 +35,13 @@ class MustEndWithCloseTagCheck extends AbstractCheck implements CheckInterface
         $file = $checkContext->getFile();
         $tokens = $checkContext->getTokenList();
         $endToken = $tokens->end()->current();
-        if (count($file) > 0 && !$endToken->isType(T_CLOSE_TAG)) {
-            $this->addViolation($file, $endToken->getLine(), 0, 'Files must end with a closing tag.');
+
+        if (count($file) > 0) {
+            if ($config->get('endwith') && !$endToken->isType(T_CLOSE_TAG)) {
+                $this->addViolation($file, $endToken->getLine(), 0, 'Files must end with a closing tag.');
+            } elseif (!$config->get('endwith') && $endToken->isType(T_CLOSE_TAG)) {
+                $this->addViolation($file, $endToken->getLine(), 0, 'Files must not end with a closing tag.');
+            }
         }
     }
 }
