@@ -1,9 +1,9 @@
 <?php
 
-namespace HippoPHP\Hippo\Tests;
+namespace HippoPHP\Tests;
 
 use HippoPHP\Hippo\FileSystem;
-use HippoPHP\Hippo\Tests\Helpers\FileSystemTestHelper;
+use HippoPHP\Tests\Helpers\FileSystemTestHelper;
 
 class FileSystemTest extends \PHPUnit_Framework_TestCase
 {

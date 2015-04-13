@@ -1,9 +1,9 @@
 <?php
 
-namespace HippoPHP\Hippo\Tests;
+namespace HippoPHP\Tests;
 
 use HippoPHP\Hippo\CheckRepository;
-use HippoPHP\Hippo\Tests\Helpers\FileSystemTestHelper;
+use HippoPHP\Tests\Helpers\FileSystemTestHelper;
 
 /**
  * Class that tests discovery of Check implementations.

@@ -1,6 +1,6 @@
 <?php
 
-namespace HippoPHP\Hippo\Tests;
+namespace HippoPHP\Tests;
 
 use HippoPHP\Hippo\CheckRepository;
 use HippoPHP\Hippo\CheckRunner;

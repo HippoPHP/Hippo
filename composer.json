@@ -41,7 +41,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "HippoPHP\\Hippo\\Tests\\": "tests/"
+            "HippoPHP\\Tests\\": "tests/"
         }
     },
     "bin": [

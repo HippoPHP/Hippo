@@ -1,12 +1,10 @@
 <?php
 
-namespace HippoPHP\Hippo\Tests\Helpers;
+namespace HippoPHP\Tests\Helpers;
 
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
-/**
- */
 class FileSystemTestHelper
 {
     private $_foldersToCleanup = [];

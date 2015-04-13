@@ -1,9 +1,9 @@
 <?php
 
-namespace HippoPHP\Hippo\Tests\Reporters;
+namespace HippoPHP\Tests\Reporters;
 
 use HippoPHP\Hippo\Reporters\CLIReporter;
-use HippoPHP\Hippo\Tests\Reporters\AbstractReporterTest;
+use HippoPHP\Tests\Reporters\AbstractReporterTest;
 use HippoPHP\Hippo\Violation;
 
 class CLIReporterTest extends AbstractReporterTest
