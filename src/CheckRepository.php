@@ -2,7 +2,6 @@
 
 namespace HippoPHP\Hippo;
 
-use HippoPHP\Hippo\FileSystem;
 use HippoPHP\Hippo\Checks\CheckInterface;
 use ReflectionClass;
 

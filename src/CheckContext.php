@@ -2,8 +2,6 @@
 
 namespace HippoPHP\Hippo;
 
-use HippoPHP\Hippo\File;
-use HippoPHP\Hippo\LazyFactory;
 use HippoPHP\Tokenizer\Tokenizer;
 use PhpParser\Lexer\Emulative;
 use PhpParser\Parser;

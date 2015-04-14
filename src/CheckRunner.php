@@ -3,8 +3,6 @@
 namespace HippoPHP\Hippo;
 
 use HippoPHP\Hippo\Config\Config;
-use HippoPHP\Hippo\CheckRepository;
-use HippoPHP\Hippo\FileSystem;
 use HippoPHP\Hippo\Exception\FileNotFoundException;
 
 class CheckRunner
