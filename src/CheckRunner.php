@@ -94,7 +94,7 @@ class CheckRunner
     /**
      * @param string $path
      *
-     * @return CheckResult[]
+     * @return \HippoPHP\Hippo\CheckResult[]
      */
     private function checkPathDirectory($path)
     {
@@ -110,7 +110,7 @@ class CheckRunner
     /**
      * @param string $path
      *
-     * @return CheckResult[]
+     * @return \HippoPHP\Hippo\CheckResult[]
      */
     protected function checkPathFile($path)
     {

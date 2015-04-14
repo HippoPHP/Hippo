@@ -14,7 +14,7 @@ class CheckRepository
     private $hasBeenBuilt = false;
 
     /**
-     * @var Check[]
+     * @var \HippoPHP\Hippo\Check[]
      */
     private $checks = [];
 
@@ -29,7 +29,7 @@ class CheckRepository
     }
 
     /**
-     * @return Check[]
+     * @return \HippoPHP\Hippo\Check[]
      */
     public function getChecks()
     {
@@ -84,7 +84,7 @@ class CheckRepository
     /**
      * Determines whether a "check" does indeed implement CheckInterface.
      *
-     * @param ReflectionClass $reflectionClass
+     * @param \ReflectionClass $reflectionClass
      *
      * @return bool
      */
