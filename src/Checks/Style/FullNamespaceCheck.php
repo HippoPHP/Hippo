@@ -35,15 +35,13 @@ class FullNamespaceCheck extends AbstractCheck implements CheckInterface
         try {
             do {
                 // Jump us to the next token we want to check.
-                $tokens->seekToType(T_USE);
+                $tokens->seekToType(T_USE)->skipToNextNonWhitespace()->current();
 
-                // We should now be at `use`.
-                // Now we need to skip the whitespace.
-                $token = $tokens->next(2)->current();
-
-                if ($token->getContent() !== '(') {
+                if ($tokens->current()->getContent() !== '(') {
                     // Now if the next token does not equal T_NS_SEPARATOR we are not fully qualified.
-                    if (!$token->isType(T_NS_SEPARATOR)) {
+                    if (!$tokens->current()->isType(T_NS_SEPARATOR)) {
+                        $token = $tokens->current();
+
                         $this->addViolation(
                             $file,
                             $token->getLine(),

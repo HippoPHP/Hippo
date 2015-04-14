@@ -45,8 +45,8 @@ class PrivateVariableNamingCheck extends AbstractCheck implements CheckInterface
         try {
             do {
                 // Jump us to the next token we want to check.
-                $tokens->seekToType(T_PRIVATE);
-                $token = $tokens->next(2)->current();
+                $tokens->seekToType(T_PRIVATE)->skipToNextNonWhitespace();
+                $token = $tokens->current();
 
                 if ($token->isType(T_VARIABLE)) {
                     if (! preg_match($this->pattern, $token->getContent())) {

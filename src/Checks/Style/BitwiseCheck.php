@@ -51,10 +51,7 @@ class BitwiseCheck extends AbstractCheck implements CheckInterface
         try {
             do {
                 // Jump us to the next token we want to check.
-                $tokens->seekToType($this->tokens);
-
-                // The token we're looking at.
-                $token = $tokens->current();
+                $token = $tokens->seekToType($this->tokens)->current();
 
                 $using = $token->getContent();
                 $should = $this->useLookup[$token->getType()];

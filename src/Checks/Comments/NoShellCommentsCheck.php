@@ -36,9 +36,7 @@ class NoShellCommentsCheck extends AbstractCheck implements CheckInterface
         try {
             do {
                 // Jump us to the next token we want to check.
-                $tokens->seekToType(T_COMMENT);
-
-                $token = $tokens->current();
+                $token = $tokens->seekToType(T_COMMENT)->current();
 
                 if (strpos($token->getContent(), '#') === 0) {
                     $this->addViolation(

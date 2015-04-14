@@ -35,22 +35,17 @@ class ElseIfConditionCheck extends AbstractCheck implements CheckInterface
         try {
             do {
                 // Jump us to the next token we want to check.
-                $tokens->seekToType(T_ELSE);
+                $tokens->seekToType(T_ELSE)->skipToNextNonWhitespace();
 
-                // Move to the next token.
-                $token = $tokens->next()->current();
+                if ($tokens->current()->isType(T_IF)) {
+                    $token = $tokens->current();
 
-                // Check that the next token is not equal to T_WHITESPACE T_IF.
-                if ($token->isType(T_WHITESPACE)) {
-                    $nextToken = $tokens->next()->current(); // Move forward.
-                    if ($nextToken->isType(T_IF)) {
-                        $this->addViolation(
-                            $file,
-                            $token->getLine(),
-                            $token->getColumn(),
-                            'Use `elseif` rather than `else if`'
-                        );
-                    }
+                    $this->addViolation(
+                        $file,
+                        $token->getLine(),
+                        $token->getColumn(),
+                        'Use `elseif` rather than `else if`'
+                    );
                 }
             } while ($tokens->valid());
         } catch (\HippoPHP\Tokenizer\Exception\OutOfBoundsException $e) {

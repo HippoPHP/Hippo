@@ -36,8 +36,7 @@ class LowerBooleanCheck extends AbstractCheck implements CheckInterface
         try {
             do {
                 // Jump us to the next token we want to check.
-                $tokens->seekToType(T_STRING);
-                $token = $tokens->current();
+                $token = $tokens->seekToType(T_STRING)->current();
 
                 $tokenContent = $token->getContent();
                 $lowerContent = strtolower($tokenContent);
