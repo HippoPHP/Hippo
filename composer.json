@@ -27,10 +27,10 @@
         "php": ">=5.4.0",
         "hippophp/tokenizer": "~1.0@dev",
         "nikic/php-parser": "~1.1",
-        "symfony/yaml": "~2.1"
+        "symfony/yaml": "~2.6"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.4",
+        "phpunit/phpunit": "~4.6",
         "squizlabs/php_codesniffer": "~2.0",
         "codeclimate/php-test-reporter": "dev-master"
     },
