@@ -34,7 +34,7 @@ class IndentationCheck extends AbstractCheck implements CheckInterface
      *
      * @param string $style
      *
-     * @return Indentation
+     * @return \HippoPHP\Hippo\Checks\Whitespace\IndentationCheck
      */
     public function setIndentStyle($style)
     {
@@ -55,7 +55,7 @@ class IndentationCheck extends AbstractCheck implements CheckInterface
      *
      * @param int $count
      *
-     * @return Indentation
+     * @return \HippoPHP\Hippo\Checks\Whitespace\IndentationCheck
      */
     public function setIndentCount($count)
     {
@@ -77,8 +77,8 @@ class IndentationCheck extends AbstractCheck implements CheckInterface
      *
      * @see AbstractCheck::checkFileInternal()
      *
-     * @param CheckContext $checkContext
-     * @param Config       $config
+     * @param \HippoPHP\Hippo\CheckContext  $checkContext
+     * @param \HippoPHP\Hippo\Config\Config $config
      *
      * @return void
      */
