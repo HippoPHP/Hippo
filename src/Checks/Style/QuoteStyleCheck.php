@@ -23,14 +23,14 @@ class QuoteStyleCheck extends AbstractCheck implements CheckInterface
      *
      * @var array
      */
-    private $_styles = [
+    private $styles = [
         'single' => '\'',
         'double' => '"',
     ];
 
     public function setQuoteStyle($style)
     {
-        if (isset($this->_styles[$style])) {
+        if (isset($this->styles[$style])) {
             $this->style = $style;
         } else {
             throw new BadConfigKeyException(sprintf(
@@ -71,9 +71,9 @@ class QuoteStyleCheck extends AbstractCheck implements CheckInterface
                 $tokens->seekToType(T_CONSTANT_ENCAPSED_STRING);
 
                 $token = $tokens->current();
-                if ($this->_isBadStyle($token)) {
+                if ($this->isBadStyle($token)) {
                     // Work out what style we shouldn't be using.
-                    $styles = $this->_styles;
+                    $styles = $this->styles;
                     unset($styles[$this->style]);
                     $badStyle = array_keys($styles)[0];
 
@@ -95,14 +95,14 @@ class QuoteStyleCheck extends AbstractCheck implements CheckInterface
         }
     }
 
-    private function _isBadStyle($token)
+    private function isBadStyle($token)
     {
-        $tokenQuote = $this->_getQuoteFromToken($token);
+        $tokenQuote = $this->getQuoteFromToken($token);
 
-        return $tokenQuote !== $this->_styles[$this->style];
+        return $tokenQuote !== $this->styles[$this->style];
     }
 
-    private function _getQuoteFromToken($token)
+    private function getQuoteFromToken($token)
     {
         return $token->getContent()[0];
     }

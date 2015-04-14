@@ -10,11 +10,11 @@ use HippoPHP\Hippo\Violation;
 
 class PrivateVariableNamingCheck extends AbstractCheck implements CheckInterface
 {
-    private $_pattern = '/\$[a-z_][a-zA-Z0-9]+$/';
+    private $pattern = '/\$[a-z_][a-zA-Z0-9]+$/';
 
     public function setPattern($pattern)
     {
-        $this->_pattern = $pattern;
+        $this->pattern = $pattern;
     }
 
     /**
@@ -40,7 +40,7 @@ class PrivateVariableNamingCheck extends AbstractCheck implements CheckInterface
         $file = $checkContext->getFile();
         $tokens = $checkContext->getTokenList();
 
-        $this->setPattern($config->get('pattern', $this->_pattern));
+        $this->setPattern($config->get('pattern', $this->pattern));
 
         try {
             do {
@@ -49,7 +49,7 @@ class PrivateVariableNamingCheck extends AbstractCheck implements CheckInterface
                 $token = $tokens->next(2)->current();
 
                 if ($token->isType(T_VARIABLE)) {
-                    if (preg_match($this->_pattern, $token->getContent())) {
+                    if (preg_match($this->pattern, $token->getContent())) {
                         $this->addViolation(
                             $file,
                             $token->getLine(),
@@ -57,7 +57,7 @@ class PrivateVariableNamingCheck extends AbstractCheck implements CheckInterface
                             sprintf(
                                 'Private variable `%s` should follow a `%s` pattern',
                                 $token->getContent(),
-                                addslashes($this->_pattern)
+                                addslashes($this->pattern)
                             ),
                             Violation::SEVERITY_ERROR
                         );

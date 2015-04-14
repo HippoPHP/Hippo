@@ -10,11 +10,11 @@ use HippoPHP\Hippo\Violation;
 
 class VariableNamingCheck extends AbstractCheck implements CheckInterface
 {
-    private $_pattern = '/\$[a-z_][a-zA-Z0-9]+$/';
+    private $pattern = '/\$[a-z_][a-zA-Z0-9]+$/';
 
     public function setPattern($pattern)
     {
-        $this->_pattern = $pattern;
+        $this->pattern = $pattern;
     }
 
     /**
@@ -40,7 +40,7 @@ class VariableNamingCheck extends AbstractCheck implements CheckInterface
         $file = $checkContext->getFile();
         $tokens = $checkContext->getTokenList();
 
-        $this->setPattern($config->get('pattern', $this->_pattern));
+        $this->setPattern($config->get('pattern', $this->pattern));
 
         try {
             do {
@@ -48,7 +48,7 @@ class VariableNamingCheck extends AbstractCheck implements CheckInterface
                 $tokens->seekToType(T_VARIABLE);
                 $token = $tokens->current();
 
-                if (! preg_match($this->_pattern, $token->getContent())) {
+                if (! preg_match($this->pattern, $token->getContent())) {
                     $this->addViolation(
                         $file,
                         $token->getLine(),
@@ -56,7 +56,7 @@ class VariableNamingCheck extends AbstractCheck implements CheckInterface
                         sprintf(
                             'Variable `%s` should follow the `%s` pattern',
                             $token->getContent(),
-                            addslashes($this->_pattern)
+                            addslashes($this->pattern)
                         ),
                         Violation::SEVERITY_ERROR
                     );

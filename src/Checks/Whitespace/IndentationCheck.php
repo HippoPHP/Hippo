@@ -89,8 +89,8 @@ class IndentationCheck extends AbstractCheck implements CheckInterface
         $this->setIndentStyle($config->get('style', $this->indentStyle));
         $this->setIndentCount($config->get('count', $this->indentCount));
 
-        $indentation = $this->_getBaseIndentation();
-        $lines = $this->_getLines($checkContext->getTokenList());
+        $indentation = $this->getBaseIndentation();
+        $lines = $this->getLines($checkContext->getTokenList());
 
         $level = 0;
         foreach ($lines as $lineNumber => $line) {
@@ -116,8 +116,8 @@ class IndentationCheck extends AbstractCheck implements CheckInterface
                     $lineNumber,
                     count($line) > 0 ? $line[0]->getColumn() + strlen($line[0]->getContent()) : 1,
                     sprintf('Unexpected indentation (expected: %s, actual: %s)',
-                        $this->_escape($expectedIndentation),
-                        $this->_escape($actualIndentation)),
+                        $this->escape($expectedIndentation),
+                        $this->escape($actualIndentation)),
                     Violation::SEVERITY_WARNING
                 );
             }
@@ -131,7 +131,7 @@ class IndentationCheck extends AbstractCheck implements CheckInterface
         }
     }
 
-    private function _getBaseIndentation()
+    private function getBaseIndentation()
     {
         $char = '';
         if ($this->indentStyle === self::INDENT_STYLE_SPACE) {
@@ -143,7 +143,7 @@ class IndentationCheck extends AbstractCheck implements CheckInterface
         return str_repeat($char, $this->indentCount);
     }
 
-    private function _getLines($tokenList)
+    private function getLines($tokenList)
     {
         $lines = [];
         $line = [];
@@ -162,7 +162,7 @@ class IndentationCheck extends AbstractCheck implements CheckInterface
         return $lines;
     }
 
-    private function _escape($string)
+    private function escape($string)
     {
         return str_replace(["\t", ' '], ['\\t', '\\ '], $string);
     }

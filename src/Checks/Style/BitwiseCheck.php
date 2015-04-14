@@ -12,7 +12,7 @@ class BitwiseCheck extends AbstractCheck implements CheckInterface
     /**
      * @var array
      */
-    private $_tokens = [
+    protected $tokens = [
         T_LOGICAL_AND,
         T_LOGICAL_OR,
     ];
@@ -20,7 +20,7 @@ class BitwiseCheck extends AbstractCheck implements CheckInterface
     /**
      * @var array
      */
-    private $_useLookup = [
+    protected $useLookup = [
         T_LOGICAL_AND => '&&',
         T_LOGICAL_OR  => '||',
     ];
@@ -51,13 +51,13 @@ class BitwiseCheck extends AbstractCheck implements CheckInterface
         try {
             do {
                 // Jump us to the next token we want to check.
-                $tokens->seekToType($this->_tokens);
+                $tokens->seekToType($this->tokens);
 
                 // The token we're looking at.
                 $token = $tokens->current();
 
                 $using = $token->getContent();
-                $should = $this->_useLookup[$token->getType()];
+                $should = $this->useLookup[$token->getType()];
 
                 $this->addViolation(
                     $file,

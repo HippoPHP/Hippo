@@ -10,7 +10,7 @@ use HippoPHP\Hippo\Violation;
 
 class StrictEqualityCheck extends AbstractCheck implements CheckInterface
 {
-    private $_sources = [
+    private $sources = [
         '==',
         '!=',
     ];
@@ -48,7 +48,7 @@ class StrictEqualityCheck extends AbstractCheck implements CheckInterface
 
                 $token = $tokens->current();
 
-                if (in_array($token->getContent(), $this->_sources)) {
+                if (in_array($token->getContent(), $this->sources)) {
                     $this->addViolation(
                         $file,
                         $token->getLine(),
