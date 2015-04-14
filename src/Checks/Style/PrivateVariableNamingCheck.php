@@ -10,7 +10,7 @@ use HippoPHP\Hippo\Violation;
 
 class PrivateVariableNamingCheck extends AbstractCheck implements CheckInterface
 {
-    private $pattern = '/\$[a-z_][a-zA-Z0-9]+$/';
+    private $pattern = '/\$([a-z_\x7f-\xff]+)([a-zA-Z0-9\x7f-\xff]+)?/';
 
     public function setPattern($pattern)
     {
@@ -49,7 +49,7 @@ class PrivateVariableNamingCheck extends AbstractCheck implements CheckInterface
                 $token = $tokens->next(2)->current();
 
                 if ($token->isType(T_VARIABLE)) {
-                    if (preg_match($this->pattern, $token->getContent())) {
+                    if (! preg_match($this->pattern, $token->getContent())) {
                         $this->addViolation(
                             $file,
                             $token->getLine(),

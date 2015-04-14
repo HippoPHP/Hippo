@@ -10,12 +10,6 @@ use HippoPHP\Hippo\Violation;
 
 class LowerBooleanCheck extends AbstractCheck implements CheckInterface
 {
-    protected $keywords = [
-        'null',
-        'true',
-        'false',
-    ];
-
     /**
      * @return string
      */
@@ -47,7 +41,7 @@ class LowerBooleanCheck extends AbstractCheck implements CheckInterface
 
                 $tokenContent = $token->getContent();
                 $lowerContent = strtolower($tokenContent);
-                if (in_array($lowerContent, $this->keywords)) {
+                if ($token->isNativeConstant()) {
                     if ($tokenContent !== $lowerContent) {
                         $this->addViolation(
                             $file,

@@ -35,14 +35,14 @@ style:
     enabled: true
   private_variable_naming:
     enabled: true
-    pattern: '/\$[a-z_][a-zA-Z0-9]+$/'
+    pattern: '/\$([a-z_\x7f-\xff]+)([a-zA-Z0-9\x7f-\xff]+)?/'
   var_var:
     enabled: true
   lower_bools:
     enabled: true
   variable_naming:
     enabled: true
-    pattern: '/\$[a-z_][a-zA-Z0-9]+$/'
+    pattern: '/\$([a-z_\x7f-\xff]+)([a-zA-Z0-9\x7f-\xff]+)?/'
 comments:
   no_shell_comments:
     enabled: true
