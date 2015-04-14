@@ -1,6 +1,6 @@
 <?php
 
-namespace HippoPHP\Tests;
+namespace HippoPHP\tests;
 
 use HippoPHP\Hippo\Environment;
 use HippoPHP\Hippo\Exception\ShutdownException;

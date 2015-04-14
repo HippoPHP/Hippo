@@ -1,6 +1,6 @@
 <?php
 
-namespace HippoPHP\Tests\Config;
+namespace HippoPHP\tests\Config;
 
 use HippoPHP\Hippo\Config\Config;
 

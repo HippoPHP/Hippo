@@ -14,17 +14,17 @@ use HippoPHP\Hippo\Violation;
  */
 class CLIReporter implements ReporterInterface
 {
-    private $_firstFile;
-    private $_fileSystem;
-    private $_loggedSeverities;
+    private $firstFile;
+    private $fileSystem;
+    private $loggedSeverities;
 
     /**
      * @param FileSystem $fileSystem
      */
     public function __construct(FileSystem $fileSystem)
     {
-        $this->_fileSystem = $fileSystem;
-        $this->_loggedSeverities = Violation::getSeverities();
+        $this->fileSystem = $fileSystem;
+        $this->loggedSeverities = Violation::getSeverities();
     }
 
     /**
@@ -32,7 +32,7 @@ class CLIReporter implements ReporterInterface
      */
     public function setLoggedSeverities(array $severities)
     {
-        $this->_loggedSeverities = $severities;
+        $this->loggedSeverities = $severities;
     }
 
     /**
@@ -42,7 +42,7 @@ class CLIReporter implements ReporterInterface
      */
     public function start()
     {
-        $this->_firstFile = true;
+        $this->firstFile = true;
     }
 
     /**
@@ -55,41 +55,41 @@ class CLIReporter implements ReporterInterface
      */
     public function addCheckResults(File $file, array $checkResults)
     {
-        if (empty($this->_loggedSeverities)) {
+        if (empty($this->loggedSeverities)) {
             return;
         }
 
-        if ($this->_firstFile) {
-            $this->_firstFile = false;
+        if ($this->firstFile) {
+            $this->firstFile = false;
         } else {
-            $this->_write(PHP_EOL);
+            $this->write(PHP_EOL);
         }
 
         // TODO: Only output if the file has violations?
-        $this->_write('Checking '.$file->getFilename().PHP_EOL);
+        $this->write('Checking '.$file->getFilename().PHP_EOL);
 
         $violations = [];
         foreach ($checkResults as $checkResult) {
             $violations = array_merge(
                 $violations,
-                $this->_getFilteredViolations($checkResult->getViolations()));
+                $this->getFilteredViolations($checkResult->getViolations()));
         }
 
         if ($violations) {
-            $this->_write($file->getFilename().':'.PHP_EOL);
-            $this->_write(str_repeat('-', 80).PHP_EOL);
+            $this->write($file->getFilename().':'.PHP_EOL);
+            $this->write(str_repeat('-', 80).PHP_EOL);
 
             foreach ($violations as $violation) {
-                $this->_write('Line '.$violation->getLine());
+                $this->write('Line '.$violation->getLine());
 
                 if ($violation->getColumn() > 0) {
-                    $this->_write(':'.$violation->getColumn());
+                    $this->write(':'.$violation->getColumn());
                 }
 
-                $this->_write(' ('.$violation->getSeverityName().') : ');
-                $this->_write($violation->getMessage().PHP_EOL);
+                $this->write(' ('.$violation->getSeverityName().') : ');
+                $this->write($violation->getMessage().PHP_EOL);
             }
-            $this->_write(PHP_EOL);
+            $this->write(PHP_EOL);
         }
 
         flush();
@@ -111,9 +111,9 @@ class CLIReporter implements ReporterInterface
      *
      * @return void
      */
-    private function _write($content)
+    private function write($content)
     {
-        $this->_fileSystem->putContent('php://stdout', $content);
+        $this->fileSystem->putContent('php://stdout', $content);
     }
 
     /**
@@ -121,10 +121,10 @@ class CLIReporter implements ReporterInterface
      *
      * @return Violation[]
      */
-    private function _getFilteredViolations(array $violations)
+    private function getFilteredViolations(array $violations)
     {
         return array_filter($violations, function ($violation) {
-            return in_array($violation->getSeverity(), $this->_loggedSeverities);
+            return in_array($violation->getSeverity(), $this->loggedSeverities);
         });
     }
 }

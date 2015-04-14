@@ -1,10 +1,10 @@
 <?php
 
-namespace HippoPHP\Tests\Reporters;
+namespace HippoPHP\tests\Reporters;
 
 use HippoPHP\Hippo\Reporters\CLIReporter;
-use HippoPHP\Tests\Reporters\AbstractReporterTest;
 use HippoPHP\Hippo\Violation;
+use HippoPHP\Tests\Reporters\AbstractReporterTest;
 
 class CLIReporterTest extends AbstractReporterTest
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace HippoPHP\Tests;
+namespace HippoPHP\tests;
 
 use HippoPHP\Hippo\FileSystem;
 use Symfony\Component\Yaml\Parser as YamlParser;

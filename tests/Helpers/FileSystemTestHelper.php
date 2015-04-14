@@ -1,6 +1,6 @@
 <?php
 
-namespace HippoPHP\Tests\Helpers;
+namespace HippoPHP\tests\Helpers;
 
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;

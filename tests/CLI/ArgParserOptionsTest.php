@@ -1,6 +1,6 @@
 <?php
 
-namespace HippoPHP\Tests\CLI;
+namespace HippoPHP\tests\CLI;
 
 use HippoPHP\Hippo\CLI\ArgParserOptions;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace HippoPHP\Tests\Reporters;
+namespace HippoPHP\tests\Reporters;
 
 use HippoPHP\Hippo\CheckResult;
 use HippoPHP\Hippo\File;
