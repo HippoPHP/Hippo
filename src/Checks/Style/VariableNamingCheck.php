@@ -1,6 +1,6 @@
 <?php
 
-namespace HippoPHP\Hippo\Checks\Naming;
+namespace HippoPHP\Hippo\Checks\Style;
 
 use HippoPHP\Hippo\CheckContext;
 use HippoPHP\Hippo\Checks\AbstractCheck;
@@ -8,7 +8,7 @@ use HippoPHP\Hippo\Checks\CheckInterface;
 use HippoPHP\Hippo\Config\Config;
 use HippoPHP\Hippo\Violation;
 
-class PrivateVariableNamingCheck extends AbstractCheck implements CheckInterface
+class VariableNamingCheck extends AbstractCheck implements CheckInterface
 {
     private $_pattern = '/^[a-z_][a-zA-Z0-9]*$/';
 
@@ -22,7 +22,7 @@ class PrivateVariableNamingCheck extends AbstractCheck implements CheckInterface
      */
     public function getConfigRoot()
     {
-        return 'style.private_variable_naming';
+        return 'style.variable_naming';
     }
 
     /**
@@ -45,23 +45,21 @@ class PrivateVariableNamingCheck extends AbstractCheck implements CheckInterface
         try {
             do {
                 // Jump us to the next token we want to check.
-                $tokens->seekToType(T_PRIVATE);
-                $token = $tokens->next(2)->current();
+                $tokens->seekToType(T_VARIABLE);
+                $token = $tokens->current();
 
-                if ($token->isType(T_VARIABLE)) {
-                    if (preg_match($this->_pattern, $token->getContent())) {
-                        $this->addViolation(
-                            $file,
-                            $token->getLine(),
-                            $token->getColumn(),
-                            sprintf(
-                                'Private variable `%s` should follow a `%s` pattern',
-                                $token->getContent(),
-                                addslashes($this->_pattern)
-                            ),
-                            Violation::SEVERITY_ERROR
-                        );
-                    }
+                if (! preg_match($this->_pattern, $token->getContent())) {
+                    $this->addViolation(
+                        $file,
+                        $token->getLine(),
+                        $token->getColumn(),
+                        sprintf(
+                            'Variable `%s` should follow the `%s` pattern',
+                            $token->getContent(),
+                            addslashes($this->_pattern)
+                        ),
+                        Violation::SEVERITY_ERROR
+                    );
                 }
             } while ($tokens->valid());
         } catch (\HippoPHP\Tokenizer\Exception\OutOfBoundsException $e) {
