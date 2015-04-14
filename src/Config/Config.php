@@ -9,14 +9,14 @@ class Config
     /**
      * @var array<*,*>
      */
-    private $_array;
+    private $array;
 
     /**
      * @param array<*,*> $array
      */
     public function __construct(array $array = [])
     {
-        $this->_array = $this->_normalizeArray($array);
+        $this->array = $this->_normalizeArray($array);
     }
 
     /**
@@ -30,10 +30,10 @@ class Config
     public function get($key, $defaultValue = null)
     {
         if (func_num_args() === 1) {
-            $current = &$this->_navigateToKey($key, false);
+            $current = &$this->navigateToKey($key, false);
         } else {
             try {
-                $current = &$this->_navigateToKey($key, false);
+                $current = &$this->navigateToKey($key, false);
             } catch (BadConfigKeyException $e) {
                 return $defaultValue;
             }
@@ -52,7 +52,7 @@ class Config
      */
     public function set($key, $value)
     {
-        $current = &$this->_navigateToKey($key, true);
+        $current = &$this->navigateToKey($key, true);
         $current = is_array($value)
             ? $this->_normalizeArray($value)
             : $value;
@@ -66,7 +66,7 @@ class Config
     public function remove($key)
     {
         try {
-            $current = &$this->_navigateToKey($key, false);
+            $current = &$this->navigateToKey($key, false);
             $current = null;
         } catch (BadConfigKeyException $e) {
             // If we try to remove an empty node, don't error.
@@ -82,7 +82,7 @@ class Config
     {
         $output = [];
         foreach ($array as $key => $value) {
-            $output[$this->_normalizeKey($key)] = is_array($value)
+            $output[$this->normalizeKey($key)] = is_array($value)
                 ? $this->_normalizeArray($value)
                 : $value;
         }
@@ -95,7 +95,7 @@ class Config
      *
      * @return string
      */
-    private function _normalizeKey($key)
+    private function normalizeKey($key)
     {
         return trim(str_replace('_', '', strtolower($key)));
     }
@@ -108,9 +108,9 @@ class Config
      *
      * @return mixed reference to the branch under given key
      */
-    private function &_navigateToKey($key, $createSections)
+    private function &navigateToKey($key, $createSections)
     {
-        $current = &$this->_array;
+        $current = &$this->array;
         foreach (explode('.', $key) as $key) {
             if (!is_array($current)) {
                 if ($createSections) {
@@ -120,15 +120,15 @@ class Config
                 }
             }
 
-            if (!isset($current[$this->_normalizeKey($key)])) {
+            if (!isset($current[$this->normalizeKey($key)])) {
                 if ($createSections) {
-                    $current[$this->_normalizeKey($key)] = [];
+                    $current[$this->normalizeKey($key)] = [];
                 } else {
                     throw new BadConfigKeyException('Trying to access a node that doesn\'t exist: '.$key);
                 }
             }
 
-            $current = &$current[$this->_normalizeKey($key)];
+            $current = &$current[$this->normalizeKey($key)];
         }
 
         return $current;

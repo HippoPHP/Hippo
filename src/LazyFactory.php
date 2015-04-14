@@ -7,14 +7,14 @@ class LazyFactory
     /**
      * @var array<*,*>
      */
-    private $_cache = [];
+    private $cache = [];
 
     /**
      * @return File
      */
     public function resetCache()
     {
-        $this->_cache = [];
+        $this->cache = [];
     }
 
     /**
@@ -23,12 +23,12 @@ class LazyFactory
      *
      * @return mixed
      */
-    public function retrieve($cacheKey, callable $factory)
+    public function get($cacheKey, callable $factory)
     {
-        if (!isset($this->_cache[$cacheKey])) {
-            $this->_cache[$cacheKey] = $factory();
+        if (!isset($this->cache[$cacheKey])) {
+            $this->cache[$cacheKey] = $factory();
         }
 
-        return $this->_cache[$cacheKey];
+        return $this->cache[$cacheKey];
     }
 }

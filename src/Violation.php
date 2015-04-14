@@ -133,7 +133,7 @@ class Violation
      */
     public function getSeverityName()
     {
-        $severityNames = $this->_getSeverityNames();
+        $severityNames = $this->getSeverityNames();
 
         return $severityNames[$this->severity];
     }
@@ -157,7 +157,7 @@ class Violation
      */
     public static function getSeverityFromString($severityName)
     {
-        $severityNames = array_flip(self::_getSeverityNames());
+        $severityNames = array_flip(self::getSeverityNames());
         if (isset($severityNames[$severityName])) {
             return $severityNames[$severityName];
         }
@@ -170,7 +170,7 @@ class Violation
      *
      * @return array
      */
-    private static function _getSeverityNames()
+    private static function getSeverityNames()
     {
         return [
             self::SEVERITY_IGNORE  => 'ignore',

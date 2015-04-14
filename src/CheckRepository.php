@@ -2,6 +2,7 @@
 
 namespace HippoPHP\Hippo;
 
+use HippoPHP\Hippo\FileSystem;
 use HippoPHP\Hippo\Checks\CheckInterface;
 use ReflectionClass;
 
@@ -10,21 +11,21 @@ class CheckRepository
     /**
      * @var bool
      */
-    private $_hasBeenBuilt = false;
+    private $hasBeenBuilt = false;
 
     /**
      * @var Check[]
      */
-    private $_checks = [];
+    private $checks = [];
 
     /**
-     * @var FileSystem
+     * @var \HippoPHP\Hippo\FileSystem
      */
-    private $_fileSystem;
+    private $fileSystem;
 
     public function __construct(FileSystem $fileSystem)
     {
-        $this->_fileSystem = $fileSystem;
+        $this->fileSystem = $fileSystem;
     }
 
     /**
@@ -32,9 +33,9 @@ class CheckRepository
      */
     public function getChecks()
     {
-        $this->_buildIfNecessary();
+        $this->buildIfNecessary();
 
-        return $this->_checks;
+        return $this->checks;
     }
 
     /**
@@ -42,11 +43,11 @@ class CheckRepository
      *
      * @return void
      */
-    private function _buildIfNecessary()
+    private function buildIfNecessary()
     {
-        if (!$this->_hasBeenBuilt) {
-            $this->_build();
-            $this->_hasBeenBuilt = true;
+        if (!$this->hasBeenBuilt) {
+            $this->build();
+            $this->hasBeenBuilt = true;
         }
     }
 
@@ -55,17 +56,17 @@ class CheckRepository
      *
      * @return void
      */
-    private function _build()
+    private function build()
     {
-        foreach ($this->_fileSystem->getAllFiles($this->_getRootDirectory(), '/^.*\.php$/') as $filePath) {
+        foreach ($this->fileSystem->getAllFiles($this->getRootDirectory(), '/^.*\.php$/') as $filePath) {
             require_once $filePath;
         }
 
-        $this->_checks = [];
+        $this->checks = [];
         foreach (get_declared_classes() as $class) {
             $reflectionClass = new ReflectionClass($class);
-            if ($this->_canInstantiate($reflectionClass)) {
-                $this->_checks[] = $reflectionClass->newInstance();
+            if ($this->canInstantiate($reflectionClass)) {
+                $this->checks[] = $reflectionClass->newInstance();
             }
         }
     }
@@ -75,7 +76,7 @@ class CheckRepository
      *
      * @return string
      */
-    private function _getRootDirectory()
+    private function getRootDirectory()
     {
         return __DIR__.DIRECTORY_SEPARATOR.'Checks';
     }
@@ -87,7 +88,7 @@ class CheckRepository
      *
      * @return bool
      */
-    private function _canInstantiate(ReflectionClass $reflectionClass)
+    private function canInstantiate(ReflectionClass $reflectionClass)
     {
         return $reflectionClass->implementsInterface('\HippoPHP\Hippo\Checks\CheckInterface')
             && !$reflectionClass->isInterface()

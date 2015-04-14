@@ -32,7 +32,7 @@ class ArgParser
     {
         $parser = new self($argParserOptions);
 
-        return $parser->_parse($argv);
+        return $parser->parseArgs($argv);
     }
 
     /**
@@ -50,7 +50,7 @@ class ArgParser
      *
      * @return ArgContainer
      */
-    private function _parse(array $argv)
+    private function parseArgs(array $argv)
     {
         $this->stopParsing = false;
         $this->argContainer = new ArgContainer();
@@ -60,7 +60,7 @@ class ArgParser
         for ($i = 0; $i < $argCount; $i++) {
             $arg = $argv[$i];
             $nextArg = isset($argv[$i + 1]) ? $argv[$i + 1] : null;
-            $hasUsedNextArg = $this->_processArg($arg, $nextArg);
+            $hasUsedNextArg = $this->processArg($arg, $nextArg);
             if ($hasUsedNextArg) {
                 $i++;
             }
@@ -75,7 +75,7 @@ class ArgParser
      *
      * @return bool whether the next arg was used
      */
-    private function _processArg($arg, $nextArg)
+    private function processArg($arg, $nextArg)
     {
         if ($arg === '--') {
             $this->stopParsing = true;
@@ -84,18 +84,18 @@ class ArgParser
         }
 
         if (!$this->stopParsing) {
-            if ($this->_isLongArgument($arg)) {
+            if ($this->isLongArgument($arg)) {
                 $this->argContainer->setLongOption(
-                    $this->_normalizeArg($arg),
-                    $this->_extractArgValue($arg, $nextArg, $hasUsedNextArg));
+                    $this->normalizeArg($arg),
+                    $this->extractArgValue($arg, $nextArg, $hasUsedNextArg));
 
                 return $hasUsedNextArg;
             }
 
-            if ($this->_isShortArgument($arg)) {
+            if ($this->isShortArgument($arg)) {
                 $this->argContainer->setShortOption(
-                    $this->_normalizeArg($arg),
-                    $this->_extractArgValue($arg, $nextArg, $hasUsedNextArg));
+                    $this->normalizeArg($arg),
+                    $this->extractArgValue($arg, $nextArg, $hasUsedNextArg));
 
                 return $hasUsedNextArg;
             }
@@ -113,26 +113,26 @@ class ArgParser
      *
      * @return mixed
      */
-    private function _extractArgValue($arg, $nextArg, &$hasUsedNextArg)
+    private function extractArgValue($arg, $nextArg, &$hasUsedNextArg)
     {
         $hasUsedNextArg = false;
-        $normalizedArg = $this->_normalizeArg($arg);
+        $normalizedArg = $this->normalizeArg($arg);
 
         $index = strpos($arg, '=');
         if ($index !== false) {
-            return $this->_processStringValue($normalizedArg, substr($arg, $index + 1));
+            return $this->processStringValue($normalizedArg, substr($arg, $index + 1));
         } elseif ($this->argParserOptions->isFlag($normalizedArg)) {
-            if ($this->_isBool($nextArg)) {
+            if ($this->isBool($nextArg)) {
                 $hasUsedNextArg = true;
 
-                return $this->_processStringValue($normalizedArg, $nextArg);
+                return $this->processStringValue($normalizedArg, $nextArg);
             }
 
             return true;
-        } elseif ($nextArg !== null && !$this->_isArgument($nextArg)) {
+        } elseif ($nextArg !== null && !$this->isArgument($nextArg)) {
             $hasUsedNextArg = true;
 
-            return $this->_processStringValue($normalizedArg, $nextArg);
+            return $this->processStringValue($normalizedArg, $nextArg);
         }
 
         return;
@@ -144,10 +144,10 @@ class ArgParser
      *
      * @return mixed
      */
-    private function _processStringValue($normalizedArg, $value)
+    private function processStringValue($normalizedArg, $value)
     {
         if ($this->argParserOptions->isFlag($normalizedArg)) {
-            return $this->_toBool($value);
+            return $this->toBool($value);
         } elseif ($this->argParserOptions->isArray($normalizedArg)) {
             return preg_split('/[\s,;]+/', $value);
         }
@@ -160,7 +160,7 @@ class ArgParser
      *
      * @return bool
      */
-    private function _isLongArgument($arg)
+    private function isLongArgument($arg)
     {
         return substr($arg, 0, 2) === '--';
     }
@@ -170,9 +170,9 @@ class ArgParser
      *
      * @return bool
      */
-    private function _isShortArgument($arg)
+    private function isShortArgument($arg)
     {
-        return !$this->_isLongArgument($arg) && $arg{0}
+        return !$this->isLongArgument($arg) && $arg{0}
         === '-';
     }
 
@@ -183,7 +183,7 @@ class ArgParser
      *
      * @return string
      */
-    private function _normalizeArg($arg)
+    private function normalizeArg($arg)
     {
         if (strpos($arg, '=') !== false) {
             $arg = substr($arg, 0, strpos($arg, '='));
@@ -197,9 +197,9 @@ class ArgParser
      *
      * @return bool
      */
-    private function _isArgument($arg)
+    private function isArgument($arg)
     {
-        return $this->_isLongArgument($arg) || $this->_isShortArgument($arg);
+        return $this->isLongArgument($arg) || $this->isShortArgument($arg);
     }
 
     /**
@@ -207,9 +207,9 @@ class ArgParser
      *
      * @return bool
      */
-    private function _isBool($arg)
+    private function isBool($arg)
     {
-        return $this->_toBool($arg) !== null;
+        return $this->toBool($arg) !== null;
     }
 
     /**
@@ -217,7 +217,7 @@ class ArgParser
      *
      * @return bool
      */
-    private function _toBool($arg)
+    private function toBool($arg)
     {
         if ($arg === '0') {
             return false;

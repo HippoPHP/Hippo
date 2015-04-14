@@ -19,21 +19,21 @@ class CheckResult implements Countable
     /**
      * Violations held against the file.
      *
-     * @var array
+     * @var \HippoPHP\Hippo\Violation[]
      */
     protected $violations = [];
 
     /**
      * Which file is this check result for.
      *
-     * @var File
+     * @var \HippoPHP\Hippo\File
      */
     protected $file;
 
     /**
      * Sets which file is this check result for.
      *
-     * @param File $file
+     * @param \HippoPHP\Hippo\File $file
      */
     public function setFile(File $file)
     {
@@ -43,7 +43,7 @@ class CheckResult implements Countable
     /**
      * Returns which file is this check result for.
      *
-     * @return File
+     * @return \HippoPHP\Hippo\File
      */
     public function getFile()
     {
@@ -86,7 +86,7 @@ class CheckResult implements Countable
     }
 
     /**
-     * @param Violation $violation
+     * @param \HippoPHP\Hippo\Violation $violation
      *
      * @return void
      */
@@ -100,11 +100,11 @@ class CheckResult implements Countable
      * Return all of the violations on the file.
      * Violations are sorted on a line/column basis.
      *
-     * @return Violation[]
+     * @return \HippoPHP\Hippo\Violation[]
      */
     public function getViolations()
     {
-        $this->_processViolationsIfDirty();
+        $this->processViolationsIfDirty();
 
         return $this->violations;
     }
@@ -126,10 +126,10 @@ class CheckResult implements Countable
      *
      * @return void
      */
-    private function _processViolationsIfDirty()
+    private function processViolationsIfDirty()
     {
         if ($this->violationsDirty) {
-            $this->_sortViolations();
+            $this->sortViolations();
             $this->violationsDirty = false;
         }
     }
@@ -139,7 +139,7 @@ class CheckResult implements Countable
      *
      * @return void
      */
-    private function _sortViolations()
+    private function sortViolations()
     {
         usort($this->violations, function (Violation $a, Violation $b) {
             if ($a->getLine() === $b->getLine()) {

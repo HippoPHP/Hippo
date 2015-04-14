@@ -9,14 +9,14 @@ class ShutdownException extends \Exception implements ExceptionInterface
     /**
      * @var int
      */
-    private $_exitCode;
+    private $exitCode;
 
     /**
      * @param int $exitCode
      */
     public function __construct($exitCode)
     {
-        $this->_exitCode = $exitCode;
+        $this->exitCode = $exitCode;
     }
 
     /**
@@ -24,6 +24,6 @@ class ShutdownException extends \Exception implements ExceptionInterface
      */
     public function getExitCode()
     {
-        return $this->_exitCode;
+        return $this->exitCode;
     }
 }

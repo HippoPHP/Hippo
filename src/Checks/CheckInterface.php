@@ -14,8 +14,8 @@ use HippoPHP\Hippo\Config\Config;
 interface CheckInterface
 {
     /**
-     * @param CheckContext $checkContext
-     * @param Config       $config
+     * @param \HippoPHP\Hippo\CheckContext  $checkContext
+     * @param \HippoPHP\Hippo\Config\Config $config
      *
      * @return \HippoPHP\Hippo\CheckResult
      */

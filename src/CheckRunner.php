@@ -3,29 +3,31 @@
 namespace HippoPHP\Hippo;
 
 use HippoPHP\Hippo\Config\Config;
+use HippoPHP\Hippo\CheckRepository;
+use HippoPHP\Hippo\FileSystem;
 use HippoPHP\Hippo\Exception\FileNotFoundException;
 
 class CheckRunner
 {
     /**
-     * @var FileSystem
+     * @var \HippoPHP\Hippo\FileSystem
      */
-    private $_fileSystem;
+    private $fileSystem;
 
     /**
-     * @var CheckRepository
+     * @var \HippoPHP\Hippo\CheckRepository
      */
-    private $_checkRepository;
+    private $checkRepository;
 
     /**
-     * @var Config
+     * @var \HippoPHP\Hippo\Config\Config
      */
-    private $_config;
+    private $config;
 
     /**
      * @var callable
      */
-    private $_observer;
+    private $observer;
 
     /**
      * @param CheckRepository
@@ -35,10 +37,10 @@ class CheckRunner
         CheckRepository $checkRepository,
         Config $config
     ) {
-        $this->_fileSystem = $fileSystem;
-        $this->_checkRepository = $checkRepository;
-        $this->_config = $config;
-        $this->_observer = null;
+        $this->fileSystem = $fileSystem;
+        $this->checkRepository = $checkRepository;
+        $this->config = $config;
+        $this->observer = null;
     }
 
     /**
@@ -48,7 +50,7 @@ class CheckRunner
      */
     public function setObserver(callable $observer)
     {
-        $this->_observer = $observer;
+        $this->observer = $observer;
 
         return $this;
     }
@@ -65,21 +67,22 @@ class CheckRunner
         }
 
         return is_dir($path)
-            ? $this->_checkPathDirectory($path)
-            : $this->_checkPathFile($path);
+            ? $this->checkPathDirectory($path)
+            : $this->checkPathFile($path);
     }
 
     /**
-     * @param File $file
+     * @param \HippoPHP\Hippo\File $file
      *
-     * @return CheckResult[]
+     * @return \HippoPHP\Hippo\CheckResult[]
      */
     public function checkFile(File $file)
     {
         $checkContext = new CheckContext($file);
         $results = [];
-        foreach ($this->_checkRepository->getChecks() as $check) {
-            $branch = $this->_config->get($check->getConfigRoot());
+
+        foreach ($this->checkRepository->getChecks() as $check) {
+            $branch = $this->config->get($check->getConfigRoot());
             if ($branch->get('enabled') === true) {
                 $results[] = $check->checkFile($checkContext, $branch);
             }
@@ -93,12 +96,12 @@ class CheckRunner
      *
      * @return CheckResult[]
      */
-    private function _checkPathDirectory($path)
+    private function checkPathDirectory($path)
     {
-        $iterator = $this->_fileSystem->getAllFiles($path, '/^.+\.php$/i');
+        $iterator = $this->fileSystem->getAllFiles($path, '/^.+\.php$/i');
         $results = [];
         foreach ($iterator as $subPath) {
-            $results = array_merge($results, $this->_checkPathFile($subPath));
+            $results = array_merge($results, $this->checkPathFile($subPath));
         }
 
         return $results;
@@ -109,12 +112,12 @@ class CheckRunner
      *
      * @return CheckResult[]
      */
-    protected function _checkPathFile($path)
+    protected function checkPathFile($path)
     {
-        $file = new File($path, $this->_fileSystem->getContent($path));
+        $file = new File($path, $this->fileSystem->getContent($path));
         $checkResults = $this->checkFile($file);
-        if ($this->_observer !== null) {
-            call_user_func($this->_observer, $file, $checkResults);
+        if ($this->observer !== null) {
+            call_user_func($this->observer, $file, $checkResults);
         }
 
         return $checkResults;

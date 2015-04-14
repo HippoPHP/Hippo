@@ -23,49 +23,49 @@ class HippoTextUIContext
     const ACTION_VERSION = 3;
 
     /**
-     * @var FileSystem
+     * @var \HippoPHP\Hippo\FileSystem
      */
-    private $_fileSystem;
+    private $fileSystem;
 
     /**
      * @var int
      */
-    private $_action = self::ACTION_UNKNOWN;
+    private $action = self::ACTION_UNKNOWN;
 
     /**
      * @var bool
      */
-    private $_strictModeEnabled = false;
+    private $strictModeEnabled = false;
 
     /**
      * @var string
      */
-    private $_configName = 'base';
+    private $configName = 'base';
 
     /**
      * @var int[]
      */
-    private $_loggedSeverities = [];
+    private $loggedSeverities = [];
 
     /**
-     * @var ReportInterface[]
+     * @var \HippoPHP\Hippo\Reporters\ReportInterface[]
      */
-    private $_reporters = [];
+    private $reporters = [];
 
     /**
      * @var string[]
      */
-    private $_pathsToCheck = [];
+    private $pathsToCheck = [];
 
     /**
-     * @param FileSystem $fileSystem
-     * @param string[]   $args
+     * @param \HippoPHP\Hippo\FileSystem $fileSystem
+     * @param string[]                   $args
      */
     public function __construct(
         FileSystem $fileSystem,
         array $args
     ) {
-        $this->_fileSystem = $fileSystem;
+        $this->fileSystem = $fileSystem;
 
         $argParserOptions = new ArgParserOptions();
         $argParserOptions->markArray('l');
@@ -77,13 +77,13 @@ class HippoTextUIContext
         $argParserOptions->markFlag('strict');
         $argContainer = ArgParser::parse($args, $argParserOptions);
 
-        $this->_loggedSeverities = Violation::getSeverities();
+        $this->loggedSeverities = Violation::getSeverities();
 
-        $this->_processArgContainer($argContainer);
+        $this->processArgContainer($argContainer);
 
-        $cliReporter = new CLIReporter($this->_fileSystem);
-        $cliReporter->setLoggedSeverities($this->_loggedSeverities);
-        $this->_reporters[] = $cliReporter;
+        $cliReporter = new CLIReporter($this->fileSystem);
+        $cliReporter->setLoggedSeverities($this->loggedSeverities);
+        $this->reporters[] = $cliReporter;
     }
 
     /**
@@ -91,15 +91,15 @@ class HippoTextUIContext
      */
     public function getAction()
     {
-        return $this->_action;
+        return $this->action;
     }
 
     /**
-     * @return ReporterInterface[]
+     * @return \HippoPHP\Hippo\Reporters\ReporterInterface[]
      */
     public function getReporters()
     {
-        return $this->_reporters;
+        return $this->reporters;
     }
 
     /**
@@ -107,7 +107,7 @@ class HippoTextUIContext
      */
     public function getPathsToCheck()
     {
-        return $this->_pathsToCheck;
+        return $this->pathsToCheck;
     }
 
     /**
@@ -115,7 +115,7 @@ class HippoTextUIContext
      */
     public function hasStrictModeEnabled()
     {
-        return $this->_strictModeEnabled;
+        return $this->strictModeEnabled;
     }
 
     /**
@@ -123,14 +123,14 @@ class HippoTextUIContext
      */
     public function getConfigName()
     {
-        return $this->_configName;
+        return $this->configName;
     }
 
     /**
      * @param callable $action
      * @param string[] $arguments
      */
-    private function _createArgMapping(callable $action, array $arguments)
+    private function createArgMapping(callable $action, array $arguments)
     {
         return ['action' => $action, 'arguments' => $arguments];
     }
@@ -138,17 +138,17 @@ class HippoTextUIContext
     /**
      * @return array
      */
-    private function _buildArgMappings()
+    private function buildArgMappings()
     {
         return [
-            $this->_createArgMapping([$this, '_handleHelpArgument'], ['h', 'help']),
-            $this->_createArgMapping([$this, '_handleVersionArgument'], ['v', 'version']),
-            $this->_createArgMapping([$this, '_handleStrictArgument'], ['s', 'strict']),
-            $this->_createArgMapping([$this, '_handleLogArgument'], ['l', 'log']),
-            $this->_createArgMapping([$this, '_handleVerboseArgument'], ['verbose']),
-            $this->_createArgMapping([$this, '_handleQuietArgument'], ['q', 'quiet']),
-            $this->_createArgMapping([$this, '_handleXmlReportArgument'], ['report-xml']),
-            $this->_createArgMapping([$this, '_handleConfigArgument'], ['c', 'config']),
+            $this->createArgMapping([$this, 'handleHelpArgument'], ['h', 'help']),
+            $this->createArgMapping([$this, 'handleVersionArgument'], ['v', 'version']),
+            $this->createArgMapping([$this, 'handleStrictArgument'], ['s', 'strict']),
+            $this->createArgMapping([$this, 'handleLogArgument'], ['l', 'log']),
+            $this->createArgMapping([$this, 'handleVerboseArgument'], ['verbose']),
+            $this->createArgMapping([$this, 'handleQuietArgument'], ['q', 'quiet']),
+            $this->createArgMapping([$this, 'handleXmlReportArgument'], ['report-xml']),
+            $this->createArgMapping([$this, 'handleConfigArgument'], ['c', 'config']),
         ];
     }
 
@@ -157,9 +157,9 @@ class HippoTextUIContext
      *
      * @return void
      */
-    private function _processArgContainer(ArgContainer $argContainer)
+    private function processArgContainer(ArgContainer $argContainer)
     {
-        $mappings = $this->_buildArgMappings();
+        $mappings = $this->buildArgMappings();
 
         foreach ($argContainer->getAllOptions() as $argName => $argValue) {
             $handled = false;
@@ -178,32 +178,32 @@ class HippoTextUIContext
         }
 
         foreach ($argContainer->getStrayArguments() as $strayArgument) {
-            $this->_pathsToCheck[] = $strayArgument;
+            $this->pathsToCheck[] = $strayArgument;
         }
 
-        if ($this->_action == self::ACTION_UNKNOWN) {
-            $this->_action = empty($this->_pathsToCheck)
+        if ($this->action == self::ACTION_UNKNOWN) {
+            $this->action = empty($this->pathsToCheck)
                 ? self::ACTION_HELP
                 : self::ACTION_CHECK;
         }
     }
 
-    private function _handleHelpArgument()
+    private function handleHelpArgument()
     {
-        $this->_action = self::ACTION_HELP;
+        $this->action = self::ACTION_HELP;
     }
 
-    private function _handleVersionArgument()
+    private function handleVersionArgument()
     {
-        $this->_action = self::ACTION_VERSION;
+        $this->action = self::ACTION_VERSION;
     }
 
-    private function _handleStrictArgument($argValue)
+    private function handleStrictArgument($argValue)
     {
-        $this->_strictModeEnabled = $argValue;
+        $this->strictModeEnabled = $argValue;
     }
 
-    private function _handleLogArgument($argValue)
+    private function handleLogArgument($argValue)
     {
         $severities = [];
         foreach ($argValue as $value) {
@@ -213,32 +213,32 @@ class HippoTextUIContext
             }
             $severities [] = $severity;
         }
-        $this->_loggedSeverities = array_unique($severities);
+        $this->loggedSeverities = array_unique($severities);
     }
 
-    private function _handleVerboseArgument($argValue)
+    private function handleVerboseArgument($argValue)
     {
-        $this->_loggedSeverities = $argValue ? Violation::getSeverities() : [];
+        $this->loggedSeverities = $argValue ? Violation::getSeverities() : [];
     }
 
-    private function _handleQuietArgument($argValue)
+    private function handleQuietArgument($argValue)
     {
-        $this->_loggedSeverities = $argValue ? [] : Violation::getSeverities();
+        $this->loggedSeverities = $argValue ? [] : Violation::getSeverities();
     }
 
-    private function _handleXmlReportArgument($argValue)
+    private function handleXmlReportArgument($argValue)
     {
         $targetFilename = $argValue === null ? 'checkstyle.xml' : $argValue;
-        $checkstyleReporter = new CheckstyleReporter($this->_fileSystem);
+        $checkstyleReporter = new CheckstyleReporter($this->fileSystem);
         $checkstyleReporter->setFilename($targetFilename);
-        $this->_reporters[] = $checkstyleReporter;
+        $this->reporters[] = $checkstyleReporter;
     }
 
-    private function _handleConfigArgument($argValue)
+    private function handleConfigArgument($argValue)
     {
         if (!$argValue) {
             throw new UnrecognizedOptionException('Must specify config path');
         }
-        $this->_configName = $argValue;
+        $this->configName = $argValue;
     }
 }

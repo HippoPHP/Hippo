@@ -17,30 +17,30 @@ class ArgParserOptions
 
     public function markFlag($argName)
     {
-        $this->_mark($argName, self::TYPE_FLAG);
+        $this->mark($argName, self::TYPE_FLAG);
     }
 
     public function markArray($argName)
     {
-        $this->_mark($argName, self::TYPE_ARRAY);
+        $this->mark($argName, self::TYPE_ARRAY);
     }
 
     public function isFlag($argName)
     {
-        return $this->_isMarked($argName, self::TYPE_FLAG);
+        return $this->isMarked($argName, self::TYPE_FLAG);
     }
 
     public function isArray($argName)
     {
-        return $this->_isMarked($argName, self::TYPE_ARRAY);
+        return $this->isMarked($argName, self::TYPE_ARRAY);
     }
 
-    private function _mark($argName, $type)
+    private function mark($argName, $type)
     {
         $this->marked[$type][] = $argName;
     }
 
-    private function _isMarked($argName, $type)
+    private function isMarked($argName, $type)
     {
         return isset($this->marked[$type]) && in_array($argName, $this->marked[$type]);
     }

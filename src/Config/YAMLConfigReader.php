@@ -26,9 +26,9 @@ class YAMLConfigReader implements ConfigReaderInterface
      */
     public function loadFromFile($filename)
     {
-        $config = $this->_parseFile($filename);
+        $config = $this->parseFile($filename);
 
-        return $this->_load($config, $filename);
+        return $this->load($config, $filename);
     }
 
     /**
@@ -38,9 +38,9 @@ class YAMLConfigReader implements ConfigReaderInterface
      */
     public function loadFromString($string)
     {
-        $config = $this->_parseString($string);
+        $config = $this->parseString($string);
 
-        return $this->_load($config);
+        return $this->load($config);
     }
 
     /**
@@ -49,10 +49,10 @@ class YAMLConfigReader implements ConfigReaderInterface
      *
      * @return Config
      */
-    private function _load($config, $filename = false)
+    private function load($config, $filename = false)
     {
         if ($filename) {
-            $included = [$this->_normalizeConfigName($filename)];
+            $included = [$this->normalizeConfigName($filename)];
         } else {
             $included = [];
         }
@@ -61,17 +61,17 @@ class YAMLConfigReader implements ConfigReaderInterface
             $baseConfigName = $config['extends'];
             $baseConfigDir = ($filename ? dirname($filename) : '.');
             $baseConfigPath = $baseConfigDir.DIRECTORY_SEPARATOR.$baseConfigName.'.yml';
-            $baseConfig = $this->_parseFile($baseConfigPath);
+            $baseConfig = $this->parseFile($baseConfigPath);
             unset($config['extends']);
 
-            $config = $this->_mergeRecursive($baseConfig, $config);
+            $config = $this->mergeRecursive($baseConfig, $config);
 
             if (isset($config['extends'])) {
-                if (in_array($this->_normalizeConfigName($config['extends']), $included)) {
+                if (in_array($this->normalizeConfigName($config['extends']), $included)) {
                     // Avoid circular dependencies
                     unset($config['extends']);
                 } else {
-                    $included[] = $this->_normalizeConfigName($config['extends']);
+                    $included[] = $this->normalizeConfigName($config['extends']);
                 }
             }
         }
@@ -84,9 +84,9 @@ class YAMLConfigReader implements ConfigReaderInterface
      *
      * @return array<*,*>
      */
-    private function _parseFile($filePath)
+    private function parseFile($filePath)
     {
-        return $this->_parseString($this->fileSystem->getContent($filePath));
+        return $this->parseString($this->fileSystem->getContent($filePath));
     }
 
     /**
@@ -94,7 +94,7 @@ class YAMLConfigReader implements ConfigReaderInterface
      *
      * @return array<*,*>
      */
-    private function _parseString($string)
+    private function parseString($string)
     {
         $result = $this->parser->parse($string);
         if (is_string($result)) {
@@ -111,7 +111,7 @@ class YAMLConfigReader implements ConfigReaderInterface
      *
      * @return string
      */
-    private function _normalizeConfigName($name)
+    private function normalizeConfigName($name)
     {
         return trim(basename(strtolower($name), '.yml'));
     }
@@ -122,7 +122,7 @@ class YAMLConfigReader implements ConfigReaderInterface
      *
      * @return array<*,*>
      */
-    private function _mergeRecursive($array1, $array2)
+    private function mergeRecursive($array1, $array2)
     {
         $result = [];
         foreach (array_merge(array_keys($array1), array_keys($array2)) as $key) {
@@ -134,7 +134,7 @@ class YAMLConfigReader implements ConfigReaderInterface
                 if (!is_array($array1[$key]) || !is_array($array2[$key])) {
                     throw new \Exception('Cannot merge a scalar with an array');
                 }
-                $result[$key] = $this->_mergeRecursive($array1[$key], $array2[$key]);
+                $result[$key] = $this->mergeRecursive($array1[$key], $array2[$key]);
             } else {
                 $result[$key] = $array2[$key];
             }

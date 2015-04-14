@@ -11,14 +11,14 @@ class Environment
     /**
      * @var int
      */
-    private $_exitCode = 0;
+    private $exitCode = 0;
 
     /**
      * @return int
      */
     public function getExitCode()
     {
-        return $this->_exitCode;
+        return $this->exitCode;
     }
 
     /**
@@ -28,7 +28,7 @@ class Environment
      */
     public function setExitCode($exitCode)
     {
-        $this->_exitCode = $exitCode;
+        $this->exitCode = $exitCode;
     }
 
     /**
@@ -36,6 +36,6 @@ class Environment
      */
     public function shutdown()
     {
-        throw new ShutdownException($this->_exitCode);
+        throw new ShutdownException($this->exitCode);
     }
 }

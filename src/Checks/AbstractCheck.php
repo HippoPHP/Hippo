@@ -32,8 +32,8 @@ abstract class AbstractCheck implements CheckInterface
     /**
      * Runs checks on the file.
      *
-     * @param CheckContext $checkContext
-     * @param Config       $config
+     * @param \HippoPHP\Hippo\CheckContext  $checkContext
+     * @param \HippoPHP\Hippo\Config\Config $config
      *
      * @return \HippoPHP\Hippo\CheckResult
      */
@@ -65,11 +65,11 @@ abstract class AbstractCheck implements CheckInterface
     /**
      * Add a violation to the current file.
      *
-     * @param File   $file
-     * @param int    $line
-     * @param int    $column
-     * @param string $message
-     * @param int    $severity
+     * @param \HippoPHP\Hippo\File $file
+     * @param int                  $line
+     * @param int                  $column
+     * @param string               $message
+     * @param int                  $severity
      */
     protected function addViolation(File $file, $line, $column, $message, $severity = null)
     {

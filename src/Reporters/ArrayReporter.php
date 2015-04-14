@@ -41,7 +41,7 @@ class ArrayReporter implements ReporterInterface
     {
         foreach ($checkResults as $checkResult) {
             foreach ($checkResult->getViolations() as $violation) {
-                $key = $this->_getArrayKey($violation);
+                $key = $this->getArrayKey($violation);
                 if (!isset($this->report[$key])) {
                     $this->report[$key] = [];
                 }
@@ -84,7 +84,7 @@ class ArrayReporter implements ReporterInterface
      *
      * @return string
      */
-    private function _getArrayKey(Violation $violation)
+    private function getArrayKey(Violation $violation)
     {
         return $violation->getFile()->getFilename().':'.$violation->getLine();
     }

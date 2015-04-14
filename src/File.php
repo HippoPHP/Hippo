@@ -50,7 +50,7 @@ class File
         $this->source = $source;
         $this->encoding = $encoding;
 
-        $this->lines = $this->_buildLinesFromSource($source);
+        $this->lines = $this->buildLinesFromSource($source);
 
         return $this;
     }
@@ -100,14 +100,14 @@ class File
      *
      * @return array
      */
-    private function _buildLinesFromSource($source)
+    private function buildLinesFromSource($source)
     {
         $eols = ["\r", "\n", "\r\n"];
 
         $lines = [];
         $index = 1;
         while ($source !== '') {
-            $line = $this->_extractNextLine($source, $eols, $eolUsed);
+            $line = $this->extractNextLine($source, $eols, $eolUsed);
             $lines[$index ++] = $line;
             $source = strval(substr($source, strlen($line)));
             if ($eolUsed !== null && $source === '') {
@@ -126,7 +126,7 @@ class File
      *
      * @return string
      */
-    private function _extractNextLine($source, array $eols, &$eolUsed)
+    private function extractNextLine($source, array $eols, &$eolUsed)
     {
         $minIndex = false;
         $eolUsed = null;

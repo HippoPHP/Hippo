@@ -10,17 +10,17 @@ class ArgContainer
     /**
      * @var array
      */
-    private $_longOptions = [];
+    private $longOptions = [];
 
     /**
      * @var array
      */
-    private $_shortOptions = [];
+    private $shortOptions = [];
 
     /**
      * @var array
      */
-    private $_strayArguments = [];
+    private $strayArguments = [];
 
     /**
      * @param string $arg
@@ -28,7 +28,7 @@ class ArgContainer
      */
     public function setShortOption($arg, $value)
     {
-        $this->_shortOptions[$arg] = $value;
+        $this->shortOptions[$arg] = $value;
     }
 
     /**
@@ -37,7 +37,7 @@ class ArgContainer
      */
     public function setLongOption($arg, $value)
     {
-        $this->_longOptions[$arg] = $value;
+        $this->longOptions[$arg] = $value;
     }
 
     /**
@@ -45,7 +45,7 @@ class ArgContainer
      */
     public function addStrayArgument($value)
     {
-        $this->_strayArguments[] = $value;
+        $this->strayArguments[] = $value;
     }
 
     /**
@@ -53,7 +53,7 @@ class ArgContainer
      */
     public function getShortOption($arg)
     {
-        return isset($this->_shortOptions[$arg]) ? $this->_shortOptions[$arg] : null;
+        return isset($this->shortOptions[$arg]) ? $this->shortOptions[$arg] : null;
     }
 
     /**
@@ -61,7 +61,7 @@ class ArgContainer
      */
     public function getLongOption($arg)
     {
-        return isset($this->_longOptions[$arg]) ? $this->_longOptions[$arg] : null;
+        return isset($this->longOptions[$arg]) ? $this->longOptions[$arg] : null;
     }
 
     /**
@@ -69,7 +69,7 @@ class ArgContainer
      */
     public function getStrayArguments()
     {
-        return $this->_strayArguments;
+        return $this->strayArguments;
     }
 
     /**
@@ -77,7 +77,7 @@ class ArgContainer
      */
     public function getLongOptions()
     {
-        return $this->_longOptions;
+        return $this->longOptions;
     }
 
     /**
@@ -85,7 +85,7 @@ class ArgContainer
      */
     public function getShortOptions()
     {
-        return $this->_shortOptions;
+        return $this->shortOptions;
     }
 
     /**
@@ -93,6 +93,6 @@ class ArgContainer
      */
     public function getAllOptions()
     {
-        return array_merge($this->_longOptions, $this->_shortOptions);
+        return array_merge($this->longOptions, $this->shortOptions);
     }
 }
