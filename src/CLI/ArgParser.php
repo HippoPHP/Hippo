@@ -33,10 +33,10 @@ class ArgParser
     private $argParserOptions;
 
     /**
-     * @param string[]         $argv
-     * @param ArgParserOptions $argParserOptions
+     * @param string[]                            $argv
+     * @param \HippoPHP\Hippo\CLI\ArgParserOptions $argParserOptions
      *
-     * @return ArgContainer
+     * @return \HippoPHP\Hippo\CLI\ArgContainer
      */
     public static function parse(array $argv, ArgParserOptions $argParserOptions = null)
     {
@@ -46,7 +46,7 @@ class ArgParser
     }
 
     /**
-     * @param ArgParserOptions $argParserOptions
+     * @param \HippoPHP\Hippo\CLI\ArgParserOptions $argParserOptions
      */
     private function __construct(ArgParserOptions $argParserOptions = null)
     {
@@ -58,7 +58,7 @@ class ArgParser
     /**
      * @param string[] $argv
      *
-     * @return ArgContainer
+     * @return \HippoPHP\Hippo\CLI\ArgContainer
      */
     private function parseArgs(array $argv)
     {
