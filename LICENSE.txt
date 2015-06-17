@@ -1,6 +1,7 @@
 The MIT License (MIT)
 
-Copyright (c) 2014 HippoPHP
+Copyright (c) 2015 James Brooks <jbrooksuk@me.com>
+Copyright (c) 2015 Marcin Kurczewski <rr-@sakuya.pl>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
