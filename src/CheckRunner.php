@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of Hippo.
+ *
+ * (c) James Brooks <jbrooksuk@me.com>
+ * (c) Marcin Kurczewski <rr-@sakuya.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace HippoPHP\Hippo;
 
 use HippoPHP\Hippo\Config\Config;
@@ -28,7 +38,9 @@ class CheckRunner
     private $observer;
 
     /**
-     * @param CheckRepository
+     * @param \HippoPHP\Hippo\FileSystem      $fileSystem
+     * @param \HippoPHP\Hippo\CheckRepository $checkRepository
+     * @param \HippoPHP\Hippo\Config\Config   $config
      */
     public function __construct(
         FileSystem $fileSystem,
@@ -43,8 +55,6 @@ class CheckRunner
 
     /**
      * @param callable $observer
-     *
-     * @return void
      */
     public function setObserver(callable $observer)
     {

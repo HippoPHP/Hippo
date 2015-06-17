@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of Hippo.
+ *
+ * (c) James Brooks <jbrooksuk@me.com>
+ * (c) Marcin Kurczewski <rr-@sakuya.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace HippoPHP\Hippo;
 
 /**
@@ -12,10 +22,10 @@ class Violation
     /**
      * Severities.
      */
-    const SEVERITY_IGNORE  = 0;
-    const SEVERITY_INFO    = 1;
+    const SEVERITY_IGNORE = 0;
+    const SEVERITY_INFO = 1;
     const SEVERITY_WARNING = 2;
-    const SEVERITY_ERROR   = 3;
+    const SEVERITY_ERROR = 3;
 
     /**
      * Violation severities, in order from most deadly to most peaceful.
@@ -74,8 +84,6 @@ class Violation
      * @param int    $column
      * @param int    $severity
      * @param string $message
-     *
-     * @return void
      */
     public function __construct(File $file, $line, $column, $severity, $message)
     {

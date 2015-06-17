@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of Hippo.
+ *
+ * (c) James Brooks <jbrooksuk@me.com>
+ * (c) Marcin Kurczewski <rr-@sakuya.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace HippoPHP\Hippo;
 
 use HippoPHP\Hippo\Checks\CheckInterface;
@@ -39,8 +49,6 @@ class CheckRepository
 
     /**
      * If the checks haven't been ran, then we need to run them.
-     *
-     * @return void
      */
     private function buildIfNecessary()
     {
@@ -52,8 +60,6 @@ class CheckRepository
 
     /**
      * Builds a list of checks to run.
-     *
-     * @return void
      */
     private function build()
     {

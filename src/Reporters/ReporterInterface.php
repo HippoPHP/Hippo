@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of Hippo.
+ *
+ * (c) James Brooks <jbrooksuk@me.com>
+ * (c) Marcin Kurczewski <rr-@sakuya.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace HippoPHP\Hippo\Reporters;
 
 use HippoPHP\Hippo\CheckResult;
@@ -22,8 +32,6 @@ interface ReporterInterface
      *
      * @param File          $file
      * @param CheckResult[] $checkResults
-     *
-     * @return void
      */
     public function addCheckResults(File $file, array $checkResult);
 

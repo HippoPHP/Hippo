@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of Hippo.
+ *
+ * (c) James Brooks <jbrooksuk@me.com>
+ * (c) Marcin Kurczewski <rr-@sakuya.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace HippoPHP\Hippo;
 
 use Exception;
@@ -44,8 +54,6 @@ class HippoTextUI implements HippoInterface
      * @param \HippoPHP\Hippo\CheckRepository    $checkRepository
      * @param string                             $pathToSelf
      * @param \HippoPHP\Hippo\HippoTextUIContext $context
-     *
-     * @return void
      */
     public function __construct(
         Environment $environment,
@@ -64,7 +72,6 @@ class HippoTextUI implements HippoInterface
     }
 
     /**
-     * @return void
      */
     public static function main($args)
     {
@@ -92,7 +99,6 @@ class HippoTextUI implements HippoInterface
     }
 
     /**
-     * @return void
      */
     protected function run()
     {
@@ -119,7 +125,6 @@ class HippoTextUI implements HippoInterface
     }
 
     /**
-     * @return void
      */
     protected function runChecks()
     {
@@ -155,8 +160,6 @@ class HippoTextUI implements HippoInterface
 
     /**
      * Shows the help information.
-     *
-     * @return void
      */
     protected function showHelp()
     {
@@ -195,8 +198,6 @@ class HippoTextUI implements HippoInterface
 
     /**
      * Shows the version information.
-     *
-     * @return void
      */
     protected function showVersion()
     {
@@ -207,8 +208,6 @@ class HippoTextUI implements HippoInterface
      * @param ReporterInterface[] $reporters
      * @param File                $file
      * @param CheckResult[]       $checkResults
-     *
-     * @return void
      */
     protected function reportCheckResults(array $reporters, File $file, array $checkResults)
     {

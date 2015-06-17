@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of Hippo.
+ *
+ * (c) James Brooks <jbrooksuk@me.com>
+ * (c) Marcin Kurczewski <rr-@sakuya.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace HippoPHP\Hippo\Config;
 
 use HippoPHP\Hippo\Exception\BadConfigKeyException;
@@ -47,8 +57,6 @@ class Config
     /**
      * @param string $key
      * @param mixed  $value
-     *
-     * @return void
      */
     public function set($key, $value)
     {
@@ -60,8 +68,6 @@ class Config
 
     /**
      * @param string $key
-     *
-     * @return void
      */
     public function remove($key)
     {

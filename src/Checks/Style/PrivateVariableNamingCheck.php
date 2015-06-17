@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of Hippo.
+ *
+ * (c) James Brooks <jbrooksuk@me.com>
+ * (c) Marcin Kurczewski <rr-@sakuya.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace HippoPHP\Hippo\Checks\Naming;
 
 use HippoPHP\Hippo\CheckContext;
@@ -32,8 +42,6 @@ class PrivateVariableNamingCheck extends AbstractCheck implements CheckInterface
      *
      * @param CheckContext $checkContext
      * @param Config       $config
-     *
-     * @return void
      */
     protected function checkFileInternal(CheckContext $checkContext, Config $config)
     {
@@ -49,7 +57,7 @@ class PrivateVariableNamingCheck extends AbstractCheck implements CheckInterface
                 $token = $tokens->current();
 
                 if ($token->isType(T_VARIABLE)) {
-                    if (! preg_match($this->pattern, $token->getContent())) {
+                    if (!preg_match($this->pattern, $token->getContent())) {
                         $this->addViolation(
                             $file,
                             $token->getLine(),

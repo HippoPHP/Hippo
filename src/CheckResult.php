@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of Hippo.
+ *
+ * (c) James Brooks <jbrooksuk@me.com>
+ * (c) Marcin Kurczewski <rr-@sakuya.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace HippoPHP\Hippo;
 
 use Countable;
@@ -87,8 +97,6 @@ class CheckResult implements Countable
 
     /**
      * @param \HippoPHP\Hippo\Violation $violation
-     *
-     * @return void
      */
     public function addViolation(Violation $violation)
     {
@@ -123,8 +131,6 @@ class CheckResult implements Countable
 
     /**
      * Resorts the violations array if it's been changed.
-     *
-     * @return void
      */
     private function processViolationsIfDirty()
     {
@@ -136,8 +142,6 @@ class CheckResult implements Countable
 
     /**
      * Sorts the violations by line then column.
-     *
-     * @return void
      */
     private function sortViolations()
     {

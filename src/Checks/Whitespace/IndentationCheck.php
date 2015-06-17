@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of Hippo.
+ *
+ * (c) James Brooks <jbrooksuk@me.com>
+ * (c) Marcin Kurczewski <rr-@sakuya.pl>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace HippoPHP\Hippo\Checks\Whitespace;
 
 use HippoPHP\Hippo\CheckContext;
@@ -79,8 +89,6 @@ class IndentationCheck extends AbstractCheck implements CheckInterface
      *
      * @param \HippoPHP\Hippo\CheckContext  $checkContext
      * @param \HippoPHP\Hippo\Config\Config $config
-     *
-     * @return void
      */
     protected function checkFileInternal(CheckContext $checkContext, Config $config)
     {
@@ -104,7 +112,7 @@ class IndentationCheck extends AbstractCheck implements CheckInterface
             foreach ($line as $token) {
                 $content = $token->getContent();
                 if ($content === '}' || $content === ')' || $content === ']') {
-                    $level --;
+                    $level--;
                 }
             }
 
@@ -125,7 +133,7 @@ class IndentationCheck extends AbstractCheck implements CheckInterface
             foreach ($line as $token) {
                 $content = $token->getContent();
                 if ($content === '{' || $content === '(' || $content === '[') {
-                    $level ++;
+                    $level++;
                 }
             }
         }
@@ -154,7 +162,7 @@ class IndentationCheck extends AbstractCheck implements CheckInterface
                 if ($token->isType(TokenType::TOKEN_EOL)) {
                     $lines[$lineNumber] = $line;
                     $line = [];
-                    $lineNumber ++;
+                    $lineNumber++;
                 }
         }
         $lines[$lineNumber] = $line;
