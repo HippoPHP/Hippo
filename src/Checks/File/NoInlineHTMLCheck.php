@@ -41,7 +41,7 @@ class NoInlineHTMLCheck extends AbstractCheck implements CheckInterface
     protected function checkFileInternal(CheckContext $checkContext, Config $config)
     {
         $file = $checkContext->getFile();
-        
+
         try {
             $ast = $checkContext->getSyntaxTree();
 
