@@ -17,6 +17,7 @@ use HippoPHP\Hippo\Checks\AbstractCheck;
 use HippoPHP\Hippo\Checks\CheckInterface;
 use HippoPHP\Hippo\Config\Config;
 use HippoPHP\Hippo\Violation;
+use PhpParser\Node\Stmt\InlineHTML;
 
 class NoInlineHTMLCheck extends AbstractCheck implements CheckInterface
 {
@@ -42,7 +43,7 @@ class NoInlineHTMLCheck extends AbstractCheck implements CheckInterface
         $ast = $checkContext->getSyntaxTree();
 
         foreach ($ast as $node) {
-            if ($node instanceof \PhpParser\Node\Stmt\InlineHTML) {
+            if ($node instanceof InlineHTML) {
                 $this->addViolation(
                     $file,
                     $node->getLine(),
