@@ -51,3 +51,6 @@ whitespace:
     enabled: true
   whitespace_around_braces:
     enabled: true
+syntax:
+  check:
+    enabled: true

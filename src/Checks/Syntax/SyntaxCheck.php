@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace HippoPHP\Hippo\Checks\Naming;
+namespace HippoPHP\Hippo\Checks\Syntax;
 
 use HippoPHP\Hippo\CheckContext;
 use HippoPHP\Hippo\Checks\AbstractCheck;
@@ -18,16 +18,17 @@ use HippoPHP\Hippo\Checks\CheckInterface;
 use HippoPHP\Hippo\Config\Config;
 use HippoPHP\Hippo\Violation;
 use PhpParser\Error as PhpParserError;
-use PhpParser\Node\Stmt\InlineHTML;
+use PhpParser\Lexer\Emulative;
+use PhpParser\Parser;
 
-class NoInlineHTMLCheck extends AbstractCheck implements CheckInterface
+class SyntaxCheck extends AbstractCheck implements CheckInterface
 {
     /**
      * @return string
      */
     public function getConfigRoot()
     {
-        return 'file.no_inline_html';
+        return 'syntax.check';
     }
 
     /**
@@ -41,23 +42,19 @@ class NoInlineHTMLCheck extends AbstractCheck implements CheckInterface
     protected function checkFileInternal(CheckContext $checkContext, Config $config)
     {
         $file = $checkContext->getFile();
-        
-        try {
-            $ast = $checkContext->getSyntaxTree();
 
-            foreach ($ast as $node) {
-                if ($node instanceof InlineHTML) {
-                    $this->addViolation(
-                        $file,
-                        $node->getLine(),
-                        0,
-                        'PHP files should not contain inline HTML.',
-                        Violation::SEVERITY_WARNING
-                    );
-                }
-            }
+        $parser = new Parser(new Emulative());
+
+        try {
+            $parser->parse($file->getSource());
         } catch (PhpParserError $e) {
-            // Ignore it, this check isn't for checking syntax errors.
+            $this->addViolation(
+                $file,
+                $e->getStartLine(),
+                0,
+                $e->getRawMessage(),
+                Violation::SEVERITY_ERROR
+            );
         }
     }
 }
