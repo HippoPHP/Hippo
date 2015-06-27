@@ -33,7 +33,7 @@ class ArgParser
     private $argParserOptions;
 
     /**
-     * @param string[]                            $argv
+     * @param string[]                             $argv
      * @param \HippoPHP\Hippo\CLI\ArgParserOptions $argParserOptions
      *
      * @return \HippoPHP\Hippo\CLI\ArgContainer
