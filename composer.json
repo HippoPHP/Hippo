@@ -9,19 +9,16 @@
     "authors": [
         {
             "name": "James Brooks",
-            "email": "jbrooksuk@me.com",
-            "homepage": "https://james-brooks.uk",
-            "role": "Developer"
+            "email": "james@alt-three.com"
         },
         {
             "name": "Marcin Kurczewski",
-            "homepage": "http://sakuya.pl",
-            "role": "Developer"
+            "homepage": "http://sakuya.pl"
         }
     ],
     "support": {
-        "wiki": "https://github.com/hippophp/hippo/wiki",
-        "source": "https://github.com/hippophp/hippo"
+        "wiki": "https://github.com/HippoPHP/Hippo/wiki",
+        "source": "https://github.com/HippoPHP/Hippo"
     },
     "require": {
         "php": ">=5.4.0",
