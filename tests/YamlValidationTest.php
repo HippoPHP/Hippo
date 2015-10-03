@@ -13,9 +13,10 @@
 namespace HippoPHP\tests;
 
 use HippoPHP\Hippo\FileSystem;
+use PHPUnit_Framework_TestCase;
 use Symfony\Component\Yaml\Parser as YamlParser;
 
-class YamlValidationTest extends \PHPUnit_Framework_TestCase
+class YamlValidationTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider yamlPathProvider

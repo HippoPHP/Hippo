@@ -14,8 +14,9 @@ namespace HippoPHP\tests;
 
 use HippoPHP\Hippo\CheckContext;
 use HippoPHP\Hippo\File;
+use PHPUnit_Framework_TestCase;
 
-class CheckContextTest extends \PHPUnit_Framework_TestCase
+class CheckContextTest extends PHPUnit_Framework_TestCase
 {
     private $_file;
     private $_checkContext;

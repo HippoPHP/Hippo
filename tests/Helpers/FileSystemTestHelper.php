@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace HippoPHP\tests\Helpers;
+namespace HippoPHP\Tests\Helpers;
 
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;

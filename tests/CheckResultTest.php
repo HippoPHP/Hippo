@@ -15,8 +15,9 @@ namespace HippoPHP\tests;
 use HippoPHP\Hippo\CheckResult;
 use HippoPHP\Hippo\File;
 use HippoPHP\Hippo\Violation;
+use PHPUnit_Framework_TestCase;
 
-class CheckResultTest extends \PHPUnit_Framework_TestCase
+class CheckResultTest extends PHPUnit_Framework_TestCase
 {
     protected $instance;
     protected $file;

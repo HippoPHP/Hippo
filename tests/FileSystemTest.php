@@ -14,8 +14,9 @@ namespace HippoPHP\tests;
 
 use HippoPHP\Hippo\FileSystem;
 use HippoPHP\Tests\Helpers\FileSystemTestHelper;
+use PHPUnit_Framework_TestCase;
 
-class FileSystemTest extends \PHPUnit_Framework_TestCase
+class FileSystemTest extends PHPUnit_Framework_TestCase
 {
     private $_fileSystem;
     private $_fileSystemTestHelper;

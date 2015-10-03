@@ -10,11 +10,12 @@
  * file that was distributed with this source code.
  */
 
-namespace HippoPHP\tests\CLI;
+namespace HippoPHP\Tests\CLI;
 
 use HippoPHP\Hippo\CLI\ArgContainer;
+use PHPUnit_Framework_TestCase;
 
-class ArgContainerTest extends \PHPUnit_Framework_TestCase
+class ArgContainerTest extends PHPUnit_Framework_TestCase
 {
     protected $argContainer;
 

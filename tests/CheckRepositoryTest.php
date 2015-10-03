@@ -14,6 +14,7 @@ namespace HippoPHP\tests;
 
 use HippoPHP\Hippo\CheckRepository;
 use HippoPHP\Tests\Helpers\FileSystemTestHelper;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Class that tests discovery of Check implementations.
@@ -23,7 +24,7 @@ use HippoPHP\Tests\Helpers\FileSystemTestHelper;
  * @runTestsInSeparateProcesses
  * @preserveGlobalState disabled
  */
-class CheckRepositoryTest extends \PHPUnit_Framework_TestCase
+class CheckRepositoryTest extends PHPUnit_Framework_TestCase
 {
     private $_checkRepository;
 

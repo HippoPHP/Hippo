@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace HippoPHP\tests\Reporters;
+namespace HippoPHP\Tests\Reporters;
 
 use HippoPHP\Hippo\Reporters\CLIReporter;
 use HippoPHP\Hippo\Violation;

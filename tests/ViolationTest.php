@@ -14,8 +14,9 @@ namespace HippoPHP\tests;
 
 use HippoPHP\Hippo\File;
 use HippoPHP\Hippo\Violation;
+use PHPUnit_Framework_TestCase;
 
-class ViolationTest extends \PHPUnit_Framework_TestCase
+class ViolationTest extends PHPUnit_Framework_TestCase
 {
     protected $violation;
     protected $file;

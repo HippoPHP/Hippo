@@ -10,13 +10,14 @@
  * file that was distributed with this source code.
  */
 
-namespace HippoPHP\tests\Reporters;
+namespace HippoPHP\Tests\Reporters;
 
 use HippoPHP\Hippo\CheckResult;
 use HippoPHP\Hippo\File;
 use HippoPHP\Hippo\Violation;
+use PHPUnit_Framework_TestCase;
 
-abstract class AbstractReporterTest extends \PHPUnit_Framework_TestCase
+abstract class AbstractReporterTest extends PHPUnit_Framework_TestCase
 {
     protected $fileSystemMock;
     private $_savedContent;

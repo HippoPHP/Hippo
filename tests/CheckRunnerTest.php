@@ -16,8 +16,9 @@ use HippoPHP\Hippo\CheckRepository;
 use HippoPHP\Hippo\CheckRunner;
 use HippoPHP\Hippo\Config\YAMLConfigReader;
 use HippoPHP\Hippo\FileSystem;
+use PHPUnit_Framework_TestCase;
 
-class CheckRunnerTest extends \PHPUnit_Framework_TestCase
+class CheckRunnerTest extends PHPUnit_Framework_TestCase
 {
     private $_fileSystemMock;
 

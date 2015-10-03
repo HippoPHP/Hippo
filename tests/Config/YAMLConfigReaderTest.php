@@ -10,12 +10,13 @@
  * file that was distributed with this source code.
  */
 
-namespace HippoPHP\tests\Config;
+namespace HippoPHP\Tests\Config;
 
 use HippoPHP\Hippo\Config;
 use HippoPHP\Hippo\Config\YAMLConfigReader;
+use PHPUnit_Framework_TestCase;
 
-class YAMLConfigReaderTest extends \PHPUnit_Framework_TestCase
+class YAMLConfigReaderTest extends PHPUnit_Framework_TestCase
 {
     private $_reader;
     private $_fileSystemMock;

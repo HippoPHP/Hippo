@@ -10,11 +10,12 @@
  * file that was distributed with this source code.
  */
 
-namespace HippoPHP\tests\CLI;
+namespace HippoPHP\Tests\CLI;
 
 use HippoPHP\Hippo\CLI\ArgParserOptions;
+use PHPUnit_Framework_TestCase;
 
-class ArgParserOptionsTest extends \PHPUnit_Framework_TestCase
+class ArgParserOptionsTest extends PHPUnit_Framework_TestCase
 {
     protected $argParserOptions;
 

@@ -10,11 +10,12 @@
  * file that was distributed with this source code.
  */
 
-namespace HippoPHP\tests\Config;
+namespace HippoPHP\Tests\Config;
 
 use HippoPHP\Hippo\Config\Config;
+use PHPUnit_Framework_TestCase;
 
-class ConfigTest extends \PHPUnit_Framework_TestCase
+class ConfigTest extends PHPUnit_Framework_TestCase
 {
     public function testGetNonExistingValue()
     {

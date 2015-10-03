@@ -13,8 +13,9 @@
 namespace HippoPHP\tests;
 
 use HippoPHP\Hippo\LazyFactory;
+use PHPUnit_Framework_TestCase;
 
-class LazyFactoryTest extends \PHPUnit_Framework_TestCase
+class LazyFactoryTest extends PHPUnit_Framework_TestCase
 {
     private $_lazyFactory;
 
