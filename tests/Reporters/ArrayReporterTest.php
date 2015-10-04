@@ -13,7 +13,6 @@
 namespace HippoPHP\Tests\Reporters;
 
 use HippoPHP\Hippo\Reporters\ArrayReporter;
-use HippoPHP\Tests\Reporters\AbstractReporterTest;
 
 class ArrayReporterTest extends AbstractReporterTest
 {

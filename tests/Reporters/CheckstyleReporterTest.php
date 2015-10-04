@@ -13,7 +13,6 @@
 namespace HippoPHP\Tests\Reporters;
 
 use HippoPHP\Hippo\Reporters\CheckstyleReporter;
-use HippoPHP\Tests\Reporters\AbstractReporterTest;
 
 class CheckstyleReporterTest extends AbstractReporterTest
 {
