@@ -14,7 +14,6 @@ namespace HippoPHP\Tests\Reporters;
 
 use HippoPHP\Hippo\Reporters\CLIReporter;
 use HippoPHP\Hippo\Violation;
-use HippoPHP\Tests\Reporters\AbstractReporterTest;
 
 class CLIReporterTest extends AbstractReporterTest
 {
