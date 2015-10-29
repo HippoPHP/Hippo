@@ -13,6 +13,9 @@
 		const INDENT_STYLE_SPACE = 'space';
 		const INDENT_STYLE_TAB = 'tab';
 
+		const OPEN_BRACE = 0;
+		const CLOSE_BRACE = 1;
+
 		/**
 		 * Style of indent.
 		 * Either 'tab' or 'space'.
@@ -86,12 +89,7 @@
 					}
 				}
 
-				foreach ($line as $token) {
-					$content = $token->getContent();
-					if ($content === '}' || $content === ')' || $content === ']') {
-						$level --;
-					}
-				}
+				$this->_loopLine($line, $level, self::CLOSE_BRACE);
 
 				$expectedIndentation = $level > 0 ? str_repeat($indentation, $level) : '';
 
@@ -107,10 +105,20 @@
 					);
 				}
 
-				foreach ($line as $token) {
-					$content = $token->getContent();
+				$this->_loopLine($line, $level, self::OPEN_BRACE);
+			}
+		}
+
+		private function _loopLine($line, &$level, $type = self::OPEN_BRACE) {
+			foreach ($line as $token) {
+				$content = $token->getContent();
+				if ($type === self::OPEN_BRACE) {
 					if ($content === '{' || $content === '(' || $content === '[') {
-						$level ++;
+						$level++;
+					}
+				} elseif ($type === self::CLOSE_BRACE) {
+					if ($content === '}' || $content === ')' || $content === ']') {
+						$level--;
 					}
 				}
 			}
