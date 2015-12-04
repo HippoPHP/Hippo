@@ -20,15 +20,49 @@ use HippoPHP\Hippo\Violation;
 
 class VariableNamingCheck extends AbstractCheck implements CheckInterface
 {
-    private $pattern = '/\$([a-z_\x7f-\xff]+)([a-zA-Z0-9\x7f-\xff]+)?/';
+    /**
+     * Variable pattern.
+     *
+     * @var string
+     */
+    protected $pattern = '/\$([a-z_\x7f-\xff]+)([a-zA-Z0-9\x7f-\xff]+)?/';
 
+    /**
+     * Built in variables that could defy our pattern.
+     *
+     * @var string[]
+     */
+    protected $ignoredVariables = [
+        '$GLOBALS',
+        '$_SERVER',
+        '$_GET',
+        '$_POST',
+        '$_FILES',
+        '$_REQUEST',
+        '$_SESSION',
+        '$_ENV',
+        '$_COOKIE',
+        '$php_errormsg',
+        '$HTTP_RAW_POST_DATA',
+        '$http_response_header',
+        '$argc',
+        '$argv',
+    ];
+
+    /**
+     * Sets the pattern to use for variable names.
+     *
+     * @param string $pattern
+     *
+     * @return void
+     */
     public function setPattern($pattern)
     {
         $this->pattern = $pattern;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getConfigRoot()
     {
@@ -55,6 +89,10 @@ class VariableNamingCheck extends AbstractCheck implements CheckInterface
                 // Jump us to the next token we want to check.
                 $tokens->seekToType(T_VARIABLE);
                 $token = $tokens->current();
+
+                if (in_array($token->getContent(), $this->ignoredVariables)) {
+                    continue;
+                }
 
                 if (!preg_match($this->pattern, $token->getContent())) {
                     $this->addViolation(
