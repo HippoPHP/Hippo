@@ -151,10 +151,10 @@ class CheckResult implements Countable
                     return 0;
                 }
 
-                return ($a->getColumn() < $b->getColumn() ? -1 : 1);
+                return $a->getColumn() < $b->getColumn() ? -1 : 1;
             }
 
-            return ($a->getLine() < $b->getLine() ? -1 : 1);
+            return $a->getLine() < $b->getLine() ? -1 : 1;
         });
     }
 }
