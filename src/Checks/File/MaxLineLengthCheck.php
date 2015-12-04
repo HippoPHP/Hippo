@@ -92,10 +92,14 @@ class MaxLineLengthCheck extends AbstractCheck implements CheckInterface
         $file = $checkContext->getFile();
         $lines = $file->getLines();
 
+        $severityError = Violation::SEVERITY_ERROR;
+        $severityWarning = Violation::SEVERITY_WARNING;
+        $severityInfo = Violation::SEVERITY_INFO;
+
         if (count($lines) > 0) {
-            $this->setLimit(Violation::SEVERITY_ERROR, $config->get('error_limit', $this->limits[Violation::SEVERITY_ERROR]));
-            $this->setLimit(Violation::SEVERITY_WARNING, $config->get('warning_limit', $this->limits[violation::SEVERITY_WARNING]));
-            $this->setLimit(Violation::SEVERITY_INFO, $config->get('info_limit', $this->limits[Violation::SEVERITY_INFO]));
+            $this->setLimit($severityError, $config->get('error_limit', $this->limits[$severityError]));
+            $this->setLimit($severityWarning, $config->get('warning_limit', $this->limits[$severityWarning]));
+            $this->setLimit($severityInfo, $config->get('info_limit', $this->limits[$severityInfo]));
             $this->setTabExpand($config->get('tab_expand', $this->tabExpand));
 
             foreach ($lines as $line => $data) {
