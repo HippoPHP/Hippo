@@ -16,7 +16,7 @@ To start using Hippo in your project add the following to `composer.json`:
 
 ```json
 "require": {
-    "hippophp/hippo": "~1.0@dev"
+    "hippophp/hippo": "dev-master"
 }
 ```
 
