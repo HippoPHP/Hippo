@@ -1,8 +1,3 @@
-.DS_Store
 composer.lock
-vendor/
-.project
-.models
-.idea/
-build/
-checkstyle.xml
+vendor
+build

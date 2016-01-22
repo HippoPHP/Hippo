@@ -8,16 +8,12 @@
 
 ## Installation & Usage
 
-Installing and using Hippo is really straightforward with [Composer](https://getcomposer.org).
+Either [PHP](https://php.net) 5.5+ or [HHVM](http://hhvm.com) 3.6+ are required.
 
-### Installation
+To get the latest version of Hippo, simply require the project using [Composer](https://getcomposer.org):
 
-To start using Hippo in your project add the following to `composer.json`:
-
-```json
-"require": {
-    "hippophp/hippo": "dev-master"
-}
+```bash
+$ composer require hippophp/hippo
 ```
 
 If you want to develop Hippo, you'll need [Git](http://git-scm.org) and >= PHP 5.4 installed on your system.
@@ -100,5 +96,6 @@ Compatible with PHP 5.4 and up.
 - [X] Run as a binary with console output and as a library.
 - [x] Switch to [semver](http://semver.org) versioning.
 
-# License
-See [LICENSE](/LICENSE.txt)
+## License
+
+Hippo is licensed under [The MIT License (MIT)](/LICENSE).

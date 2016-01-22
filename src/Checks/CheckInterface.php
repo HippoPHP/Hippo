@@ -24,6 +24,8 @@ use HippoPHP\Hippo\Config\Config;
 interface CheckInterface
 {
     /**
+     * Checks a file.
+     *
      * @param \HippoPHP\Hippo\CheckContext  $checkContext
      * @param \HippoPHP\Hippo\Config\Config $config
      *
@@ -32,6 +34,8 @@ interface CheckInterface
     public function checkFile(CheckContext $checkContext, Config $config);
 
     /**
+     * Returns the configuration root.
+     *
      * @return string
      */
     public function getConfigRoot();
