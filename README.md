@@ -16,7 +16,7 @@ To get the latest version of Hippo, simply require the project using [Composer](
 $ composer require hippophp/hippo
 ```
 
-If you want to develop Hippo, you'll need [Git](http://git-scm.org) and >= PHP 5.4 installed on your system.
+If you want to develop Hippo, you'll need [Git](http://git-scm.org) and >= PHP 5.5 installed on your system.
 
 Clone the repo to your local environment:
 
@@ -75,7 +75,7 @@ Hippo originally started life as a fork of [PHPCheckstyle](https://github.com/ph
 
 Hippo is an open-source tool that helps PHP programmers adhere to certain coding conventions. The tools checks the input PHP source code and reports any violations against the given standards.
 
-Compatible with PHP 5.4 and up.
+Compatible with PHP 5.5 and up.
 
 ## Goals
 
