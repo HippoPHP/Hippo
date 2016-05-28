@@ -29,7 +29,7 @@ class YAMLConfigReaderTest extends PHPUnit_Framework_TestCase
 
     public function testJustAString()
     {
-        $yamlConfig = <<<YML
+        $yamlConfig = <<<'YML'
 string
 YML;
 
@@ -44,7 +44,7 @@ YML;
 
     public function testLoadFromString()
     {
-        $yamlConfig = <<<YML
+        $yamlConfig = <<<'YML'
 standards: "PSR-1"
 YML;
 
@@ -55,7 +55,7 @@ YML;
 
     public function testLoadFromFile()
     {
-        $yamlConfig = <<<YML
+        $yamlConfig = <<<'YML'
 standards: "PSR-1"
 YML;
 
@@ -71,12 +71,12 @@ YML;
 
     public function testLoadFromFileExtended()
     {
-        $baseYamlConfig = <<<YML
+        $baseYamlConfig = <<<'YML'
 bracesOnNewLine: true
 parent: 1
 YML;
 
-        $yamlConfig = <<<YML
+        $yamlConfig = <<<'YML'
 extends: "PSR-1"
 
 bracesOnNewLine: false
@@ -97,11 +97,11 @@ YML;
 
     public function testExtensionArrayScalarConflict()
     {
-        $baseYamlConfig = <<<YML
+        $baseYamlConfig = <<<'YML'
 test: 1
 YML;
 
-        $yamlConfig = <<<YML
+        $yamlConfig = <<<'YML'
 extends: "base"
 test:
   child: 2
@@ -119,18 +119,18 @@ YML;
 
     public function testLoadFromFileExtendedTwice()
     {
-        $baseYamlConfig = <<<YML
+        $baseYamlConfig = <<<'YML'
 bracesOnNewLine: true
 parent: 1
 YML;
 
-        $middleYamlConfig = <<<YML
+        $middleYamlConfig = <<<'YML'
 extends: "base"
 bracesOnNewLine: true
 middle: 2
 YML;
 
-        $yamlConfig = <<<YML
+        $yamlConfig = <<<'YML'
 extends: "middle"
 
 bracesOnNewLine: false
@@ -155,13 +155,13 @@ YML;
 
     public function testLoadFromFileExtendedCycle()
     {
-        $baseYamlConfig = <<<YML
+        $baseYamlConfig = <<<'YML'
 extends: "initial"
 bracesOnNewLine: true
 parent: 1
 YML;
 
-        $childYamlConfig = <<<YML
+        $childYamlConfig = <<<'YML'
 extends: "base"
 bracesOnNewLine: false
 child: 2
@@ -183,20 +183,20 @@ YML;
 
     public function testMultipleExtensionWithRecursion()
     {
-        $baseYamlConfig = <<<YML
+        $baseYamlConfig = <<<'YML'
 test:
   grandparent:
     set: true
 YML;
 
-        $middleYamlConfig = <<<YML
+        $middleYamlConfig = <<<'YML'
 extends: "base"
 test:
   parent:
     set: true
 YML;
 
-        $yamlConfig = <<<YML
+        $yamlConfig = <<<'YML'
 extends: "middle"
 test:
   child:

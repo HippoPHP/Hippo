@@ -22,7 +22,7 @@ class CheckstyleReporterTest extends AbstractReporterTest
         $reporter->setFilename('checkstyle.xml');
         $reporter->start();
         $reporter->finish();
-        $expectedLines = <<<EXML
+        $expectedLines = <<<'EXML'
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="5.5"/>
 
@@ -38,7 +38,7 @@ EXML;
         $reporter->start();
         $reporter->addCheckResults($file, [$this->getEmptyCheckResult($file)]);
         $reporter->finish();
-        $expectedLines = <<<EXML
+        $expectedLines = <<<'EXML'
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="5.5">
     <file name="whatever.php"/>
@@ -57,7 +57,7 @@ EXML;
         $reporter->addCheckResults($file, [$this->getBasicCheckResult($file)]);
         $reporter->finish();
 
-        $expectedLines = <<<EXML
+        $expectedLines = <<<'EXML'
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="5.5">
     <file name="whatever.php">

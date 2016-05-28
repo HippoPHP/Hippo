@@ -144,8 +144,6 @@ class ArgParser
 
             return $this->processStringValue($normalizedArg, $nextArg);
         }
-
-        return;
     }
 
     /**
@@ -234,7 +232,5 @@ class ArgParser
         } elseif ($arg === '1') {
             return true;
         }
-
-        return;
     }
 }

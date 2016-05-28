@@ -12,8 +12,6 @@
 
 namespace HippoPHP\Hippo\Exception;
 
-/**
- */
 class FileNotWritableException extends \Exception implements ExceptionInterface
 {
     /**
