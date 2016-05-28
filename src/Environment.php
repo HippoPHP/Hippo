@@ -14,8 +14,6 @@ namespace HippoPHP\Hippo;
 
 use HippoPHP\Hippo\Exception\ShutdownException;
 
-/**
- */
 class Environment
 {
     /**
@@ -39,8 +37,7 @@ class Environment
         $this->exitCode = $exitCode;
     }
 
-    /**
-     */
+
     public function shutdown()
     {
         throw new ShutdownException($this->exitCode);

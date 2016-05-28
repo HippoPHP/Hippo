@@ -59,7 +59,9 @@ class YamlValidationTest extends PHPUnit_Framework_TestCase
     {
         $paths = $this->_getAllYamlFiles();
 
-        return array_map(function ($path) { return [$path]; }, $paths);
+        return array_map(function ($path) {
+            return [$path];
+        }, $paths);
     }
 
     private function _getAllYamlFiles()

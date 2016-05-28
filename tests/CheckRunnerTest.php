@@ -32,7 +32,7 @@ class CheckRunnerTest extends PHPUnit_Framework_TestCase
         $checkRepository = new CheckRepository($fileSystem);
         $configReader = new YAMLConfigReader($this->_fileSystemMock);
 
-        $yamlConfig = <<<YML
+        $yamlConfig = <<<'YML'
 standards: "PSR-1"
 YML;
 
@@ -48,7 +48,8 @@ YML;
 
     public function testSetObserver()
     {
-        $callable = function () { /**/ };
+        $callable = function () { /**/
+        };
 
         $this->assertInstanceOf(
             '\HippoPHP\Hippo\CheckRunner',

@@ -169,8 +169,6 @@ class Violation
         if (isset($severityNames[$severityName])) {
             return $severityNames[$severityName];
         }
-
-        return;
     }
 
     /**

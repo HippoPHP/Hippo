@@ -12,8 +12,6 @@
 
 namespace HippoPHP\Hippo\Exception;
 
-/**
- */
 class ShutdownException extends \Exception implements ExceptionInterface
 {
     /**

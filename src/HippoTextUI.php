@@ -71,8 +71,7 @@ class HippoTextUI implements HippoInterface
         $this->context = $context;
     }
 
-    /**
-     */
+
     public static function main($args)
     {
         if (!$args) {
@@ -98,8 +97,7 @@ class HippoTextUI implements HippoInterface
         $hippoTextUi->run();
     }
 
-    /**
-     */
+
     protected function run()
     {
         switch ($this->context->getAction()) {
@@ -124,8 +122,7 @@ class HippoTextUI implements HippoInterface
         }
     }
 
-    /**
-     */
+
     protected function runChecks()
     {
         $baseConfig = $this->configReader->loadFromFile($this->_getStandardPath($this->context->getConfigName()));
