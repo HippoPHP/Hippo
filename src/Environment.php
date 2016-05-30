@@ -37,7 +37,6 @@ class Environment
         $this->exitCode = $exitCode;
     }
 
-
     public function shutdown()
     {
         throw new ShutdownException($this->exitCode);

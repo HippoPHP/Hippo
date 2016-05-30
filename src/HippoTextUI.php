@@ -71,7 +71,6 @@ class HippoTextUI implements HippoInterface
         $this->context = $context;
     }
 
-
     public static function main($args)
     {
         if (!$args) {
@@ -97,7 +96,6 @@ class HippoTextUI implements HippoInterface
         $hippoTextUi->run();
     }
 
-
     protected function run()
     {
         switch ($this->context->getAction()) {
@@ -121,7 +119,6 @@ class HippoTextUI implements HippoInterface
                 throw new Exception('Unrecognized action');
         }
     }
-
 
     protected function runChecks()
     {
