@@ -180,7 +180,7 @@ class ArgParser
      */
     private function isShortArgument($arg)
     {
-        return !$this->isLongArgument($arg) && $arg{0}
+        return !$this->isLongArgument($arg) && $arg[0]
         === '-';
     }
 
