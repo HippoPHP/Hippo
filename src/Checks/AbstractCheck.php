@@ -80,6 +80,8 @@ abstract class AbstractCheck implements CheckInterface
      * @param int                  $column
      * @param string               $message
      * @param int                  $severity
+     *
+     * @return void
      */
     protected function addViolation(File $file, $line, $column, $message, $severity = null)
     {
