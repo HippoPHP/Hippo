@@ -18,9 +18,16 @@ use HippoPHP\Hippo\Checks\CheckInterface;
 use HippoPHP\Hippo\Config\Config;
 use HippoPHP\Hippo\Violation;
 
+/**
+ * This is the no trailing whitespace check class.
+ *
+ * @author James Brooks <james@alt-three.com>
+ */
 class NoTrailingWhitespaceCheck extends AbstractCheck implements CheckInterface
 {
     /**
+     * Returns the configuration root.
+     *
      * @return string
      */
     public function getConfigRoot()
@@ -33,8 +40,10 @@ class NoTrailingWhitespaceCheck extends AbstractCheck implements CheckInterface
      *
      * @see AbstractCheck::checkFileInternal()
      *
-     * @param CheckContext $checkContext
-     * @param Config       $config
+     * @param \HippoPHP\Hippo\CheckContext $checkContext
+     * @param \HippoPHP\Hippo\Config\Config       $config
+     *
+     * @return void
      */
     protected function checkFileInternal(CheckContext $checkContext, Config $config)
     {
