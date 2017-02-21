@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace HippoPHP\Hippo\Checks\Naming;
+namespace HippoPHP\Hippo\Checks\File;
 
 use HippoPHP\Hippo\CheckContext;
 use HippoPHP\Hippo\Checks\AbstractCheck;
