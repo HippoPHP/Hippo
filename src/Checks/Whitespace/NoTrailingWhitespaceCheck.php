@@ -40,8 +40,8 @@ class NoTrailingWhitespaceCheck extends AbstractCheck implements CheckInterface
      *
      * @see AbstractCheck::checkFileInternal()
      *
-     * @param \HippoPHP\Hippo\CheckContext $checkContext
-     * @param \HippoPHP\Hippo\Config\Config       $config
+     * @param \HippoPHP\Hippo\CheckContext  $checkContext
+     * @param \HippoPHP\Hippo\Config\Config $config
      *
      * @return void
      */
