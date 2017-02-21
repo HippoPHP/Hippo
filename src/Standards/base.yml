@@ -21,6 +21,8 @@ file:
     bom: true
   no_inline_html:
     enabled: true
+  tag_types:
+    enabled: true
 style:
   bitwise:
     enabled: true
