@@ -158,12 +158,12 @@ class IndentationCheck extends AbstractCheck implements CheckInterface
         $lineNumber = 1;
         foreach ($tokenList as $token) {
             $line[] = $token;
-                // TODO: Fix end of line token.
-                if ($token->isType(TokenType::TOKEN_EOL)) {
-                    $lines[$lineNumber] = $line;
-                    $line = [];
-                    $lineNumber++;
-                }
+            // TODO: Fix end of line token.
+            if ($token->isType(TokenType::TOKEN_EOL)) {
+                $lines[$lineNumber] = $line;
+                $line = [];
+                $lineNumber++;
+            }
         }
         $lines[$lineNumber] = $line;
 
